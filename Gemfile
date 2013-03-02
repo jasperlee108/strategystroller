@@ -5,7 +5,21 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+## Assume deploying to heroku, use Rspec
+gem 'rspec-rails', '2.12.2'
+
+## For local development and testing, use sqlite3 as dBase
+## On local machine, do "bundle install --without production"
+group :development, :test do
+  gem 'sqlite3'
+end
+
+## For deployment to heroku, use postgreSQL
+## Capycabara is a fix for Rspec mentioned in CS169 website 
+group :production do
+  gem 'pg'
+  gem 'capybara', '1.1.2'
+end
 
 gem 'json'
 
