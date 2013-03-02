@@ -6,7 +6,7 @@ describe Goal do
   
   ## Default
   it "should pass assert true sanity test" do
-    assert true
+    assert(true, "Did not pass sanity check")
   end
 
   ### NAME

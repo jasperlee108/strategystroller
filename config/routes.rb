@@ -1,4 +1,6 @@
 StrategyStroller::Application.routes.draw do
+  get "tester/runRspecTest"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
