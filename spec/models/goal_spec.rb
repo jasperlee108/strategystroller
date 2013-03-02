@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Goal do
+
+  ### NOTE: Using ruby format, not Rspec
   
   ## Default
   it "should pass assert true sanity test" do
