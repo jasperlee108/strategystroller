@@ -1,10 +1,16 @@
 == Welcome to Strategy Stroller
 Created By:
-Emily Sheng
-Febrianto Djunaidi
-Jacob Newman
-Jasper Lee
-Mark Davidoff
+Emily Sheng,
+Febrianto Djunaidi,
+Jacob Newman,
+Jasper Lee,
+Mark Davidoff,
 
-As Part of a University California, Berkeley CS169 Class Project
+As Part of a University California, Berkeley CS169 Project
 Spring 2013
+
+
+
+
+Use this README file to introduce your application and point to useful places in the API for learning more.
+Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
