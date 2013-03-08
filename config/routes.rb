@@ -1,4 +1,8 @@
 StrategyStroller::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   get "tester/runRspecTest"
 
   # The priority is based upon order of creation:
