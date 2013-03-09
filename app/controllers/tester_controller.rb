@@ -8,6 +8,7 @@ class TesterController < ApplicationController
     ## Add further system calls as you add more Rspec tests
     ## Template: system("rspec ./spec/models/xxx_spec.rb")
     system("rspec ./spec/models/goal_spec.rb")
+    system("rspec ./spec/models/user_spec.rb")
     
   end
 end
