@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   #do exception error handling
-  #do omniauth
 
   belongs_to :company
   attr_accessible :company_id, :name, :password, :position

@@ -10,6 +10,11 @@
     <center> 
         <%= flash[:error] %> <!-- Display error message -->
     </center>
+
+      <!-- For devise. flash messages required for it to display information to users. -->
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
 <%= yield %>
 
 </body>

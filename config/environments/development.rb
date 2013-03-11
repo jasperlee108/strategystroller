@@ -34,4 +34,9 @@ StrategyStroller::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # For devise. It requires a default is set.
+  # "Ensure you have defined default url options in your environments files."
+  # TODO In production, :host should be set to the actual host of your application.
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
