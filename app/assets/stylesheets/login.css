@@ -1,0 +1,13 @@
+.screen
+{
+   width:275px;
+   padding:10px;
+   border:2px solid;
+   height:175px;
+}
+.msgscreen
+{
+  width:200px;
+  border:1px dashed;
+  margin-bottom: 10px;
+}

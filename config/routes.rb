@@ -1,4 +1,15 @@
 StrategyStroller::Application.routes.draw do
+  match "authentication/login" => 'authentication#login', :as => 'login'
+  match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
+  match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
+  match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
+  #match "admin"
+  get "authentication/create_user"
+
+  get "authentication/creation_token"
+
+  get "authentication/logout"
+
   get "tester/runRspecTest"
 
   # The priority is based upon order of creation:
@@ -51,7 +62,7 @@ StrategyStroller::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-
+  root :to => 'authentication#login'
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
