@@ -1,5 +1,3 @@
-
-
 require 'spec_helper'
 
 describe User do
@@ -15,40 +13,40 @@ describe User do
   
   ## Name is not empty
   it "should have a UserName" do
-    goal = User.new(
+    user = User.new(
     :name => "",
     :password => "test"
     )
-    assert(!goal.save, "Name is empty")
+    assert(!user.save, "Name is empty")
   end
   
   ## Name max = 128
   it "should have a name less than 128 character" do
-    goal = User.new(
+    user = User.new(
     :name => (0...140).map{(65+rand(26)).chr}.join,
     :password => "test"
     )
-    assert(!goal.save, "Name is longer than 128 characters")
+    assert(!user.save, "Name is longer than 128 characters")
   end
   
   ### PASSWORD 
 
   ## Name is not empty
   it "should have a password" do
-    goal = User.new(
+    user = User.new(
     :name => "test",
     :password => ""
     )
-    assert(!goal.save, "Password is empty")
+    assert(!user.save, "Password is empty")
   end
   
   ## Password max = 128
   it "should have a password less than 128 character" do
-    goal = User.new(
+    user = User.new(
     :name => "test",
     :password => (0...140).map{(65+rand(26)).chr}.join
     )
-    assert(!goal.save, "Password is longer than 128 characters")
+    assert(!user.save, "Password is longer than 128 characters")
   end
   
   ### EXTRA
