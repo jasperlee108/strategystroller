@@ -1,4 +1,12 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   #do exception error handling
 
   belongs_to :company
@@ -6,10 +14,10 @@ class User < ActiveRecord::Base
   # position 0 => admin, 1 => CU, 2 => provider
   validates :name, :presence => true,
                     :length => { :maximum => 128 }
-  validates_uniqueness_of :name, :scope => :company_id 
+  validates_uniqueness_of :name, :scope => :company_id
   # a company has unique users
-  validates :password, :presence => true,
-  					:length => { :maximum => 128 }
+  # validates :password, :presence => true,
+  #	 				:length => { :maximum => 128 }
   validates :company_id, :presence => true
   validates :position, :presence => true
 
