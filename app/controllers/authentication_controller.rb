@@ -10,19 +10,19 @@ class AuthenticationController < ApplicationController
   PROVIDER = 2
 
   def login_result
-      #validate login name + password: User model
-      #either display error message: controller
-      #or direct to CU panel/Provider panel/Admin panel (prob change admin stuff later)
-      username = params[:username]
-      password = params[:password]
-      company_id = params[:company][:id]
-      result = User.validate_login(username, password, company_id)
-      if (result > 0)
-        position = User.get_position(username, password, company_id)
-        return {:errCode => result, :company => company_id , :position => position}
-      else
-        return {:errCode => result}
-      end
+    #validate login name + password: User model
+    #either display error message: controller
+    #or direct to CU panel/Provider panel/Admin panel (prob change admin stuff later)
+    username = params[:username]
+    password = params[:password]
+    company_id = params[:company][:name].to_i
+    result = User.validate_login(username, password, company_id)
+    if (result > 0)
+      position = User.get_position(username, password, company_id)
+      return {:errCode => result, :company => company_id , :position => position}
+    else
+      return {:errCode => result}
+    end
   end
 
 
