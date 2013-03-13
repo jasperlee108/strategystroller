@@ -52,6 +52,12 @@ class AuthenticationController < ApplicationController
     end
   end
 
+  def admin
+    if (request.get?)
+      redirect_to admin_path
+    end
+  end
+
   def create_user
   end
 

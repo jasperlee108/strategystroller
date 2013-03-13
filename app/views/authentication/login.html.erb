@@ -19,6 +19,10 @@
                       <%= submit_tag("Login") %>
 <!--                       <%= @msg %> -->
                     <% end %>
+                    <%= form_tag admin_path, :method => "get" do %>
+                      <%= submit_tag("Admin") %>
+<!--                       <%= @msg %> -->
+                    <% end %>
                </center>
 
             </div>
