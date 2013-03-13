@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308191123) do
+ActiveRecord::Schema.define(:version => 20130311063033) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -51,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20130308191123) do
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "companies", :force => true do |t|
-    t.string   "company"
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -85,10 +86,10 @@ ActiveRecord::Schema.define(:version => 20130308191123) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "password"
-    t.string   "company"
     t.integer  "position"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
 end

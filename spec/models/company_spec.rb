@@ -17,7 +17,7 @@ describe Company do
     assert(!company.save, "Name is empty")
   end
   
-  ## Name max = 80
+  ## Name max = 128
   it "should not have Name longer than 128 characters" do
     company = Company.new(:name => (0...129).map{ ( 65+rand(26) ).chr }.join)
     assert(!company.save, "Name is longer than 128 characters")

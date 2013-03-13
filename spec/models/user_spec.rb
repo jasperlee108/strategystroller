@@ -50,6 +50,7 @@ describe User do
     )
     assert(!goal.save, "Password is longer than 128 characters")
   end
+  
   ### EXTRA
   
   ## Running Rspec remotely (RoR)
