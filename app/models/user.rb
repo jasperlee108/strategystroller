@@ -10,9 +10,9 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   # these validations are redundant - they're ensured through a combination of the database migration/definition and in
-  # devise.rb initializer. Put here for documentation mainly.
-  validates :email, :presence => true
-  validates :password, :presence => true, :length => { :minimum => 10, :maximum => 128 }
+  # devise.rb initializer and in the :validatable module. Put here for documentation mainly.
+  # validates :email, :presence => true
+  # validates :password, :presence => true, :length => { :minimum => 10, :maximum => 128 }
 
 
   # TODO add in :username:string, :cu:boolean fields.
