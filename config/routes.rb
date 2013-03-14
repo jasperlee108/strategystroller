@@ -12,10 +12,11 @@ StrategyStroller::Application.routes.draw do
   match "admin" => 'admin', :as => 'admin'
   
   ## Rails auto generated stuff
-  get "authentication/create_user"
-  get "authentication/creation_token"
-  get "authentication/logout"
-  get "tester/runRspecTest"
+  get "authentication/create_user" => 'authentication#create_user'
+  get "authentication/creation_token" => 'authentication#creation_token'
+  get "authentication/logout" => 'authentication#logout'
+  get "tester/runRspecTest" => 'tester#runRspecTest'
+  #match ':controller(/:action)'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
