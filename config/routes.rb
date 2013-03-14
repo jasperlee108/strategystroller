@@ -8,7 +8,6 @@ StrategyStroller::Application.routes.draw do
   match "authentication/login" => 'authentication#login', :as => 'login'
   match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
   match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
-  match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
   match "admin" => 'admin', :as => 'admin'
   
   ## Rails auto generated stuff

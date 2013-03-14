@@ -1,13 +1,15 @@
 class AuthenticationController < ApplicationController
 
+  ## Error Code
   SUCCESS = 1
   ERR_BAD_CREDENTIALS = -1
   ERR_USER_EXISTS = -2
   ERR_BAD_USERNAME = -3
   ERR_BAD_PASSWORD = -4
-  ADMIN = 0
-  CU = 1
-  PROVIDER = 2
+  
+  ## Position Code
+  CU = 0
+  PROVIDER = 1
 
   def login_result
     #validate login name + password: User model
@@ -33,9 +35,7 @@ class AuthenticationController < ApplicationController
       if (code > 0) #success
         #admin, cu, provider
         position = result[:position]
-        if (position == ADMIN)
-          redirect_to admin_panel_path
-        elsif (position == CU)
+        if (position == CU)
           redirect_to controller_panel_path
         elsif (position == PROVIDER)
           redirect_to provider_panel_path
@@ -55,6 +55,9 @@ class AuthenticationController < ApplicationController
   def admin
     if (request.get?)
       redirect_to admin_path
+    else
+      flash[:error] = "Something went wrong when redirecting to admin login page."
+      redirect_to login_path
     end
   end
 
