@@ -58,7 +58,7 @@ describe User do
       :name => "test",
       :password => "testing",
       :company_id => 0,
-      :position => 2
+      :position => 1
     )
     user2 = User.new(
       :name => "test",
@@ -103,7 +103,7 @@ describe User do
     :name => "test",
     :password => (0...140).map{(65+rand(26)).chr}.join,
     :company_id => 0,
-    :position => 2
+    :position => 1
     )
     assert(!user.save, "Password is longer than 128 characters") #&& errCode == bad pw
   end
@@ -116,7 +116,7 @@ describe User do
       :name => "Jelly",
       :password => "Bean",
       :company_id => 0,
-      :position => 2
+      :position => 1
     ) 
     code = User.validate_login("Jelly", "Bean", 0)
     assert(code == SUCCESS, "Correct user was not able to log in")
@@ -134,7 +134,7 @@ describe User do
       :name => "Jelly",
       :password => "Bean",
       :company_id => 0,
-      :position => 2
+      :position => 1
     ) 
     code = User.validate_login("Jelly", "Blob", 0)
     assert(code == ERR_BAD_CREDENTIALS, "User entered wrong password")
@@ -146,13 +146,13 @@ describe User do
       :name => "Jelly",
       :password => "Bean",
       :company_id => 0,
-      :position => 2
+      :position => 1
     ) 
     User.create( #Change to creation method later
       :name => "Jelly",
       :password => "Bean",
       :company_id => 1,
-      :position => 2
+      :position => 1
     ) 
     code = User.validate_login("Jelly", "Bean", 0)
     code2 = User.validate_login("Jelly", "Bean", 1)
@@ -165,13 +165,13 @@ describe User do
       :name => "Jelly",
       :password => "Blob",
       :company_id => 0,
-      :position => 2
+      :position => 1
     ) 
     User.create( #Change to creation method later
       :name => "Jelly",
       :password => "Bean",
       :company_id => 1,
-      :position => 2
+      :position => 1
     ) 
     code = User.validate_login("Jelly", "Blob", 0)
     code2 = User.validate_login("Jelly", "Bean", 1)
@@ -184,13 +184,13 @@ describe User do
       :name => "Jelly",
       :password => "Bean",
       :company_id => 0,
-      :position => 2
+      :position => 1
     ) 
     User.create( #Change to creation method later
       :name => "Jello",
       :password => "Bean",
       :company_id => 0,
-      :position => 2
+      :position => 1
     ) 
     code = User.validate_login("Jelly", "Bean", 0)
     code2 = User.validate_login("Jello", "Bean", 0)
@@ -203,7 +203,7 @@ describe User do
       :name => "Jelly",
       :password => "Bean",
       :company_id => 0,
-      :position => 2
+      :position => 1
     ) 
     code = User.validate_login("Jelly", "Bean", 28)
     assert(code == ERR_BAD_CREDENTIALS, "logged in to wrong company")
@@ -217,10 +217,10 @@ describe User do
       :name => "Jelly",
       :password => "Bean",
       :company_id => 0,
-      :position => 2
+      :position => 1
     ) 
     pos = User.get_position("Jelly", "Bean", 0)
-    assert(pos == 2, "Wrong position returned")
+    assert(pos == 1, "Wrong position returned")
   end
 
   ### EXTRA
