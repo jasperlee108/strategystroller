@@ -10,6 +10,12 @@ describe Company do
   end
 
   ### NAME
+
+  ## Correctly named company is saved
+  it "should be saved" do
+    company = Company.new(:name => "StratStroll275")
+    assert(company.save, "Correctly named company not saved")
+  end
   
   ## Name is not empty
   it "should not have empty Name" do
@@ -21,6 +27,19 @@ describe Company do
   it "should not have Name longer than 128 characters" do
     company = Company.new(:name => (0...129).map{ ( 65+rand(26) ).chr }.join)
     assert(!company.save, "Name is longer than 128 characters")
+  end
+
+  ## Name must be unique
+  it "should have a unique name" do
+    Company.create(:name => "StratStroll")
+    company = Company.new(:name => "StratStroll")
+    assert(!company.save, "Company name is not unique")
+  end 
+
+  ## Name must be alphanumeric
+  it "should have an alphanumeric name" do
+    company = Company.new(:name => "%!)*&^%_")
+    assert(!company.save, "Name is not alphanumeric")
   end
 
   ### EXTRA

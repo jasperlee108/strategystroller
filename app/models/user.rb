@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   #do exception error handling
-  #do omniauth
 
   belongs_to :company
   attr_accessible :company_id, :name, :password, :position
@@ -33,6 +32,8 @@ class User < ActiveRecord::Base
       user = User.find_by_name_and_company_id(name, company_id)
       if (user && user.password == password)
         return user.position
+      else 
+        return ERR_BAD_CREDENTIALS
       end
     end
 
