@@ -1,4 +1,7 @@
 StrategyStroller::Application.routes.draw do
+  # For devise. "Ensure you have defined root_url to *something* in your config/routes.rb"
+  root :to => "home#index"
+
   #match "authentication/login" => 'authentication#login', :as => 'login'     EMK
   match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
   match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
