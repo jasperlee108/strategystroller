@@ -1,21 +1,19 @@
 StrategyStroller::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
+
 
   # For devise. "Ensure you have defined root_url to *something* in your config/routes.rb"
   root :to => "home#index"
 
-  #match "authentication/login" => 'authentication#login', :as => 'login'     EMK
   match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
   match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
   match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
   #match "admin"
-  #get "authentication/create_user" EMK
 
-  #get "authentication/creation_token" EMK
-
-  #get "authentication/logout"       EMK
-
-  #get "tester/runRspecTest"            EMK
+  #get "authentication/create_user"
+  #get "authentication/creation_token"
+  #get "authentication/logout"
+  #get "tester/runRspecTest"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
