@@ -98,7 +98,6 @@ GEM
     orm_adapter (0.4.0)
     pg (0.14.1)
     pg (0.14.1-x86-mingw32)
-    orm_adapter (0.4.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
@@ -174,8 +173,8 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   coffee-rails (~> 3.2.1)
-  devise
   coffee-script-source (~> 1.4.0)
+  devise
   jquery-rails
   json
   meta_search (>= 1.1.0.pre)
