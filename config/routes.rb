@@ -1,4 +1,5 @@
 StrategyStroller::Application.routes.draw do
+  
   devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
 
   match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
@@ -14,6 +15,12 @@ StrategyStroller::Application.routes.draw do
   #get "authentication/creation_token"
   #get "authentication/logout"
   #get "tester/runRspecTest"
+
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  get "tester/runRspecTest"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

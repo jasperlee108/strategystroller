@@ -20,6 +20,7 @@ Devise.setup do |config|
   # just :email. You can configure it to use [:username, :subdomain], so for
   # authenticating a user, both parameters are required. Remember that those
   # parameters are used only when authenticating and not when retrieving from
+
   # session. If you need permissions, you should implement that in a before filter.    #TODO <<< THIS line
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
@@ -36,11 +37,13 @@ Devise.setup do |config|
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
   config.case_insensitive_keys = [ :login ]
+  config.case_insensitive_keys = [ :email ]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
   config.strip_whitespace_keys = [ :login ]
+  config.strip_whitespace_keys = [ :email ]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -74,6 +77,7 @@ Devise.setup do |config|
   # passing :skip => :sessions to `devise_for` in your config/routes.rb
   # config.skip_session_storage = [:http_auth]
   # #TODO see if this is useful for testing. May want to enable :http_auth for that, see above.
+  config.skip_session_storage = [:http_auth]
 
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
@@ -127,6 +131,7 @@ Devise.setup do |config|
   # ==> Configuration for :validatable
   # Range for password length. Default is 8..128.
   config.password_length = 10..128
+  #config.password_length = 8..128
 
   # Email regex used to validate email formats. It simply asserts that
   # an one (and only one) @ exists in the given string. This is mainly
@@ -155,6 +160,7 @@ Devise.setup do |config|
   # :time  = Re-enables login after a certain amount of time (see :unlock_in below)
   # :both  = Enables both strategies
   # :none  = No unlock strategy. You should handle unlocking by yourself.
+
   config.unlock_strategy = :both
 
   # Number of authentication tries before locking an account if lock_strategy
