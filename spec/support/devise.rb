@@ -4,6 +4,10 @@ end
 
 =begin
 
+Our confidence in the devise gem itself comes from it's test suite, whichcan be viewed at:
+https://github.com/plataformatec/devise/tree/master/test
+as of this writing, th elast update to this suite was march 4, 2013.
+
 Note: to overcome the need to confirm due to :confirmable module, simply use skip_confirmation! before saving the user:
 
 def create
