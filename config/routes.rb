@@ -5,6 +5,11 @@ StrategyStroller::Application.routes.draw do
   match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
   match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
   #match "admin"
+  
+  ## Deal with devise quirks
+  devise_scope :user do
+    match "/" => 'devise/sessions#new'
+  end
 
   #get "authentication/create_user"
   #get "authentication/creation_token"
@@ -64,7 +69,7 @@ StrategyStroller::Application.routes.draw do
   # See how all your routes lay out with "rake routes"
 
   # For devise. "Ensure you have defined root_url to *something* in your config/routes.rb"
-  root :to => "devise/sessions#new" #login page
+  # root :to => "devise/sessions#new" #login page
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
