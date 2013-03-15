@@ -7,9 +7,14 @@ StrategyStroller::Application.routes.draw do
   #match "admin"
   
   ## Deal with devise quirks
-  devise_scope :user do
-    match "/" => 'devise/sessions#new'
+  #devise_scope :user do
+  #  match "/" => 'devise/sessions#new'
+  #end
+
+  authenticated :user do
+    root :to => "" #something other than a login  etc. page!! write a dummy page - logout. TODO
   end
+  root :to => redirect("/users/login")
 
   #get "authentication/create_user"
   #get "authentication/creation_token"
@@ -67,9 +72,6 @@ StrategyStroller::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
   # See how all your routes lay out with "rake routes"
-
-  # For devise. "Ensure you have defined root_url to *something* in your config/routes.rb"
-  # root :to => "devise/sessions#new" #login page
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
