@@ -52,15 +52,6 @@ class AuthenticationController < ApplicationController
     end
   end
 
-  def admin
-    if (request.get?)
-      redirect_to admin_path
-    else
-      flash[:error] = "Something went wrong when redirecting to admin login page."
-      redirect_to login_path
-    end
-  end
-
   def create_user
   end
 
