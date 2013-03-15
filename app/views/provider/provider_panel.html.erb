@@ -1,1 +1,25 @@
-<h1>Provider Panel</h1>
+<!DOCTYPE html> 
+<!-- for now, just a simple Provider page  -->
+<html>
+<head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+</head>
+
+    <body>
+        <center>
+            <div id="CUPage" class="screen">
+
+                <center>
+                    <h2>Welcome to Provider page</h2>
+                    <%= form_tag logout_path, :method => "get" do %>
+                      <%= submit_tag("Logout") %>
+<!--                       <%= @msg %> -->
+                    <% end %>
+               </center>
+
+            </div>
+        </center>
+    </body>
+
+</html>
+

@@ -1,2 +1,25 @@
-<h1>Authentication#logout</h1>
-<p>Find me in app/views/authentication/logout.html.erb</p>
+<!DOCTYPE html> 
+<!-- for now, just a simple logout page  -->
+<html>
+<head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+</head>
+
+    <body>
+        <center>
+            <div id="CUPage" class="screen">
+
+                <center>
+                    <h2>Thank You</h2>
+                    <%= form_tag login_path, :method => "get" do %>
+                      <%= submit_tag("Login") %>
+<!--                       <%= @msg %> -->
+                    <% end %>
+               </center>
+
+            </div>
+        </center>
+    </body>
+
+</html>
+

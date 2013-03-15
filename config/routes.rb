@@ -13,7 +13,7 @@ StrategyStroller::Application.routes.draw do
   ## Rails auto generated stuff
   get "authentication/create_user" => 'authentication#create_user'
   get "authentication/creation_token" => 'authentication#creation_token'
-  get "authentication/logout" => 'authentication#logout'
+  get "authentication/logout" => 'authentication#logout', :as => 'logout'
   get "tester/runRspecTest" => 'tester#runRspecTest'
   #match ':controller(/:action)'
 
