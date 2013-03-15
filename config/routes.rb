@@ -5,16 +5,10 @@ StrategyStroller::Application.routes.draw do
   match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
   match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
   #match "admin"
-  
-  ## Deal with devise quirks
-  #devise_scope :user do
-  #  match "/" => 'devise/sessions#new'
-  #end
 
-  authenticated :user do
-    root :to => "" #something other than a login  etc. page!! write a dummy page - logout. TODO
-  end
-  root :to => redirect("/users/login")
+  get "controller_unit/welcome" => 'controller_unit#welcome', :as => 'controller_unit_welcome'
+
+  root :to => redirect("/controller_unit/welcome")
 
   #get "authentication/create_user"
   #get "authentication/creation_token"
