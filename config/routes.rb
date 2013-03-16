@@ -1,20 +1,26 @@
 StrategyStroller::Application.routes.draw do
+  
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  
   devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
 
   match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
   match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
   match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
   #match "admin"
-  
-  ## Deal with devise quirks
-  devise_scope :user do
-    match "/" => 'devise/sessions#new'
-  end
+
+  get "controller_unit/welcome" => 'controller_unit#welcome', :as => 'controller_unit_welcome'
+
+  root :to => redirect("/controller_unit/welcome")
 
   #get "authentication/create_user"
   #get "authentication/creation_token"
   #get "authentication/logout"
   #get "tester/runRspecTest"
+
+  get "tester/runRspecTest"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -67,9 +73,6 @@ StrategyStroller::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
   # See how all your routes lay out with "rake routes"
-
-  # For devise. "Ensure you have defined root_url to *something* in your config/routes.rb"
-  # root :to => "devise/sessions#new" #login page
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
