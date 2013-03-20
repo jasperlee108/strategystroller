@@ -11,6 +11,9 @@ gem 'sass-rails'
 gem "meta_search",    '>= 1.1.0.pre'
 gem 'coffee-script-source', '~> 1.4.0'
 
+#Twitter Bootstrap
+gem "twitter-bootstrap-rails"
+
 ## Assume deploying to heroku, use Rspec
 gem 'rspec-rails', '2.12.2'
 
