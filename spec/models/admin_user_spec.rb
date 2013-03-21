@@ -91,6 +91,16 @@ describe AdminUser do
     assert(!admin.save, "Email is invalid: " + "a@.a")
   end
 
+  ## Email is invalid: a@@a
+  it "should have valid Email" do
+    admin = AdminUser.create(
+    :email => "a@@a",
+    :password => "password",
+    :password_confirmation => "password"
+    )
+    assert(!admin.save, "Email is invalid: " + "a@@a")
+  end
+
   ### PASSWORD
 
   ## Password can't be blank
@@ -223,6 +233,6 @@ describe AdminUser do
   ## Credit: Yong Hoon Lee
   ## Source: https://sites.google.com/a/eecs.berkeley.edu/cs169-sp13/project/setting-up-a-deployment-site
   after(:each) do
-    Goal.delete_all
+    AdminUser.delete_all
   end
 end
