@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
   index do                            
+    column :username
     column :email                     
     column :current_sign_in_at        
     column :last_sign_in_at           
@@ -7,10 +8,12 @@ ActiveAdmin.register User do
     default_actions                   
   end                                 
 
+  filter :username
   filter :email                       
 
   form do |f|                         
     f.inputs "Admin Details" do       
+      f.input :username
       f.input :email                  
       f.input :password               
       f.input :password_confirmation  
