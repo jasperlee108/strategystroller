@@ -1,7 +1,7 @@
 <h2>Sign in</h2>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "custom_form" }) do |f| %>
+  <div class="wrapper">
   <div><%= f.label :email %><br />
   <%= f.text_field :email, :autofocus => true %></div>
     <!-- TODO this replaces f.email_field with f.text_field for generic login functionality with either UN or email,
@@ -16,5 +16,6 @@
 
   <div><%= f.submit "Sign in" %></div>
 <% end %>
-
+<br/>
+<br/>
 <%= render "devise/shared/links" %>
