@@ -4,6 +4,9 @@
     <%= semantic_form_for :goal do |f| %>
         <%= f.inputs do %>
           <%= f.input :name %>
+          <%= f.select :parent, Dimension.all, :prompt => true %>
+          <!-- #dropdown for :owner -->
+          <%= f.input :notes %>
         <% end %>
     <%= f.button %>
     <% end %>
