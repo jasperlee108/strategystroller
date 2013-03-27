@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :focus, :justification, :name, :need, :notes, :status
+  attr_accessible :name, :parent, :id, :owner, :need, :justification, :focus, :prerequisite, :notes, :children, :status
   
   ## Name = string[80]
   validates :name,

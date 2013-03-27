@@ -14,6 +14,9 @@ gem 'coffee-script-source', '~> 1.4.0'
 #Twitter Bootstrap
 gem "twitter-bootstrap-rails"
 
+gem 'formtastic-bootstrap'
+gem 'tabulous'
+
 ## Assume deploying to heroku, use Rspec
 gem 'rspec-rails', '2.12.2'
 

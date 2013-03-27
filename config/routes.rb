@@ -13,6 +13,17 @@ StrategyStroller::Application.routes.draw do
 
   get "controller_unit/welcome" => 'controller_unit#welcome', :as => 'controller_unit_welcome'
 
+  #For Formtastic
+  resources :user
+
+  match "controller_unit/input_framework" => "controller_unit#goals", :as => 'input_framework'
+  match "controller_unit/input_framework/goals" => "controller_unit#goals", :as => "goals"
+  match "controller_unit/input_framework/indicators" => "controller_unit#indicators", :as => "indicators"
+  match "controller_unit/input_framework/projects" => "controller_unit#projects", :as => "projects"
+
+  match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "setup_system"
+  match "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
+
   root :to => redirect("/controller_unit/welcome")
 
   #get "authentication/create_user"
