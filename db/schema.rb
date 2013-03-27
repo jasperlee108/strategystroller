@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314101405) do
+ActiveRecord::Schema.define(:version => 20130327222718) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -50,12 +51,6 @@ ActiveRecord::Schema.define(:version => 20130314101405) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "companies", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "dimensions", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -73,13 +68,48 @@ ActiveRecord::Schema.define(:version => 20130314101405) do
   end
 
   create_table "indicators", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "owner"
+    t.string   "description"
+    t.string   "source"
+    t.string   "unit"
+    t.string   "freq"
+    t.string   "type"
+    t.string   "dir"
+    t.float    "actual"
+    t.float    "target"
+    t.string   "notes"
+    t.string   "diff"
+    t.integer  "status"
+    t.string   "status_notes"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "projects", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "owner"
+    t.string   "steer"
+    t.string   "description"
+    t.string   "team"
+    t.date     "start"
+    t.date     "end"
+    t.float    "duration"
+    t.integer  "target_manp"
+    t.float    "target_cost"
+    t.string   "inplan"
+    t.string   "compensation"
+    t.string   "notes"
+    t.integer  "actual_manp"
+    t.float    "actual_cost"
+    t.integer  "status_prog"
+    t.integer  "status_ms"
+    t.integer  "status_manp"
+    t.integer  "status_cost"
+    t.integer  "status_global"
+    t.string   "status_notes"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|
