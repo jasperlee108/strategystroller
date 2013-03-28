@@ -1,3 +1,0 @@
-class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :name, :notes, :owner, :source, :status, :status_notes, :target, :type, :unit
-end

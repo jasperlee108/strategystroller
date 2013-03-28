@@ -14,14 +14,14 @@
       <img src="./assets/0.7.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2013-03-28T02:17:58-07:00">2013-03-28T02:17:58-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2013-03-28T04:48:39-07:00">2013-03-28T04:48:39-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">78.32%</span></span>
+    (<span class="covered_percent"><span class="red">78.47%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
@@ -32,8 +32,8 @@
   <a name="AllFiles"></a>
   <div>
     <b>20</b> files in total.
-    <b>143</b> relevant lines. 
-    <span class="green"><b>112</b> lines covered</span> and
+    <b>144</b> relevant lines. 
+    <span class="green"><b>113</b> lines covered</span> and
     <span class="red"><b>31</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -223,9 +223,9 @@
       <tr>
         <td class="strong"><a href="#4fd363232c76192fd02ac475ea451297f8c9f508" class="src_link" title="app/models/indicator.rb">app/models/indicator.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>75</td>
-        <td>15</td>
-        <td>15</td>
+        <td>79</td>
+        <td>16</td>
+        <td>16</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -346,7 +346,7 @@
           <div class="file_list_container" id="Models">
   <h2>
     <span class="group_name">Models</span>
-    (<span class="covered_percent"><span class="green">95.45%</span></span>
+    (<span class="covered_percent"><span class="green">95.51%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
@@ -357,8 +357,8 @@
   <a name="Models"></a>
   <div>
     <b>7</b> files in total.
-    <b>88</b> relevant lines. 
-    <span class="green"><b>84</b> lines covered</span> and
+    <b>89</b> relevant lines. 
+    <span class="green"><b>85</b> lines covered</span> and
     <span class="red"><b>4</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -418,9 +418,9 @@
       <tr>
         <td class="strong"><a href="#4fd363232c76192fd02ac475ea451297f8c9f508" class="src_link" title="app/models/indicator.rb">app/models/indicator.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>75</td>
-        <td>15</td>
-        <td>15</td>
+        <td>79</td>
+        <td>16</td>
+        <td>16</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -2566,8 +2566,8 @@
     <h3>app/models/indicator.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>15</b> relevant lines. 
-      <span class="green"><b>15</b> lines covered</span> and
+      <b>16</b> relevant lines. 
+      <span class="green"><b>16</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -2626,7 +2626,7 @@
         <li class="never" data-hits="" data-linenumber="9">
           
           
-          <code class="ruby">  ## Owner = string[100] &lt;u_id,u_string&gt;</code>
+          <code class="ruby">  ## Owner = string[20] &lt;u_id,u_string&gt;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="10">
@@ -2644,7 +2644,7 @@
         <li class="never" data-hits="" data-linenumber="12">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 100 }</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 20 }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="13">
@@ -2659,367 +2659,391 @@
           <code class="ruby">  ## Description = string[600]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="15">
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">  ## Description can be empty</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="16">
           <span class="hits">1</span>
           
           <code class="ruby">  validates :description,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="16">
-          
-          
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 600 }</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="17">
           
           
-          <code class="ruby">  </code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 600 },</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="18">
           
           
-          <code class="ruby">  ## Source = string[200]</code>
+          <code class="ruby">  :allow_blank =&gt; true</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="19">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="19">
           
-          <code class="ruby">  validates :source,</code>
+          
+          <code class="ruby">  </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="20">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 200 }</code>
+          <code class="ruby">  ## Source = string[200]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">  validates :source,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="22">
           
           
-          <code class="ruby">  ## Unit = string[20]</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 200 }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="23">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="23">
           
-          <code class="ruby">  validates :unit,</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="24">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 20 }</code>
+          <code class="ruby">  ## Unit = string[20]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="25">
+        <li class="covered" data-hits="1" data-linenumber="25">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">  validates :unit,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="26">
           
           
-          <code class="ruby">  ## Freq = string[2]</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 20 }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="27">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="27">
           
-          <code class="ruby">  validates :source,</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="28">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 2 }</code>
+          <code class="ruby">  ## Freq = string[2]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="29">
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">  validates :freq,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
           
           
-          <code class="ruby">  ## Type = string[10]</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 2 }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="31">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="31">
           
-          <code class="ruby">  validates :source,</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="32">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 10 }</code>
+          <code class="ruby">  ## Type = string[10]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="33">
+        <li class="covered" data-hits="1" data-linenumber="33">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">  validates :type,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="34">
           
           
-          <code class="ruby">  ## Dir = string[20]</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 10 }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="35">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="35">
           
-          <code class="ruby">  validates :dir,</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="36">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 20 }</code>
+          <code class="ruby">  ## Dir = string[20]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
+        <li class="covered" data-hits="1" data-linenumber="37">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">  validates :dir,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="38">
           
           
-          <code class="ruby">  ## Actual = long integer</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 20 }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="39">
           
           
-          <code class="ruby">  ## 0.00 &lt;= Status &lt;= 100.00</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="40">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="40">
           
-          <code class="ruby">  validates :actual,</code>
+          
+          <code class="ruby">  ## Actual = float</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="41">
           
           
-          <code class="ruby">  :allow_nil =&gt; true,</code>
+          <code class="ruby">  ## 0.00 &lt;= Actual</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="42">
+        <li class="covered" data-hits="1" data-linenumber="42">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  :numericality =&gt; {</code>
+          <code class="ruby">  validates :actual,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="43">
           
           
-          <code class="ruby">    :greater_than_or_equal_to =&gt; 0,</code>
+          <code class="ruby">  :allow_nil =&gt; true,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">
           
           
-          <code class="ruby">    :less_than_or_equal_to =&gt; 100</code>
+          <code class="ruby">  :numericality =&gt; { :greater_than_or_equal_to =&gt; 0 }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="45">
           
           
-          <code class="ruby">  }</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="46">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  ## Target = float</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
           
           
-          <code class="ruby">  ## Target = long integer</code>
+          <code class="ruby">  ## 0.00 &lt;= Target</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="48">
-          
-          
-          <code class="ruby">  ## 0.00 &lt;= Status &lt;= 100.00</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="49">
+        <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
           <code class="ruby">  validates :target,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="50">
+        <li class="never" data-hits="" data-linenumber="49">
           
           
           <code class="ruby">  :allow_nil =&gt; true,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby">  :numericality =&gt; { :greater_than_or_equal_to =&gt; 0 }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="51">
           
           
-          <code class="ruby">  :numericality =&gt; {</code>
+          <code class="ruby">  </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="52">
           
           
-          <code class="ruby">    :greater_than_or_equal_to =&gt; 0,</code>
+          <code class="ruby">  ## Notes = string[600]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="53">
           
           
-          <code class="ruby">    :less_than_or_equal_to =&gt; 100</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="54">
-          
-          
-          <code class="ruby">  }</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="55">
-          
-          
-          <code class="ruby">  </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="56">
-          
-          
-          <code class="ruby">  ## Notes = string[600]</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="57">
-          
-          
           <code class="ruby">  ## Notes can be empty</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="58">
+        <li class="covered" data-hits="1" data-linenumber="54">
           <span class="hits">1</span>
           
           <code class="ruby">  validates :notes,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="59">
+        <li class="never" data-hits="" data-linenumber="55">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 600 }</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 600 },</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="60">
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby">  :allow_blank =&gt; true</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
           
           
           <code class="ruby">  </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
+        <li class="never" data-hits="" data-linenumber="58">
           
           
           <code class="ruby">  ## Status = long integer</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="62">
+        <li class="never" data-hits="" data-linenumber="59">
           
           
           <code class="ruby">  ## 0.00 &lt;= Status &lt;= 100.00</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="63">
+        <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
           <code class="ruby">  validates :status,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="61">
           
           
           <code class="ruby">  :allow_nil =&gt; true,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="never" data-hits="" data-linenumber="62">
           
           
           <code class="ruby">  :numericality =&gt; {</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="66">
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby">    :greater_than_or_equal_to =&gt; 0,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="67">
+        <li class="never" data-hits="" data-linenumber="64">
           
           
           <code class="ruby">    :less_than_or_equal_to =&gt; 100</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="68">
+        <li class="never" data-hits="" data-linenumber="65">
           
           
           <code class="ruby">  }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="69">
+        <li class="never" data-hits="" data-linenumber="66">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="70">
+        <li class="never" data-hits="" data-linenumber="67">
           
           
           <code class="ruby">  ## Status Notes = string[600]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="never" data-hits="" data-linenumber="68">
           
           
           <code class="ruby">  ## Notes can be empty</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="72">
+        <li class="covered" data-hits="1" data-linenumber="69">
           <span class="hits">1</span>
           
           <code class="ruby">  validates :status_notes,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="73">
+        <li class="never" data-hits="" data-linenumber="70">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 600 }</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 600 },</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="74">
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby">  :allow_blank =&gt; true</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="75">
+        <li class="never" data-hits="" data-linenumber="73">
+          
+          
+          <code class="ruby">  ## Difference = float</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="74">
+          
+          
+          <code class="ruby">  ## Difference &gt;= 0.0</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  validates :diff,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby">  :allow_nil =&gt; true,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby">  :numericality =&gt; { :greater_than_or_equal_to =&gt; 0 }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby">  </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
           
           
           <code class="ruby">end</code>
@@ -3094,7 +3118,7 @@
         <li class="never" data-hits="" data-linenumber="9">
           
           
-          <code class="ruby">  ## Owner = string[100] &lt;u_id,u_string&gt;</code>
+          <code class="ruby">  ## Owner = string[20] &lt;u_id,u_string&gt;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="10">
@@ -3112,7 +3136,7 @@
         <li class="never" data-hits="" data-linenumber="12">
           
           
-          <code class="ruby">  :length =&gt; { :maximum =&gt; 100 }</code>
+          <code class="ruby">  :length =&gt; { :maximum =&gt; 20 }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="13">
@@ -3760,7 +3784,7 @@
         <li class="never" data-hits="" data-linenumber="120">
           
           
-          <code class="ruby">  ## Notes can be empty</code>
+          <code class="ruby">  ## Status_notes can be empty</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="121">

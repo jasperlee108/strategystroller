@@ -6,10 +6,10 @@ class Project < ActiveRecord::Base
   :presence => true,
   :length => { :maximum => 80 }
   
-  ## Owner = string[100] <u_id,u_string>
+  ## Owner = string[20] <u_id,u_string>
   validates :owner,
   :presence => true,
-  :length => { :maximum => 100 }
+  :length => { :maximum => 20 }
   
   ## Description = string[600]
   ## Description can be empty
@@ -117,7 +117,7 @@ class Project < ActiveRecord::Base
   }
   
   ## Status_notes = string[600]
-  ## Notes can be empty
+  ## Status_notes can be empty
   validates :status_notes,
   :length => { :maximum => 600 },
   :allow_blank => true
