@@ -1,0 +1,13 @@
+<body>
+    <%= tabs %>
+
+    <%= semantic_form_for :goal do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :name %>
+          <%= f.select :parent, Dimension.all.name, :prompt => true %>
+          <%= f.select :owner, 
+          <%= f.input :notes %>
+        <% end %>
+    <%= f.button %>
+    <% end %>
+</body>
