@@ -1,5 +1,5 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :name, :notes, :source, :status, :status_notes, :target, :type, :unit
+  attr_accessible :actual, :description, :diff, :dir, :freq, :name, :notes, :source, :status, :status_notes, :target, :type, :unit, :goal_id, :user_id
   
   ### ASSOCIATIONS
   ## parent
