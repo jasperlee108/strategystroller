@@ -1,9 +1,13 @@
 source 'https://rubygems.org'
-
+ruby '1.9.3' 
 gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+# SimpleCov 
+gem 'simplecov', :require => false, :group => :test
+#gem "bcrypt-ruby" # necessary for 1.9
 
 # Active Admin
 gem 'activeadmin'
@@ -28,10 +32,10 @@ end
 
 ## For deployment to heroku, use postgreSQL
 ## Capycabara is a fix for Rspec mentioned in CS169 website 
-#group :production do
-  #gem 'pg'
-  #gem 'capybara', '1.1.2'
-#end
+group :production do
+  gem 'pg'
+  gem 'capybara', '1.1.2'
+end
 
 gem 'json'
 

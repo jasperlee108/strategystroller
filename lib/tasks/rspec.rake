@@ -24,4 +24,16 @@ namespace :rspec do
     system("rspec ./spec/models/user_spec.rb")
   end
 
+  desc "Run activity tests"
+  task :activity => :environment do
+    system("echo Running activity_spec test..")
+    system("rspec ./spec/models/activity_spec.rb")
+  end
+
+  desc "Run dimension tests"
+  task :dimension => :environment do
+    system("echo Running dimension_spec test..")
+    system("rspec ./spec/models/dimension_spec.rb")
+  end
+
 end
