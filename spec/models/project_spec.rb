@@ -7,10 +7,7 @@ describe Project do
   def generate
     project = Project.new(
     :name => "Projekts",
-    :owner => "Projektleiter",
-    :steer => "Lenkungssauschuss",
     :description => "Projektbeschreibung",
-    :team => "Projektteam",
     :startDate => Date.new(2013,03,27),
     :endDate => Date.new(2013,03,28),
     :duration => 5.5,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328093518) do
+ActiveRecord::Schema.define(:version => 20130328131208) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -43,6 +43,12 @@ ActiveRecord::Schema.define(:version => 20130328093518) do
     t.text     "statusNotes"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
+  end
+
+  create_table "activities_users", :id => false, :force => true do |t|
+    t.integer "activity_id"
+    t.integer "user_id"
   end
 
   create_table "admin_users", :force => true do |t|
@@ -79,11 +85,12 @@ ActiveRecord::Schema.define(:version => 20130328093518) do
     t.float    "status"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "dimension_id"
+    t.integer  "user_id"
   end
 
   create_table "indicators", :force => true do |t|
     t.string   "name"
-    t.string   "owner"
     t.text     "description"
     t.string   "source"
     t.string   "unit"
@@ -98,14 +105,13 @@ ActiveRecord::Schema.define(:version => 20130328093518) do
     t.text     "status_notes"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "goal_id"
+    t.integer  "user_id"
   end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.string   "owner"
-    t.string   "steer"
     t.text     "description"
-    t.string   "team"
     t.date     "startDate"
     t.date     "endDate"
     t.float    "duration"
@@ -124,6 +130,14 @@ ActiveRecord::Schema.define(:version => 20130328093518) do
     t.text     "status_notes"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "indicator_id"
+    t.integer  "head_id"
+    t.integer  "steer_id"
+  end
+
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|

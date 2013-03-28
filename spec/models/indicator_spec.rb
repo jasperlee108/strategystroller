@@ -7,7 +7,6 @@ describe Indicator do
   def generate
     indicator = Indicator.new(
     :name => "Name der Messgrobe",
-    :owner => "Verantwortllich",
     :description => "Beschreibung der Messgrobe",
     :source => "Quelle",
     :unit => "Einheit",
@@ -32,7 +31,7 @@ describe Indicator do
   ## All Correct
   it "should behave correctly on good inputs" do
     indicator = generate()
-    assert(indicator.save, "It won't save on good inputs")
+    assert(indicator.save!, "It won't save on good inputs")
   end
 
   ### DESCRIPTION

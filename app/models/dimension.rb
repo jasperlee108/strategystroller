@@ -1,6 +1,10 @@
 class Dimension < ActiveRecord::Base
   attr_accessible :name, :status
   
+  ### ASSOCIATIONS
+  ## children
+  has_many :goals
+  
   ## Name = string[30]
   validates :name,
   :presence => true,

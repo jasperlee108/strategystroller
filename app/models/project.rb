@@ -1,29 +1,28 @@
 class Project < ActiveRecord::Base
-  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :owner, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :steer, :target_cost, :target_manp, :team
+  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp
+
+  ### ASSOCIATIONS
+  ## parent
+  belongs_to :indicator
+  ## owner
+  belongs_to :head, :class_name => "User", :foreign_key => :head_id
+  ## steer
+  belongs_to :steer, :class_name => "User", :foreign_key => :steer_id
+  ## team
+  has_and_belongs_to_many :users
+  ## children
+  has_many :activities
 
   # Name = string[80]
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
   
-  ## Owner = string[20] <u_id,u_string>
-  validates :owner,
-  :presence => true,
-  :length => { :maximum => 20 }
-  
   ## Description = string[600]
   ## Description can be empty
   validates :description,
   :length => { :maximum => 600 },
   :allow_blank => true
-  
-  ## Steer = string[20]
-  validates :steer,
-  :length => { :maximum => 20 }
-
-  ## Team = string[20]
-  validates :team,
-  :length => { :maximum => 20 }
 
   ### TODO: NOTE TO SELF
   ## If you see this note, make sure to only give T/F options

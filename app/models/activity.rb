@@ -1,6 +1,12 @@
 class Activity < ActiveRecord::Base
   attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp
 
+  ### ASSOCIATIONS
+  ## parent
+  belongs_to :project
+  ## team
+  has_and_belongs_to_many :users
+
   ## name = string[80]
   validates :name,
   :presence => true,

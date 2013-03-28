@@ -1,15 +1,18 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :name, :notes, :owner, :source, :status, :status_notes, :target, :type, :unit
+  attr_accessible :actual, :description, :diff, :dir, :freq, :name, :notes, :source, :status, :status_notes, :target, :type, :unit
+  
+  ### ASSOCIATIONS
+  ## parent
+  belongs_to :goal
+  ## owner
+  belongs_to :user
+  ## children
+  has_many :projects 
   
   # Name = string[80]
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
-  
-  ## Owner = string[20] <u_id,u_string>
-  validates :owner,
-  :presence => true,
-  :length => { :maximum => 20 }
   
   ## Description = string[600]
   ## Description can be empty
