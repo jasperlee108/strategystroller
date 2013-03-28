@@ -86,7 +86,7 @@ describe Activity do
     :actualProg => 75.00,
     :statusNotes => "A Different Wall of Text"
     )
-    assert(activity.save, "It saves on empty Description")
+    assert(activity.save, "It won't save on empty Description")
   end
   
   ## Description max = 600
@@ -350,7 +350,7 @@ describe Activity do
     :actualProg => 75.00,
     :statusNotes => "A Different Wall of Text"
     )
-    assert(activity.save, "It saves on empty Notes")
+    assert(activity.save, "It won't save on empty Notes")
   end
   
   ## Notes max = 600
@@ -499,7 +499,7 @@ describe Activity do
   end
 
   ## ActualProg = float >= 0
-  it "should have ActualProg as a float > 0" do
+  it "should have ActualProg as a float >= 0" do
     actualProg = -5
     activity = Activity.new(
     :name => "Aktivitat",
@@ -519,7 +519,7 @@ describe Activity do
   end
 
   ## ActualProg = float <= 100
-  it "should have ActualProg as a float > 0" do
+  it "should have ActualProg as a float <= 100" do
     actualProg = 100.50
     activity = Activity.new(
     :name => "Aktivitat",
@@ -556,7 +556,7 @@ describe Activity do
     :actualProg => 75.00,
     :statusNotes => ""
     )
-    assert(activity.save, "It saves on empty Status Notes")
+    assert(activity.save, "It won't save on empty Status Notes")
   end
   
   ## Status Notes max = 600

@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20130327222718) do
-
+ActiveRecord::Schema.define(:version => 20130328023954) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -106,24 +104,24 @@ ActiveRecord::Schema.define(:version => 20130327222718) do
     t.string   "name"
     t.string   "owner"
     t.string   "steer"
-    t.string   "description"
+    t.text     "description"
     t.string   "team"
-    t.date     "start"
-    t.date     "end"
+    t.date     "startDate"
+    t.date     "endDate"
     t.float    "duration"
     t.integer  "target_manp"
-    t.float    "target_cost"
-    t.string   "inplan"
-    t.string   "compensation"
-    t.string   "notes"
+    t.decimal  "target_cost"
+    t.boolean  "inplan"
+    t.boolean  "compensation"
+    t.text     "notes"
     t.integer  "actual_manp"
-    t.float    "actual_cost"
-    t.integer  "status_prog"
+    t.decimal  "actual_cost"
+    t.float    "status_prog"
     t.integer  "status_ms"
     t.integer  "status_manp"
-    t.integer  "status_cost"
-    t.integer  "status_global"
-    t.string   "status_notes"
+    t.decimal  "status_cost"
+    t.float    "status_global"
+    t.text     "status_notes"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
