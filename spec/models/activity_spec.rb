@@ -4,6 +4,24 @@ describe Activity do
   
   ### NOTE: Using ruby format, not Rspec
   
+  def generate
+    activity = Activity.new(
+    :name => "Aktivitat",
+    :description => "Wall of Text",
+    :phase => "Projektphasen",
+    :startDate => Date.new(2013,03,26),
+    :endDate => Date.new(2013,03,27),
+    :targetManp => 20,
+    :targetCost => 50.50,
+    :notes => "Another Wall of Text",
+    :actualManp => 10,
+    :actualCost => 25.25,
+    :actualProg => 75.00,
+    :statusNotes => "A Different Wall of Text"
+    )
+    return activity    
+  end
+  
   ## Default
   it "should pass assert true sanity test" do
     assert(true, "Did not pass sanity check")
@@ -11,20 +29,7 @@ describe Activity do
 
   ## All Correct
   it "should behave correctly on good inputs" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
     assert(activity.save, "It won't save on good inputs")
   end
 
@@ -32,39 +37,17 @@ describe Activity do
   
   ## Name is not empty
   it "should not have empty Name" do
-    activity = Activity.new(
-    :name => "",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    name = ""
+    activity = generate()
+    activity.name = name
     assert(!activity.save, "It saves on empty Name")
   end
   
   ## Name max = 80
   it "should not have Name longer than 80 characters" do
-    activity = Activity.new(
-    :name => (0...81).map{ ( 65+rand(26) ).chr }.join,
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    name = (0...81).map{ ( 65+rand(26) ).chr }.join
+    activity = generate()
+    activity.name = name
     assert(!activity.save, "It saves on Name longer than 80 characters")
   end
   
@@ -72,39 +55,17 @@ describe Activity do
   
   ## Description can be empty
   it "can have empty Description" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    description = ""
+    activity = generate()
+    activity.description = description
     assert(activity.save, "It won't save on empty Description")
   end
   
   ## Description max = 600
   it "should not have Description longer than 600 characters" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => (0...601).map{ ( 65+rand(26) ).chr }.join,
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    description = (0...601).map{ ( 65+rand(26) ).chr }.join
+    activity = generate()
+    activity.description = description
     assert(!activity.save, "It saves on Description longer than 600 characters")
   end
   
@@ -112,39 +73,17 @@ describe Activity do
   
   ## Phase is not empty
   it "should not have empty Phase" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    phase = ""
+    activity = generate()
+    activity.phase = phase
     assert(!activity.save, "It saves on empty Phase")
   end
   
   ## Phase max = 30
   it "should not have Phase longer than 30 characters" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => (0...31).map{ ( 65+rand(26) ).chr }.join,
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    phase = (0...31).map{ ( 65+rand(26) ).chr }.join
+    activity = generate()
+    activity.phase = phase
     assert(!activity.save, "It saves on Phase longer than 30 characters")
   end
   
@@ -152,58 +91,27 @@ describe Activity do
   
   ## Start Date is valid
   it "should have valid Start Date" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => "random",
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    startDate = "random"
+    activity = generate()
+    activity.startDate = startDate
     assert(!activity.save, "It saves on invalid Start Date")
   end
 
   ## End Date is valid
   it "should have valid End Date" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => "random",
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    endDate = "random"
+    activity = generate()
+    activity.endDate = endDate
     assert(!activity.save, "It saves on invalid End Date")
   end
 
   ## Start Date before End Date
   it "should have Start Date before End Date" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,27),
-    :endDate => Date.new(2013,03,26),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    startDate = Date.new(2013,03,27)
+    endDate = Date.new(2013,03,26)
+    activity = generate()
+    activity.startDate = startDate
+    activity.endDate = endDate
     assert(!activity.save, "It saves on End Date before Start Date")
   end
 
@@ -211,20 +119,9 @@ describe Activity do
   # NOTE: date is in string, the validator will check its correctness,
   # if not, it will error out before even reaching the validator
   it "should have real Date" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => "2013-02-30",
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    startDate = "2013-02-30"
+    activity = generate()
+    activity.startDate = startDate
     assert(!activity.save, "It saves on non existence Date")
   end
 
@@ -233,60 +130,24 @@ describe Activity do
   ## TargetManp = integer
   it "should have TargetManp as an integer" do
     targetManp = "random"
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => targetManp,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.targetManp = targetManp
     assert(!activity.save, "It saves on TargetManp = " + targetManp.to_s)
   end
 
   ## TargetManp = integer
   it "should have TargetManp as an integer" do
     targetManp = 10.50
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => targetManp,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.targetManp = targetManp
     assert(!activity.save, "It saves on TargetManp = " + targetManp.to_s)
   end
   
   ## TargetManp = integer > 0
   it "should have TargetManp as an integer > 0" do
     targetManp = -5
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => targetManp,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.targetManp = targetManp
     assert(!activity.save, "It saves on TargetManp = " + targetManp.to_s)
   end
 
@@ -295,40 +156,16 @@ describe Activity do
   ## TargetCost = decimal
   it "should have TargetCost as a decimal" do
     targetCost = "random"
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => targetCost,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.targetCost = targetCost
     assert(!activity.save, "It saves on TargetCost = " + targetCost.to_s)
   end
 
   ## TargetCost = decimal > 0
   it "should have TargetCost as a decimal > 0" do
     targetCost = -5
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => targetCost,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.targetCost = targetCost
     assert(!activity.save, "It saves on TargetCost = " + targetCost.to_s)
   end
 
@@ -336,39 +173,17 @@ describe Activity do
   
   ## Notes can be empty
   it "can have empty Notes" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    notes = ""
+    activity = generate()
+    activity.notes = notes
     assert(activity.save, "It won't save on empty Notes")
   end
   
   ## Notes max = 600
   it "should not have Notes longer than 600 characters" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => (0...601).map{ ( 65+rand(26) ).chr }.join,
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    notes = (0...601).map{ ( 65+rand(26) ).chr }.join
+    activity = generate()
+    activity.notes = notes
     assert(!activity.save, "It saves on Notes longer than 600 characters")
   end
 
@@ -377,60 +192,24 @@ describe Activity do
   ## ActualManp = integer
   it "should have ActualManp as an integer" do
     actualManp = "random"
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => actualManp,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.actualManp = actualManp
     assert(!activity.save, "It saves on ActualManp = " + actualManp.to_s)
   end
 
   ## ActualManp = integer
   it "should have ActualManp as an integer" do
     actualManp = 10.50
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => actualManp,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.actualManp = actualManp
     assert(!activity.save, "It saves on ActualManp = " + actualManp.to_s)
   end
   
   ## ActualManp = integer > 0
   it "should have ActualManp as an integer > 0" do
     actualManp = -5
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => actualManp,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.actualManp = actualManp
     assert(!activity.save, "It saves on ActualManp = " + actualManp.to_s)
   end
 
@@ -439,40 +218,16 @@ describe Activity do
   ## ActualCost = decimal
   it "should have ActualCost as a decimal" do
     actualCost = "random"
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => actualCost,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.actualCost = actualCost
     assert(!activity.save, "It saves on ActualCost = " + actualCost.to_s)
   end
 
   ## ActualCost = decimal > 0
   it "should have ActualCost as a decimal > 0" do
     actualCost = -5
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => actualCost,
-    :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.actualCost = actualCost
     assert(!activity.save, "It saves on ActualCost = " + actualCost.to_s)
   end
 
@@ -481,60 +236,24 @@ describe Activity do
   ## ActualProg = float
   it "should have ActualProg as a float" do
     actualProg = "random"
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => actualProg,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.actualProg = actualProg
     assert(!activity.save, "It saves on ActualProg = " + actualProg.to_s)
   end
 
   ## ActualProg = float >= 0
   it "should have ActualProg as a float >= 0" do
     actualProg = -5
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => actualProg,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.actualProg = actualProg
     assert(!activity.save, "It saves on ActualProg = " + actualProg.to_s)
   end
 
   ## ActualProg = float <= 100
   it "should have ActualProg as a float <= 100" do
     actualProg = 100.50
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => actualProg,
-    :statusNotes => "A Different Wall of Text"
-    )
+    activity = generate()
+    activity.actualProg = actualProg
     assert(!activity.save, "It saves on ActualProg = " + actualProg.to_s)
   end
 
@@ -542,39 +261,17 @@ describe Activity do
   
   ## Status Notes can be empty
   it "can have empty Status Notes" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => ""
-    )
+    statusNotes = ""
+    activity = generate()
+    activity.statusNotes = statusNotes
     assert(activity.save, "It won't save on empty Status Notes")
   end
   
   ## Status Notes max = 600
   it "should not have Status Notes longer than 600 characters" do
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => "Projektphasen",
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => 75.00,
-    :statusNotes => (0...601).map{ ( 65+rand(26) ).chr }.join
-    )
+    statusNotes = (0...601).map{ ( 65+rand(26) ).chr }.join
+    activity = generate()
+    activity.statusNotes = statusNotes
     assert(!activity.save, "It saves on Status Notes longer than 600 characters")
   end
 

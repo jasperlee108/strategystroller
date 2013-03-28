@@ -4,36 +4,44 @@ describe Goal do
 
   ### NOTE: Using ruby format, not Rspec
   
+  def generate
+    goal = Goal.new(
+    :name => "Name of Goal",
+    :need => "Call for action",
+    :justification => "Justification of specific goal",
+    :focus => "Strategic approach",
+    :notes => "Notes",
+    :status => 0.00
+    )
+    return goal
+  end
+  
   ## Default
   it "should pass assert true sanity test" do
     assert(true, "Did not pass sanity check")
+  end
+
+  ## All Correct
+  it "should behave correctly on good inputs" do
+    goal = generate()
+    assert(goal.save, "It won't save on good inputs")
   end
 
   ### NAME
   
   ## Name is not empty
   it "should not have empty Name" do
-    goal = Goal.new(
-    :name => "",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 0.00
-    )
+    name = ""
+    goal = generate()
+    goal.name = name
     assert(!goal.save, "Name is empty")
   end
   
   ## Name max = 80
   it "should not have Name longer than 80 characters" do
-    goal = Goal.new(
-    :name => (0...81).map{ ( 65+rand(26) ).chr }.join,
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 0.00
-    )
+    name = (0...81).map{ ( 65+rand(26) ).chr }.join
+    goal = generate()
+    goal.name = name
     assert(!goal.save, "Name is longer than 80 characters")
   end
   
@@ -41,27 +49,17 @@ describe Goal do
   
   ## Need is not empty
   it "should not have empty Need" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 0.00
-    )
+    need = ""
+    goal = generate()
+    goal.need = need
     assert(!goal.save, "Need is empty")
   end
   
   ## Need max = 1200
   it "should not have Need longer than 1200 characters" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => (0...1201).map{ ( 65+rand(26) ).chr }.join,
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 0.00
-    )
+    need = (0...1201).map{ ( 65+rand(26) ).chr }.join
+    goal = generate()
+    goal.need = need
     assert(!goal.save, "Need is longer than 1200 characters")
   end
   
@@ -69,27 +67,17 @@ describe Goal do
   
   ## Justification is not empty
   it "should not have empty Justification" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "Call for action",
-    :justification => "",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 0.00
-    )
+    justification = ""
+    goal = generate()
+    goal.justification = justification
     assert(!goal.save, "Justification is empty")
   end
   
   ## Need max = 1200
   it "should not have Need longer than 1200 characters" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "Call for action",
-    :justification => (0...1201).map{ ( 65+rand(26) ).chr }.join,
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 0.00
-    )
+    justification = (0...1201).map{ ( 65+rand(26) ).chr }.join
+    goal = generate()
+    goal.justification = justification
     assert(!goal.save, "Justification is longer than 1200 characters")
   end
   
@@ -97,27 +85,17 @@ describe Goal do
   
   ## Focus is not empty
   it "should not have empty Focus" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "",
-    :notes => "Notes",
-    :status => 0.00
-    )
+    focus = ""
+    goal = generate()
+    goal.focus = focus
     assert(!goal.save, "Focus is empty")
   end
   
   ## Focus max = 1200
   it "should not have Focus longer than 1200 characters" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => (0...1201).map{ ( 65+rand(26) ).chr }.join,
-    :notes => "Notes",
-    :status => 0.00
-    )
+    focus = (0...1201).map{ ( 65+rand(26) ).chr }.join
+    goal = generate()
+    goal.focus = focus
     assert(!goal.save, "Focus is longer than 1200 characters")
   end  
 
@@ -125,27 +103,17 @@ describe Goal do
   
   ## Notes can be empty
   it "should be allowed to have empty Notes" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "",
-    :status => 0.00
-    )
+    notes = ""
+    goal = generate()
+    goal.notes = notes
     assert(goal.save, "Notes can be empty")
   end
   
   ## Notes max = 600
   it "should not have Notes longer than 600 characters" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => (0...601).map{ ( 65+rand(26) ).chr }.join,
-    :status => 0.00
-    )
+    notes = (0...601).map{ ( 65+rand(26) ).chr }.join
+    goal = generate()
+    goal.notes = notes
     assert(!goal.save, "Notes is longer than 600 characters")
   end  
   
@@ -153,27 +121,17 @@ describe Goal do
   
   ## Status >= 0
   it "should have Status of at least 0" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => -1.50
-    )
+    status = -1.50
+    goal = generate()
+    goal.status = status
     assert(!goal.save, "Status is less than 0")
   end
   
   ## Status <= 100
   it "should have Status of at most 100" do
-    goal = Goal.new(
-    :name => "Name of goal",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 100.50
-    )
+    status = 100.50
+    goal = generate()
+    goal.status = status
     assert(!goal.save, "Status is more than 100")    
   end
 
