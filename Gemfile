@@ -29,10 +29,10 @@ end
 
 ## For deployment to heroku, use postgreSQL
 ## Capycabara is a fix for Rspec mentioned in CS169 website 
-#group :production do
-  #gem 'pg'
-  #gem 'capybara', '1.1.2'
-#end
+group :production do
+  gem 'pg'
+  gem 'capybara', '1.1.2'
+end
 
 gem 'json'
 
