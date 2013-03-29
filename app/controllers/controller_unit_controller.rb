@@ -9,4 +9,18 @@ class ControllerUnitController < ApplicationController
      @user = current_user
    end
 
+    def set_goal
+        @goal = Goal.new
+        if (request.post?) 
+            hash = params[:goal]
+            hash = hash.merge(:status => 0)
+            @goal = Goal.new(hash)
+            if @goal.save
+                flash[:notice] = "Goal successfully saved!"
+            else
+                flash[:error] = "Goal was not saved"
+            end
+        end
+    end
+
 end

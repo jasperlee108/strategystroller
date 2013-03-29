@@ -1,5 +1,6 @@
 class Goal < ActiveRecord::Base
   attr_accessible :name, :parent, :owner, :need, :justification, :focus, :prerequisite, :notes, :children, :status
+  belongs_to :dimension
   
   ## Name = string[80]
   validates :name,
@@ -18,22 +19,18 @@ class Goal < ActiveRecord::Base
   
   ## Need = string[1200]
   validates :need,
-  :presence => true,
   :length => { :maximum => 1200 }
   
   ## Justification = string[1200]
   validates :justification,
-  :presence => true,
   :length => { :maximum => 1200 }
   
   ## Focus = string[1200]
   validates :focus,
-  :presence => true,
   :length => { :maximum => 1200 }
 
   ## Prerequisite = string[2]
   validates :prerequisite,
-  :presence => true,
   :length => { :maximum => 2 }
   
   ## Notes = string[600]
@@ -43,7 +40,6 @@ class Goal < ActiveRecord::Base
 
   ## Children = string[6]
   validates :children,
-  :presence => true,
   :length => { :maximum => 6 }
   
   ## Status = long integer

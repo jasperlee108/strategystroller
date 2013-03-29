@@ -1,5 +1,6 @@
 class Dimension < ActiveRecord::Base
   attr_accessible :name, :status
+  has_many :goals
   
   ## Name = string[30]
   validates :name,

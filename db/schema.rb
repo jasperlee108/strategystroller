@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
 ActiveRecord::Schema.define(:version => 20130327222718) do
-
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
