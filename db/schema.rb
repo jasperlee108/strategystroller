@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327222718) do
+ActiveRecord::Schema.define(:version => 20130328131208) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -43,6 +43,12 @@ ActiveRecord::Schema.define(:version => 20130327222718) do
     t.text     "statusNotes"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "project_id"
+  end
+
+  create_table "activities_users", :id => false, :force => true do |t|
+    t.integer "activity_id"
+    t.integer "user_id"
   end
 
   create_table "admin_users", :force => true do |t|
@@ -72,23 +78,20 @@ ActiveRecord::Schema.define(:version => 20130327222718) do
 
   create_table "goals", :force => true do |t|
     t.string   "name"
-    t.string   "parent"
-    t.string   "owner"
     t.string   "need"
     t.string   "justification"
     t.string   "focus"
-    t.string   "prerequisite"
     t.string   "notes"
-    t.string   "children"
     t.float    "status"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "dimension_id"
+    t.integer  "user_id"
   end
 
   create_table "indicators", :force => true do |t|
     t.string   "name"
-    t.string   "owner"
-    t.string   "description"
+    t.text     "description"
     t.string   "source"
     t.string   "unit"
     t.string   "freq"
@@ -96,38 +99,45 @@ ActiveRecord::Schema.define(:version => 20130327222718) do
     t.string   "dir"
     t.float    "actual"
     t.float    "target"
-    t.string   "notes"
-    t.string   "diff"
-    t.integer  "status"
-    t.string   "status_notes"
+    t.text     "notes"
+    t.float    "diff"
+    t.float    "status"
+    t.text     "status_notes"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "goal_id"
+    t.integer  "user_id"
   end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.string   "owner"
-    t.string   "steer"
-    t.string   "description"
-    t.string   "team"
-    t.date     "start"
-    t.date     "end"
+    t.text     "description"
+    t.date     "startDate"
+    t.date     "endDate"
     t.float    "duration"
     t.integer  "target_manp"
-    t.float    "target_cost"
-    t.string   "inplan"
-    t.string   "compensation"
-    t.string   "notes"
+    t.decimal  "target_cost"
+    t.boolean  "inplan"
+    t.boolean  "compensation"
+    t.text     "notes"
     t.integer  "actual_manp"
-    t.float    "actual_cost"
-    t.integer  "status_prog"
+    t.decimal  "actual_cost"
+    t.float    "status_prog"
     t.integer  "status_ms"
     t.integer  "status_manp"
-    t.integer  "status_cost"
-    t.integer  "status_global"
-    t.string   "status_notes"
+    t.decimal  "status_cost"
+    t.float    "status_global"
+    t.text     "status_notes"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "indicator_id"
+    t.integer  "head_id"
+    t.integer  "steer_id"
+  end
+
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|

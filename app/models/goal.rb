@@ -1,6 +1,14 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :name, :parent, :owner, :need, :justification, :focus, :prerequisite, :notes, :children, :status
+
+  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id
+  
+  ### ASSOCIATIONS
+  ## parent
   belongs_to :dimension
+  ## owner
+  belongs_to :user
+  ## children
+  has_many :indicators
   
   ## Name = string[80]
   validates :name,

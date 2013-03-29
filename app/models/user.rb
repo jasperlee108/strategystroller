@@ -34,4 +34,13 @@ class User < ActiveRecord::Base
 
 
   # TODO add in :username:string, :cu:boolean fields.
+  
+  ### ASSOCIATIONS (added 03/28/2013)
+  has_many :goals
+  has_many :indicators
+  has_many :owned_projects, :class_name => "Project", :foreign_key => :head_id
+  has_many :steering_projects, :class_name => "Project", :foreign_key => :steer_id
+  has_and_belongs_to_many :projects
+  has_and_belongs_to_many :activities
+  
 end

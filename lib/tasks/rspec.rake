@@ -36,4 +36,16 @@ namespace :rspec do
     system("rspec ./spec/models/dimension_spec.rb")
   end
 
+  desc "Run project tests"
+  task :project => :environment do
+    system("echo Running project_spec test..")
+    system("rspec ./spec/models/project_spec.rb")
+  end
+
+  desc "Run indicator tests"
+  task :indicator => :environment do
+    system("echo Running indicator_spec test..")
+    system("rspec ./spec/models/indicator_spec.rb")
+  end
+
 end

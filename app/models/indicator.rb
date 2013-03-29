@@ -1,19 +1,24 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :name, :notes, :owner, :source, :status, :status_notes, :target, :type, :unit
+  attr_accessible :actual, :description, :diff, :dir, :freq, :name, :notes, :source, :status, :status_notes, :target, :type, :unit, :goal_id, :user_id
+  
+  ### ASSOCIATIONS
+  ## parent
+  belongs_to :goal
+  ## owner
+  belongs_to :user
+  ## children
+  has_many :projects 
   
   # Name = string[80]
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
   
-  ## Owner = string[100] <u_id,u_string>
-  validates :owner,
-  :presence => true,
-  :length => { :maximum => 100 }
-  
   ## Description = string[600]
+  ## Description can be empty
   validates :description,
-  :length => { :maximum => 600 }
+  :length => { :maximum => 600 },
+  :allow_blank => true
   
   ## Source = string[200]
   validates :source,
@@ -24,39 +29,34 @@ class Indicator < ActiveRecord::Base
   :length => { :maximum => 20 }
 
   ## Freq = string[2]
-  validates :source,
+  validates :freq,
   :length => { :maximum => 2 }
 
   ## Type = string[10]
-  validates :source,
+  validates :type,
   :length => { :maximum => 10 }
 
   ## Dir = string[20]
   validates :dir,
   :length => { :maximum => 20 }
 
-  ## Actual = long integer
-  ## 0.00 <= Status <= 100.00
+  ## Actual = float
+  ## 0.00 <= Actual
   validates :actual,
   :allow_nil => true,
-  :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
-  }
+  :numericality => { :greater_than_or_equal_to => 0 }
 
-  ## Target = long integer
-  ## 0.00 <= Status <= 100.00
+  ## Target = float
+  ## 0.00 <= Target
   validates :target,
   :allow_nil => true,
-  :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
-  }
+  :numericality => { :greater_than_or_equal_to => 0 }
   
   ## Notes = string[600]
   ## Notes can be empty
   validates :notes,
-  :length => { :maximum => 600 }
+  :length => { :maximum => 600 },
+  :allow_blank => true
   
   ## Status = long integer
   ## 0.00 <= Status <= 100.00
@@ -70,6 +70,13 @@ class Indicator < ActiveRecord::Base
   ## Status Notes = string[600]
   ## Notes can be empty
   validates :status_notes,
-  :length => { :maximum => 600 }
+  :length => { :maximum => 600 },
+  :allow_blank => true
 
+  ## Difference = float
+  ## Difference >= 0.0
+  validates :diff,
+  :allow_nil => true,
+  :numericality => { :greater_than_or_equal_to => 0 }
+  
 end

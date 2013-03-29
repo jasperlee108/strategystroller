@@ -1,5 +1,11 @@
 class Activity < ActiveRecord::Base
-  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp
+  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id
+
+  ### ASSOCIATIONS
+  ## parent
+  belongs_to :project
+  ## team
+  has_and_belongs_to_many :users
 
   ## name = string[80]
   validates :name,
