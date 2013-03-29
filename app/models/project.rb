@@ -13,6 +13,18 @@ class Project < ActiveRecord::Base
   ## children
   has_many :activities
 
+  # Needs a Parent
+  validates :indicator_id,
+  :presence => true
+
+  # Needs an Owner
+  validates :head_id,
+  :presence => true
+
+  # Needs a Steer
+  validates :steer_id,
+  :presence => true
+
   # Name = string[80]
   validates :name,
   :presence => true,
@@ -136,12 +148,14 @@ class Project < ActiveRecord::Base
   ## Source: http://stackoverflow.com/questions/1370926/rails-built-in-datetime-validation
   ## Source: http://stackoverflow.com/questions/5665157/date-validation-in-rails
   def validDate
-    if (Date.parse(startDate.to_s) rescue ArgumentError) == ArgumentError
-      errors.add(:startDate, 'must be a valid date')
-    elsif (Date.parse(endDate.to_s) rescue ArgumentError) == ArgumentError
-      errors.add(:endDate, 'must be a valid date')
-    elsif startDate > endDate
-      errors.add(:endDate, 'must be before start date')
+    if (startDate && endDate)
+      if (Date.parse(startDate.to_s) rescue ArgumentError) == ArgumentError
+        errors.add(:startDate, 'must be a valid date')
+      elsif (Date.parse(endDate.to_s) rescue ArgumentError) == ArgumentError
+        errors.add(:endDate, 'must be a valid date')
+      elsif startDate > endDate
+        errors.add(:endDate, 'must be before start date')
+      end
     end
   end
 
