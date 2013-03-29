@@ -3,16 +3,17 @@
     <%= flash[:notice] %>
     <%= flash[:error] %><br>
 
-    <%= semantic_form_for @goal do |f| %>
+    <%= semantic_form_for @indicator do |f| %>
         <%= f.inputs do %>
           <%= f.input :name %>
 
-          <%= f.input :dimension_id, :label => "Parent", :as => :select, :collection => Dimension.all, :prompt => true %>
+          <%= f.input :goal_id, :label => "Parent", :as => :select, :collection => Goal.all, :prompt => true %>
 
           <%= f.input :user_id, :label => "Owner", :as => :select, :collection => User.all, :prompt => true %>
 
           <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false %>
         <% end %>
-    <%= f.action :submit, :label => "Save Goal" %>
+    <%= f.action :submit, :label => "Save Indicator" %>
     <% end %>
 </body>
+

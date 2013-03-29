@@ -57,9 +57,9 @@ Tabulous.setup do |config|
       #---------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                  |    DISPLAY TEXT           |    PATH                      |    VISIBLE?    |    ENABLED?    #
       #---------------------------------------------------------------------------------------------------------------------------#
-      [    :goals_tab                ,    'Goals'                ,    goal_path                ,    true        ,    true        ],
-      [    :indicators_tab           ,    'Indicators'           ,    indicator_path           ,    true        ,    true        ],
-      [    :projects_tab             ,    'Projects'             ,    project_path             ,    true        ,    true        ],
+      [    :goals_tab                ,    'Goals'                ,    goals_path                ,    true        ,    true        ],
+      [    :indicators_tab           ,    'Indicators'           ,    indicators_path           ,    true        ,    true        ],
+      [    :projects_tab             ,    'Projects'             ,    projects_path             ,    true        ,    true        ],
       #---------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                  |    DISPLAY TEXT           |    PATH                      |    VISIBLE?    |    ENABLED?    #
       #---------------------------------------------------------------------------------------------------------------------------#
@@ -85,9 +85,9 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------#
       #    CONTROLLER            |    ACTION          |    TAB                       #
       #------------------------------------------------------------------------------#
-      [    :controller_unit      ,    :set_goal          ,    :goals_tab                ],
-      [    :controller_unit      ,    :indicator     ,    :indicators_tab           ],
-      [    :controller_unit      ,    :project       ,    :projects_tab             ],
+      [    :controller_unit      ,    :set_goal       ,    :goals_tab                ],
+      [    :controller_unit      ,    :set_indicator  ,    :indicators_tab           ],
+      [    :controller_unit      ,    :set_project    ,    :projects_tab             ],
       #------------------------------------------------------------------------------#
       #    CONTROLLER            |    ACTION          |    TAB                       #
       #------------------------------------------------------------------------------#

@@ -1,5 +1,4 @@
 class Goal < ActiveRecord::Base
-
   attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id
   
   ### ASSOCIATIONS
@@ -10,49 +9,44 @@ class Goal < ActiveRecord::Base
   ## children
   has_many :indicators
   
+  ## Needs to have Parent
+  validates :dimension_id,
+  :presence => true
+
+  ## Needs to have Owner
+  validates :user_id,
+  :presence => true
+
   ## Name = string[80]
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
-
-  ## Parent = string[30]
-  validates :parent,
-  :presence => true,
-  :length => { :maximum => 30 }
-
-  ## Owner = string[20]
-  validates :owner,
-  :presence => true,
-  :length => { :maximum => 20 }
   
   ## Need = string[1200]
   validates :need,
+  :allow_nil => true,
   :length => { :maximum => 1200 }
   
   ## Justification = string[1200]
   validates :justification,
+  :allow_nil => true,
   :length => { :maximum => 1200 }
   
   ## Focus = string[1200]
   validates :focus,
+  :allow_nil => true,
   :length => { :maximum => 1200 }
-
-  ## Prerequisite = string[2]
-  validates :prerequisite,
-  :length => { :maximum => 2 }
   
   ## Notes = string[600]
   ## Notes can be empty
   validates :notes,
+  :allow_nil => true,
   :length => { :maximum => 600 }
-
-  ## Children = string[6]
-  validates :children,
-  :length => { :maximum => 6 }
   
   ## Status = long integer
   ## 0.00 <= Status <= 100.00
   validates :status,
+  :allow_nil => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100

@@ -13,6 +13,14 @@ class Indicator < ActiveRecord::Base
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
+
+  # Needs to have Parent
+  validates :goal_id,
+  :presence => true
+
+  # Needs to have Owner
+  validates :user_id,
+  :presence => true
   
   ## Description = string[600]
   ## Description can be empty

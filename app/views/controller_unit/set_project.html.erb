@@ -1,0 +1,20 @@
+<body>
+    <%= tabs %>
+    <%= flash[:notice] %>
+    <%= flash[:error] %><br>
+
+    <%= semantic_form_for @project do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :name %>
+
+          <%= f.input :indicator_id, :label => "Parent", :as => :select, :collection => Indicator.all, :prompt => true %>
+
+          <%= f.input :head_id, :label => "Owner", :as => :select, :collection => User.all, :prompt => true %>
+
+          <%= f.input :steer_id, :label => "Steer", :as => :select, :collection => User.all, :prompt => true %>
+          
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false %>
+        <% end %>
+    <%= f.action :submit, :label => "Save Project" %>
+    <% end %>
+</body>

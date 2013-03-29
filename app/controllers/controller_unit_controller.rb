@@ -12,13 +12,35 @@ class ControllerUnitController < ApplicationController
     def set_goal
         @goal = Goal.new
         if (request.post?) 
-            hash = params[:goal]
-            hash = hash.merge(:status => 0)
-            @goal = Goal.new(hash)
+            @goal = Goal.new(params[:goal])
             if @goal.save
                 flash[:notice] = "Goal successfully saved!"
             else
                 flash[:error] = "Goal was not saved"
+            end
+        end
+    end
+
+    def set_indicator
+        @indicator = Indicator.new
+        if (request.post?) 
+            @indicator = Indicator.new(params[:indicator])
+            if @indicator.save
+                flash[:notice] = "Indicator successfully saved!"
+            else
+                flash[:error] = "Indicator was not saved"
+            end
+        end
+    end
+
+    def set_project
+        @project = Project.new
+        if (request.post?) 
+            @project = Project.new(params[:project])
+            if @project.save
+                flash[:notice] = "Project successfully saved!"
+            else
+                flash[:error] = "Project was not saved"
             end
         end
     end
