@@ -20,6 +20,7 @@ gem "twitter-bootstrap-rails"
 
 gem 'formtastic-bootstrap'
 gem 'tabulous'
+gem 'cocoon'
 
 ## Assume deploying to heroku, use Rspec
 gem 'rspec-rails', '2.12.2'

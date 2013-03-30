@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :confirmable, :timeoutable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :login #, :remember_me
+  attr_accessible :username, :email, :password, :password_confirmation, :application_id, :login #, :remember_me
   # attr_accessible :title, :body
 
   # This is a virtual attribute to allow logging in via username OR email
@@ -42,5 +42,6 @@ class User < ActiveRecord::Base
   has_many :steering_projects, :class_name => "Project", :foreign_key => :steer_id
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :activities
+  belongs_to :application
   
 end

@@ -45,4 +45,25 @@ class ControllerUnitController < ApplicationController
         end
     end
 
+    def setup_system
+        @application = Application.new
+        @years = Application::YEARS
+        @languages = Application::LANGUAGES
+        @time_horizon = Application::TIME_HORIZON
+         if (request.post?) 
+            @application = Application.new(params[:application])
+            if @application.save
+               # users = params[:users_attributes]
+               # for id in users do
+               #     user_hash = users[id]
+               #     username = user_hash[:username]
+               #     email = user_hash[:email]
+
+                flash[:notice] = "Setup successfully saved!"
+            else
+                flash[:error] = "Setup was not saved"
+            end
+        end
+    end
+
 end

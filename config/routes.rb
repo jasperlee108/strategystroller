@@ -23,8 +23,10 @@ StrategyStroller::Application.routes.draw do
 
   #match "goals/create" => "goal#create"
 
-  match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "setup_system"
+  match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "application"
   match "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
+  #match "controller_unit/user_fields" => "controller_unit#user_fields", :as => "user_fields"
+  #match "application/user_fields" => "controller_unit#user_fields", :as => "user_fields"
 
   root :to => redirect("/controller_unit/welcome")
 
