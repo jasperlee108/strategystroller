@@ -18,7 +18,9 @@ describe Indicator do
     :notes => "Anmerkungen",
     :diff => 5.0,
     :status => 75.5,
-    :status_notes => "Anmerkungen zum Status" 
+    :status_notes => "Anmerkungen zum Status",
+    :goal_id => 1,
+    :user_id => 1
     )
     return indicator
   end
@@ -31,7 +33,7 @@ describe Indicator do
   ## All Correct
   it "should behave correctly on good inputs" do
     indicator = generate()
-    assert(indicator.save!, "It won't save on good inputs")
+    assert(indicator.save, "It won't save on good inputs")
   end
 
   ### DESCRIPTION

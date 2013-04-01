@@ -23,7 +23,10 @@ describe Project do
     :status_manp => 10,
     :status_cost => 10.5,
     :status_global => 50.5,
-    :status_notes => "Anmerkungen zum Status"
+    :status_notes => "Anmerkungen zum Status",
+    :indicator_id => 1,
+    :head_id => 1,
+    :steer_id => 1
     )
     return project
   end

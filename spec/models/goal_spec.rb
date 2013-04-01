@@ -11,7 +11,9 @@ describe Goal do
     :justification => "Justification of specific goal",
     :focus => "Strategic approach",
     :notes => "Notes",
-    :status => 0.00
+    :status => 0.00,
+    :dimension_id => 1,
+    :user_id => 1
     )
     return goal
   end
@@ -34,7 +36,7 @@ describe Goal do
     name = ""
     goal = generate()
     goal.name = name
-    assert(!goal.save, "Name is empty")
+    assert(!goal.save, "It saves on empty Name")
   end
   
   ## Name max = 80
@@ -42,7 +44,7 @@ describe Goal do
     name = (0...81).map{ ( 65+rand(26) ).chr }.join
     goal = generate()
     goal.name = name
-    assert(!goal.save, "Name is longer than 80 characters")
+    assert(!goal.save, "It saves on Name longer than 80 characters")
   end
   
   ### NEED
@@ -52,7 +54,7 @@ describe Goal do
     need = ""
     goal = generate()
     goal.need = need
-    assert(!goal.save, "Need is empty")
+    assert(!goal.save, "It saves on empty Need")
   end
   
   ## Need max = 1200
@@ -60,7 +62,7 @@ describe Goal do
     need = (0...1201).map{ ( 65+rand(26) ).chr }.join
     goal = generate()
     goal.need = need
-    assert(!goal.save, "Need is longer than 1200 characters")
+    assert(!goal.save, "It saves on Need longer than 1200 characters")
   end
   
   ### JUSTIFICATION
@@ -70,7 +72,7 @@ describe Goal do
     justification = ""
     goal = generate()
     goal.justification = justification
-    assert(!goal.save, "Justification is empty")
+    assert(!goal.save, "It saves on empty Justification")
   end
   
   ## Need max = 1200
@@ -78,7 +80,7 @@ describe Goal do
     justification = (0...1201).map{ ( 65+rand(26) ).chr }.join
     goal = generate()
     goal.justification = justification
-    assert(!goal.save, "Justification is longer than 1200 characters")
+    assert(!goal.save, "It saves on Justification longer than 1200 characters")
   end
   
   ### FOCUS
@@ -88,7 +90,7 @@ describe Goal do
     focus = ""
     goal = generate()
     goal.focus = focus
-    assert(!goal.save, "Focus is empty")
+    assert(!goal.save, "It saves on empty Focus")
   end
   
   ## Focus max = 1200
@@ -96,7 +98,7 @@ describe Goal do
     focus = (0...1201).map{ ( 65+rand(26) ).chr }.join
     goal = generate()
     goal.focus = focus
-    assert(!goal.save, "Focus is longer than 1200 characters")
+    assert(!goal.save, "It saves on Focus longer than 1200 characters")
   end  
 
   ### NOTES
@@ -106,7 +108,7 @@ describe Goal do
     notes = ""
     goal = generate()
     goal.notes = notes
-    assert(goal.save, "Notes can be empty")
+    assert(goal.save, "It won't save on empty Notes")
   end
   
   ## Notes max = 600
@@ -114,7 +116,7 @@ describe Goal do
     notes = (0...601).map{ ( 65+rand(26) ).chr }.join
     goal = generate()
     goal.notes = notes
-    assert(!goal.save, "Notes is longer than 600 characters")
+    assert(!goal.save, "It saves on Notes longer than 600 characters")
   end  
   
   ### STATUS
@@ -124,7 +126,7 @@ describe Goal do
     status = -1.50
     goal = generate()
     goal.status = status
-    assert(!goal.save, "Status is less than 0")
+    assert(!goal.save, "It saves on Status less than 0")
   end
   
   ## Status <= 100
@@ -132,7 +134,7 @@ describe Goal do
     status = 100.50
     goal = generate()
     goal.status = status
-    assert(!goal.save, "Status is more than 100")    
+    assert(!goal.save, "It saves on Status more than 100")    
   end
 
   ### EXTRA

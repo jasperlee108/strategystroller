@@ -24,17 +24,17 @@ class Goal < ActiveRecord::Base
   
   ## Need = string[1200]
   validates :need,
-  :allow_nil => true,
+  :presence => true,
   :length => { :maximum => 1200 }
   
   ## Justification = string[1200]
   validates :justification,
-  :allow_nil => true,
+  :presence => true,
   :length => { :maximum => 1200 }
   
   ## Focus = string[1200]
   validates :focus,
-  :allow_nil => true,
+  :presence => true,
   :length => { :maximum => 1200 }
   
   ## Notes = string[600]

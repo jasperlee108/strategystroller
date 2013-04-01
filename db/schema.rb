@@ -171,7 +171,6 @@ ActiveRecord::Schema.define(:version => 20130330034551) do
     t.datetime "updated_at",                                :null => false
     t.string   "username"
     t.boolean  "controlling_unit",       :default => false
-    t.integer  "application_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
