@@ -6,8 +6,8 @@
     <%= semantic_form_for @project do |f| %>
         <%= f.inputs do %>
           <%= f.input :name %>
-          <%= f.input :indicator_id, :label => "Parent", :as => :select, :collection => Indicator.all, :prompt => true %>
-          <%= f.input :head_id, :label => "Owner", :as => :select, :collection => User.all, :prompt => true %>
+          <%= f.input :indicator_id, :label => "Parent", :as => :select, :collection => Indicator.all, :prompt => true, :required => true %>
+          <%= f.input :head_id, :label => "Owner", :as => :select, :collection => User.all, :prompt => true, :required => true %>
           <%= f.input :steer_id, :label => "Steer", :as => :select, :collection => User.all, :prompt => true %>
           <%= f.input :inplan, :as => :select, :prompt => true %>
           <%= f.input :compensation, :as => :select, :prompt => true %>

@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id
+  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id, :form_id
 
   ### ASSOCIATIONS
   ## parent
@@ -12,6 +12,8 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :users
   ## children
   has_many :activities
+
+  belongs_to :form
 
   # Needs a Parent
   validates :indicator_id,

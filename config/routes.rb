@@ -25,8 +25,7 @@ StrategyStroller::Application.routes.draw do
 
   match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "applications"
   match "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
-  #match "controller_unit/user_fields" => "controller_unit#user_fields", :as => "user_fields"
-  #match "application/user_fields" => "controller_unit#user_fields", :as => "user_fields"
+  match "forms/form_template" => "forms#form_template", :as => "form"
 
   root :to => redirect("/controller_unit/welcome")
 

@@ -53,6 +53,10 @@ class ControllerUnitController < ApplicationController
          if (request.post?) 
             @application = Application.new(params[:application])
             if @application.save
+
+              # TODO: save each user entered in the User table once User creation
+              # changed such that a user can be saved without a password
+
                # users = params[:users_attributes]
                # for id in users do
                #     user_hash = users[id]
