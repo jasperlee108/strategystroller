@@ -1,0 +1,16 @@
+<body>
+    <%= tabs %>
+    <%= flash[:notice] %>
+    <%= flash[:error] %><br>
+
+    <%= semantic_form_for @dimension do |f| %>
+        <%= f.inputs do %>
+        
+          <%= f.input :name, :required => true, :as => :string %>
+
+          <%= f.input :status, :required => true, :as => :number %>
+          
+        <% end %>
+    <%= f.action :submit, :label => "Save Dimension" %>
+    <% end %>
+</body>

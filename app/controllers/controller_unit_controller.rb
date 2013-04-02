@@ -45,6 +45,19 @@ class ControllerUnitController < ApplicationController
         end
     end
 
+    def set_dimension
+        @dimension = Dimension.new
+        if (request.post?) 
+            @dimension = Dimension.new(params[:dimension])
+            if @dimension.save
+                flash[:notice] = "Dimension successfully saved!"
+            else
+                flash[:error] = "ERROR: Dimension was not saved!"
+            end
+            redirect_to dimensions_path
+        end
+    end
+
     def setup_system
         @application = Application.new
         @years = Application::YEARS
