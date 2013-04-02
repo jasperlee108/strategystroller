@@ -5,13 +5,23 @@
 
     <%= semantic_form_for @goal do |f| %>
         <%= f.inputs do %>
-          <%= f.input :name %>
+
+          <%= f.input :name, :required => true, :as => :string %>
 
           <%= f.input :dimension_id, :label => "Parent", :as => :select, :collection => Dimension.all, :prompt => true, :required => true %>
 
           <%= f.input :user_id, :label => "Owner", :as => :select, :collection => User.all, :prompt => true, :required => true %>
 
+          <%= f.input :need, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true %>
+          
+          <%= f.input :justification, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true %>
+          
+          <%= f.input :focus, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true %>
+
           <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false %>
+          
+          <%= f.input :status, :required => true, :as => :number %>
+          
         <% end %>
     <%= f.action :submit, :label => "Save Goal" %>
     <% end %>
