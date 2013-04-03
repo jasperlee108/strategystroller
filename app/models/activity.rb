@@ -76,14 +76,11 @@ class Activity < ActiveRecord::Base
   :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
   
-  ## actualProg = long (I guess this is percentage)
-  ## 0.0 <= percentage <= 100.0
+  ## actualProg = string = {"1-Not yet started", "2-In progress", "3-Activity completed"}
+  ## can't be empty
   validates :actualProg,
   :presence => true,
-  :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
-  }
+  :length => { :maximum => 30 }
   
   ## statusNotes = string[600]
   validates :statusNotes,
