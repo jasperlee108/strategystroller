@@ -725,6 +725,11 @@
         null,
         null,
         null,
+        null,
+        null,
+        null,
+        1,
+        null,
         null
       ],
       "C:/cs169/main-project/strategystroller/app/controllers/provider_controller.rb": [
@@ -1113,6 +1118,6 @@
         null
       ]
     },
-    "timestamp": 1365019016
+    "timestamp": 1365028835
   }
 }

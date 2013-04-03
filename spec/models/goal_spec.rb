@@ -13,7 +13,8 @@ describe Goal do
     :notes => "Notes",
     :status => 0.00,
     :dimension_id => 1,
-    :user_id => 1
+    :user_id => 1,
+    :prereq => "A Different Goal's Name"
     )
     return goal
   end
@@ -143,6 +144,24 @@ describe Goal do
     goal = generate()
     goal.status = status
     assert(!goal.save, "It saves on Status more than 100")    
+  end
+
+  ### PREREQUISITE
+
+  ## Prereq can be empty
+  it "should be allowed to have empty Prereq" do
+    prereq = ""
+    goal = generate()
+    goal.prereq = prereq
+    assert(goal.save, "It won't save on empty Prereq")
+  end
+  
+  ## Prereq max = 80
+  it "should not have Prereq longer than 80 characters" do
+    prereq = (0...81).map{ ( 65+rand(26) ).chr }.join
+    goal = generate()
+    goal.prereq = prereq
+    assert(!goal.save, "It saves on Prereq longer than 80 characters")
   end
 
   ### EXTRA

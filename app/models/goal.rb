@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :form_id
+  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :form_id, :prereq
   
   ### ASSOCIATIONS
   ## parent
@@ -53,4 +53,9 @@ class Goal < ActiveRecord::Base
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
   }
+  
+  ## Prereq = string[80]
+  ## Can have zero pre-req if it's the first
+  validates :prereq,
+  :length => { :maximum => 80 }
 end
