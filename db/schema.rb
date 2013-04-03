@@ -210,7 +210,11 @@ end
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20130403185854) do
+=======
 ActiveRecord::Schema.define(:version => 20130403184056) do
+>>>>>>> 17cbe66ddc07dc2fe8a481a2d7791d5f1baae703
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -238,7 +242,7 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.text     "notes"
     t.integer  "actualManp"
     t.decimal  "actualCost"
-    t.float    "actualProg"
+    t.string   "actualProg"
     t.text     "statusNotes"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -318,7 +322,7 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.string   "source"
     t.string   "unit"
     t.string   "freq"
-    t.string   "type"
+    t.string   "indicator_type"
     t.string   "dir"
     t.float    "actual"
     t.float    "target"
@@ -331,7 +335,6 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.integer  "goal_id"
     t.integer  "user_id"
     t.integer  "form_id"
-    t.string   "indicator_type"
   end
 
   create_table "projects", :force => true do |t|
