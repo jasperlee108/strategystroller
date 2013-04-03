@@ -6,9 +6,9 @@
     <%= semantic_form_for @dimension do |f| %>
         <%= f.inputs do %>
         
-          <%= f.input :name, :required => true, :as => :string %>
+          <%= f.input :name, :required => true, :as => :string, :label => "Dimension" %>
 
-          <%= f.input :status, :required => true, :as => :number %>
+          <%= f.input :status, :required => true, :as => :number, :label => "Current Status (%)" %>
           
         <% end %>
     <%= f.action :submit, :label => "Save Dimension" %>

@@ -16,7 +16,7 @@ class ControllerUnitController < ApplicationController
             if @goal.save
                 flash[:notice] = "Goal successfully saved!"
             else
-                flash[:error] = "ERROR: Dimension was not saved!"
+                flash[:error] = "ERROR: Goal was not saved!"
             end
             redirect_to goals_path
         end
@@ -29,8 +29,9 @@ class ControllerUnitController < ApplicationController
             if @indicator.save
                 flash[:notice] = "Indicator successfully saved!"
             else
-                flash[:error] = "Indicator was not saved"
+                flash[:error] = "ERROR: Indicator was not saved!"
             end
+            redirect_to indicators_path
         end
     end
 

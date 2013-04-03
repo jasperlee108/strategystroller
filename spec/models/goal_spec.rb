@@ -49,12 +49,12 @@ describe Goal do
   
   ### NEED
   
-  ## Need is not empty
-  it "should not have empty Need" do
+  ## Need can be empty
+  it "should be allowed to have empty Need" do
     need = ""
     goal = generate()
     goal.need = need
-    assert(!goal.save, "It saves on empty Need")
+    assert(goal.save, "It won't save on empty Need")
   end
   
   ## Need max = 1200
@@ -67,16 +67,16 @@ describe Goal do
   
   ### JUSTIFICATION
   
-  ## Justification is not empty
-  it "should not have empty Justification" do
+  ## Justification can be empty
+  it "should be allowed to have empty Justification" do
     justification = ""
     goal = generate()
     goal.justification = justification
-    assert(!goal.save, "It saves on empty Justification")
+    assert(goal.save, "It won't save on empty Justification")
   end
   
-  ## Need max = 1200
-  it "should not have Need longer than 1200 characters" do
+  ## Justification max = 1200
+  it "should not have Justification longer than 1200 characters" do
     justification = (0...1201).map{ ( 65+rand(26) ).chr }.join
     goal = generate()
     goal.justification = justification
@@ -85,12 +85,12 @@ describe Goal do
   
   ### FOCUS
   
-  ## Focus is not empty
-  it "should not have empty Focus" do
+  ## Focus can be empty
+  it "should be allowed to have empty Focus" do
     focus = ""
     goal = generate()
     goal.focus = focus
-    assert(!goal.save, "It saves on empty Focus")
+    assert(goal.save, "It won't save on empty Focus")
   end
   
   ## Focus max = 1200
@@ -120,6 +120,14 @@ describe Goal do
   end  
   
   ### STATUS
+  
+  ## Status is not empty
+  it "should not have empty Status" do
+    status = nil
+    goal = generate()
+    goal.status = status
+    assert(!goal.save, "It saves on empty Status")
+  end
   
   ## Status >= 0
   it "should have Status of at least 0" do

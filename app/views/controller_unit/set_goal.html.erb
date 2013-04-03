@@ -6,21 +6,21 @@
     <%= semantic_form_for @goal do |f| %>
         <%= f.inputs do %>
 
-          <%= f.input :name, :required => true, :as => :string %>
+          <%= f.input :name, :required => true, :as => :string, :label => "Name of Goal" %>
 
-          <%= f.input :dimension_id, :label => "Parent", :as => :select, :collection => Dimension.all, :prompt => true, :required => true %>
+          <%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :required => true, :label => "Associated Dimension" %>
 
-          <%= f.input :user_id, :label => "Owner", :as => :select, :collection => User.all, :prompt => true, :required => true %>
+          <%= f.input :user_id, :as => :select, :collection => User.all, :required => true, :label => "Responsible" %>
 
-          <%= f.input :need, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true %>
+          <%= f.input :need, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Call for Action" %>
           
-          <%= f.input :justification, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true %>
+          <%= f.input :justification, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Justification of Specific Goal" %>
           
-          <%= f.input :focus, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true %>
+          <%= f.input :focus, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Strategic Approach" %>
 
-          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false %>
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
           
-          <%= f.input :status, :required => true, :as => :number %>
+          <%= f.input :status, :required => true, :as => :number, :label => "Current Status (%)" %>
           
         <% end %>
     <%= f.action :submit, :label => "Save Goal" %>

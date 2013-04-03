@@ -14,6 +14,7 @@ class Dimension < ActiveRecord::Base
   ## Status = long integer
   ## 0.00 <= Status <= 100.00
   validates :status,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100

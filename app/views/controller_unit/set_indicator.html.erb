@@ -5,13 +5,37 @@
 
     <%= semantic_form_for @indicator do |f| %>
         <%= f.inputs do %>
-          <%= f.input :name %>
+        
+          <%= f.input :name, :required => true, :as => :string, :label => "Name of Indicator" %>
 
-          <%= f.input :goal_id, :label => "Parent", :as => :select, :collection => Goal.all, :prompt => true, :required => true %>
+          <%= f.input :goal_id, :as => :select, :collection => Goal.all, :required => true, :label => "Associated Goal" %>
 
-          <%= f.input :user_id, :label => "Owner", :as => :select, :collection => User.all, :prompt => true, :required => true %>
+          <%= f.input :user_id, :as => :select, :collection => User.all, :required => true, :label => "Responsible" %>
+          
+          <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Description of Indicator" %>
+          
+          <%= f.input :source, :required => true, :as => :string, :label => "Source" %>
+          
+          <%= f.input :unit, :required => true, :as => :string, :label => "Unit" %>
+          
+          <%= f.input :freq, :required => true, :as => :string, :label => "Frequency of Acquisition" %>
+          
+          <%= f.input :indicator_type, :required => true, :as => :string, :label => "Indicator Type" %>
+          
+          <%= f.input :dir, :required => true, :as => :string, :label => "Target Direction" %>
+          
+          <%= f.input :actual, :required => true, :as => :number, :label => "Actual Values" %>
+          
+          <%= f.input :target, :required => true, :as => :number, :label => "Target Values" %>
 
-          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false %>
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
+          
+          <%= f.input :diff, :required => true, :as => :number, :label => "Difference" %>
+          
+          <%= f.input :status, :required => true, :as => :number, :label => "Current Status" %>
+          
+          <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes to Current Status" %>
+          
         <% end %>
     <%= f.action :submit, :label => "Save Indicator" %>
     <% end %>

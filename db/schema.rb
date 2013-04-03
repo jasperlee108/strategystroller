@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(:version => 20130402233120) do
     t.string   "source"
     t.string   "unit"
     t.string   "freq"
-    t.string   "type"
+    t.string   "indicator_type"
     t.string   "dir"
     t.float    "actual"
     t.float    "target"
@@ -126,8 +126,8 @@ ActiveRecord::Schema.define(:version => 20130402233120) do
     t.float    "diff"
     t.float    "status"
     t.text     "status_notes"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "goal_id"
     t.integer  "user_id"
     t.integer  "form_id"

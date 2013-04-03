@@ -43,6 +43,14 @@ describe Dimension do
 
   ### STATUS
   
+  ## Status is not empty
+  it "should not have empty Status" do
+    status = ""
+    dimension = generate()
+    dimension.status = status
+    assert(!dimension.save, "It saves on empty Status")
+  end
+  
   ## Status >= 0
   it "should have Status of at least 0" do
     status = -1.50
