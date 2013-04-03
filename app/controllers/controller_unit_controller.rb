@@ -82,7 +82,7 @@ class ControllerUnitController < ApplicationController
          if (request.post?) 
             @application = Application.new(params[:application])
             if @application.save
-
+              # No longer a TODO--can remove user-related details 
               # TODO: save each user entered in the User table once User creation
               # changed such that a user can be saved without a password
 
@@ -118,6 +118,10 @@ class ControllerUnitController < ApplicationController
                 end
 
         end
+    end
+
+    def edit_users
+        @user = User.new
     end
 
 end

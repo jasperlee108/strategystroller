@@ -9,7 +9,7 @@
           <%= f.input :indicator_id, :label => "Pick an Indicator", :as => :select, :collection => Indicator.all, :prompt => true, :required => true %>
           <%= f.input :project_id, :label => "Pick a Project", :as => :select, :collection => Project.all, :prompt => true, :required => true %> 
 
-          <%= f.input :user_ids, :as => :select, :size => 25, :multiple => true, :collection => User.all, :selected => User.first, :include_hidden => false, :label => "Select Providers to send this form to (hold down ctrl to select multiple)" %>
+          <%= f.input :user_ids, :as => :select, :size => 25, :multiple => true, :collection => User.all, :selected => User.first, :include_hidden => false, :label => "Select Providers to send this form to (click and drag or hold down ctrl to select multiple)" %>
 
         <% end %>
     <%= f.action :submit, :label => "Submit Form to Providers" %>
