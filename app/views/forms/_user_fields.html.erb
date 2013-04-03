@@ -1,5 +1,4 @@
 <div class='nested-fields'>
-    <br><%= f.input :username, :label => "Actor Username" %>
-    <%= f.input :email, :label => "Actor Email" %>
+    <%= f.input :email, :as => :select, :size => 10, :multiple => true, :label => "Actor Email" %>
     <%= link_to_remove_association "Remove Actor", f %><br>
 </div>

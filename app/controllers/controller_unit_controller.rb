@@ -42,8 +42,9 @@ class ControllerUnitController < ApplicationController
             if @project.save
                 flash[:notice] = "Project successfully saved!"
             else
-                flash[:error] = "Project was not saved"
+                flash[:error] = "ERROR: Project was not saved!"
             end
+            redirect_to projects_path
         end
     end
 
@@ -57,6 +58,19 @@ class ControllerUnitController < ApplicationController
                 flash[:error] = "ERROR: Dimension was not saved!"
             end
             redirect_to dimensions_path
+        end
+    end
+
+    def set_activity
+        @activity = Activity.new
+        if (request.post?) 
+            @activity = Activity.new(params[:activity])
+            if @activity.save
+                flash[:notice] = "Activity successfully saved!"
+            else
+                flash[:error] = "ERROR: Activity was not saved!"
+            end
+            redirect_to activities_path
         end
     end
 
@@ -78,10 +92,31 @@ class ControllerUnitController < ApplicationController
                #     username = user_hash[:username]
                #     email = user_hash[:email]
 
+
                 flash[:notice] = "Setup successfully saved!"
             else
                 flash[:error] = "Setup was not saved"
+                return
             end
+
+
+               users = params[:users]
+                count = 0
+                total = 0
+                users.each do |info|
+                    total += 1
+                    user = User.new(info)
+                    if !user.save
+                        count+= 1
+                    end
+                end
+                
+                if (count != total)
+                    flash[:error] = count + " users not saved"
+                else
+                    flash[:notice] = "All users successfully saved!"
+                end
+
         end
     end
 
