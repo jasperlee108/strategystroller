@@ -35,6 +35,8 @@ $ rake rspec:all
 
 The result of coverage test can be accessed at ./coverage/index.html from a browser.
 
+To run UI tests, install Selenium IDE add-on for Mozilla browser and run all test files located under ./selenium from a browser.
+
 ==Documentations
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
