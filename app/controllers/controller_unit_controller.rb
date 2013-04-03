@@ -42,8 +42,9 @@ class ControllerUnitController < ApplicationController
             if @project.save
                 flash[:notice] = "Project successfully saved!"
             else
-                flash[:error] = "Project was not saved"
+                flash[:error] = "ERROR: Project was not saved!"
             end
+            redirect_to projects_path
         end
     end
 
