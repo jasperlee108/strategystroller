@@ -4,35 +4,55 @@ class FormsController < ApplicationController
   def form_template
     @form = Form.new
     if (request.post?)
-        @form = Form.new(params[:form])
-        if @form.save
-            #Once we connect the mailing service, make sure form is saved and SENT to those specified
-            flash[:notice] = "Form template successfully saved!"
-        else
-            flash[:error] = "Form template and users not saved"
+        # Check if this particular goal/ind/proj-combo form already exists
+        form_hash = params[:form]
+        goal_id = form_hash[:goal_id]
+        indicator_id = form_hash[:indicator_id]
+        project_id = form_hash[:project_id]
+        if (!(goal_id && indicator_id && project_id))
+            # Just return if all fields aren't filled out
+            flash[:error] = "All required fields must be filled out"
             return
-        end
+        else
+            @form = Form.find_by_goal_id_and_indicator_id_and_project_id(goal_id, indicator_id, project_id)
 
-        users = params[:users]
-        count = 0
-        total = 0
-        if (users)
-            users.each do |info|
-                total += 1
-                user = User.new(info)
-                if !user.save
-                    count+= 1
+            if (@form)
+                form_id = @form[:id]
+                # Associate providers with this form
+                 user_ids = form_hash[:user_ids]
+                 user_ids.shift
+                @form.users << User.find(user_ids)
+
+               # form_hash[:user_ids].each do |id|
+                 #   Form.create(:form_id => form_id, :user_id => id)
+                    # Will do nothing if user already associated with this form
+                #end
+                flash[:notice] = "Old form template successfully updated!"
+            else
+                # this form doesn't exist yet so:
+                @form = Form.new(:goal_id => goal_id, :indicator_id => indicator_id, :project_id => project_id)
+                if @form.save
+                    form_id = @form[:id]
+                    #Once we connect the mailing service, make sure form is SENT to those specified
+                    # Associate providers with this form
+                    user_ids = form_hash[:user_ids]
+                 user_ids.shift
+                @form.users << User.find(user_ids)
+                    #form_hash[:user_ids].each do |id|
+                     #   Form.create(:form_id => form_id, :user_id => id)
+                        # Will do nothing if user already associated with this form
+                   # end
+                    flash[:notice] = "New form template successfully saved!"
+
+                else
+                    flash[:error] = "New form template not saved"
+                    return
                 end
             end
-        end
-        
-        if (count != total)
-            # May end up wanting to specify which users not saved/sent to
-            flash[:error] = count + " users not saved"
-        else
-            flash[:notice] = "All users successfully saved!"
-        end
 
+        end
     end
   end
+
+
 end
