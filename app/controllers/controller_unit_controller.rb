@@ -61,6 +61,19 @@ class ControllerUnitController < ApplicationController
         end
     end
 
+    def set_activity
+        @activity = Activity.new
+        if (request.post?) 
+            @activity = Activity.new(params[:activity])
+            if @activity.save
+                flash[:notice] = "Activity successfully saved!"
+            else
+                flash[:error] = "ERROR: Activity was not saved!"
+            end
+            redirect_to activities_path
+        end
+    end
+
     def setup_system
         @application = Application.new
         @years = Application::YEARS
