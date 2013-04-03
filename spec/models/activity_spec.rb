@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Activity do
   
   ### NOTE: Using ruby format, not Rspec
+  ### TODO: user_ids for "team" is not yet tested
   
   def generate
     activity = Activity.new(
@@ -17,7 +18,8 @@ describe Activity do
     :actualManp => 10,
     :actualCost => 25.25,
     :actualProg => 75.00,
-    :statusNotes => "A Different Wall of Text"
+    :statusNotes => "A Different Wall of Text",
+    :project_id => 1
     )
     return activity    
   end
@@ -127,6 +129,14 @@ describe Activity do
 
   ### TARGET MAN POWER
   
+  ## TargetManp is not empty
+  it "should not have empty TargetManp" do
+    targetManp = nil
+    activity = generate()
+    activity.targetManp = targetManp
+    assert(!activity.save, "It saves on empty TargetManp")
+  end
+  
   ## TargetManp = integer
   it "should have TargetManp as an integer" do
     targetManp = "random"
@@ -152,6 +162,14 @@ describe Activity do
   end
 
   ### TARGET COST
+  
+  ## TargetCost is not empty
+  it "should not have empty TargetCost" do
+    targetCost = nil
+    activity = generate()
+    activity.targetCost = targetCost
+    assert(!activity.save, "It saves on empty TargetCost")
+  end
   
   ## TargetCost = decimal
   it "should have TargetCost as a decimal" do
@@ -189,6 +207,14 @@ describe Activity do
 
   ### ACTUAL MAN POWER
   
+  ## ActualManp is not empty
+  it "should not have empty ActualManp" do
+    actualManp = nil
+    activity = generate()
+    activity.actualManp = actualManp
+    assert(!activity.save, "It saves on empty ActualManp")
+  end
+  
   ## ActualManp = integer
   it "should have ActualManp as an integer" do
     actualManp = "random"
@@ -215,6 +241,14 @@ describe Activity do
 
   ### ACTUAL COST
   
+  ## ActualCost is not empty
+  it "should not have empty ActualCost" do
+    actualCost = nil
+    activity = generate()
+    activity.actualCost = actualCost
+    assert(!activity.save, "It saves on empty ActualCost")
+  end
+  
   ## ActualCost = decimal
   it "should have ActualCost as a decimal" do
     actualCost = "random"
@@ -232,6 +266,14 @@ describe Activity do
   end
 
   ### ACTUAL PROGRESS
+  
+  ## ActualProg is not empty
+  it "should not have empty ActualProg" do
+    actualProg = nil
+    activity = generate()
+    activity.actualProg = actualProg
+    assert(!activity.save, "It saves on empty ActualProg")
+  end
   
   ## ActualProg = float
   it "should have ActualProg as a float" do
