@@ -6,4 +6,7 @@ class Form < ActiveRecord::Base
     has_and_belongs_to_many :users
     has_and_belongs_to_many :applications
     accepts_nested_attributes_for :users
+
+    # Must have unique goal+indicator+project
+    validates_uniqueness_of :goal_id, :scope => [:indicator_id, :project_id]
 end
