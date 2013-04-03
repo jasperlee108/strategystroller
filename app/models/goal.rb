@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id
+  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :form_id
   
   ### ASSOCIATIONS
   ## parent
@@ -8,7 +8,17 @@ class Goal < ActiveRecord::Base
   belongs_to :user
   ## children
   has_many :indicators
+
+  belongs_to :form
   
+  ## Needs to have Parent
+  validates :dimension_id,
+  :presence => true
+
+  ## Needs to have Owner
+  validates :user_id,
+  :presence => true
+
   ## Name = string[80]
   validates :name,
   :presence => true,
@@ -16,27 +26,29 @@ class Goal < ActiveRecord::Base
   
   ## Need = string[1200]
   validates :need,
-  :presence => true,
-  :length => { :maximum => 1200 }
+  :length => { :maximum => 1200 },
+  :allow_blank => true
   
   ## Justification = string[1200]
   validates :justification,
-  :presence => true,
-  :length => { :maximum => 1200 }
+  :length => { :maximum => 1200 },
+  :allow_blank => true
   
   ## Focus = string[1200]
   validates :focus,
-  :presence => true,
-  :length => { :maximum => 1200 }
+  :length => { :maximum => 1200 },
+  :allow_blank => true
   
   ## Notes = string[600]
   ## Notes can be empty
   validates :notes,
-  :length => { :maximum => 600 }
+  :length => { :maximum => 600 },
+  :allow_blank => true
   
   ## Status = long integer
   ## 0.00 <= Status <= 100.00
   validates :status,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100

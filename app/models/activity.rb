@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id
+  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id, :user_ids
 
   ### ASSOCIATIONS
   ## parent
@@ -11,6 +11,10 @@ class Activity < ActiveRecord::Base
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
+  
+  # Needs a Parent
+  validates :project_id,
+  :presence => true
   
   ## description = string[600]
   validates :description,
@@ -43,6 +47,7 @@ class Activity < ActiveRecord::Base
   
   ## targetManp = integer > 0
   validates :targetManp,
+  :presence => true,
   :numericality => {
     :only_integer => true,
     :greater_than => 0
@@ -50,7 +55,8 @@ class Activity < ActiveRecord::Base
   
   ## targetCost = currency
   validates :targetCost,
-  :numericality => { :greater_than => 0 }
+  :presence => true,
+  :numericality => { :greater_than_or_equal_to => 0 }
   
   ## notes = string[600]
   validates :notes,
@@ -59,6 +65,7 @@ class Activity < ActiveRecord::Base
   
   ## actualManp = integer > 0
   validates :actualManp,
+  :presence => true,
   :numericality => {
     :only_integer => true,
     :greater_than => 0
@@ -66,15 +73,14 @@ class Activity < ActiveRecord::Base
   
   ## actualCost = currency
   validates :actualCost,
-  :numericality => { :greater_than => 0 }
+  :presence => true,
+  :numericality => { :greater_than_or_equal_to => 0 }
   
-  ## actualProg = long (I guess this is percentage)
-  ## 0.0 <= percentage <= 100.0
+  ## actualProg = string = {"1-Not yet started", "2-In progress", "3-Activity completed"}
+  ## can't be empty
   validates :actualProg,
-  :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
-  }
+  :presence => true,
+  :length => { :maximum => 30 }
   
   ## statusNotes = string[600]
   validates :statusNotes,

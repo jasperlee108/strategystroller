@@ -13,12 +13,23 @@ StrategyStroller::Application.routes.draw do
 
   get "controller_unit/welcome" => 'controller_unit#welcome', :as => 'controller_unit_welcome'
 
-  root :to => redirect("/controller_unit/welcome")
+  #For Formtastic
+  resources :user
 
-  #get "authentication/create_user"
-  #get "authentication/creation_token"
-  #get "authentication/logout"
-  #get "tester/runRspecTest"
+  match "controller_unit/input_framework" => "controller_unit#set_dimension", :as => 'input_framework'
+  match "controller_unit/input_framework/goals" => "controller_unit#set_goal", :as => "goals"
+  match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
+  match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
+  match "controller_unit/input_framework/dimensions" => "controller_unit#set_dimension", :as => "dimensions"
+  match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
+
+  #match "goals/create" => "goal#create"
+
+  match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "applications"
+  match "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
+  match "forms/form_template" => "forms#form_template", :as => "form"
+
+  root :to => redirect("/controller_unit/welcome")
 
   get "tester/runRspecTest"
 

@@ -20,7 +20,6 @@
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
     <![endif]-->
-
   </head>
 
   <body>
@@ -53,8 +52,12 @@
       <%= yield %>
 
     </div> <!-- /container -->
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-
+    <!-- Added for cocoon gem -->
+    <%= javascript_include_tag :cocoon %>
   </body>
 </html>
 

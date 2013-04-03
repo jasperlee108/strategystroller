@@ -1,0 +1,58 @@
+<body>
+    <%= tabs %>
+    <%= flash[:notice] %>
+    <%= flash[:error] %><br>
+
+    <%= semantic_form_for @project do |f| %>
+        <%= f.inputs do %>
+        
+          <%= f.input :name, :as => :string, :label => "Name of Project" %>
+
+          <%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :required => true, :label => "Associated Indicator" %>
+
+          <%= f.input :head_id, :as => :select, :collection => User.all, :required => true, :label => "Project Manager" %>
+
+          <%= f.input :steer_id, :as => :select, :collection => User.all, :required => true, :label => "Steering Committee" %>
+          
+          <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Project Description" %>
+          
+          <%= f.input :users, :as => :check_boxes, :label => "Project Team" %>
+          
+          <%= f.input :startDate, :as => :date_select, :required => true, :label => "Starting Date" %>
+          
+          <%= f.input :endDate, :as => :date_select, :required => true, :label => "Ending Date" %>
+          
+          <%= f.input :duration, :as => :number, :required => true, :label => "Project Duration (months)" %>
+          
+          <%= f.input :target_manp, :as => :number, :required => true, :label => "Planned Employee Resources (days)" %>
+          
+          <%= f.input :target_cost, :as => :number, :required => true, :label => "Planned External Costs (currency)" %>
+          
+          <%= f.input :inplan, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Included in Financial Plan" %>
+          
+          <%= f.input :compensation, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Compensation Possible" %>
+          
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
+          
+          <%= f.input :actual_manp, :as => :number, :required => true, :label => "Actual Employee Resources (days)" %>
+          
+          <%= f.input :actual_cost, :as => :number, :required => true, :label => "Actual External Costs (currency)" %>
+          
+          <%= f.input :status_prog, :required => true, :as => :number, :label => "Current Status by Progress" %>
+          
+          <%= f.input :status_prog, :required => true, :as => :number, :label => "Current Status by Progress" %>
+          
+          <%= f.input :status_ms, :required => true, :as => :number, :label => "Current Status by Milestone" %>
+          
+          <%= f.input :status_manp, :required => true, :as => :number, :label => "Current Status by Manpower Use" %>
+          
+          <%= f.input :status_cost, :required => true, :as => :number, :label => "Current Status by Cost" %>
+          
+          <%= f.input :status_global, :required => true, :as => :number, :label => "Current Status Overall" %>
+          
+          <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes to Current Status" %>
+
+        <% end %>
+    <%= f.action :submit, :label => "Save Project" %>
+    <% end %>
+</body>

@@ -1,0 +1,25 @@
+<h1> Setup System </h1>
+
+<body>
+
+    <%= semantic_form_for @application do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :company %>
+
+          <%= f.input :curr_year, :label => "Current Year", :as => :select, :collection => @years, :prompt => true %>
+
+          <%= f.input :init_year, :label => "Initial Year", :as => :select, :collection => @years, :prompt => true %>
+
+          <%= f.input :language, :as => :select, :collection => @languages, :prompt => true %>
+
+          <%= f.input :time_horizon, :as => :select, :collection => @time_horizon, :prompt => true %>
+
+          <%= f.semantic_fields_for :users do |user| %>
+             <%= render 'user_fields', :f => user %>
+             <% end %>
+            <%= link_to_add_association 'Add Actor', f, :users, :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
+
+        <% end %>
+    <br><%= f.action :submit, :label => "Save Setup" %>
+    <% end %>
+</body>

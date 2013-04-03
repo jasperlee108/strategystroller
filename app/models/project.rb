@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id
+  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id, :form_id, :user_ids
 
   ### ASSOCIATIONS
   ## parent
@@ -12,6 +12,20 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :users
   ## children
   has_many :activities
+
+  belongs_to :form
+
+  # Needs a Parent
+  validates :indicator_id,
+  :presence => true
+
+  # Needs an Owner
+  validates :head_id,
+  :presence => true
+
+  # Needs a Steer
+  validates :steer_id,
+  :presence => true
 
   # Name = string[80]
   validates :name,
@@ -37,25 +51,25 @@ class Project < ActiveRecord::Base
   ## Duration = float
   ## 0.00 <= duration
   validates :duration,
-  :allow_nil => true,
+  :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Target Cost = decimal
   ## 0.00 <= target_cost
   validates :target_cost,
-  :allow_nil => true,
+  :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Actual Cost = decimal
   ## 0.00 <= actual_cost
   validates :actual_cost,
-  :allow_nil => true,
+  :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Target_manp = long integer
   ## 0.00 <= target_manp
   validates :target_manp,
-  :allow_nil => true,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :only_integer => true
@@ -64,7 +78,7 @@ class Project < ActiveRecord::Base
   ## Actual_manp = long integer
   ## 0.00 <= actual_manp
   validates :actual_manp,
-  :allow_nil => true,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :only_integer => true
@@ -73,7 +87,7 @@ class Project < ActiveRecord::Base
   ## Status_prog = float
   ## 0.00 <= status_prog <= 100.00
   validates :status_prog,
-  :allow_nil => true,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -82,7 +96,7 @@ class Project < ActiveRecord::Base
   ## Status_ms = long integer
   ## 0.00 <= status_ms <= 100.00
   validates :status_ms,
-  :allow_nil => true,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -91,7 +105,7 @@ class Project < ActiveRecord::Base
   ## Status_manp = long integer
   ## 0.00 <= status_manp <= 100.00
   validates :status_manp,
-  :allow_nil => true,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -100,7 +114,7 @@ class Project < ActiveRecord::Base
   ## Status_cost = long integer
   ## 0.00 <= status_cost <= 100.00
   validates :status_cost,
-  :allow_nil => true,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -109,7 +123,7 @@ class Project < ActiveRecord::Base
   ## Status_global = float
   ## 0.00 <= status_global <= 100.00
   validates :status_global,
-  :allow_nil => true,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100

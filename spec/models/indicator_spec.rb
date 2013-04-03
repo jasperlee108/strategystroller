@@ -11,14 +11,16 @@ describe Indicator do
     :source => "Quelle",
     :unit => "Einheit",
     :freq => "hy",
-    :type => "average",
+    :indicator_type => "average",
     :dir => "more is better",
     :actual => 5.5,
     :target => 10.5,
     :notes => "Anmerkungen",
     :diff => 5.0,
     :status => 75.5,
-    :status_notes => "Anmerkungen zum Status" 
+    :status_notes => "Anmerkungen zum Status",
+    :goal_id => 1,
+    :user_id => 1
     )
     return indicator
   end
@@ -31,7 +33,7 @@ describe Indicator do
   ## All Correct
   it "should behave correctly on good inputs" do
     indicator = generate()
-    assert(indicator.save!, "It won't save on good inputs")
+    assert(indicator.save, "It won't save on good inputs")
   end
 
   ### DESCRIPTION
@@ -54,6 +56,14 @@ describe Indicator do
 
   ### SOURCE
   
+  ## Source is not empty
+  it "should not have empty Source" do
+    source = ""
+    indicator = generate()
+    indicator.source = source
+    assert(!indicator.save, "It saves on empty Source")
+  end
+  
   ## Source max = 200
   it "should not have Source longer than 200 characters" do
     source = (0...201).map{ ( 65+rand(26) ).chr }.join
@@ -64,6 +74,14 @@ describe Indicator do
 
   ### UNIT
   
+  ## Unit is not empty
+  it "should not have empty Unit" do
+    unit = ""
+    indicator = generate()
+    indicator.unit = unit
+    assert(!indicator.save, "It saves on empty Unit")
+  end
+  
   ## Unit max = 20
   it "should not have Unit longer than 20 characters" do
     unit = (0...21).map{ ( 65+rand(26) ).chr }.join
@@ -73,6 +91,14 @@ describe Indicator do
   end
 
   ### FREQUENCY
+
+  ## Frequency is not empty
+  it "should not have empty Frequency" do
+    freq = ""
+    indicator = generate()
+    indicator.freq = freq
+    assert(!indicator.save, "It saves on empty Frequency")
+  end
   
   ## Frequency max = 2 = { 'm', 'q', 'hy', 'y' }
   it "should not have Frequency longer than 2 characters" do
@@ -84,15 +110,31 @@ describe Indicator do
 
   ### TYPE
   
+  ## Type is not empty
+  it "should not have empty Type" do
+    type = ""
+    indicator = generate()
+    indicator.indicator_type = type
+    assert(!indicator.save, "It saves on empty Type")
+  end
+  
   ## Type max = 10 = { 'average', 'cumulative' }
   it "should not have Type longer than 10 characters" do
     type = (0...11).map{ ( 65+rand(26) ).chr }.join
     indicator = generate()
-    indicator.type = type
+    indicator.indicator_type = type
     assert(!indicator.save, "It saves on Type longer than 10 characters")
   end
 
   ### DIRECTION
+  
+  ## Direction is not empty
+  it "should not have empty Direction" do
+    direction = ""
+    indicator = generate()
+    indicator.dir = direction
+    assert(!indicator.save, "It saves on empty Direction")
+  end
   
   ## Direction max = 20 = { 'more is better', 'less is better' }
   it "should not have Direction longer than 20 characters" do
@@ -103,6 +145,14 @@ describe Indicator do
   end
 
   ### ACTUAL VALUES
+
+  ## Actual is not empty
+  it "should not have empty Actual" do
+    actual = nil
+    indicator = generate()
+    indicator.actual = actual
+    assert(!indicator.save, "It saves on empty Actual")
+  end
   
   ## Actual = float
   it "should have Actual as a float" do
@@ -121,6 +171,14 @@ describe Indicator do
   end
 
   ### TARGET VALUES
+  
+  ## Target is not empty
+  it "should not have empty Target" do
+    target = nil
+    indicator = generate()
+    indicator.target = target
+    assert(!indicator.save, "It saves on empty Target")
+  end
   
   ## Target = float
   it "should have Target as a float" do
@@ -158,6 +216,14 @@ describe Indicator do
 
   ### DIFFERENCE
   
+  ## Difference is not empty
+  it "should not have empty Difference" do
+    difference = nil
+    indicator = generate()
+    indicator.diff = difference
+    assert(!indicator.save, "It saves on empty Difference")
+  end
+  
   ## Difference = float
   it "should have Difference as a float" do
     difference = "random"
@@ -175,6 +241,14 @@ describe Indicator do
   end
 
   ### STATUS
+  
+  ## Status is not empty
+  it "should not have empty Status" do
+    status = nil
+    indicator = generate()
+    indicator.status = status
+    assert(!indicator.save, "It saves on empty Status")
+  end
   
   ## Status = float
   it "should have Status as a float" do
