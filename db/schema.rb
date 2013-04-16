@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403200607) do
+ActiveRecord::Schema.define(:version => 20130416070130) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(:version => 20130403200607) do
     t.string   "username"
     t.boolean  "controlling_unit",       :default => false
     t.integer  "form_id"
+    t.integer  "business_code"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
