@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403184056) do
+ActiveRecord::Schema.define(:version => 20130416073621) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.text     "notes"
     t.integer  "actualManp"
     t.decimal  "actualCost"
-    t.float    "actualProg"
+    t.string   "actualProg"
     t.text     "statusNotes"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -92,6 +92,8 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.integer  "goal_id"
     t.integer  "indicator_id"
     t.integer  "project_id"
+    t.boolean  "reviewed"
+    t.boolean  "final"
   end
 
   create_table "forms_users", :force => true do |t|
@@ -111,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.integer  "dimension_id"
     t.integer  "user_id"
     t.integer  "form_id"
+    t.string   "prereq"
   end
 
   create_table "indicators", :force => true do |t|
@@ -119,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.string   "source"
     t.string   "unit"
     t.string   "freq"
-    t.string   "type"
+    t.string   "indicator_type"
     t.string   "dir"
     t.float    "actual"
     t.float    "target"
@@ -132,7 +135,6 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.integer  "goal_id"
     t.integer  "user_id"
     t.integer  "form_id"
-    t.string   "indicator_type"
   end
 
   create_table "projects", :force => true do |t|
@@ -189,6 +191,7 @@ ActiveRecord::Schema.define(:version => 20130403184056) do
     t.string   "username"
     t.boolean  "controlling_unit",       :default => false
     t.integer  "form_id"
+    t.integer  "business_code"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

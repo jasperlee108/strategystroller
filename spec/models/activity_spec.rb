@@ -17,7 +17,7 @@ describe Activity do
     :notes => "Another Wall of Text",
     :actualManp => 10,
     :actualCost => 25.25,
-    :actualProg => 75.00,
+    :actualProg => "In Progress",
     :statusNotes => "A Different Wall of Text",
     :project_id => 1
     )
@@ -269,34 +269,18 @@ describe Activity do
   
   ## ActualProg is not empty
   it "should not have empty ActualProg" do
-    actualProg = nil
+    actualProg = ""
     activity = generate()
     activity.actualProg = actualProg
     assert(!activity.save, "It saves on empty ActualProg")
   end
   
-  ## ActualProg = float
-  it "should have ActualProg as a float" do
-    actualProg = "random"
+  ## ActualProg max = 30
+  it "should not have ActualProg longer than 30 characters" do
+    actualProg = (0...31).map{ ( 65+rand(26) ).chr }.join
     activity = generate()
     activity.actualProg = actualProg
-    assert(!activity.save, "It saves on ActualProg = " + actualProg.to_s)
-  end
-
-  ## ActualProg = float >= 0
-  it "should have ActualProg as a float >= 0" do
-    actualProg = -5
-    activity = generate()
-    activity.actualProg = actualProg
-    assert(!activity.save, "It saves on ActualProg = " + actualProg.to_s)
-  end
-
-  ## ActualProg = float <= 100
-  it "should have ActualProg as a float <= 100" do
-    actualProg = 100.50
-    activity = generate()
-    activity.actualProg = actualProg
-    assert(!activity.save, "It saves on ActualProg = " + actualProg.to_s)
+    assert(!activity.save, "It saves on ActualProg longer than 30 characters")
   end
 
   ### STATUS NOTES

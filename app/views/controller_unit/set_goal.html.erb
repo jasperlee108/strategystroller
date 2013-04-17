@@ -17,6 +17,8 @@
           <%= f.input :justification, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Justification of Specific Goal" %>
           
           <%= f.input :focus, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Strategic Approach" %>
+          
+          <%= f.input :prereq, :as => :select, :collection => Goal.select('name'), :required => false, :label => "Prerequisites" %>
 
           <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
           

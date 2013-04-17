@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :confirmable, :timeoutable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation #, :remember_me
+  attr_accessible :username, :email, :password,:password_confirmation, :business_code #, :remember_me
   # attr_accessible :title, :body
 
   # these validations are redundant - they're ensured through a combination of the database migration/definition and in

@@ -18,11 +18,11 @@
           
           <%= f.input :unit, :required => true, :as => :string, :label => "Unit" %>
           
-          <%= f.input :freq, :required => true, :as => :string, :label => "Frequency of Acquisition" %>
+          <%= f.input :freq, :required => true, :as => :select, :collection => ["M", "Q", "HY", "Y"], :label => "Frequency of Acquisition" %>
           
-          <%= f.input :indicator_type, :required => true, :as => :string, :label => "Indicator Type" %>
+          <%= f.input :indicator_type, :required => true, :as => :select, :collection => ["Average", "Cummulative"], :label => "Indicator Type" %>
           
-          <%= f.input :dir, :required => true, :as => :string, :label => "Target Direction" %>
+          <%= f.input :dir, :required => true, :as => :select, :collection => ["More is Better", "Less is Better"], :label => "Target Direction" %>
           
           <%= f.input :actual, :required => true, :as => :number, :label => "Actual Values" %>
           

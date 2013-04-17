@@ -30,7 +30,7 @@
           
           <%= f.input :actualCost, :as => :number, :required => true, :label => "Actual External Costs (currency)" %>
           
-          <%= f.input :actualProg, :as => :number, :required => true, :label => "Status of Activity" %>
+          <%= f.input :actualProg, :as => :select, :collection => ["1-Not yet started", "2-In progress", "3-Activity completed"], :required => true, :label => "Status of Activity" %>
           
           <%= f.input :statusNotes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes on Status" %>
           
