@@ -3,6 +3,10 @@
 <h2 class="form-signin-heading"><%=t :please_sign_in%></h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "custom_form" }) do |f| %>
+    <% if devise_error_messages! != "" %>
+  <div class="alert"><%= devise_error_messages! %></div>
+  <% end %>
+
   <div class="wrapper">
   <%= f.text_field :email, :autofocus => true, :class => "input-block-level", :placeholder => (t :username)%>
 

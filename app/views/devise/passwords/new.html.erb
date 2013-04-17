@@ -3,12 +3,15 @@
 <h2 class="form-signin-heading"><%=t :forgot_password %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+  <% if devise_error_messages! != "" %>
+  <div class="alert"><%= devise_error_messages! %></div>
+  <% end %>
+
 
   <%= f.email_field :email, :autofocus => true , :class => "input-block-level", :placeholder => (t :email_address)%>
 
   	<div class="row-fluid"><%= f.submit (t :send_me_reset_password_instructions), :class=> "btn btn-large btn-primary span12" %>
-   <input type=button class="btn btn-large btn-primary span12" value= "<%= t :cancel%>" onclick= "window.location.href='../login'">
+   <input type=button class="btn btn-large btn-primary span12" value= "<%= t :cancel%>" onclick= "cancel_button()">
    </div>
 <% end %>
 
