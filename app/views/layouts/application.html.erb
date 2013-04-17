@@ -6,13 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!-- Le styles -->
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
+	
     <%= stylesheet_link_tag    "application", :media => "all" %>
 
 
@@ -56,17 +50,18 @@
 
       <!-- Display messages For devise. -->
       <p class="notice"><%= notice %></p>
+      <% if alert %>
       <p class="alert"><%= alert %></p>
-
+      <% end %>
       <%= yield %>
 
     </div> <!-- /container -->
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
+   <!-- <%= javascript_include_tag "application" %>-->
     <!-- Added for cocoon gem -->
-    <%= javascript_include_tag :cocoon %>
+   <!--  <%= javascript_include_tag :cocoon %>-->
   </body>
 </html>
 

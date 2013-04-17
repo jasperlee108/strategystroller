@@ -1,24 +1,25 @@
-<h2>Sign up</h2>
+<div class="logincontainer" style="background-color: #f5f5f5">
+<div class="form-signin">
+<h2 class="form-signin-heading">Sign Up</h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username, :autofocus => true %></div>
+  <%= f.text_field :username, :autofocus => true, :class => "input-block-level", :placeholder => "Username"%>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <%= f.email_field :email, :class => "input-block-level", :placeholder => "example@example.com"%>
 
-  <div><%= f.label :business_code %><br />
-  <%= f.text_field :business_code %></div>
+  <%= f.text_field :business_code, :class => "input-block-level", :placeholder => "Buisness Code" %>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <%= f.password_field :password, :class => "input-block-level", :placeholder => "Password" %>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <%= f.password_field :password_confirmation,:class => "input-block-level", :placeholder => "Confirm Password" %>
 
-  <div><%= f.submit "Sign up" %></div>
+	<div class="row-fluid">
+       <%= f.submit "Sign in", :class=> "btn btn-large btn-primary"%>
+	</div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
+</div>
