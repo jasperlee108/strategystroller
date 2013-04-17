@@ -1,6 +1,8 @@
-<h1> Setup System </h1>
-
 <body>
+    <%= tabs %>
+    <%= flash[:notice] %>
+    <%= flash[:error] %><br>
+
 
     <%= semantic_form_for @application do |f| %>
         <%= f.inputs do %>
