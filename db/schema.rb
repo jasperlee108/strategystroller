@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(:version => 20130416073621) do
     t.string   "username"
     t.boolean  "controlling_unit",       :default => false
     t.integer  "form_id"
-    t.integer  "business_code"
+    t.string   "business_code"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
