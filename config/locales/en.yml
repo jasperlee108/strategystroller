@@ -1,5 +1,5 @@
 en:
-  hello: "Hello world"
+  hello: "Hello"
   email_address: "Email Address"
   username: "Username"
   buisness_code: "Buisness Code"
@@ -15,6 +15,9 @@ en:
   new_password: "New password"
   confirm_new_password: "Confirm New Password"
   resend_unlock_instructions: "Resend Unlock Instructions"
+  didnt_recieve_confirmation_instructions: "Didn't receive confirmation instructions?"
+  didnt_recieve_unlock_instructions: "Didn't receive unlock instructions?"
+  sign_in_with: "Sign in with"
   currently_awaiting_confirmation_for: "Currently awaiting confirmation for: "
   edit: "Edit"
   password_unchanged: "New Password (unchanged)"
@@ -27,4 +30,5 @@ en:
   are_you_sure: "Are You Sure?"
   welcome: "Welcome"
   send_me_reset_password_instructions: "Send me reset password instructions"
+  someone_requested_a_link_to_change_password: "Someone has requested a link to change your password. You can do this through the link below."
 
