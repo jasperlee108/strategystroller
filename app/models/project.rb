@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id, :form_id, :user_ids
+  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id, :form_id, :user_ids, :team
 
   ### ASSOCIATIONS
   ## parent
@@ -8,13 +8,16 @@ class Project < ActiveRecord::Base
   belongs_to :head, :class_name => "User", :foreign_key => :head_id
   ## steer
   belongs_to :steer, :class_name => "User", :foreign_key => :steer_id
-  ## team
-  has_and_belongs_to_many :users
   ## children
   has_many :activities
 
   belongs_to :form
 
+  # Team = string[600]
+  validates :team,
+  :length => { :maximum => 600 },
+  :allow_blank => true
+  
   # Needs a Parent
   validates :indicator_id,
   :presence => true

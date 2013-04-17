@@ -13,6 +13,7 @@ class RenameColumnInProject < ActiveRecord::Migration
       t.change :status_cost, :decimal
       t.change :inplan, :boolean, :limit => nil
       t.change :compensation, :boolean, :limit => nil
+      t.change :team, :text, :limit => nil
     end
   end
 end

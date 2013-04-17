@@ -16,7 +16,7 @@
           
           <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Project Description" %>
           
-          <%= f.input :users, :as => :check_boxes, :label => "Project Team" %>
+          <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Team Member" %>
           
           <%= f.input :startDate, :as => :date_select, :required => true, :label => "Starting Date" %>
           
