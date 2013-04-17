@@ -3,3 +3,15 @@
 
 en:
   hello: "Hello world"
+  email_address: "Email Address"
+  username: "Username"
+  buisness_code: "Buisness Code"
+  password: "Password"
+  confirm_password: "Confirm Password"
+  please_sign_in: "Please Sign In"
+  cancel: "Cancel"
+  sign_in: "Sign In"
+  forgot_password: "Forgot Password?"
+  sign_up: "Sign Up"
+  remember_me: "Remember Me"
+  send_me_reset_password_instructions: "Send me reset password instructions"

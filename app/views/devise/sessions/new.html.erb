@@ -1,19 +1,19 @@
 <div class="logincontainer" style="background-color: #f5f5f5">
 <div class="form-signin">
-<h2 class="form-signin-heading">Please Sign In</h2>
+<h2 class="form-signin-heading"><%=t :please_sign_in%></h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "custom_form" }) do |f| %>
   <div class="wrapper">
-  <%= f.text_field :email, :autofocus => true, :class => "input-block-level", :placeholder => "Username"%>
+  <%= f.text_field :email, :autofocus => true, :class => "input-block-level", :placeholder => (t :username)%>
 
     <!-- TODO this replaces f.email_field with f.text_field for generic login functionality with either UN or email,
      which I believe breaks auto form checking for a well-formed email -->
-  <%= f.password_field :password, :class => "input-block-level", :placeholder => "Password"%>
+  <%= f.password_field :password, :class => "input-block-level", :placeholder => (t :password)%>
   <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+    <div><%= f.check_box :remember_me %> <%= f.label (t :remember_me)%></div>
   <% end -%>
 	<div class="row-fluid">
-       <%= f.submit "Sign in", :class=> "btn btn-large btn-primary"%>
+       <%= f.submit (t :sign_in), :class=> "btn btn-large btn-primary span12"%>
 	</div>
   <div></div>
 <% end %>
