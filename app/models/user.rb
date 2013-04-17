@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
   has_many :steering_projects, :class_name => "Project", :foreign_key => :steer_id
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :activities
-  has_and_belongs_to_many :applications
   has_and_belongs_to_many :forms
   
 end
