@@ -2,19 +2,20 @@ ActiveAdmin.register User do
   index do                            
     column :username
     column :email                     
-    column :current_sign_in_at        
-    column :last_sign_in_at           
-    column :sign_in_count             
+    column :business_code
+    column :confirmation_token          
     default_actions                   
   end                                 
 
   filter :username
-  filter :email                       
+  filter :email
+  filter :business_code             
 
   form do |f|                         
-    f.inputs "Admin Details" do       
+    f.inputs "User Details" do       
       f.input :username
       f.input :email                  
+      f.input :business_code
       f.input :password               
       f.input :password_confirmation  
     end                               

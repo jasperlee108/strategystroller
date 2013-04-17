@@ -57,7 +57,6 @@ Tabulous.setup do |config|
       #---------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                  |    DISPLAY TEXT           |    PATH                      |    VISIBLE?    |    ENABLED?    #
       #---------------------------------------------------------------------------------------------------------------------------#
-      [    :dimensions_tab           ,    'Dimensions'           ,    dimensions_path           ,    true        ,    true        ],
       [    :goals_tab                ,    'Goals'                ,    goals_path                ,    true        ,    true        ],
       [    :indicators_tab           ,    'Indicators'           ,    indicators_path           ,    true        ,    true        ],
       [    :projects_tab             ,    'Projects'             ,    projects_path             ,    true        ,    true        ],
@@ -88,7 +87,6 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------#
       #    CONTROLLER            |    ACTION          |    TAB                       #
       #------------------------------------------------------------------------------#
-      [    :controller_unit      ,    :set_dimension  ,    :dimensions_tab           ],
       [    :controller_unit      ,    :set_goal       ,    :goals_tab                ],
       [    :controller_unit      ,    :set_indicator  ,    :indicators_tab           ],
       [    :controller_unit      ,    :set_project    ,    :projects_tab             ],

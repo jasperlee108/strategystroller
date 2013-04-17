@@ -6,14 +6,12 @@ class User < ActiveRecord::Base
          :confirmable, :timeoutable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password,:password_confirmation, :business_code #, :remember_me
-  # attr_accessible :title, :body
+  attr_accessible :username, :email, :password, :password_confirmation, :business_code
 
   # these validations are redundant - they're ensured through a combination of the database migration/definition and in
   # devise.rb initializer and in the :validatable module. Put here for documentation mainly.
   # validates :email, :presence => true
   # validates :password, :presence => true, :length => { :minimum => 10, :maximum => 128 }
-
 
   # TODO add in :username:string, :cu:boolean fields.
   
@@ -24,7 +22,12 @@ class User < ActiveRecord::Base
   has_many :steering_projects, :class_name => "Project", :foreign_key => :steer_id
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :activities
-  has_and_belongs_to_many :applications
   has_and_belongs_to_many :forms
+  
+  ### VALIDATIONS (added 04/16/2013)
+  # Business code = string[2]
+  validates :business_code,
+  :presence => true,
+  :length => { :maximum => 2 }
   
 end

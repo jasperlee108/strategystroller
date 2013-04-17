@@ -16,11 +16,10 @@ StrategyStroller::Application.routes.draw do
   #For Formtastic
   resources :user
 
-  match "controller_unit/input_framework" => "controller_unit#set_dimension", :as => 'input_framework'
+  match "controller_unit/input_framework" => "controller_unit#set_goal", :as => 'input_framework'
   match "controller_unit/input_framework/goals" => "controller_unit#set_goal", :as => "goals"
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
-  match "controller_unit/input_framework/dimensions" => "controller_unit#set_dimension", :as => "dimensions"
   match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
 
   #match "goals/create" => "goal#create"
