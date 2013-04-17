@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/jasper/Desktop/ITERATION3/vendor/plugins/gmail_smtp/lib/smtp_tls.rb": [
+      "C:/cs169/main-project/strategystroller/vendor/plugins/gmail_smtp/lib/smtp_tls.rb": [
         1,
         1,
         null,
@@ -68,7 +68,7 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/vendor/plugins/gmail_smtp/lib/actionmailer_gmail.rb": [
+      "C:/cs169/main-project/strategystroller/vendor/plugins/gmail_smtp/lib/actionmailer_gmail.rb": [
         1,
         null,
         null,
@@ -78,13 +78,13 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/controllers/application_controller.rb": [
+      "C:/cs169/main-project/strategystroller/app/controllers/application_controller.rb": [
         1,
         1,
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/models/application.rb": [
+      "C:/cs169/main-project/strategystroller/app/models/application.rb": [
         1,
         1,
         null,
@@ -122,119 +122,27 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/helpers/application_helper.rb": [
+      "C:/cs169/main-project/strategystroller/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/helpers/admin_helper.rb": [
+      "C:/cs169/main-project/strategystroller/app/helpers/admin_helper.rb": [
         1,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/helpers/controller_unit_helper.rb": [
+      "C:/cs169/main-project/strategystroller/app/helpers/controller_unit_helper.rb": [
         1,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/helpers/forms_helper.rb": [
+      "C:/cs169/main-project/strategystroller/app/helpers/forms_helper.rb": [
         1,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/helpers/provider_helper.rb": [
+      "C:/cs169/main-project/strategystroller/app/helpers/provider_helper.rb": [
         1,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/admin/dashboard.rb": [
-        1,
-        null,
-        1,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/home/jasper/Desktop/ITERATION3/app/admin/users.rb": [
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null
-      ],
-      "/home/jasper/Desktop/ITERATION3/app/models/user.rb": [
-        1,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null
-      ],
-      "/home/jasper/Desktop/ITERATION3/app/admin/admin_user.rb": [
+      "C:/cs169/main-project/strategystroller/app/admin/admin_user.rb": [
         1,
         1,
         0,
@@ -256,7 +164,7 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/models/admin_user.rb": [
+      "C:/cs169/main-project/strategystroller/app/models/admin_user.rb": [
         1,
         null,
         null,
@@ -269,7 +177,99 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/tabs/tabulous.rb": [
+      "C:/cs169/main-project/strategystroller/app/admin/dashboard.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "C:/cs169/main-project/strategystroller/app/admin/users.rb": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null
+      ],
+      "C:/cs169/main-project/strategystroller/app/models/user.rb": [
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "C:/cs169/main-project/strategystroller/app/tabs/tabulous.rb": [
         null,
         null,
         null,
@@ -353,14 +353,12 @@
         null,
         null,
         null,
-        null,
         1,
         null,
         null,
         null,
         null,
         0,
-        null,
         null,
         null,
         null,
@@ -444,14 +442,14 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/controllers/admin_controller.rb": [
+      "C:/cs169/main-project/strategystroller/app/controllers/admin_controller.rb": [
         1,
         null,
         1,
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/controllers/controller_unit_controller.rb": [
+      "C:/cs169/main-project/strategystroller/app/controllers/controller_unit_controller.rb": [
         1,
         1,
         null,
@@ -569,66 +567,6 @@
         0,
         null,
         0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/home/jasper/Desktop/ITERATION3/app/controllers/forms_controller.rb": [
-        1,
-        1,
-        null,
-        1,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        0,
-        null,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        0,
-        null,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        0,
-        null,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null,
         null,
         null,
         null,
@@ -636,7 +574,67 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/models/form.rb": [
+      "C:/cs169/main-project/strategystroller/app/controllers/forms_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "C:/cs169/main-project/strategystroller/app/models/form.rb": [
         1,
         1,
         1,
@@ -650,7 +648,7 @@
         1,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/controllers/goal_controller.rb": [
+      "C:/cs169/main-project/strategystroller/app/controllers/goal_controller.rb": [
         1,
         null,
         1,
@@ -669,7 +667,7 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/models/goal.rb": [
+      "C:/cs169/main-project/strategystroller/app/models/goal.rb": [
         1,
         1,
         null,
@@ -732,12 +730,12 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/controllers/provider_controller.rb": [
+      "C:/cs169/main-project/strategystroller/app/controllers/provider_controller.rb": [
         1,
         1,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/models/activity.rb": [
+      "C:/cs169/main-project/strategystroller/app/models/activity.rb": [
         1,
         1,
         null,
@@ -829,7 +827,7 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/models/dimension.rb": [
+      "C:/cs169/main-project/strategystroller/app/models/dimension.rb": [
         1,
         1,
         1,
@@ -854,7 +852,7 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/models/indicator.rb": [
+      "C:/cs169/main-project/strategystroller/app/models/indicator.rb": [
         1,
         1,
         null,
@@ -953,7 +951,7 @@
         null,
         null
       ],
-      "/home/jasper/Desktop/ITERATION3/app/models/project.rb": [
+      "C:/cs169/main-project/strategystroller/app/models/project.rb": [
         1,
         1,
         null,
@@ -1118,6 +1116,6 @@
         null
       ]
     },
-    "timestamp": 1366096620
+    "timestamp": 1366162284
   }
 }
