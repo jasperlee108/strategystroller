@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418053617) do
+ActiveRecord::Schema.define(:version => 20130418064407) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -83,6 +82,14 @@ ActiveRecord::Schema.define(:version => 20130418053617) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "forms", :force => true do |t|
+    t.integer  "lookup"
+    t.integer  "user_id"
+    t.boolean  "checked"
+    t.boolean  "reviewed"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "goals", :force => true do |t|
     t.string   "name"
@@ -167,6 +174,8 @@ ActiveRecord::Schema.define(:version => 20130418053617) do
     t.string   "username"
     t.boolean  "controlling_unit",       :default => false
     t.string   "business_code"
+    t.string   "temp_password"
+    t.integer  "application_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
