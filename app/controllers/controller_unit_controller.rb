@@ -170,13 +170,19 @@ class ControllerUnitController < ApplicationController
                     if (email != "") #quick check not from empty input boxes (or invalid)
                         total += 1
                         user = User.find_by_email(email)
-                        User.delete(user)
-                        if (!User.find_by_email(email))
-                            numDeleted += 1
+
+                        if (user) #user with this email exists
+                          User.delete(user)
+                          if (!User.find_by_email(email)) #not successfully deleted, perhaps redundant check
+                              numDeleted += 1
+                          else
+                              notDeleted << email
+                          end
                         else
-                            notDeleted << email
+                          notDeleted << email
                         end
                     end
+
                 end     
 
                 if (numDeleted == 0 && total == 0) #empty input boxes
