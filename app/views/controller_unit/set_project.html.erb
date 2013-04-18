@@ -1,5 +1,18 @@
 <body>
-    <%= tabs %>
+    <div class="navbar snb">
+      <div class="navbar-inner ni">
+        <div class="container">
+          <ul class="nav isnb">
+            <li><a href=<%= url_for(:action => 'set_goal', :controller => 'controller_unit') %>>Goals</a></li>
+            <li><a href=<%= url_for(:action => 'set_indicator', :controller => 'controller_unit') %>>Indicators</a></li>
+            <li><a href=<%= url_for(:action => 'set_project', :controller => 'controller_unit') %>>Projects</a></li>
+            <li><a href=<%= url_for(:action => 'set_activity', :controller => 'controller_unit') %>>Activities</a></li>
+            <li><a href=<%= url_for(:action => 'setup_system', :controller => 'controller_unit') %>>Setup System</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div><!-- /.navbar -->
     <%= flash[:notice] %>
     <%= flash[:error] %><br>
 

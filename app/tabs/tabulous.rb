@@ -159,8 +159,11 @@ Tabulous.setup do |config|
   # head start or an easy way to prototype quickly.  Set this to false if
   # you are using Twitter Bootstrap.
   # 
-  config.css.scaffolding = true
-
+  #config.css.scaffolding = true
+  config.tabs_ul_class = "navbar"
+  #config.tabs_ul_class = “nav nav-pills” # or whatever Bootstrap class you want
+  config.bootstrap_style_subtabs = true
+  config.active_tab_clickable = true
   # You can tweak the colors of the generated CSS.
   #
   # config.css.background_color = '#ccc'
