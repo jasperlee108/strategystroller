@@ -24,9 +24,9 @@ StrategyStroller::Application.routes.draw do
 
   #match "goals/create" => "goal#create"
 
-  match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "applications"
+  match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "users"
 
-  match "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
+  match "controller_unit/edit_users" => "controller_unit#edit_users", :as => "applications"
   match "forms/form_template" => "forms#form_template", :as => "forms"
 
 
