@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :confirmable, :timeoutable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :business_code, :controlling_unit
+  attr_accessible :username, :email, :password, :password_confirmation, :business_code, :temp_password, :controlling_unit
 
   # these validations are redundant - they're ensured through a combination of the database migration/definition and in
   # devise.rb initializer and in the :validatable module. Put here for documentation mainly.

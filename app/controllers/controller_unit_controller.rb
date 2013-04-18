@@ -79,47 +79,19 @@ class ControllerUnitController < ApplicationController
     end
   end
   
-  def setup_system
+  def applications
     @application = Application.new
-    @years = Application::YEARS
-    @languages = Application::LANGUAGES
-    @time_horizon = Application::TIME_HORIZON
-    if (request.post?) 
-      @application = Application.new(params[:application])
-      if @application.save
-        # No longer a TODO--can remove user-related details 
-        # TODO: save each user entered in the User table once User creation
-        # changed such that a user can be saved without a password
-  
-        # users = params[:users_attributes]
-        # for id in users do
-        #     user_hash = users[id]
-        #     username = user_hash[:username]
-        #     email = user_hash[:email]
-  
-        flash[:notice] = "Setup successfully saved!"
-      else
-        flash[:error] = "Setup was not saved"
-        return
+    if (request.post?)
+      if (params[:commit] == 'Save Setup')
+          redirect_to "/controller_unit/setup_system"
+          setup_system
+      elsif (params[:commit] == 'Create User(s)')
+          redirect_to "/controller_unit/create_users"
+          create_users
+      elsif (params[:commit] == 'Remove User(s)')
+          redirect_to "/controller_unit/remove_users"
+          remove_users
       end
-  
-      users = params[:users]
-      count = 0
-      total = 0
-      users.each do |info|
-        total += 1
-        user = User.new(info)
-        if !user.save
-          count+= 1
-        end
-      end
-  
-      if (count != total)
-        flash[:error] = count + " users not saved"
-      else
-        flash[:notice] = "All users successfully saved!"
-      end
-      
     end
   end
   
@@ -140,7 +112,7 @@ class ControllerUnitController < ApplicationController
     end
 
     def create_users
-       @application = Application.new #Just using Application model because cocoon needs a users field
+       @application = Application.new #Just using Application model because it has a 'users' field that cocoon needs
         if (request.post?)
             app = params[:application]
             if (app != nil)
@@ -155,7 +127,9 @@ class ControllerUnitController < ApplicationController
                     email = users_hash[key][:email]
                     if (email != "" && username != "") #quick check not from empty input boxes (or invalid)
                         total += 1
-                        user = User.new(:username => username, :email => email, :password => "password", :business_code=>"xx")
+                        #temp password and business code
+                        temp_password = "password"
+                        user = User.new(:username => username, :email => email, :password => temp_password, :temp_password => temp_password, :business_code=>"xx")
                         if user.save
                             numSaved += 1
                         else
@@ -174,7 +148,7 @@ class ControllerUnitController < ApplicationController
                         user_string = user_string + user + ", "
                     end
                     user_string.slice!(user_string.length - 2)
-                    flash[:notice] = "User(s) " + user_string + "already exist(s) so not saved."
+                    flash[:notice] = "User(s) " + user_string + "already exist(s). All other users successfully created!"
                 end
             else
                 flash[:notice] = "No users saved"
@@ -182,8 +156,8 @@ class ControllerUnitController < ApplicationController
          end
     end
 
-    def delete_users
-         @application = Application.new #Just using Application model because cocoon needs a users field
+    def remove_users
+         @application = Application.new #Just using Application model because it has a 'users' field that cocoon needs
         if (request.post?)
             app = params[:application]
             if (app != nil)
@@ -197,29 +171,36 @@ class ControllerUnitController < ApplicationController
                     email = users_hash[key][:email]
                     if (email != "") #quick check not from empty input boxes (or invalid)
                         total += 1
-                        user = User.delete_all
-                        if user.save
-                            numSaved += 1
+                        user = User.find_by_email(email)
+
+                        if (user) #user with this email exists
+                          User.delete(user)
+                          if (!User.find_by_email(email)) #not successfully deleted, perhaps redundant check
+                              numDeleted += 1
+                          else
+                              notDeleted << email
+                          end
                         else
-                            notSaved << email
+                          notDeleted << email
                         end
                     end
+
                 end     
 
-                if (numSaved == 0 && total == 0) #empty input boxes
+                if (numDeleted == 0 && total == 0) #empty input boxes
                     flash[:notice] = "Please enter Username and Email"
-                elsif (numSaved == total) #tried to save valid inputs and success!
-                    flash[:notice] = "All users successfully saved!"
-                else #some users could not be saved
+                elsif (numDeleted == total) #tried to delete valid inputs and success!
+                    flash[:notice] = "All users successfully removed!"
+                else #some users could not be deleted
                     user_string = ""
-                    notSaved.each do |user|
+                    notDeleted.each do |user|
                         user_string = user_string + user + ", "
                     end
                     user_string.slice!(user_string.length - 2)
-                    flash[:notice] = "User(s) " + user_string + "already exist(s) so not saved."
+                    flash[:notice] = "User(s) " + user_string + "do(es) not exist. All other users successfully removed!"
                 end
             else
-                flash[:notice] = "No users saved"
+                flash[:notice] = "No users removed"
             end
          end
     end

@@ -111,9 +111,9 @@ Tabulous.setup do |config|
   # Tabulous expects every controller action to be associated with a tab.
   # When an action does not have an associated tab (or subtab), you can
   # instruct tabulous how to behave:
-   config.when_action_has_no_tab = :raise_error      # the default behavior
+   #config.when_action_has_no_tab = :raise_error      # the default behavior
   #config.when_action_has_no_tab = :do_not_render  # no tab navigation HTML will be generated
-  # config.when_action_has_no_tab = :render         # the tab navigation HTML will be generated,
+   config.when_action_has_no_tab = :render         # the tab navigation HTML will be generated,
                                                     # but no tab or subtab will be active
 
   #--------------------
@@ -159,8 +159,11 @@ Tabulous.setup do |config|
   # head start or an easy way to prototype quickly.  Set this to false if
   # you are using Twitter Bootstrap.
   # 
-  config.css.scaffolding = true
-
+  #config.css.scaffolding = true
+  config.tabs_ul_class = "navbar"
+  #config.tabs_ul_class = “nav nav-pills” # or whatever Bootstrap class you want
+  config.bootstrap_style_subtabs = true
+  config.active_tab_clickable = true
   # You can tweak the colors of the generated CSS.
   #
   # config.css.background_color = '#ccc'
