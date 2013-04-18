@@ -1,5 +1,5 @@
 class Form < ActiveRecord::Base
-  attr_accessible :checked, :lookup, :reviewed, :user_id
+  attr_accessible :checked, :lookup, :reviewed, :user_id, :submitted, :last_reminder
   
   ## INFO
   GOAL = 1
@@ -28,4 +28,21 @@ class Form < ActiveRecord::Base
   
   ## Reviewed = true / false = yes / no
   validates :reviewed, :inclusion => { :in => [true, false] }
+  
+  ## Submitted = true / false = yes / no
+  validates :submitted, :inclusion => { :in => [true, false] }
+
+  ## Last reminder = date
+  validate :validDate
+  
+  ### VALID DATE CHECKER, modified accordingly from source
+  ## Credit: Gabe Hollombe, brettish
+  ## Source: http://stackoverflow.com/questions/1370926/rails-built-in-datetime-validation
+  ## Source: http://stackoverflow.com/questions/5665157/date-validation-in-rails
+  def validDate
+    if (Date.parse(last_reminder.to_s) rescue ArgumentError) == ArgumentError
+      errors.add(:last_reminder, 'must be a valid date')
+    end
+  end
+
 end
