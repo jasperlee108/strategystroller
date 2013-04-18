@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :form_id, :prereq
+  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :prereq
   
   ### ASSOCIATIONS
   ## parent
@@ -8,8 +8,6 @@ class Goal < ActiveRecord::Base
   belongs_to :user
   ## children
   has_many :indicators
-
-  belongs_to :form
   
   ## Needs to have Parent
   validates :dimension_id,

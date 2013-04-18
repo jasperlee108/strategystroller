@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :indicators
   has_many :owned_projects, :class_name => "Project", :foreign_key => :head_id
   has_many :steering_projects, :class_name => "Project", :foreign_key => :steer_id
-  has_and_belongs_to_many :forms
+  has_many :forms
   
   ### VALIDATIONS (added 04/16/2013)
   # Business code = string[2]
