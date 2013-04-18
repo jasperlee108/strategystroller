@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :confirmable, :timeoutable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :business_code, :temp_password
+  attr_accessible :username, :email, :password, :password_confirmation, :business_code, :temp_password, :controlling_unit
 
   # these validations are redundant - they're ensured through a combination of the database migration/definition and in
   # devise.rb initializer and in the :validatable module. Put here for documentation mainly.
@@ -28,5 +28,12 @@ class User < ActiveRecord::Base
   :length => { :maximum => 2 }
 
   validates_uniqueness_of :email
+  
+  ### TODO: NOTE TO SELF
+  ## If you see this note, make sure to only give T/F options
+  ## Rails has this thing where most things default to False 
+
+  ## Controlling Unit = true / false = yes / no
+  validates :controlling_unit, :inclusion => { :in => [true, false] }
   
 end
