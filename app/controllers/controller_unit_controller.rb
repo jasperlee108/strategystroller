@@ -82,46 +82,54 @@ class ControllerUnitController < ApplicationController
          if (request.post?) 
             @application = Application.new(params[:application])
             if @application.save
-              # No longer a TODO--can remove user-related details 
-              # TODO: save each user entered in the User table once User creation
-              # changed such that a user can be saved without a password
-
-               # users = params[:users_attributes]
-               # for id in users do
-               #     user_hash = users[id]
-               #     username = user_hash[:username]
-               #     email = user_hash[:email]
-
-
                 flash[:notice] = "Setup successfully saved!"
             else
-                flash[:error] = "Setup was not saved"
+                flash[:error] = "ERROR: Setup was not saved"
                 return
             end
-
-
-               users = params[:users]
-                count = 0
-                total = 0
-                users.each do |info|
-                    total += 1
-                    user = User.new(info)
-                    if !user.save
-                        count+= 1
-                    end
-                end
-                
-                if (count != total)
-                    flash[:error] = count + " users not saved"
-                else
-                    flash[:notice] = "All users successfully saved!"
-                end
-
         end
     end
 
-    def edit_users
-        @user = User.new
-    end
+    def create_users
+       @application = Application.new #Just using Application model because cocoon needs a users field
+        if (request.post?)
+            app = params[:application]
+            if (app != nil)
+                users_hash = app[:users_attributes] #hash of hashes
 
+                numSaved = 0 
+                total = 0 #number of users that should be saved
+                notSaved = []
+
+                users_hash.each do |key, value|
+                    username = users_hash[key][:username]
+                    email = users_hash[key][:email]
+                    if (email != "" && username != "") #quick check not from empty input boxes (or invalid)
+                        total += 1
+                        user = User.new(:username => username, :email => email, :password => "password", :business_code=>"xx")
+                        if user.save
+                            numSaved += 1
+                        else
+                            notSaved << email
+                        end
+                    end
+                end     
+
+                if (numSaved == 0 && total == 0) #empty input boxes
+                    flash[:notice] = "Please enter Username and Email"
+                elsif (numSaved == total) #tried to save valid inputs and success!
+                    flash[:notice] = "All users successfully saved!"
+                else #some users could not be saved
+                    user_string = ""
+                    notSaved.each do |user|
+                        user_string = user_string + user + ", "
+                    end
+                    user_string.slice!(user_string.length - 2)
+                    flash[:notice] = "User(s) " + user_string + "already exist(s) so not saved."
+                end
+            else
+                flash[:notice] = "No users saved"
+            end
+         end
+    end
 end

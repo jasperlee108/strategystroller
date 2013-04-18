@@ -192,3 +192,4 @@ ActiveRecord::Schema.define(:version => 20130416073621) do
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
 end
+
