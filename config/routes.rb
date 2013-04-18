@@ -19,6 +19,7 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
   match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
+  match "controller_unit/cu_review" => "controller_unit#cu_review", :as => "cu_review"
 
   #applications path currently defaults to setup_system path so really we only need
   #first 'post' route below, but including all 'post' paths to be safe/in case we need them
@@ -29,6 +30,7 @@ StrategyStroller::Application.routes.draw do
   get "controller_unit/setup_system" => "controller_unit#setup_system", :as => "setup_system"
   get "controller_unit/create_users" => "controller_unit#create_users", :as => "create_users"
   get "controller_unit/remove_users" => "controller_unit#remove_users", :as => "remove_users"
+
   match "forms/form_template" => "forms#form_template", :as => "forms"
 
 
