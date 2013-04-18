@@ -61,7 +61,7 @@ Tabulous.setup do |config|
       [    :indicators_tab           ,    'Indicators'           ,    indicators_path           ,    true        ,    true        ],
       [    :projects_tab             ,    'Projects'             ,    projects_path             ,    true        ,    true        ],
       [    :activities_tab           ,    'Activities'           ,    activities_path           ,    true        ,    true        ],
-      [    :setup_system_tab         ,    'Setup System'         ,    applications_path         ,    true        ,    true        ]
+      [    :setup_system_tab         ,    'Setup System'         ,    setup_system_path         ,    true        ,    true        ]
       #---------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                  |    DISPLAY TEXT           |    PATH                      |    VISIBLE?    |    ENABLED?    #
       #---------------------------------------------------------------------------------------------------------------------------#

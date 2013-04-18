@@ -1,7 +1,7 @@
 class Application < ActiveRecord::Base
   attr_accessible :company, :curr_year, :curr_qtr, :curr_month,:init_year, 
-  :language, :time_horizon
-  has_and_belongs_to_many :users
+  :language, :time_horizon, :users
+  has_many :users
   accepts_nested_attributes_for :users
 
   YEARS = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,

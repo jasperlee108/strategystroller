@@ -29,5 +29,7 @@ class User < ActiveRecord::Base
   validates :business_code,
   :presence => true,
   :length => { :maximum => 2 }
+
+  validates_uniqueness_of :email
   
 end
