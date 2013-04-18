@@ -182,6 +182,48 @@ class ControllerUnitController < ApplicationController
          end
     end
 
+    def delete_users
+         @application = Application.new #Just using Application model because cocoon needs a users field
+        if (request.post?)
+            app = params[:application]
+            if (app != nil)
+                users_hash = app[:users_attributes] #hash of hashes
+
+                numDeleted = 0 
+                total = 0 #number of users that should be deleted
+                notDeleted = []
+                #here
+                users_hash.each do |key, value|
+                    email = users_hash[key][:email]
+                    if (email != "") #quick check not from empty input boxes (or invalid)
+                        total += 1
+                        user = User.delete_all
+                        if user.save
+                            numSaved += 1
+                        else
+                            notSaved << email
+                        end
+                    end
+                end     
+
+                if (numSaved == 0 && total == 0) #empty input boxes
+                    flash[:notice] = "Please enter Username and Email"
+                elsif (numSaved == total) #tried to save valid inputs and success!
+                    flash[:notice] = "All users successfully saved!"
+                else #some users could not be saved
+                    user_string = ""
+                    notSaved.each do |user|
+                        user_string = user_string + user + ", "
+                    end
+                    user_string.slice!(user_string.length - 2)
+                    flash[:notice] = "User(s) " + user_string + "already exist(s) so not saved."
+                end
+            else
+                flash[:notice] = "No users saved"
+            end
+         end
+    end
+
   def save_form(table_id, user_id)
     default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
     if default.include? table_id

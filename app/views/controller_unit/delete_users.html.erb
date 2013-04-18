@@ -1,0 +1,12 @@
+<h1>Delete Users</h1>
+<!-- Need to specify company position and general position (CU/prov) when entering a user-->
+<%= semantic_form_for @application do |f| %>
+    <%= f.inputs do %>
+       <%= f.semantic_fields_for :users do |user| %>
+             <%= render 'delete_user_fields', :f => user %>
+        <% end %>
+        <%= link_to_add_association 'Delete User', f, :users, :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
+
+    <% end %>
+    <%= f.action :submit, :label => "Delete User(s)" %>
+<% end %>
