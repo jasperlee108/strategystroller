@@ -121,7 +121,21 @@ class ControllerUnitController < ApplicationController
     end
 
     def edit_users
-        @user = User.new
+       @application = Application.new
+        if (request.post?)
+            if (params[:users] != nil)
+                @application.users = params[:users]
+                for id in users do
+                    user_hash = users[id]
+                    username = user_hash[:username]
+                    email = user_hash[:email]
+                    user = User.new(:username => username, :email => email, :password => "password")
+                    if !user.save
+                        flash[:error] = "Some user(s) not saved!"
+                    end
+                end
+            end
+        end
     end
 
 end
