@@ -25,7 +25,6 @@ class User < ActiveRecord::Base
   ### VALIDATIONS (added 04/16/2013)
   # Business code = string[2]
   validates :business_code,
-  :presence => true,
   :length => { :maximum => 2 }
 
   validates_uniqueness_of :email

@@ -127,9 +127,9 @@ class ControllerUnitController < ApplicationController
                     email = users_hash[key][:email]
                     if (email != "" && username != "") #quick check not from empty input boxes (or invalid)
                         total += 1
-                        #temp password and business code
-                        temp_password = "password"
-                        user = User.new(:username => username, :email => email, :password => temp_password, :temp_password => temp_password, :business_code=>"xx")
+                      
+                        temp_password = SecureRandom.hex
+                        user = User.new(:username => username, :email => email, :password => temp_password, :temp_password => temp_password)
                         if user.save
                             numSaved += 1
                         else
@@ -228,6 +228,14 @@ class ControllerUnitController < ApplicationController
     :user_id => user_id
     )
     return form
+  end
+
+  def cu_review
+    if (request.post?) 
+      #get a list of forms that have been submitted, not reviewed, checked (by provider)
+      #for each form
+      #generate the link to the form -- for now, just 
+    end
   end
 
 end
