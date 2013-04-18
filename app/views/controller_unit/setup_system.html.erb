@@ -29,11 +29,6 @@
 
           <%= f.input :time_horizon, :as => :select, :collection => @time_horizon, :prompt => true %>
 
-          <%= f.semantic_fields_for :users do |user| %>
-             <%= render 'user_fields', :f => user %>
-             <% end %>
-            <%= link_to_add_association 'Add Actor', f, :users, :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
-
         <% end %>
     <br><%= f.action :submit, :label => "Save Setup" %>
     <% end %>
