@@ -127,7 +127,9 @@ class ControllerUnitController < ApplicationController
                     email = users_hash[key][:email]
                     if (email != "" && username != "") #quick check not from empty input boxes (or invalid)
                         total += 1
-                        user = User.new(:username => username, :email => email, :password => "password", :business_code=>"xx")
+                        #temp password and business code
+                        temp_password = "password"
+                        user = User.new(:username => username, :email => email, :password => temp_password, :temp_password => temp_password, :business_code=>"xx")
                         if user.save
                             numSaved += 1
                         else
