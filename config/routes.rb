@@ -20,10 +20,11 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
   match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
 
+  post "controller_unit/setup_system" => "controller_unit#applications"
+  post "controller_unit/create_users" => "controller_unit#applications"
 
-  match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "setup_system"
-  match "controller_unit/setup_system" => "controller_unit#setup_system", :as => "applications"
-  match "controller_unit/create_users" => "controller_unit#create_users", :as => "create_users"
+  get "controller_unit/setup_system" => "controller_unit#setup_system", :as => "setup_system"
+  get "controller_unit/create_users" => "controller_unit#create_users", :as => "create_users"
   match "controller_unit/delete_users" => "controller_unit#delete_users", :as => "delete_users"
   match "forms/form_template" => "forms#form_template", :as => "forms"
 

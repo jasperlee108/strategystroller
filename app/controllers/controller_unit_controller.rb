@@ -79,47 +79,16 @@ class ControllerUnitController < ApplicationController
     end
   end
   
-  def setup_system
+  def applications
     @application = Application.new
-    @years = Application::YEARS
-    @languages = Application::LANGUAGES
-    @time_horizon = Application::TIME_HORIZON
-    if (request.post?) 
-      @application = Application.new(params[:application])
-      if @application.save
-        # No longer a TODO--can remove user-related details 
-        # TODO: save each user entered in the User table once User creation
-        # changed such that a user can be saved without a password
-  
-        # users = params[:users_attributes]
-        # for id in users do
-        #     user_hash = users[id]
-        #     username = user_hash[:username]
-        #     email = user_hash[:email]
-  
-        flash[:notice] = "Setup successfully saved!"
-      else
-        flash[:error] = "Setup was not saved"
-        return
+    if (request.post?)
+      if (params[:commit] == 'Save Setup')
+          redirect_to "/controller_unit/setup_system"
+          setup_system
+      elsif (params[:commit] == "Create User(s)")
+          redirect_to "/controller_unit/create_users"
+          create_users
       end
-  
-      users = params[:users]
-      count = 0
-      total = 0
-      users.each do |info|
-        total += 1
-        user = User.new(info)
-        if !user.save
-          count+= 1
-        end
-      end
-  
-      if (count != total)
-        flash[:error] = count + " users not saved"
-      else
-        flash[:notice] = "All users successfully saved!"
-      end
-      
     end
   end
   
