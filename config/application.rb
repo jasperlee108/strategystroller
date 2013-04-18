@@ -64,4 +64,8 @@ module StrategyStroller
     config.assets.initialize_on_precompile = false
 
   end
+  
+  ## Supress deprecation warning
+  ## TODO: remove later during production
+  ActiveSupport::Deprecation.silenced = true
 end

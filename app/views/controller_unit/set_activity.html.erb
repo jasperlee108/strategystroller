@@ -33,7 +33,7 @@
           
           <%= f.input :endDate, :as => :date_select, :required => true, :label => "Ending Date" %>
           
-          <%= f.input :users, :as => :check_boxes, :label => "Activity Team" %>
+          <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Team Member" %>
           
           <%= f.input :targetManp, :as => :number, :required => true, :label => "Planned Employee Resources (days)" %>
           

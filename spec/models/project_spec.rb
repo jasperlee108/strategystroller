@@ -27,7 +27,8 @@ describe Project do
     :status_notes => "Anmerkungen zum Status",
     :indicator_id => 1,
     :head_id => 1,
-    :steer_id => 1
+    :steer_id => 1,
+    :team => "James Bond, Andy Warhol"
     )
     return project
   end
@@ -489,6 +490,24 @@ describe Project do
     project = generate()
     project.status_notes = statusNotes
     assert(!project.save, "It saves on Status Notes longer than 600 characters")
+  end
+
+  ### TEAM
+  
+  ## Team Notes can be empty
+  it "can have empty Team" do
+    team = ""
+    project = generate()
+    project.team = team
+    assert(project.save, "It won't save on empty Team")
+  end
+  
+  ## Team Notes max = 600
+  it "should not have Team longer than 600 characters" do
+    team = (0...601).map{ ( 65+rand(26) ).chr }.join
+    project = generate()
+    project.team = team
+    assert(!project.save, "It saves on Team longer than 600 characters")
   end
 
   ### EXTRA

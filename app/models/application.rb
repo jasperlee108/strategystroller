@@ -1,4 +1,5 @@
 class Application < ActiveRecord::Base
+
   attr_accessible :company, :curr_year, :curr_qtr, :curr_month,:init_year, 
   :language, :time_horizon, :users
   has_many :users
@@ -11,26 +12,26 @@ class Application < ActiveRecord::Base
 
   TIME_HORIZON = [2,3,4,5]
 
-# company
-validates :company,
-:presence => true
-
-# curr_year
-validates :curr_year,
-:presence => true
-# validate valid year?
-
-# init_year
-validates :init_year,
-:presence => true
-# validate valid year?
-
-# language
-validates :language,
-:presence => true
-# Only English and German?
-
-# time_horizon
-validates :time_horizon,
-:presence => true
+  # company
+  validates :company,
+  :presence => true
+  
+  # curr_year
+  validates :curr_year,
+  :presence => true
+  # validate valid year?
+  
+  # init_year
+  validates :init_year,
+  :presence => true
+  # validate valid year?
+  
+  # language
+  validates :language,
+  :presence => true
+  # Only English and German?
+  
+  # time_horizon
+  validates :time_horizon,
+  :presence => true
 end

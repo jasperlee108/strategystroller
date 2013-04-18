@@ -48,4 +48,10 @@ namespace :rspec do
     system("rspec ./spec/models/indicator_spec.rb")
   end
 
+  desc "Run form tests"
+  task :form => :environment do
+    system("echo Running form_spec test..")
+    system("rspec ./spec/models/form_spec.rb")
+  end
+
 end

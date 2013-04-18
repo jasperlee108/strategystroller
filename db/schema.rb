@@ -1,3 +1,4 @@
+
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -11,7 +12,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418064407) do
+ActiveRecord::Schema.define(:version => 20130418053617) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -44,11 +45,7 @@ ActiveRecord::Schema.define(:version => 20130418064407) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "project_id"
-  end
-
-  create_table "activities_users", :id => false, :force => true do |t|
-    t.integer "activity_id"
-    t.integer "user_id"
+    t.text     "team"
   end
 
   create_table "admin_users", :force => true do |t|
@@ -86,20 +83,6 @@ ActiveRecord::Schema.define(:version => 20130418064407) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "forms", :force => true do |t|
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "goal_id"
-    t.integer  "indicator_id"
-    t.integer  "project_id"
-    t.boolean  "reviewed"
-    t.boolean  "final"
-  end
-
-  create_table "forms_users", :force => true do |t|
-    t.integer "form_id"
-    t.integer "user_id"
-  end
 
   create_table "goals", :force => true do |t|
     t.string   "name"
@@ -112,7 +95,6 @@ ActiveRecord::Schema.define(:version => 20130418064407) do
     t.datetime "updated_at",    :null => false
     t.integer  "dimension_id"
     t.integer  "user_id"
-    t.integer  "form_id"
     t.string   "prereq"
   end
 
@@ -134,12 +116,12 @@ ActiveRecord::Schema.define(:version => 20130418064407) do
     t.datetime "updated_at",     :null => false
     t.integer  "goal_id"
     t.integer  "user_id"
-    t.integer  "form_id"
   end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
+    t.text     "team"
     t.date     "startDate"
     t.date     "endDate"
     t.float    "duration"
@@ -161,12 +143,6 @@ ActiveRecord::Schema.define(:version => 20130418064407) do
     t.integer  "indicator_id"
     t.integer  "head_id"
     t.integer  "steer_id"
-    t.integer  "form_id"
-  end
-
-  create_table "projects_users", :id => false, :force => true do |t|
-    t.integer "project_id"
-    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|
@@ -190,10 +166,7 @@ ActiveRecord::Schema.define(:version => 20130418064407) do
     t.datetime "updated_at",                                :null => false
     t.string   "username"
     t.boolean  "controlling_unit",       :default => false
-    t.integer  "form_id"
     t.string   "business_code"
-    t.string   "temp_password"
-    t.integer  "application_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
