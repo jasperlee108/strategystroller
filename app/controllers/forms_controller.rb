@@ -5,6 +5,7 @@ class FormsController < ApplicationController
     @form = Form.new
     if (request.post?)
         # Check if this particular goal/ind/proj-combo form already exists
+        print "sadddasdas"
         form_hash = params[:form]
         goal_id = form_hash[:goal_id]
         indicator_id = form_hash[:indicator_id]
