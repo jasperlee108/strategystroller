@@ -1,0 +1,12 @@
+<h1>Remove Users</h1>
+<!-- Need to specify company position and general position (CU/prov) when entering a user-->
+<%= semantic_form_for @application do |f| %>
+    <%= f.inputs do %>
+       <%= f.semantic_fields_for :users do |user| %>
+             <%= render 'remove_user_fields', :f => user %>
+        <% end %>
+        <%= link_to_add_association 'Remove User', f, :users, :partial => 'remove_user_fields', :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
+
+    <% end %>
+    <%= f.action :submit, :label => "Remove User(s)" %>
+<% end %>

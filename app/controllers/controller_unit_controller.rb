@@ -85,9 +85,12 @@ class ControllerUnitController < ApplicationController
       if (params[:commit] == 'Save Setup')
           redirect_to "/controller_unit/setup_system"
           setup_system
-      elsif (params[:commit] == "Create User(s)")
+      elsif (params[:commit] == 'Create User(s)')
           redirect_to "/controller_unit/create_users"
           create_users
+      elsif (params[:commit] == 'Remove User(s)')
+          redirect_to "/controller_unit/remove_users"
+          remove_users
       end
     end
   end
@@ -109,7 +112,7 @@ class ControllerUnitController < ApplicationController
     end
 
     def create_users
-       @application = Application.new #Just using Application model because cocoon needs a users field
+       @application = Application.new #Just using Application model because it has a 'users' field that cocoon needs
         if (request.post?)
             app = params[:application]
             if (app != nil)
@@ -143,7 +146,7 @@ class ControllerUnitController < ApplicationController
                         user_string = user_string + user + ", "
                     end
                     user_string.slice!(user_string.length - 2)
-                    flash[:notice] = "User(s) " + user_string + "already exist(s) so not saved."
+                    flash[:notice] = "User(s) " + user_string + "already exist(s). All other users successfully created!"
                 end
             else
                 flash[:notice] = "No users saved"
@@ -151,8 +154,8 @@ class ControllerUnitController < ApplicationController
          end
     end
 
-    def delete_users
-         @application = Application.new #Just using Application model because cocoon needs a users field
+    def remove_users
+         @application = Application.new #Just using Application model because it has a 'users' field that cocoon needs
         if (request.post?)
             app = params[:application]
             if (app != nil)
@@ -166,29 +169,30 @@ class ControllerUnitController < ApplicationController
                     email = users_hash[key][:email]
                     if (email != "") #quick check not from empty input boxes (or invalid)
                         total += 1
-                        user = User.delete_all
-                        if user.save
-                            numSaved += 1
+                        user = User.find_by_email(email)
+                        User.delete(user)
+                        if (!User.find_by_email(email))
+                            numDeleted += 1
                         else
-                            notSaved << email
+                            notDeleted << email
                         end
                     end
                 end     
 
-                if (numSaved == 0 && total == 0) #empty input boxes
+                if (numDeleted == 0 && total == 0) #empty input boxes
                     flash[:notice] = "Please enter Username and Email"
-                elsif (numSaved == total) #tried to save valid inputs and success!
-                    flash[:notice] = "All users successfully saved!"
-                else #some users could not be saved
+                elsif (numDeleted == total) #tried to delete valid inputs and success!
+                    flash[:notice] = "All users successfully removed!"
+                else #some users could not be deleted
                     user_string = ""
-                    notSaved.each do |user|
+                    notDeleted.each do |user|
                         user_string = user_string + user + ", "
                     end
                     user_string.slice!(user_string.length - 2)
-                    flash[:notice] = "User(s) " + user_string + "already exist(s) so not saved."
+                    flash[:notice] = "User(s) " + user_string + "do(es) not exist. All other users successfully removed!"
                 end
             else
-                flash[:notice] = "No users saved"
+                flash[:notice] = "No users removed"
             end
          end
     end
