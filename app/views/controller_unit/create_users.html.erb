@@ -3,11 +3,11 @@
 <%= semantic_form_for @application do |f| %>
     <%= f.inputs do %>
        <%= f.semantic_fields_for :users do |user| %>
-             <%= render 'user_fields', :f => user %>
+             <%= render 'create_user_fields', :f => user %>
         <% end %>
         <%= link_to_add_association 'Add User', f, :users, :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
 
     <% end %>
-    <%= f.action :submit, :label => "Create User" %>
+    <%= f.action :submit, :label => "Create User(s)" %>
 <% end %>
 
