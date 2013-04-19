@@ -18,6 +18,49 @@ describe Goal do
     )
     return goal
   end
+
+  def gen_with_children
+    goal = generate()
+    indicator1 = Indicator.new(
+        :name => "Name der Messgrobe",
+        :description => "Beschreibung der Messgrobe",
+        :source => "Quelle",
+        :unit => "Einheit",
+        :freq => "hy",
+        :indicator_type => "average",
+        :dir => "more is better",
+        :actual => 5.5,
+        :target => 10.5,
+        :notes => "Anmerkungen",
+        :diff => 5.0,
+        :status => 75.5,
+        :contributing_projects_status => 69.3,
+        :status_notes => "Anmerkungen zum Status",
+        :goal_id => 1,
+        :user_id => 1
+    )
+    indicator2 = Indicator.new(
+        :name => "Name der Messgrobe2",
+        :description => "Beschreibung der Messgrobe2",
+        :source => "Quelle2",
+        :unit => "Einheit2",
+        :freq => "hy",
+        :indicator_type => "average",
+        :dir => "more is better",
+        :actual => 5.5,
+        :target => 10.5,
+        :notes => "Anmerkungen2",
+        :diff => 5.0,
+        :status => 11.1,
+        :contributing_projects_status => 20.1,
+        :status_notes => "Anmerkungen zum Status2",
+        :goal_id => 3,
+        :user_id => 1
+    )
+    indicator1.save()
+    indicator2.save()
+    return goal
+  end
   
   ## Default
   it "should pass assert true sanity test" do
@@ -156,6 +199,23 @@ describe Goal do
     assert(!goal.save, "It saves on Prereq longer than 80 characters")
   end
 
+  ### Status Update/calculation
+  it 'can update its status using its children' do
+    goal = gen_with_children()
+    goal.save()
+    goal_in_table = Goal.find(1)
+    goal_in_table.update_status()
+    assert(goal_in_table.status == 69.3, "goal status value was #{goal_in_table.status}, not 69.3 as expected")
+  end
+
+  it 'can update its even if it has no children' do
+    goal = generate()
+    goal.save()
+    goal_in_table = Goal.find(1)
+    goal_in_table.update_status()
+    assert(goal_in_table.status == 0.0, "goal status value was #{goal_in_table.status}, not 0.0 as expected")
+  end
+
   ### EXTRA
   
   ## Running Rspec remotely (RoR)
@@ -163,5 +223,6 @@ describe Goal do
   ## Source: https://sites.google.com/a/eecs.berkeley.edu/cs169-sp13/project/setting-up-a-deployment-site
   after(:each) do
     Goal.delete_all
+    Indicator.delete_all
   end
 end

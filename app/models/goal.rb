@@ -55,4 +55,13 @@ class Goal < ActiveRecord::Base
   ## Can have zero pre-req if it's the first
   validates :prereq,
   :length => { :maximum => 80 }
+
+  def update_status
+    status = 0.00
+    self.indicators.each do |indicator|
+      status += indicator.contributing_projects_status
+    end
+    self.status = status
+  end
+
 end
