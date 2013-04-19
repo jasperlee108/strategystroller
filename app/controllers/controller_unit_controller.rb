@@ -20,7 +20,7 @@ class ControllerUnitController < ApplicationController
     @goal = Goal.new
     if (request.post?) 
       @goal = Goal.new(params[:goal])
-      result = save_form(GOAL, current_user.id)
+      result = save_form(GOAL, @goal.user_id)
       if result.include? "ERROR"
         flash[:error] = result + ' ' + "ERROR: Goal was not saved!"
       elsif @goal.save
@@ -36,7 +36,7 @@ class ControllerUnitController < ApplicationController
     @indicator = Indicator.new
     if (request.post?) 
       @indicator = Indicator.new(params[:indicator])
-      result = save_form(INDICATOR, current_user.id)
+      result = save_form(INDICATOR, @indicator.user_id)
       if result.include? "ERROR"
         flash[:error] = result + ' ' + "ERROR: Indicator was not saved!"
       elsif @indicator.save
@@ -52,7 +52,7 @@ class ControllerUnitController < ApplicationController
     @project = Project.new
     if (request.post?) 
       @project = Project.new(params[:project])
-      result = save_form(PROJECT, current_user.id)
+      result = save_form(PROJECT, @project.user_id)
       if result.include? "ERROR"
         flash[:error] = result + ' ' + "ERROR: Project was not saved!"
       elsif @project.save
@@ -68,7 +68,7 @@ class ControllerUnitController < ApplicationController
     @activity = Activity.new
     if (request.post?) 
       @activity = Activity.new(params[:activity])
-      result = save_form(ACTIVITY, current_user.id)
+      result = save_form(ACTIVITY, @activity.user_id)
       if result.include? "ERROR"
         flash[:error] = result + ' ' + "ERROR: Activity was not saved!"
       elsif @activity.save
