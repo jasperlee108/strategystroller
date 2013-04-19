@@ -20,6 +20,8 @@
         <%= f.inputs do %>
         
           <%= f.input :name, :required => true, :as => :string, :label => "Name of Indicator" %>
+          
+          <%= f.input :short_name, :as => :string, :label => "Short Name of Indicator" %>
 
           <%= f.input :goal_id, :as => :select, :collection => Goal.all, :required => true, :label => "Associated Goal" %>
 

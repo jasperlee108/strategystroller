@@ -21,6 +21,8 @@
         <%= f.inputs do %>
 
           <%= f.input :name, :required => true, :as => :string, :label => "Name of Goal" %>
+          
+          <%= f.input :short_name, :as => :string, :label => "Short Name of Goal" %>
 
           <%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :required => true, :label => "Associated Dimension" %>
 

@@ -20,7 +20,8 @@ describe Indicator do
     :status => 75.5,
     :status_notes => "Anmerkungen zum Status",
     :goal_id => 1,
-    :user_id => 1
+    :user_id => 1,
+    :short_name => "Shorter name"
     )
     return indicator
   end
@@ -34,6 +35,24 @@ describe Indicator do
   it "should behave correctly on good inputs" do
     indicator = generate()
     assert(indicator.save, "It won't save on good inputs")
+  end
+
+  ### NAME
+  
+  ## Name is not empty
+  it "should not have empty Name" do
+    name = ""
+    indicator = generate()
+    indicator.name = name
+    assert(!indicator.save, "It saves on empty Name")
+  end
+  
+  ## Name max = 80
+  it "should not have Name longer than 80 characters" do
+    name = (0...81).map{ ( 65+rand(26) ).chr }.join
+    indicator = generate()
+    indicator.name = name
+    assert(!indicator.save, "It saves on Name longer than 80 characters")
   end
 
   ### DESCRIPTION
@@ -290,6 +309,24 @@ describe Indicator do
     indicator = generate()
     indicator.status_notes = statusNotes
     assert(!indicator.save, "It saves on Status Notes longer than 600 characters")
+  end
+
+  ### SHORT NAME
+  
+  ## Short Name is not empty
+  it "should not have empty Short Name" do
+    short_name = ""
+    indicator = generate()
+    indicator.short_name = short_name
+    assert(!indicator.save, "It saves on empty Short Name")
+  end
+  
+  ## Short Name max = 30
+  it "should not have Short Name longer than 30 characters" do
+    short_name = (0...31).map{ ( 65+rand(26) ).chr }.join
+    indicator = generate()
+    indicator.short_name = short_name
+    assert(!indicator.save, "It saves on Short Name longer than 30 characters")
   end
 
   ### EXTRA

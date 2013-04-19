@@ -28,7 +28,8 @@ describe Project do
     :indicator_id => 1,
     :head_id => 1,
     :steer_id => 1,
-    :team => "James Bond, Andy Warhol"
+    :team => "James Bond, Andy Warhol",
+    :short_name => "Shorter name"
     )
     return project
   end
@@ -508,6 +509,24 @@ describe Project do
     project = generate()
     project.team = team
     assert(!project.save, "It saves on Team longer than 600 characters")
+  end
+
+  ### SHORT NAME
+  
+  ## Short Name is not empty
+  it "should not have empty Short Name" do
+    short_name = ""
+    project = generate()
+    project.short_name = short_name
+    assert(!project.save, "It saves on empty Short Name")
+  end
+  
+  ## Short Name max = 30
+  it "should not have Short Name longer than 30 characters" do
+    short_name = (0...31).map{ ( 65+rand(26) ).chr }.join
+    project = generate()
+    project.short_name = short_name
+    assert(!project.save, "It saves on Short Name longer than 30 characters")
   end
 
   ### EXTRA
