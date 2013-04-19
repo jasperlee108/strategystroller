@@ -1,6 +1,12 @@
 class ProviderController < ApplicationController
   before_filter :authenticate_user!
   
+  ## INFO
+  GOAL = 1
+  INDICATOR = 2
+  PROJECT = 3
+  ACTIVITY = 4
+  
   def provider_panel
     @user = current_user
   end
@@ -35,7 +41,7 @@ class ProviderController < ApplicationController
   
   def unchecked
     @user = current_user
-    # do something here
+    @forms = Form.find_all_by_user_id(@user.id)
   end
   
   def saved

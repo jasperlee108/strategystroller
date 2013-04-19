@@ -1,1 +1,16 @@
-Moved to correct location :)
+<h2>Hi Provider, <%= @user.username %>! </h2>
+<h2>Please complete the following forms.</h2>
+ 
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Link</th>
+  </tr>
+ 
+<% @forms.each do |forms| %>
+  <tr>
+    <td><%= forms.id %></td>
+    <td><%= link_to 'Show', goal_define_path %></td>
+  </tr>
+<% end %>
+</table>
