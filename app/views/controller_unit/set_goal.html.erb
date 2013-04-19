@@ -20,7 +20,7 @@
     <%= semantic_form_for @goal do |f| %>
         <%= f.inputs do %>
 
-          <%= f.input :name, :required => true, :as => :string, :label => "Name of Goal" %>
+          <%= f.input :name, :disabled => true, :as => :string, :label => "Name of Goal" %>
 
           <%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :required => true, :label => "Associated Dimension" %>
 
@@ -42,3 +42,9 @@
     <%= f.action :submit, :label => "Save Goal" %>
     <% end %>
 </body>
+
+<script type="text/javascript">
+$(document).ready(function(){
+$('#name_of_goal').val('Emily');
+});
+</script>

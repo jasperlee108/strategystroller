@@ -139,7 +139,7 @@ class ControllerUnitController < ApplicationController
 
     def encode_url(form_id)
       encoded_id = encode_id(form_id.to_s)
-      url = "http://localhost:3000/form_id=" + encoded_id.to_s #TEMP
+      url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
     end
 
     def decode_id(form_id)
@@ -280,7 +280,7 @@ class ControllerUnitController < ApplicationController
   def cu_review
     @urls = []
     forms = Form.find_all_by_checked_and_reviewed_and_submitted(true, false, true)
-    forms.each do |form| # view?
+    forms.each do |form| 
       @urls << encode_url(form.id)
     end
   end
