@@ -18,6 +18,7 @@ describe Indicator do
     :notes => "Anmerkungen",
     :diff => 5.0,
     :status => 75.5,
+    :contributing_projects_status => 69.3,
     :status_notes => "Anmerkungen zum Status",
     :goal_id => 1,
     :user_id => 1
@@ -264,6 +265,32 @@ describe Indicator do
     indicator = generate()
     indicator.status = status
     assert(!indicator.save, "It saves on Status = " + status.to_s)
+  end
+
+  ### contributing_projects_status
+
+  ## contributing_projects_status is not empty
+  it "should not have empty contributing_projects_status" do
+    contributing_projects_status = nil
+    indicator = generate()
+    indicator.contributing_projects_status = contributing_projects_status
+    assert(!indicator.save, "It saves on empty contributing_projects_status")
+  end
+
+  ## contributing_projects_status = float
+  it "should have contributing_projects_status as a float" do
+    contributing_projects_status = "random"
+    indicator = generate()
+    indicator.contributing_projects_status = contributing_projects_status
+    assert(!indicator.save, "It saves on contributing_projects_status = " + contributing_projects_status.to_s)
+  end
+
+  ## contributing_projects_status = float >= 0
+  it "should have contributing_projects_status as a float >= 0" do
+    contributing_projects_status = -5
+    indicator = generate()
+    indicator.contributing_projects_status = contributing_projects_status
+    assert(!indicator.save, "It saves on contributing_projects_status = " + contributing_projects_status.to_s)
   end
 
   ### STATUS NOTES
