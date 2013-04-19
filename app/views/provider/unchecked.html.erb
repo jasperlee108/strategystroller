@@ -12,7 +12,7 @@
 <% @forms.each do |forms| %>
   <tr>
     <td><%= forms.id %></td>
-    <td><%= link_to 'Show', find_path(forms.lookup, forms.entry_id, forms.id) %></td>
+    <td><%= link_to find_label(forms.lookup), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
   </tr>
 <% end %>
 </table>

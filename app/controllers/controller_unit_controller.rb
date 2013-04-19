@@ -57,7 +57,7 @@ class ControllerUnitController < ApplicationController
     if (request.post?) 
       @project = Project.new(params[:project])
       if @project.save
-        result = save_form(PROJECT, @project.user_id, @project.id)
+        result = save_form(PROJECT, @project.head_id, @project.id)
         if result.include? "ERROR"
           flash[:error] = result
         else
@@ -75,7 +75,8 @@ class ControllerUnitController < ApplicationController
     if (request.post?) 
       @activity = Activity.new(params[:activity])
       if @activity.save
-        result = save_form(ACTIVITY, @activity.user_id, @activity.id)
+        # Assume current user is Provider for now
+        result = save_form(ACTIVITY, current_user.id, @activity.id)
         if result.include? "ERROR"
           flash[:error] = result
         else

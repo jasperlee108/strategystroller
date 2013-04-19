@@ -20,7 +20,8 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_goal = Goal.find_by_id(entry_id)
-    if request.post?
+    ## The following if is still faulty
+    if (request.post?)
       @current_form.update_attributes(:checked => true)
       @current_goal.update_attributes(params[:goal])
       redirect_to unchecked_path
@@ -29,6 +30,17 @@ class ProviderController < ApplicationController
   
   def indicator_define
     @user = current_user
+    @indicator = Indicator.new
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_indicator = Indicator.find_by_id(entry_id)
+    ## The following if is still faulty
+    if (request.post?)
+      @current_form.update_attributes(:checked => true)
+      @current_indicator.update_attributes(params[:indicator])
+      redirect_to unchecked_path
+    end
   end
   
   def activity_define
