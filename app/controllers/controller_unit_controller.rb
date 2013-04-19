@@ -20,17 +20,19 @@ class ControllerUnitController < ApplicationController
     @goal = Goal.new
     if (request.post?) 
       @goal = Goal.new(params[:goal])
-      form_id = save_form(GOAL, @goal.user_id, @goal.id)
-      if (!form_id) #form not saved
-        flash[:error] = "ERROR: Goal was not saved!"
-      elsif @goal.save #form saved and goal saved
-        flash[:notice] = "Goal successfully saved!"
-        @user_obj = User.find_by_id(@goal.user_id)
-        # Need to populate a form
-        @form_url = encode_url(form_id)
-        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
-      else #form saved but goal not saved, so delete form
-        Form.delete(Form.find_by_id(form_id))
+      if @goal.save # goal saved
+        form_id = save_form(GOAL, @goal.user_id, @goal.id)
+        if (!form_id) # goal saved but form not saved, so delete goal
+          Goal.delete(Goal.find_by_id(@goal.id))
+          flash[:error] = "ERROR: Goal was not saved!"
+        else # goal and form saved
+          flash[:notice] = "Goal successfully saved!"
+          @user_obj = User.find_by_id(@goal.user_id)
+          # Need to populate a form
+          @form_url = encode_url(form_id)
+          FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        end
+      else # goal not saved
         flash[:error] = "ERROR: Goal was not saved!"
       end
       redirect_to goals_path
@@ -41,17 +43,19 @@ class ControllerUnitController < ApplicationController
     @indicator = Indicator.new
     if (request.post?) 
       @indicator = Indicator.new(params[:indicator])
-      form_id = save_form(INDICATOR, @indicator.user_id, @indicator.id)
-      if (!form_id) #form not saved
-        flash[:error] = "ERROR: Indicator was not saved!"
-      elsif @indicator.save #form saved and indicator saved
-        flash[:notice] = "Indicator successfully saved!"
-        @user_obj = User.find_by_id(@indicator.user_id)
-        # Need to populate a form
-        @form_url = encode_url(form_id)
-        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
-      else #form saved but indicator not saved, so delete form
-        Form.delete(Form.find_by_id(form_id))
+      if @indicator.save # indicator saved
+        form_id = save_form(INDICATOR, @indicator.user_id, @indicator.id)
+        if (!form_id) # indicator saved but form not saved, so delete indicator
+          Indicator.delete(Indicator.find_by_id(@indicator.id))
+          flash[:error] = "ERROR: Indicator was not saved!"
+        else # indicator and form saved
+          flash[:notice] = "Indicator successfully saved!"
+          @user_obj = User.find_by_id(@indicator.user_id)
+          # Need to populate a form
+          @form_url = encode_url(form_id)
+          FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        end
+      else # indicator not saved
         flash[:error] = "ERROR: Indicator was not saved!"
       end
       redirect_to indicators_path
@@ -62,17 +66,19 @@ class ControllerUnitController < ApplicationController
     @project = Project.new
     if (request.post?) 
       @project = Project.new(params[:project])
-      form_id = save_form(PROJECT, @project.head_id, @project.id)
-      if (!form_id) #form not saved
-        flash[:error] = "ERROR: Project was not saved!"
-      elsif @project.save #form saved and project saved
-        flash[:notice] = "Project successfully saved!"
-        @user_obj = User.find_by_id(@project.head_id)
-        # Need to populate a form
-        @form_url = encode_url(form_id)
-        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved use
-      else #form saved but project not saved, so delete form
-        Form.delete(Form.find_by_id(form_id))
+      if @project.save # project saved
+        form_id = save_form(PROJECT, @project.head_id, @project.id)
+        if (!form_id) # project saved but form not saved, so delete project
+          Project.delete(Project.find_by_id(@project.id))
+          flash[:error] = "ERROR: Project was not saved!"
+        else # project and form saved
+          flash[:notice] = "Project successfully saved!"
+          @user_obj = User.find_by_id(@project.head_id)
+          # Need to populate a form
+          @form_url = encode_url(form_id)
+          FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        end
+      else # project not saved
         flash[:error] = "ERROR: Project was not saved!"
       end
       redirect_to projects_path
@@ -255,13 +261,10 @@ class ControllerUnitController < ApplicationController
       @form = create_form(false, table_id, false, user_id, false, Date.current, entry_id)
       if @form.save
         return @form.id
-      else
-        return nil
       end
-    else
-      # ERROR: wrong table_id
-      return nil
     end
+    # ERROR: wrong table_id or form.save failed
+    return nil
   end
 
   def create_form(checked, table_id, reviewed, user_id, submitted, last, entry_id)
