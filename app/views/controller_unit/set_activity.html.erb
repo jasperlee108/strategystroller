@@ -22,6 +22,8 @@
         <%= f.inputs do %>
         
           <%= f.input :name, :required => true, :as => :string, :label => "Name of Activity" %>
+          
+          <%= f.input :short_name, :as => :string, :label => "Short Name of Activity" %>
 
           <%= f.input :project_id, :as => :select, :collection => Project.all, :required => true, :label => "Part of Project" %>
           

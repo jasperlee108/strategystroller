@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418100814) do
+ActiveRecord::Schema.define(:version => 20130419074501) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130418100814) do
     t.datetime "updated_at",  :null => false
     t.integer  "project_id"
     t.text     "team"
+    t.string   "short_name"
   end
 
   create_table "admin_users", :force => true do |t|
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20130418100814) do
     t.integer  "dimension_id"
     t.integer  "user_id"
     t.string   "prereq"
+    t.string   "short_name"
   end
 
   create_table "indicators", :force => true do |t|
@@ -125,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20130418100814) do
     t.datetime "updated_at",     :null => false
     t.integer  "goal_id"
     t.integer  "user_id"
+    t.string   "short_name"
   end
 
   create_table "projects", :force => true do |t|
@@ -152,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20130418100814) do
     t.integer  "indicator_id"
     t.integer  "head_id"
     t.integer  "steer_id"
+    t.string   "short_name"
   end
 
   create_table "users", :force => true do |t|
