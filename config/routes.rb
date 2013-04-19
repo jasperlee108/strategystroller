@@ -28,8 +28,15 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
   match "controller_unit/cu_review" => "controller_unit#cu_review", :as => "cu_review"
   match "controller_unit/activity_list" => "controller_unit#activity_list", :as => "activity_list"
-  match "controller_unit/view_activity" => "controller_unit#view_activity", :as => "activity"
-  
+  match "controller_unit/view_activity" => "controller_unit#view_activity", :as => "activity"  
+  #match "controller_unit/saved" => "controller_unit#saved", :as => "saved"
+  match "controller_unit/goal_check" => "controller_unit#goal_check", :as => 'goal_check'
+  match "controller_unit/indicator_check" => "controller_unit#indicator_check", :as => 'indicator_check'
+  match "controller_unit/project_check" => "controller_unit#project_check", :as => 'project_check'
+  match "controller_unit/activity_check" => "controller_unit#activity_check", :as => 'activity_check'
+  #match "controller_unit/indicator_update" => "controller_unit#indicator_update", :as => 'indicator_update'
+  #match "controller_unit/project_update" => "controller_unit#project_update", :as => 'project_update'
+
   # Provider
   match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
   match "provider/saved" => "provider#saved", :as => "saved"
@@ -39,6 +46,7 @@ StrategyStroller::Application.routes.draw do
   match "provider/activity_define" => "provider#activity_define", :as => 'activities'
   match "provider/indicator_update" => "provider#indicator_update", :as => 'indicator_update'
   match "provider/project_update" => "provider#project_update", :as => 'project_update'
+
 
   #applications path currently defaults to setup_system path so really we only need
   #first 'post' route below, but including all 'post' paths to be safe/in case we need them

@@ -1,8 +1,18 @@
-<h1> CU Review Page </h1>
-<% if (@urls == []) %>
-    There are currently no forms to review.
-<% else %>
-    <% @urls.each do |url| %>
-        <%= link_to "Form", url %><br>
-    <% end %>
+<h2>Hi Controller Unit, <%= @user.username %>! </h2>
+<h2>Please review the following forms.</h2>
+
+<%= flash[:notice] %><%= flash[:error] %><br>
+ 
+<table border=7 cellpadding=7 cellspacing=7>
+  <tr>
+    <th>Form ID</th>
+    <th>Link to the form</th>
+  </tr>
+ 
+<% @forms.each do |forms| %>
+  <tr>
+    <td><%= forms.id %></td>
+    <td><%= link_to find_label(forms.lookup), find_path_cu(forms.lookup, forms.entry_id, forms.id) %></td>
+  </tr>
 <% end %>
+</table>
