@@ -1,4 +1,5 @@
 class ControllerUnitController < ApplicationController
+  require 'base64' 
   before_filter :authenticate_user!
   #before_filter do
   # #should handle checking that a user is a cu, as of yet untested TODO test me.
@@ -113,6 +114,27 @@ class ControllerUnitController < ApplicationController
             end
         end
     end
+
+    def encode_id(form_id)
+      encoded = Base64.encode64(form_id.to_s)
+      return encoded
+    end
+
+    def encode_url(form_id)
+      encoded_id = encode_id(form_id.to_s)
+      url = "http://localhost:3000/form_id=" + encoded_id.to_s
+    end
+
+    def decode_id(form_id)
+      decoded = Base64.decode64(form_id.to_s)
+      return decoded
+    end
+
+    def extract_id(url)
+      id = url.split("form_id=")[1]
+      return id
+    end  
+
 
     def create_users
        @application = Application.new #Just using Application model because it has a 'users' field that cocoon needs
