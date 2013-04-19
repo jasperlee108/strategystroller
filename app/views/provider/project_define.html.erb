@@ -3,6 +3,10 @@
 <li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
 <li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
 <% end %>
+<script>
+document.getElementById("home").className = "";
+document.getElementById("define_page").className = "active";
+</script>
 
 <style>
 input {

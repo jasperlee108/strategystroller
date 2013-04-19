@@ -1,6 +1,11 @@
 class ProviderController < ApplicationController
   before_filter :authenticate_user!
-  
+
+  def encode_url(form_id)
+    encoded_id = encode_id(form_id.to_s)
+    url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
+  end
+
   def provider_panel
     @user = current_user
   end
