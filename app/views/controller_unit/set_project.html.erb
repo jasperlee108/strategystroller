@@ -33,9 +33,9 @@
           
           <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Team Member" %>
           
-          <%= f.input :startDate, :as => :date_select, :required => true, :label => "Starting Date" %>
+          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Starting Date" %>
           
-          <%= f.input :endDate, :as => :date_select, :required => true, :label => "Ending Date" %>
+          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Ending Date" %>
           
           <%= f.input :duration, :as => :number, :required => true, :label => "Project Duration (months)" %>
           
