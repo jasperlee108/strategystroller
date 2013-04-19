@@ -1,8 +1,14 @@
 <% content_for :context_menu do %>
-<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
+<li id="goal_define"><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
 <li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
 <li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
 <% end %>
+
+<script>
+document.getElementById("home").className = "";
+document.getElementById("define_page").className = "active";
+document.getElementById("goal_define").className = "active";
+</script>
 
 <style>
 input {
@@ -14,18 +20,25 @@ textarea {
 </style>
 
 <h2>Goal Form</h2>
+<p> These are your current Goal forms. User id is <%=@user.id %> and you are in charge of <%=Goal.where(:user_id => @user.id) %>  </p>
+
+<ul>
+<% Goal.where(:user_id => @user.id).each do |i| %>
+  <li><a href="http://localhost:3000/forms?form_id=<%= i.id %>">Form <%= i.id %></a></li>     
+<% end %>
+</ul>
 
 <body>
     <%= semantic_form_for @goal do |f| %>
         <%= f.inputs do %>
 
-          <%= f.input :name, :input_html => { :value => @current_goal.name, :readonly => true }, :label => "Name of Goal" %>
+          <%= f.input :name, :input_html => { :value => @goal.name, :readonly => true }, :label => "Name of Goal" %>
           
-          <%= f.input :short_name, :input_html => { :value => @current_goal.short_name, :readonly => true }, :label => "Short Name of Goal" %>
+          <%= f.input :short_name, :input_html => { :value => @goal.short_name, :readonly => true }, :label => "Short Name of Goal" %>
 
-          <%= f.input :dimension_id, :input_html => { :value => @current_goal.dimension_id, :readonly => true }, :label => "Associated Dimension" %>
+          <%= f.input :dimension_id, :input_html => { :value => @goal.dimension_id, :readonly => true }, :label => "Associated Dimension" %>
 
-          <%= f.input :user_id, :input_html => { :value => @current_goal.user_id, :readonly => true }, :label => "Responsible" %>
+          <%= f.input :user_id, :input_html => { :value => @goal.user_id, :readonly => true }, :label => "Responsible" %>
 
           <%= f.input :need, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Call for Action" %>
           
@@ -33,11 +46,11 @@ textarea {
           
           <%= f.input :focus, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Strategic Approach" %>
           
-          <%= f.input :prereq, :input_html => { :value => @current_goal.prereq, :readonly => true }, :label => "Prerequisites" %>
+          <%= f.input :prereq, :input_html => { :value => @goal.prereq, :readonly => true }, :label => "Prerequisites" %>
 
           <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
           
-          <%= f.input :status, :input_html => { :value => @current_goal.status, :readonly => true }, :label => "Current Status (%)" %>
+          <%= f.input :status, :input_html => { :value => @goal.status, :readonly => true }, :label => "Current Status (%)" %>
 
         <% end %>
     <%= f.action :submit, :label => "Submit Goal" %>

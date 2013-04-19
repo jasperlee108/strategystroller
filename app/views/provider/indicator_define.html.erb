@@ -1,8 +1,13 @@
 <% content_for :context_menu do %>
 <li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
-<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
+<li id="indicator_define"><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
 <li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
 <% end %>
+<script>
+document.getElementById("home").className = "";
+document.getElementById("define_page").className = "active";
+document.getElementById("indicator_define").className = "active";
+</script>
 
 <style>
 input {
@@ -15,17 +20,25 @@ textarea {
 
 <h2>Indicator Form</h2>
 
+<p> These are your current Indicator forms. User id is <%=@user.id %> and you are in charge of <%=Indicator.where(:user_id => @user.id) %>  </p>
+
+<ul>
+<% Indicator.where(:user_id => @user.id).each do |i| %>
+  <li><a href="http://localhost:3000/forms?form_id=<%= i.id %>">Form <%= i.id %></a></li>    
+<% end %>
+</ul>
+
 <body>
     <%= semantic_form_for @indicator do |f| %>
         <%= f.inputs do %>
 
-          <%= f.input :name, :input_html => { :value => @current_indicator.name, :readonly => true }, :label => "Name of Indicator" %>
+          <%= f.input :name, :input_html => { :value => @indicator.name, :readonly => true }, :label => "Name of Indicator" %>
           
-          <%= f.input :short_name, :input_html => { :value => @current_indicator.short_name, :readonly => true }, :label => "Short Name of Indicator" %>
+          <%= f.input :short_name, :input_html => { :value => @indicator.short_name, :readonly => true }, :label => "Short Name of Indicator" %>
 
-          <%= f.input :goal_id, :input_html => { :value => @current_indicator.goal_id, :readonly => true }, :label => "Associated Goal" %>
+          <%= f.input :goal_id, :input_html => { :value => @indicator.goal_id, :readonly => true }, :label => "Associated Goal" %>
 
-          <%= f.input :user_id, :input_html => { :value => @current_indicator.user_id, :readonly => true }, :label => "Responsible" %>
+          <%= f.input :user_id, :input_html => { :value => @indicator.user_id, :readonly => true }, :label => "Responsible" %>
           
           <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Description of Indicator" %>
           
@@ -45,9 +58,9 @@ textarea {
 
           <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
           
-          <%= f.input :diff, :input_html => { :value => @current_indicator.diff, :readonly => true }, :label => "Difference" %>
+          <%= f.input :diff, :input_html => { :value => @indicator.diff, :readonly => true }, :label => "Difference" %>
           
-          <%= f.input :status, :input_html => { :value => @current_indicator.status, :readonly => true }, :label => "Current Status" %>
+          <%= f.input :status, :input_html => { :value => @indicator.status, :readonly => true }, :label => "Current Status" %>
           
           <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes to Current Status" %>
         <% end %>

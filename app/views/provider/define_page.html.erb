@@ -1,3 +1,7 @@
+<script>
+document.getElementById("home").className = "";
+document.getElementById("define_page").className = "active";
+</script>
 
 <% content_for :context_menu do %>
 <li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>

@@ -1,3 +1,7 @@
+<script>
+document.getElementById("home").className = "";
+document.getElementById("update_page").className = "active";
+</script>
 
 <% content_for :context_menu do %>
 <li><a href="<%= url_for(:action => 'indicator_update', :controller => 'provider') %>">Indicator</a></li>
