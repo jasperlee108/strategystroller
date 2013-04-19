@@ -1,1 +1,8 @@
 <h1> CU Review Page </h1>
+<% if (@urls == []) %>
+    There are currently no forms to review.
+<% else %>
+    <% @urls.each do |url| %>
+        <%= link_to "Form", url %><br>
+    <% end %>
+<% end %>
