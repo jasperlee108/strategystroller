@@ -102,6 +102,9 @@ class ControllerUnitController < ApplicationController
         @time_horizon = Application::TIME_HORIZON
          if (request.post?) 
             @application = Application.new(params[:application])
+            @user_obj = User.new(:username=>"username2342")
+            @form_url = "google.com"
+            FormMailer.form_email(@user_obj,@form_url).deliver
             if @application.save
                 flash[:notice] = "Setup successfully saved!"
             else
@@ -233,6 +236,7 @@ class ControllerUnitController < ApplicationController
     return form
   end
 
+
   def cu_review
     if (request.post?) 
       Form.find_by_checked_and_reviewed_and_submitted(true, false, true)
@@ -241,5 +245,6 @@ class ControllerUnitController < ApplicationController
       #generate the link to the form -- for now, just 
     end
   end
+
 
 end
