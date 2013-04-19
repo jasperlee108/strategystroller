@@ -16,7 +16,9 @@ describe Form do
     :checked => true,
     :lookup => GOAL,
     :reviewed => true,
-    :user_id => 1
+    :user_id => 1,
+    :submitted => true,
+    :last_reminder => Date.new(2013,04,18)
     )
     return form
   end
@@ -64,6 +66,33 @@ describe Form do
     form = generate()
     form.reviewed = reviewed
     assert(form.save, "It won't save on Reviewed being false")
+  end
+  
+  ## Submitted = false
+  ## True case is tested in All Correct test
+  it "can have Submitted be false" do
+    submitted = false
+    form = generate()
+    form.submitted = submitted
+    assert(form.save, "It won't save on Submitted being false")
+  end
+
+  ## Last Reminder is a valid date
+  it "should have valid Last Reminder Date" do
+    last_reminder = "random"
+    form = generate()
+    form.last_reminder = last_reminder
+    assert(!form.save, "It saves on invalid Last Reminder Date")
+  end
+
+  ## Date doesn't have February 30th
+  # NOTE: date is in string, the validator will check its correctness,
+  # if not, it will error out before even reaching the validator
+  it "should have real Last Reminder Date" do
+    last_reminder = "2013-02-30"
+    form = generate()
+    form.last_reminder = last_reminder
+    assert(!form.save, "It saves on non existence Last Reminder Date")
   end
 
   ### EXTRA

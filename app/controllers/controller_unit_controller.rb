@@ -11,7 +11,7 @@ class ControllerUnitController < ApplicationController
   PROJECT = 3
   ACTIVITY = 4
 
-  def welcome
+  def controller_panel
     @user = current_user
   end
   
@@ -130,9 +130,10 @@ class ControllerUnitController < ApplicationController
                     email = users_hash[key][:email]
                     if (email != "" && username != "") #quick check not from empty input boxes (or invalid)
                         total += 1
-                        #temp password and business code
-                        temp_password = "password"
-                        user = User.new(:username => username, :email => email, :password => temp_password, :temp_password => temp_password, :business_code=>"xx")
+                      
+                        temp_password = SecureRandom.hex
+                        cu = users_hash[key][:controlling_unit]
+                        user = User.new(:username => username, :email => email, :password => temp_password, :temp_password => temp_password, :controlling_unit => cu)
                         if user.save
                             numSaved += 1
                         else
@@ -211,7 +212,7 @@ class ControllerUnitController < ApplicationController
   def save_form(table_id, user_id)
     default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
     if default.include? table_id
-      @form = create_form(false, table_id, false, user_id)
+      @form = create_form(false, table_id, false, user_id, false, Date.today)
       if @form.save
         return "Form successfully saved!"
       else
@@ -223,14 +224,25 @@ class ControllerUnitController < ApplicationController
     end
   end
 
-  def create_form(checked, table_id, reviewed, user_id)
+  def create_form(checked, table_id, reviewed, user_id, submitted, last)
     form = Form.new(
     :checked => checked,
     :lookup => table_id,
     :reviewed => reviewed,
-    :user_id => user_id
+    :user_id => user_id,
+    :submitted => submitted,
+    :last_reminder => last
     )
     return form
+  end
+
+
+  def cu_review
+    if (request.post?) 
+      #get a list of forms that have been submitted, not reviewed, checked (by provider)
+      #for each form
+      #generate the link to the form -- for now, just 
+    end
   end
 
 

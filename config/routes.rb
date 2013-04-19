@@ -1,5 +1,7 @@
 StrategyStroller::Application.routes.draw do
   
+  get "home/index"
+
   ## FOR ACTIVE ADMIN
   ActiveAdmin.routes(self)
 
@@ -10,15 +12,18 @@ StrategyStroller::Application.routes.draw do
   ## FOR FORMTASTIC
   resources :user
 
-  ## FOR OTHER LINKS / PATHS
+  ## FOR MAIN PANELS
+  match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
   match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
   match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
-  match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
+
+  ## FOR OTHER LINKS / PATHS
   match "controller_unit/input_framework" => "controller_unit#set_goal", :as => 'input_framework'
   match "controller_unit/input_framework/goals" => "controller_unit#set_goal", :as => "goals"
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
   match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
+
   match "controller_unit/cu_review" => "controller_unit#cu_review", :as => "cu_review"
 
   #applications path currently defaults to setup_system path so really we only need
@@ -31,13 +36,12 @@ StrategyStroller::Application.routes.draw do
   get "controller_unit/create_users" => "controller_unit#create_users", :as => "create_users"
   get "controller_unit/remove_users" => "controller_unit#remove_users", :as => "remove_users"
 
-  match "forms/form_template" => "forms#form_template", :as => "forms"
-
-
+  match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
+  match "provider/saved" => "provider#saved", :as => "saved"
+  
   ## FOR MAIN PAGE
-  root :to => redirect("/controller_unit/welcome")
-  get "controller_unit/welcome" => 'controller_unit#welcome', :as => 'controller_unit_welcome'
-  get "tester/runRspecTest"
+  root :to => "home#index"
+  match "home/index" => "home#index", :as => "home_index"
 
   ### IGNORE RAILS AUTO GENERATED STUFF BELOW ###
 
