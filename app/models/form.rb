@@ -1,5 +1,5 @@
 class Form < ActiveRecord::Base
-  attr_accessible :checked, :lookup, :reviewed, :user_id, :submitted, :last_reminder
+  attr_accessible :checked, :lookup, :reviewed, :user_id, :submitted, :last_reminder, :entry_id
   
   ## INFO
   GOAL = 1
@@ -45,4 +45,6 @@ class Form < ActiveRecord::Base
     end
   end
 
+  ## Reference to the entry in table for owner
+  validates :entry_id, :presence => true
 end

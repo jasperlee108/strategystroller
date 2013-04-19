@@ -1,5 +1,5 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :indicator_type, :name, :notes, :source, :status, :status_notes, :target, :unit, :goal_id, :user_id
+  attr_accessible :actual, :description, :diff, :dir, :freq, :indicator_type, :name, :notes, :source, :status, :status_notes, :target, :unit, :goal_id, :user_id, :short_name
   
   ### ASSOCIATIONS
   ## parent
@@ -13,6 +13,11 @@ class Indicator < ActiveRecord::Base
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
+
+  ## short name = string[30]
+  validates :short_name,
+  :presence => true,
+  :length => { :maximum => 30 }
 
   # Needs to have Parent
   validates :goal_id,

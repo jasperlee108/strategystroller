@@ -1,0 +1,59 @@
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
+<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
+<li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
+<% end %>
+
+<style>
+input {
+	width:25em;
+}
+textarea {
+	width:50em;
+}
+</style>
+
+<h2>Indicator Form</h2>
+
+<body>
+    <%= flash[:notice] %>
+    <%= flash[:error] %><br>
+
+    <%= semantic_form_for @indicator do |f| %>
+        <%= f.inputs do %>
+
+          <%= f.input :name, :input_html => { :value => @current_indicator.name, :readonly => true }, :label => "Name of Indicator" %>
+          
+          <%= f.input :short_name, :input_html => { :value => @current_indicator.short_name, :readonly => true }, :label => "Short Name of Indicator" %>
+
+          <%= f.input :goal_id, :input_html => { :value => @current_indicator.goal_id, :readonly => true }, :label => "Associated Goal" %>
+
+          <%= f.input :user_id, :input_html => { :value => @current_indicator.user_id, :readonly => true }, :label => "Responsible" %>
+          
+          <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Description of Indicator" %>
+          
+          <%= f.input :source, :required => true, :as => :string, :label => "Source" %>
+          
+          <%= f.input :unit, :required => true, :as => :string, :label => "Unit" %>
+          
+          <%= f.input :freq, :required => true, :as => :select, :collection => ["M", "Q", "HY", "Y"], :label => "Frequency of Acquisition" %>
+          
+          <%= f.input :indicator_type, :required => true, :as => :select, :collection => ["Average", "Cummulative"], :label => "Indicator Type" %>
+          
+          <%= f.input :dir, :required => true, :as => :select, :collection => ["More is Better", "Less is Better"], :label => "Target Direction" %>
+          
+          <%= f.input :actual, :required => true, :as => :number, :label => "Actual Values" %>
+          
+          <%= f.input :target, :required => true, :as => :number, :label => "Target Values" %>
+
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
+          
+          <%= f.input :diff, :input_html => { :value => @current_indicator.diff, :readonly => true }, :label => "Difference" %>
+          
+          <%= f.input :status, :input_html => { :value => @current_indicator.status, :readonly => true }, :label => "Current Status" %>
+          
+          <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes to Current Status" %>
+        <% end %>
+    <%= f.action :submit, :label => "Submit Indicator" %>
+    <% end %>
+</body>

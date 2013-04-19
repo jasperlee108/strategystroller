@@ -58,6 +58,7 @@ namespace :fake_data do
       random_string = (0...5).map{ ( 65+rand(26) ).chr }.join
       goal = Goal.new(
         :name => random_string,
+        :short_name => random_string,
         :need => random_string,
         :justification => random_string,
         :focus => random_string,
@@ -85,6 +86,7 @@ namespace :fake_data do
       random_string = (0...5).map{ ( 65+rand(26) ).chr }.join
       Indicator.new(
         :name => random_string,
+        :short_name => random_string,
         :description => random_string,
         :source => random_string,
         :unit => random_string,
@@ -111,6 +113,7 @@ namespace :fake_data do
       random_string = (0...5).map{ ( 65+rand(26) ).chr }.join
       project = Project.new(
         :name => random_string,
+        :short_name => random_string,
         :description => random_string,
         :startDate => Date.yesterday,
         :endDate => Date.tomorrow,
@@ -144,6 +147,7 @@ namespace :fake_data do
       random_string = (0...5).map{ ( 65+rand(26) ).chr }.join
       activity = Activity.new(
         :name => random_string,
+        :short_name => random_string,
         :description => random_string,
         :phase => phase.sample,
         :startDate => Date.yesterday,

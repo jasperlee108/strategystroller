@@ -14,7 +14,8 @@ describe Goal do
     :status => 0.00,
     :dimension_id => 1,
     :user_id => 1,
-    :prereq => "A Different Goal's Name"
+    :prereq => "A Different Goal's Name",
+    :short_name => "Shorter name"
     )
     return goal
   end
@@ -162,6 +163,24 @@ describe Goal do
     goal = generate()
     goal.prereq = prereq
     assert(!goal.save, "It saves on Prereq longer than 80 characters")
+  end
+
+  ### SHORT NAME
+  
+  ## Short Name is not empty
+  it "should not have empty Short Name" do
+    short_name = ""
+    goal = generate()
+    goal.short_name = short_name
+    assert(!goal.save, "It saves on empty Short Name")
+  end
+  
+  ## Short Name max = 30
+  it "should not have Short Name longer than 30 characters" do
+    short_name = (0...31).map{ ( 65+rand(26) ).chr }.join
+    goal = generate()
+    goal.short_name = short_name
+    assert(!goal.save, "It saves on Short Name longer than 30 characters")
   end
 
   ### EXTRA

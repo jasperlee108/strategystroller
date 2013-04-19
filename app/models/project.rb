@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id, :user_ids, :team
+  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id, :user_ids, :team, :short_name
 
   ### ASSOCIATIONS
   ## parent
@@ -32,6 +32,11 @@ class Project < ActiveRecord::Base
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
+  
+  ## short name = string[30]
+  validates :short_name,
+  :presence => true,
+  :length => { :maximum => 30 }
   
   ## Description = string[600]
   ## Description can be empty

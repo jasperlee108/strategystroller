@@ -22,6 +22,8 @@
         <%= f.inputs do %>
         
           <%= f.input :name, :required => true, :as => :string, :label => "Name of Activity" %>
+          
+          <%= f.input :short_name, :as => :string, :label => "Short Name of Activity" %>
 
           <%= f.input :project_id, :as => :select, :collection => Project.all, :required => true, :label => "Part of Project" %>
           
@@ -29,9 +31,9 @@
           
           <%= f.input :phase, :as => :select, :collection => ["1-Concept completed", "2-Prerequisites fulfilled", "3-Implementation running", "4-Project effective"], :required => true, :label => "Part of Phase" %>
           
-          <%= f.input :startDate, :as => :date_select, :required => true, :label => "Starting Date" %>
+          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Starting Date" %>
           
-          <%= f.input :endDate, :as => :date_select, :required => true, :label => "Ending Date" %>
+          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Ending Date" %>
           
           <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Team Member" %>
           

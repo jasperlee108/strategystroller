@@ -1,0 +1,74 @@
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
+<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
+<li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
+<% end %>
+
+<style>
+input {
+	width:25em;
+}
+textarea {
+	width:50em;
+}
+</style>
+
+<h2>Project Form</h2>
+
+<body>
+    <%= flash[:notice] %>
+    <%= flash[:error] %><br>
+
+    <%= semantic_form_for @project do |f| %>
+        <%= f.inputs do %>
+
+          <%= f.input :name, :input_html => { :value => @current_project.name, :readonly => true }, :label => "Name of Project" %>
+          
+          <%= f.input :short_name, :input_html => { :value => @current_project.short_name, :readonly => true }, :label => "Short Name of Project" %>
+
+          <%= f.input :indicator_id, :input_html => { :value => @current_project.indicator_id, :readonly => true }, :label => "Associated Indicator" %>
+
+          <%= f.input :head_id, :input_html => { :value => @current_project.head_id, :readonly => true }, :label => "Project Manager" %>
+
+          <%= f.input :steer_id, :input_html => { :value => @current_project.steer_id, :readonly => true }, :label => "Steering Committee" %>
+          
+          <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Project Description" %>
+          
+          <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Team Member" %>
+          
+          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Starting Date" %>
+          
+          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Ending Date" %>
+          
+          <%= f.input :duration, :input_html => { :value => @current_project.duration, :readonly => true }, :label => "Project Duration (months)" %>
+          
+          <%= f.input :target_manp, :input_html => { :value => @current_project.target_manp, :readonly => true }, :label => "Planned Employee Resources (days)" %>
+          
+          <%= f.input :target_cost, :input_html => { :value => @current_project.target_cost, :readonly => true }, :label => "Planned External Costs (currency)" %>
+          
+          <%= f.input :inplan, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Included in Financial Plan" %>
+          
+          <%= f.input :compensation, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Compensation Possible" %>
+          
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Notes" %>
+          
+          <%= f.input :actual_manp, :input_html => { :value => @current_project.actual_manp, :readonly => true }, :label => "Actual Employee Resources (days)" %>
+          
+          <%= f.input :actual_cost, :input_html => { :value => @current_project.actual_cost, :readonly => true }, :label => "Actual External Costs (currency)" %>
+          
+          <%= f.input :status_prog, :input_html => { :value => @current_project.status_prog, :readonly => true }, :label => "Current Status by Progress" %>
+          
+          <%= f.input :status_ms, :input_html => { :value => @current_project.status_ms, :readonly => true }, :label => "Current Status by Milestone" %>
+          
+          <%= f.input :status_manp, :input_html => { :value => @current_project.status_manp, :readonly => true }, :label => "Current Status by Manpower Use" %>
+          
+          <%= f.input :status_cost, :input_html => { :value => @current_project.status_cost, :readonly => true }, :label => "Current Status by Cost" %>
+          
+          <%= f.input :status_global, :input_html => { :value => @current_project.status_global, :readonly => true }, :label => "Current Status Overall" %>
+          
+          <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Notes to Current Status" %>
+
+        <% end %>
+    <%= f.action :submit, :label => "Submit Goal" %>
+    <% end %>
+</body>

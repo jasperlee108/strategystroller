@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id, :user_ids, :team
+  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id, :user_ids, :team, :short_name
 
   ### ASSOCIATIONS
   ## parent
@@ -14,6 +14,11 @@ class Activity < ActiveRecord::Base
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
+  
+  ## short name = string[30]
+  validates :short_name,
+  :presence => true,
+  :length => { :maximum => 30 }  
   
   # Needs a Parent
   validates :project_id,

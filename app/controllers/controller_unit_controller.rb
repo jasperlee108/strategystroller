@@ -20,7 +20,7 @@ class ControllerUnitController < ApplicationController
     @goal = Goal.new
     if (request.post?) 
       @goal = Goal.new(params[:goal])
-      form_id = save_form(GOAL, @goal.user_id)
+      form_id = save_form(GOAL, @goal.user_id, @goal.id)
       if (!form_id) #form not saved
         flash[:error] = "ERROR: Goal was not saved!"
       elsif @goal.save #form saved and goal saved
@@ -41,7 +41,7 @@ class ControllerUnitController < ApplicationController
     @indicator = Indicator.new
     if (request.post?) 
       @indicator = Indicator.new(params[:indicator])
-      form_id = save_form(INDICATOR, @indicator.user_id)
+      form_id = save_form(INDICATOR, @indicator.user_id, @indicator.id)
       if (!form_id) #form not saved
         flash[:error] = "ERROR: Indicator was not saved!"
       elsif @indicator.save #form saved and indicator saved
@@ -62,7 +62,7 @@ class ControllerUnitController < ApplicationController
     @project = Project.new
     if (request.post?) 
       @project = Project.new(params[:project])
-      form_id = save_form(PROJECT, @project.head_id)
+      form_id = save_form(PROJECT, @project.head_id, @project.id)
       if (!form_id) #form not saved
         flash[:error] = "ERROR: Project was not saved!"
       elsif @project.save #form saved and project saved
@@ -83,7 +83,7 @@ class ControllerUnitController < ApplicationController
     @activity = Activity.new
     if (request.post?) 
       @activity = Activity.new(params[:activity])
-      form_id = save_form(ACTIVITY, nil)
+      form_id = save_form(ACTIVITY, nil, @activity.id)
       if (!form_id) #form not saved
         flash[:error] = "ERROR: Activity was not saved!"
       elsif @activity.save #form saved and activity saved
@@ -249,10 +249,10 @@ class ControllerUnitController < ApplicationController
          end
     end
 
-  def save_form(table_id, user_id)
+  def save_form(table_id, user_id, entry_id)
     default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
     if default.include? table_id
-        @form = create_form(false, table_id, false, user_id, false, Date.current)
+      @form = create_form(false, table_id, false, user_id, false, Date.current, entry_id)
       if @form.save
         return @form.id
       else
@@ -264,14 +264,15 @@ class ControllerUnitController < ApplicationController
     end
   end
 
-  def create_form(checked, table_id, reviewed, user_id, submitted, last)
+  def create_form(checked, table_id, reviewed, user_id, submitted, last, entry_id)
     form = Form.new(
     :checked => checked,
     :lookup => table_id,
     :reviewed => reviewed,
     :user_id => user_id,
     :submitted => submitted,
-    :last_reminder => last
+    :last_reminder => last,
+    :entry_id => entry_id
     )
     return form
   end

@@ -20,6 +20,8 @@
         <%= f.inputs do %>
         
           <%= f.input :name, :as => :string, :label => "Name of Project" %>
+          
+          <%= f.input :short_name, :as => :string, :label => "Short Name of Project" %>
 
           <%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :required => true, :label => "Associated Indicator" %>
 
@@ -31,9 +33,9 @@
           
           <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Team Member" %>
           
-          <%= f.input :startDate, :as => :date_select, :required => true, :label => "Starting Date" %>
+          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Starting Date" %>
           
-          <%= f.input :endDate, :as => :date_select, :required => true, :label => "Ending Date" %>
+          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Ending Date" %>
           
           <%= f.input :duration, :as => :number, :required => true, :label => "Project Duration (months)" %>
           
@@ -50,8 +52,6 @@
           <%= f.input :actual_manp, :as => :number, :required => true, :label => "Actual Employee Resources (days)" %>
           
           <%= f.input :actual_cost, :as => :number, :required => true, :label => "Actual External Costs (currency)" %>
-          
-          <%= f.input :status_prog, :required => true, :as => :number, :label => "Current Status by Progress" %>
           
           <%= f.input :status_prog, :required => true, :as => :number, :label => "Current Status by Progress" %>
           
