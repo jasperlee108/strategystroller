@@ -1,12 +1,6 @@
 class ProviderController < ApplicationController
   before_filter :authenticate_user!
   
-  ## INFO
-  GOAL = 1
-  INDICATOR = 2
-  PROJECT = 3
-  ACTIVITY = 4
-  
   def provider_panel
     @user = current_user
   end
@@ -21,6 +15,16 @@ class ProviderController < ApplicationController
    
   def goal_define
     @user = current_user
+    @goal = Goal.new
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_goal = Goal.find_by_id(entry_id)
+    if request.post?
+      @current_form.update_attributes(:checked => true)
+      @current_goal.update_attributes(params[:goal])
+      redirect_to unchecked_path
+    end
   end
   
   def indicator_define
@@ -41,7 +45,7 @@ class ProviderController < ApplicationController
   
   def unchecked
     @user = current_user
-    @forms = Form.find_all_by_user_id(@user.id)
+    @forms = Form.where(:checked => false).find_all_by_user_id(@user.id)
   end
   
   def saved
