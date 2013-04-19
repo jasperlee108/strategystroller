@@ -151,7 +151,7 @@ class Project < ActiveRecord::Base
     elsif (Date.parse(endDate.to_s) rescue ArgumentError) == ArgumentError
       errors.add(:endDate, 'must be a valid date')
     elsif startDate > endDate
-      errors.add(:endDate, 'must be before start date')
+      errors.add(:endDate, 'must be after start date')
     end
   end
 
