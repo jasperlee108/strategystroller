@@ -30,6 +30,7 @@ StrategyStroller::Application.routes.draw do
   match "provider/saved" => "provider#saved", :as => "saved"
   match "provider/goal_define" => "provider#goal_define", :as => 'goal_define'
   match "provider/indicator_define" => "provider#indicator_define", :as => 'indicator_define'
+  match "provider/project_define" => "provider#project_define", :as => 'project_define'
   match "provider/activity_define" => "provider#activity_define", :as => 'activity_define'
   match "provider/indicator_update" => "provider#indicator_update", :as => 'indicator_update'
   match "provider/project_update" => "provider#project_update", :as => 'project_update'

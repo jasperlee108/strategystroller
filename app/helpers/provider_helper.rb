@@ -27,9 +27,9 @@ module ProviderHelper
     elsif table_id == INDICATOR
       return indicator_define_path(:entry_id => entry_id, :form_id => form_id)
     elsif table_id == PROJECT
-      return indicator_define_path(:entry_id => entry_id, :form_id => form_id)
+      return project_define_path(:entry_id => entry_id, :form_id => form_id)
     elsif table_id == ACTIVITY
-      return indicator_define_path(:entry_id => entry_id, :form_id => form_id)
+      return activity_define_path(:entry_id => entry_id, :form_id => form_id)
     else
       ## ERROR: Should not reach here!
       return provider_panel_path
