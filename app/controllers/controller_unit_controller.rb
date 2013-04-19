@@ -11,7 +11,7 @@ class ControllerUnitController < ApplicationController
   PROJECT = 3
   ACTIVITY = 4
 
-  def welcome
+  def controller_panel
     @user = current_user
   end
   

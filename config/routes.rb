@@ -40,8 +40,7 @@ StrategyStroller::Application.routes.draw do
   match "provider/saved" => "provider#saved", :as => "saved"
   
   ## FOR MAIN PAGE
-  root :to => redirect("/controller_unit/welcome")
-  match "controller_unit/welcome" => 'controller_unit#welcome', :as => 'controller_unit_welcome'
+  root :to => "home#index"
   match "home/index" => "home#index", :as => "home_index"
 
   ### IGNORE RAILS AUTO GENERATED STUFF BELOW ###
