@@ -236,4 +236,12 @@ class ControllerUnitController < ApplicationController
     end
   end
 
+  def activity_list
+    @activities = Activity.all
+  end
+
+  def view_activity
+    @activity = Activity.find_by_id(params[:activity_id])
+  end
+
 end

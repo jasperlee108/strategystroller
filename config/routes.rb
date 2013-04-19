@@ -27,6 +27,8 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
   match "controller_unit/cu_review" => "controller_unit#cu_review", :as => "cu_review"
+  match "controller_unit/activity_list" => "controller_unit#activity_list", :as => "activity_list"
+  match "controller_unit/view_activity" => "controller_unit#view_activity", :as => "activity"
   
   # Provider
   match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
