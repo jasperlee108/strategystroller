@@ -1,0 +1,58 @@
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
+<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
+<li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
+<% end %>
+
+<style>
+input {
+	width:25em;
+}
+textarea {
+	width:50em;
+}
+</style>
+
+<h2>Activity Form</h2>
+
+<body>
+    <%= flash[:notice] %>
+    <%= flash[:error] %><br>
+
+    <%= semantic_form_for @activity do |f| %>
+        <%= f.inputs do %>
+
+          <%= f.input :name, :input_html => { :value => @current_activity.name, :readonly => true }, :label => "Name of Activity" %>
+          
+          <%= f.input :short_name, :input_html => { :value => @current_activity.short_name, :readonly => true }, :label => "Short Name of Activity" %>
+
+          <%= f.input :project_id, :input_html => { :value => @current_activity.project_id, :readonly => true }, :label => "Part of Project" %>
+          
+          <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Activity Description" %>
+          
+          <%= f.input :phase, :input_html => { :value => @current_activity.phase, :readonly => true }, :label => "Part of Phase" %>
+          
+          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Starting Date" %>
+          
+          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Ending Date" %>
+          
+          <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Team Member" %>
+          
+          <%= f.input :targetManp, :input_html => { :value => @current_activity.targetManp, :readonly => true }, :label => "Planned Employee Resources (days)" %>
+          
+          <%= f.input :targetCost, :input_html => { :value => @current_activity.targetCost, :readonly => true }, :label => "Planned External Costs (currency)" %>
+          
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Notes" %>
+          
+          <%= f.input :actualManp, :input_html => { :value => @current_activity.actualManp, :readonly => true }, :label => "Actual Employee Resources (days)" %>
+          
+          <%= f.input :actualCost, :input_html => { :value => @current_activity.actualCost, :readonly => true }, :label => "Actual External Costs (currency)" %>
+          
+          <%= f.input :actualProg, :input_html => { :value => @current_activity.actualProg, :readonly => true }, :label => "Status of Activity" %>
+          
+          <%= f.input :statusNotes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Notes on Status" %>
+
+        <% end %>
+    <%= f.action :submit, :label => "Submit Goal" %>
+    <% end %>
+</body>

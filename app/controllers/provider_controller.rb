@@ -63,6 +63,18 @@ class ProviderController < ApplicationController
   
   def activity_define
     @user = current_user
+    @activity = Activity.new
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_activity = Activity.find_by_id(entry_id)
+    ## The following if is still faulty
+    ## On success, it is redirecting to CU panel!
+    if (request.post?)
+      @current_form.update_attributes(:checked => true)
+      @current_activity.update_attributes(params[:activity])
+      redirect_to unchecked_path
+    end
   end
   
   def indicator_update
