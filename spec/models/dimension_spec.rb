@@ -11,6 +11,36 @@ describe Dimension do
     )
     return dimension
   end
+
+  def gen_with_children
+    dimension = generate()
+    goal1 = Goal.new(
+        :name => "Name of Goal",
+        :need => "Call for action",
+        :justification => "Justification of specific goal",
+        :focus => "Strategic approach",
+        :notes => "Notes",
+        :status => 0.23,
+        :dimension_id => 1,
+        :user_id => 1,
+        :prereq => "A Different Goal's Name"
+    )
+    goal2 = Goal.new(
+        :name => "Name of Goal2",
+        :need => "Call for action2",
+        :justification => "Justification of specific goal2",
+        :focus => "Strategic approach2",
+        :notes => "Notes2",
+        :status => 0.43,
+        :dimension_id => 23,
+        :user_id => 1,
+        :prereq => "A Different Goal's Name2"
+    )
+    goal1.save()
+    goal2.save()
+    return dimension
+  end
+
   
   ## Default
   it "should pass assert true sanity test" do
@@ -59,6 +89,22 @@ describe Dimension do
     assert(!dimension.save, "It saves on Status less than 0")
   end
   
+  ### Status Update/calculation
+
+  it 'can update its status using its children' do
+    dimension = gen_with_children()
+    dimension.save()
+    dimension_in_table = Dimension.find(1)
+    dimension_in_table.update_status()
+    assert(dimension_in_table.status == 0.23, "dimension status value was #{dimension_in_table.status}, not 0.23 as expected")
+  end
+
+  it 'can update its even if it has no children' do
+    dimension = generate()
+    dimension.save()
+    dimension_in_table = Dimension.find(1)
+    dimension_in_table.update_status()
+    assert(dimension_in_table.status == 0.0, "dimension status value was #{dimension_in_table.status}, not 0.0 as expected")
   end
 
   ### EXTRA
@@ -68,5 +114,6 @@ describe Dimension do
   ## Source: https://sites.google.com/a/eecs.berkeley.edu/cs169-sp13/project/setting-up-a-deployment-site
   after(:each) do
     Dimension.delete_all
+    Goal.delete_all
   end
 end

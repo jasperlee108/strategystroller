@@ -19,4 +19,12 @@ class Dimension < ActiveRecord::Base
     :greater_than_or_equal_to => 0
   }
   
+  def update_status
+    status = 0.00
+    self.goals.each do |goal|
+      status += goal.status
+    end
+    self.status = status
+  end
+  
 end
