@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419055157) do
+ActiveRecord::Schema.define(:version => 20130419074740) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20130419055157) do
     t.integer  "goal_id"
     t.integer  "user_id"
     t.float    "contributing_projects_status"
+    t.float    "prognosis"
   end
 
   create_table "projects", :force => true do |t|

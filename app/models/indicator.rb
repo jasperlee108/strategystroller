@@ -1,5 +1,5 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :indicator_type, :name, :notes, :source, :contributing_projects_status, :status, :status_notes, :target, :unit, :goal_id, :user_id
+  attr_accessible :actual, :description, :diff, :dir, :freq, :indicator_type, :name, :notes, :source, :contributing_projects_status, :status, :status_notes, :prognosis, :target, :unit, :goal_id, :user_id
   
   ### ASSOCIATIONS
   ## parent
@@ -86,6 +86,14 @@ class Indicator < ActiveRecord::Base
     :numericality => {
       :greater_than_or_equal_to => 0
       }
+
+  ## prognosis = long integer
+  ## 0.00 <= prognosis
+  validates :prognosis,
+    :presence => true,
+    :numericality => {
+        :greater_than_or_equal_to => 0
+        }
 
   ## Status Notes = string[600]
   ## Notes can be empty

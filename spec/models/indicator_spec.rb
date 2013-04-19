@@ -12,6 +12,7 @@ describe Indicator do
     :unit => "Einheit",
     :freq => "hy",
     :indicator_type => "average",
+    :prognosis => 65.43,
     :dir => "more is better",
     :actual => 5.5,
     :target => 10.5,
@@ -291,6 +292,32 @@ describe Indicator do
     indicator = generate()
     indicator.contributing_projects_status = contributing_projects_status
     assert(!indicator.save, "It saves on contributing_projects_status = " + contributing_projects_status.to_s)
+  end
+
+  ### prognosis
+
+  ## prognosis is not empty
+  it "should not have empty prognosis" do
+    prognosis = nil
+    indicator = generate()
+    indicator.prognosis = prognosis
+    assert(!indicator.save, "It saves on empty prognosis")
+  end
+
+  ## prognosis = float
+  it "should have prognosis as a float" do
+    prognosis = "random"
+    indicator = generate()
+    indicator.prognosis = prognosis
+    assert(!indicator.save, "It saves on prognosis = " + prognosis.to_s)
+  end
+
+  ## prognosis = float >= 0
+  it "should have prognosis as a float >= 0" do
+    prognosis = -5
+    indicator = generate()
+    indicator.prognosis = prognosis
+    assert(!indicator.save, "It saves on prognosis = " + prognosis.to_s)
   end
 
   ### STATUS NOTES
