@@ -261,6 +261,7 @@ class ControllerUnitController < ApplicationController
 
   def cu_review
     if (request.post?) 
+      Form.find_by_checked_and_reviewed_and_submitted(true, false, true)
       #get a list of forms that have been submitted, not reviewed, checked (by provider)
       #for each form
       #generate the link to the form -- for now, just 
