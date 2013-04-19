@@ -20,17 +20,19 @@ class ControllerUnitController < ApplicationController
     @goal = Goal.new
     if (request.post?) 
       @goal = Goal.new(params[:goal])
-      form_id = save_form(GOAL, @goal.user_id, @goal.id)
-      if (!form_id) #form not saved
-        flash[:error] = "ERROR: Goal was not saved!"
-      elsif @goal.save #form saved and goal saved
-        flash[:notice] = "Goal successfully saved!"
-        @user_obj = User.find_by_id(@goal.user_id)
-        # Need to populate a form
-        @form_url = encode_url(form_id)
-        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
-      else #form saved but goal not saved, so delete form
-        Form.delete(Form.find_by_id(form_id))
+      if @goal.save #goal saved
+        form_id = save_form(GOAL, @goal.user_id, @goal.id)
+        if (!form_id) #form not saved
+          Goal.delete(@goal) # rollback: delete goal
+          flash[:error] = "ERROR: Goal was not saved!"
+        else
+          @user_obj = User.find_by_id(@goal.user_id)
+          # Need to populate a form
+          @form_url = encode_url(form_id)
+          FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+          flash[:notice] = "Goal successfully saved!"
+        end
+      else #goal not saved
         flash[:error] = "ERROR: Goal was not saved!"
       end
       redirect_to goals_path
@@ -277,14 +279,73 @@ class ControllerUnitController < ApplicationController
     return form
   end
 
-
   def cu_review
-    @urls = []
-    forms = Form.find_all_by_checked_and_reviewed_and_submitted(true, false, true)
-    forms.each do |form| 
-      @urls << encode_url(form.id)
-    end
+    @user = current_user
+    @forms = Form.where(:checked => true, :reviewed => false, :submitted => true)
   end
 
+def goal_check
+  @user = current_user
+  @goal = Goal.new
+  form_id = params[:form_id]
+  entry_id = params[:entry_id]
+  @current_form = Form.find_by_id(form_id)
+  @current_goal = Goal.find_by_id(entry_id)
+  ## The following if is still faulty
+  ## On success, it is redirecting to CU panel!
+  if (request.post?)
+    @current_form.update_attributes(:reviewed => true)
+    @current_goal.update_attributes(params[:goal])
+    redirect_to cu_review
+  end
+end
+
+def indicator_check
+  @user = current_user
+  @indicator = Indicator.new
+  form_id = params[:form_id]
+  entry_id = params[:entry_id]
+  @current_form = Form.find_by_id(form_id)
+  @current_indicator = Indicator.find_by_id(entry_id)
+  ## The following if is still faulty
+  ## On success, it is redirecting to CU panel!
+  if (request.post?)
+    @current_form.update_attributes(:reviewed => true)
+    @current_goal.update_attributes(params[:indicator])
+    redirect_to cu_review
+  end
+end
+
+def project_check
+  @user = current_user
+  @project = Project.new
+  form_id = params[:form_id]
+  entry_id = params[:entry_id]
+  @current_form = Form.find_by_id(form_id)
+  @current_project = Project.find_by_id(entry_id)
+  ## The following if is still faulty
+  ## On success, it is redirecting to CU panel!
+  if (request.post?)
+    @current_form.update_attributes(:reviewed => true)
+    @current_goal.update_attributes(params[:project])
+    redirect_to cu_review
+  end
+end
+
+def activity_check
+  @user = current_user
+  @activity = Activity.new
+  form_id = params[:form_id]
+  entry_id = params[:entry_id]
+  @current_form = Form.find_by_id(form_id)
+  @current_activity = Activity.find_by_id(entry_id)
+  ## The following if is still faulty
+  ## On success, it is redirecting to CU panel!
+  if (request.post?)
+    @current_form.update_attributes(:reviewed => true)
+    @current_goal.update_attributes(params[:activity])
+    redirect_to cu_review
+  end
+end
 
 end

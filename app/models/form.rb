@@ -45,6 +45,4 @@ class Form < ActiveRecord::Base
     end
   end
 
-  ## Reference to the entry in table for owner
-  validates :entry_id, :presence => true
 end
