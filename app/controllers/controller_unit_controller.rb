@@ -102,6 +102,9 @@ class ControllerUnitController < ApplicationController
         @time_horizon = Application::TIME_HORIZON
          if (request.post?) 
             @application = Application.new(params[:application])
+            @user_obj = User.new(:username=>"username2342")
+            @form_url = "google.com"
+            FormMailer.form_email(@user_obj,@form_url).deliver
             if @application.save
                 flash[:notice] = "Setup successfully saved!"
             else
@@ -229,5 +232,6 @@ class ControllerUnitController < ApplicationController
     )
     return form
   end
+
 
 end
