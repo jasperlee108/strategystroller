@@ -160,4 +160,23 @@ class Project < ActiveRecord::Base
     end
   end
 
+  # Calculates actual cost from the activities claiming this project as a parent.
+  # In the even there are no activities, sets this projects' cost to 0.
+  def update_actual_cost
+    cost = 0.00
+    self.activities.each do |activity|
+      cost += activity.actualCost
+    end
+    self.actual_cost = cost
+  end
+
+  def update_actual_manp
+    manp = 0
+    self.activities.each do |activity|
+      manp += activity.actualManp
+    end
+    self.actual_manp = manp
+  end
+
+
 end

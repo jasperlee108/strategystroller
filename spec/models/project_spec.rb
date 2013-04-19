@@ -32,6 +32,46 @@ describe Project do
     )
     return project
   end
+
+  def gen_with_children
+    project = generate()
+    activity1 = Activity.new(
+        :name => "Aktivitat",
+        :description => "Wall of Text",
+        :phase => "Projektphasen",
+        :startDate => Date.new(2013,03,26),
+        :endDate => Date.new(2013,03,27),
+        :targetManp => 20,
+        :targetCost => 50.50,
+        :notes => "Another Wall of Text",
+        :actualManp => 15,
+        :actualCost => 25.25,
+        :actualProg => "In Progress",
+        :statusNotes => "A Different Wall of Text",
+        :project_id => 1,
+        :team => "James Bond, Andy Warhol"
+    )
+    activity2 = Activity.new(
+        :name => "Aktivitat2",
+        :description => "Wall of Text2",
+        :phase => "Projektphasen2",
+        :startDate => Date.new(2013,03,26),
+        :endDate => Date.new(2013,03,27),
+        :targetManp => 20,
+        :targetCost => 50.50,
+        :notes => "Another Wall of Text",
+        :actualManp => 3,
+        :actualCost => 9.50,
+        :actualProg => "In Progress",
+        :statusNotes => "A Different Wall of Text",
+        :project_id => 2,
+        :team => "James Warhol"
+    )
+    activity1.save()
+    activity2.save()
+    project.actual_cost = 0
+    return project
+  end
   
   ## Default
   it "should pass assert true sanity test" do
@@ -510,6 +550,40 @@ describe Project do
     assert(!project.save, "It saves on Team longer than 600 characters")
   end
 
+  ### update_actual_cost
+  it 'should update its cost using only its children' do
+    project = gen_with_children()
+    project.save()
+    project_in_table = Project.find(1)
+    project_in_table.update_actual_cost()
+    assert(project_in_table.actual_cost == 25.25, "Project's cost = #{project_in_table.actual_cost}, not 25.25 as it should.")
+  end
+
+  it 'can update it\'s cost even if it has no children' do
+    project = generate()
+    project.save()
+    project_in_table = Project.find(1)
+    project_in_table.update_actual_cost()
+    assert(project_in_table.actual_cost == 0.0, "Project's cost = #{project_in_table.actual_cost}, not 0.0 as it should.")
+  end
+
+  ### update_actual_manp
+  it 'should update its manp using only its children' do
+    project = gen_with_children()
+    project.save()
+    project_in_table = Project.find(1)
+    project_in_table.update_actual_manp()
+    assert(project_in_table.actual_manp == 15, "Project's manp = #{project_in_table.actual_manp}, not 15 as it should.")
+  end
+
+  it 'can update it\'s manp even if it has no children' do
+    project = generate()
+    project.save()
+    project_in_table = Project.find(1)
+    project_in_table.update_actual_manp()
+    assert(project_in_table.actual_manp == 0.0, "Project's manp = #{project_in_table.actual_manp}, not 0 as it should.")
+  end
+
   ### EXTRA
   
   ## Running Rspec remotely (RoR)
@@ -517,5 +591,6 @@ describe Project do
   ## Source: https://sites.google.com/a/eecs.berkeley.edu/cs169-sp13/project/setting-up-a-deployment-site
   after(:each) do
     Project.delete_all
+    Activity.delete_all
   end
 end
