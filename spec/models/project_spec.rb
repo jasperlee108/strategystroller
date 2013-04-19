@@ -370,14 +370,6 @@ describe Project do
     assert(!project.save, "It saves on StatusProg = " + statusProg.to_s)
   end
 
-  ## StatusProg = float <= 100
-  it "should have StatusProg as a float <= 100" do
-    statusProg = 100.50
-    project = generate()
-    project.status_prog = statusProg
-    assert(!project.save, "It saves on StatusProg = " + statusProg.to_s)
-  end
-
   ### STATUS MILESTONE
   
   ## StatusMs is not empty
@@ -399,14 +391,6 @@ describe Project do
   ## StatusMs = integer >= 0
   it "should have StatusMs as a integer >= 0" do
     statusMs = -5
-    project = generate()
-    project.status_ms = statusMs
-    assert(!project.save, "It saves on StatusMs = " + statusMs.to_s)
-  end
-
-  ## StatusMs = integer <= 100
-  it "should have StatusMs as a integer <= 100" do
-    statusMs = 100.50
     project = generate()
     project.status_ms = statusMs
     assert(!project.save, "It saves on StatusMs = " + statusMs.to_s)
@@ -438,14 +422,6 @@ describe Project do
     assert(!project.save, "It saves on StatusManp = " + statusManp.to_s)
   end
 
-  ## StatusManp = integer <= 100
-  it "should have StatusManp as a integer <= 100" do
-    statusManp = 100.50
-    project = generate()
-    project.status_manp = statusManp
-    assert(!project.save, "It saves on StatusManp = " + statusManp.to_s)
-  end
-
   ### STATUS COST
   
   ## StatusCost is not empty
@@ -472,14 +448,6 @@ describe Project do
     assert(!project.save, "It saves on StatusCost = " + statusCost.to_s)
   end
 
-  ## StatusCost = float <= 100
-  it "should have StatusCost as a float <= 100" do
-    statusCost = 100.50
-    project = generate()
-    project.status_cost = statusCost
-    assert(!project.save, "It saves on StatusCost = " + statusCost.to_s)
-  end
-
   ### STATUS GLOBAL
   
   ## StatusGlobal is not empty
@@ -501,14 +469,6 @@ describe Project do
   ## StatusGlobal = float >= 0
   it "should have StatusGlobal as a float >= 0" do
     statusGlobal = -5
-    project = generate()
-    project.status_global = statusGlobal
-    assert(!project.save, "It saves on StatusGlobal = " + statusGlobal.to_s)
-  end
-
-  ## StatusGlobal = float <= 100
-  it "should have StatusGlobal as a float <= 100" do
-    statusGlobal = 100.50
     project = generate()
     project.status_global = statusGlobal
     assert(!project.save, "It saves on StatusGlobal = " + statusGlobal.to_s)

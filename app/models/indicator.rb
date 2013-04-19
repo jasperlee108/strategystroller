@@ -72,12 +72,11 @@ class Indicator < ActiveRecord::Base
   :allow_blank => true
   
   ## Status = long integer
-  ## 0.00 <= Status <= 100.00
+  ## 0.00 <= Status
   validates :status,
   :presence => true,
   :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
+    :greater_than_or_equal_to => 0
   }
 
   ## Status Notes = string[600]

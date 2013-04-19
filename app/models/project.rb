@@ -86,48 +86,43 @@ class Project < ActiveRecord::Base
   }
   
   ## Status_prog = float
-  ## 0.00 <= status_prog <= 100.00
+  ## 0.00 <= status_prog
   validates :status_prog,
   :presence => true,
   :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
+    :greater_than_or_equal_to => 0
   }
   
   ## Status_ms = long integer
-  ## 0.00 <= status_ms <= 100.00
+  ## 0.00 <= status_ms
   validates :status_ms,
   :presence => true,
   :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
+    :greater_than_or_equal_to => 0
   }
   
   ## Status_manp = long integer
-  ## 0.00 <= status_manp <= 100.00
+  ## 0.00 <= status_manp
   validates :status_manp,
   :presence => true,
   :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
+    :greater_than_or_equal_to => 0
   }
 
   ## Status_cost = long integer
-  ## 0.00 <= status_cost <= 100.00
+  ## 0.00 <= status_cost
   validates :status_cost,
   :presence => true,
   :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
+    :greater_than_or_equal_to => 0
   }
 
   ## Status_global = float
-  ## 0.00 <= status_global <= 100.00
+  ## 0.00 <= status_global
   validates :status_global,
   :presence => true,
   :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
+    :greater_than_or_equal_to => 0
   }
   
   ## Status_notes = string[600]

@@ -266,14 +266,6 @@ describe Indicator do
     assert(!indicator.save, "It saves on Status = " + status.to_s)
   end
 
-  ## Status = float <= 100
-  it "should have Status as a float <= 100" do
-    status = 100.50
-    indicator = generate()
-    indicator.status = status
-    assert(!indicator.save, "It saves on Status = " + status.to_s)
-  end
-
   ### STATUS NOTES
   
   ## Status Notes can be empty

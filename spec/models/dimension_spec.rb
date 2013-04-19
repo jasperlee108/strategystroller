@@ -59,12 +59,6 @@ describe Dimension do
     assert(!dimension.save, "It saves on Status less than 0")
   end
   
-  ## Status <= 100
-  it "should have Status of at most 100" do
-    status = 100.50
-    dimension = generate()
-    dimension.status = status
-    assert(!dimension.save, "It saves on Status more than 100")    
   end
 
   ### EXTRA

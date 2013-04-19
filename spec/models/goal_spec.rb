@@ -138,14 +138,6 @@ describe Goal do
     assert(!goal.save, "It saves on Status less than 0")
   end
   
-  ## Status <= 100
-  it "should have Status of at most 100" do
-    status = 100.50
-    goal = generate()
-    goal.status = status
-    assert(!goal.save, "It saves on Status more than 100")    
-  end
-
   ### PREREQUISITE
 
   ## Prereq can be empty
