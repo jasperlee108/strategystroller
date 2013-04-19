@@ -20,13 +20,15 @@ class ControllerUnitController < ApplicationController
     @goal = Goal.new
     if (request.post?) 
       @goal = Goal.new(params[:goal])
-      result = save_form(GOAL, @goal.user_id)
-      if result.include? "ERROR"
-        flash[:error] = result + ' ' + "ERROR: Goal was not saved!"
-      elsif @goal.save
-        flash[:notice] = result + ' ' + " Goal successfully saved!"
+      if @goal.save
+        result = save_form(GOAL, @goal.user_id, @goal.id)
+        if result.include? "ERROR"
+          flash[:error] = result
+        else
+          flash[:notice] = "Goal successfully saved!"
+        end
       else
-        flash[:error] = result + ' ' + "ERROR: Goal was not saved!"
+        flash[:error] = "ERROR: Goal was not saved!"
       end
       redirect_to goals_path
     end
@@ -36,13 +38,15 @@ class ControllerUnitController < ApplicationController
     @indicator = Indicator.new
     if (request.post?) 
       @indicator = Indicator.new(params[:indicator])
-      result = save_form(INDICATOR, @indicator.user_id)
-      if result.include? "ERROR"
-        flash[:error] = result + ' ' + "ERROR: Indicator was not saved!"
-      elsif @indicator.save
-        flash[:notice] = result + ' ' + " Indicator successfully saved!"
+      if @indicator.save
+        result = save_form(INDICATOR, @indicator.user_id, @indicator.id)
+        if result.include? "ERROR"
+          flash[:error] = result
+        else
+          flash[:notice] = "Indicator successfully saved!"
+        end
       else
-        flash[:error] = result + ' ' + "ERROR: Indicator was not saved!"
+        flash[:error] = "ERROR: Indicator was not saved!"
       end
       redirect_to indicators_path
     end
@@ -52,13 +56,15 @@ class ControllerUnitController < ApplicationController
     @project = Project.new
     if (request.post?) 
       @project = Project.new(params[:project])
-      result = save_form(PROJECT, @project.user_id)
-      if result.include? "ERROR"
-        flash[:error] = result + ' ' + "ERROR: Project was not saved!"
-      elsif @project.save
-        flash[:notice] = result + ' ' + " Project successfully saved!"
+      if @project.save
+        result = save_form(PROJECT, @project.user_id, @project.id)
+        if result.include? "ERROR"
+          flash[:error] = result
+        else
+          flash[:notice] = "Project successfully saved!"
+        end
       else
-        flash[:error] = result + ' ' + "ERROR: Project was not saved!"
+        flash[:error] = "ERROR: Project was not saved!"
       end
       redirect_to projects_path
     end
@@ -68,13 +74,15 @@ class ControllerUnitController < ApplicationController
     @activity = Activity.new
     if (request.post?) 
       @activity = Activity.new(params[:activity])
-      result = save_form(ACTIVITY, @activity.user_id)
-      if result.include? "ERROR"
-        flash[:error] = result + ' ' + "ERROR: Activity was not saved!"
-      elsif @activity.save
-        flash[:notice] = result + ' ' + " Activity successfully saved!"
+      if @activity.save
+        result = save_form(ACTIVITY, @activity.user_id, @activity.id)
+        if result.include? "ERROR"
+          flash[:error] = result
+        else
+          flash[:notice] = "Activity successfully saved!"
+        end
       else
-        flash[:error] = result + ' ' + "ERROR: Activity was not saved!"
+        flash[:error] = "ERROR: Activity was not saved!"
       end
       redirect_to activities_path
     end
@@ -231,10 +239,10 @@ class ControllerUnitController < ApplicationController
          end
     end
 
-  def save_form(table_id, user_id)
+  def save_form(table_id, user_id, entry_id)
     default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
     if default.include? table_id
-      @form = create_form(false, table_id, false, user_id, false, Date.current)
+      @form = create_form(false, table_id, false, user_id, false, Date.current, entry_id)
       if @form.save
         return "Form successfully saved!"
       else
@@ -246,14 +254,15 @@ class ControllerUnitController < ApplicationController
     end
   end
 
-  def create_form(checked, table_id, reviewed, user_id, submitted, last)
+  def create_form(checked, table_id, reviewed, user_id, submitted, last, entry_id)
     form = Form.new(
     :checked => checked,
     :lookup => table_id,
     :reviewed => reviewed,
     :user_id => user_id,
     :submitted => submitted,
-    :last_reminder => last
+    :last_reminder => last,
+    :entry_id => entry_id
     )
     return form
   end

@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20130419074501) do
     t.datetime "updated_at",    :null => false
     t.boolean  "submitted"
     t.date     "last_reminder"
+    t.integer  "entry_id"
   end
 
   create_table "goals", :force => true do |t|
