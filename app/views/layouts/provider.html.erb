@@ -57,13 +57,10 @@
               <li class="nav-header">Navigation</li>
               <li class="active"><a href="/home/index">Home</a></li>
               <li><a href="/admin/login">Admin</a></li>
-              <li><a href="#">Define</a></li>
-              <li><a href="#">Update</a></li>
+              <li><a href="<%= url_for(:action => 'define_page', :controller => 'provider') %>">Define</a></li>
+              <li><a href="<%= url_for(:action => 'update_page', :controller => 'provider') %>">Update</a></li>
               <li class="nav-header">Context Menu</li>
-              <li><a href="#">Goal</a></li>
-              <li><a href="#">Indicator</a></li>
-              <li><a href="#">Project</a></li>
-              <li><a href="#">Activity</a></li>
+              <%= yield :context_menu %>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
