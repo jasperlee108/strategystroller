@@ -234,7 +234,7 @@ class ControllerUnitController < ApplicationController
   def save_form(table_id, user_id)
     default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
     if default.include? table_id
-      @form = create_form(false, table_id, false, user_id, false, Date.today)
+      @form = create_form(false, table_id, false, user_id, false, Date.current)
       if @form.save
         return "Form successfully saved!"
       else
