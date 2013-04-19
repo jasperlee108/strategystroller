@@ -14,7 +14,6 @@ class ProviderController < ApplicationController
   end
    
   def goal_define
-    @user = current_user
     @goal = Goal.new
     form_id = params[:form_id]
     entry_id = params[:entry_id]
@@ -30,7 +29,6 @@ class ProviderController < ApplicationController
   end
   
   def indicator_define
-    @user = current_user
     @indicator = Indicator.new
     form_id = params[:form_id]
     entry_id = params[:entry_id]
@@ -46,7 +44,6 @@ class ProviderController < ApplicationController
   end
   
   def project_define
-    @user = current_user
     @project = Project.new
     form_id = params[:form_id]
     entry_id = params[:entry_id]
@@ -64,16 +61,16 @@ class ProviderController < ApplicationController
   def activity_define
     @user = current_user
     @activity = Activity.new
-    form_id = params[:form_id]
-    entry_id = params[:entry_id]
-    @current_form = Form.find_by_id(form_id)
-    @current_activity = Activity.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
     if (request.post?)
-      @current_form.update_attributes(:checked => true)
-      @current_activity.update_attributes(params[:activity])
-      redirect_to unchecked_path
+      # NOTE: activity don't need to be in form table
+      # We can directly do lookup on activity table
+      @activity = Activity.new(params[:activity])
+      if @activity.save # activity saved
+          flash[:notice] = "Activity successfully saved!"
+      else # activity not saved
+        flash[:error] = "ERROR: Activity was not saved!"
+      end
+      redirect_to activities_path
     end
   end
   
@@ -94,4 +91,5 @@ class ProviderController < ApplicationController
     @user = current_user
     # do something here
   end
+  
 end

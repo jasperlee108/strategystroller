@@ -20,18 +20,21 @@ StrategyStroller::Application.routes.draw do
   match "provider/provider_panel/update" => 'provider#update_page', :as => 'provider_panel_update'
 
   ## FOR OTHER LINKS / PATHS
+  
+  # Controller
   match "controller_unit/input_framework" => "controller_unit#set_goal", :as => 'input_framework'
   match "controller_unit/input_framework/goals" => "controller_unit#set_goal", :as => "goals"
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
-  match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
   match "controller_unit/cu_review" => "controller_unit#cu_review", :as => "cu_review"
+  
+  # Provider
   match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
   match "provider/saved" => "provider#saved", :as => "saved"
   match "provider/goal_define" => "provider#goal_define", :as => 'goal_define'
   match "provider/indicator_define" => "provider#indicator_define", :as => 'indicator_define'
   match "provider/project_define" => "provider#project_define", :as => 'project_define'
-  match "provider/activity_define" => "provider#activity_define", :as => 'activity_define'
+  match "provider/activity_define" => "provider#activity_define", :as => 'activities'
   match "provider/indicator_update" => "provider#indicator_update", :as => 'indicator_update'
   match "provider/project_update" => "provider#project_update", :as => 'project_update'
 

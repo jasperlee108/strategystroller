@@ -6,12 +6,6 @@ class ControllerUnitController < ApplicationController
     #redirect_to :new_user_session_path unless current_user && current_user.controlling_unit?
   #end
 
-  ## INFO
-  GOAL = 1
-  INDICATOR = 2
-  PROJECT = 3
-  ACTIVITY = 4
-
   def controller_panel
     @user = current_user
   end
@@ -84,28 +78,7 @@ class ControllerUnitController < ApplicationController
       redirect_to projects_path
     end
   end
-  
-  def set_activity #Belongs in Provider Panel?
-    @activity = Activity.new
-    if (request.post?) 
-      @activity = Activity.new(params[:activity])
-      form_id = save_form(ACTIVITY, nil, @activity.id)
-      if (!form_id) #form not saved
-        flash[:error] = "ERROR: Activity was not saved!"
-      elsif @activity.save #form saved and activity saved
-        flash[:notice] = "Activity successfully saved!"
-        form = Form.find_by_id(form_id)
-        form.submitted = true
-        form.checked = true
-        form.save
-      else #form saved but activity not saved, so delete form
-        Form.delete(Form.find_by_id(form_id))
-        flash[:error] = "ERROR: Activity was not saved!"
-      end
-      redirect_to activities_path
-    end
-  end
-  
+
   def applications
     @application = Application.new
     if (request.post?)
@@ -255,32 +228,6 @@ class ControllerUnitController < ApplicationController
          end
     end
 
-  def save_form(table_id, user_id, entry_id)
-    default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
-    if default.include? table_id
-      @form = create_form(false, table_id, false, user_id, false, Date.current, entry_id)
-      if @form.save
-        return @form.id
-      end
-    end
-    # ERROR: wrong table_id or form.save failed
-    return nil
-  end
-
-  def create_form(checked, table_id, reviewed, user_id, submitted, last, entry_id)
-    form = Form.new(
-    :checked => checked,
-    :lookup => table_id,
-    :reviewed => reviewed,
-    :user_id => user_id,
-    :submitted => submitted,
-    :last_reminder => last,
-    :entry_id => entry_id
-    )
-    return form
-  end
-
-
   def cu_review
     @urls = []
     forms = Form.find_all_by_checked_and_reviewed_and_submitted(true, false, true)
@@ -288,6 +235,5 @@ class ControllerUnitController < ApplicationController
       @urls << encode_url(form.id)
     end
   end
-
 
 end

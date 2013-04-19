@@ -16,9 +16,6 @@ textarea {
 <h2>Project Form</h2>
 
 <body>
-    <%= flash[:notice] %>
-    <%= flash[:error] %><br>
-
     <%= semantic_form_for @project do |f| %>
         <%= f.inputs do %>
 
@@ -69,6 +66,6 @@ textarea {
           <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Notes to Current Status" %>
 
         <% end %>
-    <%= f.action :submit, :label => "Submit Goal" %>
+    <%= f.action :submit, :label => "Submit Project" %>
     <% end %>
 </body>
