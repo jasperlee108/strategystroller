@@ -1,2 +1,43 @@
-<h2> Hi Lazy Provider, <%= @user.username %>! </h2>
-<h2> This should be populated with all forms that <%= @user.username %> needs to fill out </h2>
+<style>
+input {
+	width:25em;
+}
+textarea {
+	width:70em;
+}
+</style>
+
+<form method>
+  <fieldset>
+    <legend><h2>Goal Profile (Provider)</h2></legend>
+    <label>ID</label>
+    <input type="text" name="firstname" title="firstname"  value="P4" disabled="disabled"/>
+    <label>Full name</label>
+    <input type="text" name="fullname" title="fullname"  value="Improve passenger information during disruptions" disabled="disabled"/>
+    <label>Short name:</label>
+    <input type="text" name="shortname" title="shortname"  value="Passenger information" disabled="disabled"/>
+    <br/><br/>
+    <label>Associated Dimension</label>
+    <input type="text" name="dimension" title="dimension"  value="Internal processes" disabled="disabled"/>
+    <label>Owner Name</label>
+    <input type="text" name="owner" title="owner"  value="Frederick Law Olmsted jr." disabled="disabled"/>
+    <label>Department</label>
+    <input type="text" name="department" title="department"  value="PL-M7" disabled="disabled"/>
+    <br/><br/>
+    <label>Call For Action*</label>
+    <br/>
+    <textarea id=address name=address rows=5 required></textarea>
+    <br/><br/>
+    <label>Justification of Specific Goal*</label>
+    <br/>
+    <textarea id=address name=address rows=5 required></textarea>
+    <br/><br/>
+    <label>Strategic Approach*</label>
+    <br/>
+    <textarea id=address name=address rows=5 required></textarea>
+    <br/><br/>
+    <label>Notes</label>
+    <br/>
+    <textarea id=address name=address rows=5></textarea>
+  </fieldset>
+</form>
