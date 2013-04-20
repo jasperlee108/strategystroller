@@ -10,7 +10,9 @@ describe Indicator do
     :description => "Beschreibung der Messgrobe",
     :source => "Quelle",
     :unit => "Einheit",
-    :freq => "hy",
+    :freq => [3,6,9,12],
+    :year => 2013,
+    :reported_values => [0.2, 0.65],
     :indicator_type => "average",
     :prognosis => 65.43,
     :dir => "more is better",
@@ -96,18 +98,100 @@ describe Indicator do
 
   ## Frequency is not empty
   it "should not have empty Frequency" do
-    freq = ""
+    freq = []
     indicator = generate()
     indicator.freq = freq
     assert(!indicator.save, "It saves on empty Frequency")
   end
-  
-  ## Frequency max = 2 = { 'm', 'q', 'hy', 'y' }
-  it "should not have Frequency longer than 2 characters" do
-    freq = (0...3).map{ ( 65+rand(26) ).chr }.join
+
+  it "will not save a non-array Frequency" do
+    freq = "lolhi"
     indicator = generate()
     indicator.freq = freq
-    assert(!indicator.save, "It saves on Frequency longer than 2 characters")
+    assert(!indicator.save, "It saves a non-array Frequency")
+  end
+  
+  ## Frequency max = 12 months
+  it "should not have Frequency with more than 12 elements" do
+    freq = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+    indicator = generate()
+    indicator.freq = freq
+    assert(!indicator.save, "It saves on Frequency longer than 12 elements")
+  end
+
+  ## Frequency only allowed values >=1 <= 12
+  it "will not save Frequency element with value greater than 12" do
+    freq = [1,2,3,13]
+    indicator = generate()
+    indicator.freq = freq
+    assert(!indicator.save, "It saves on Frequency with an element greater than 12")
+  end
+
+  ## Frequency only allowed integer elements
+  it "will not save Frequency with a non-integer element" do
+    freq = [1,2,3,4.5]
+    indicator = generate()
+    indicator.freq = freq
+    assert(!indicator.save, "It saves on Frequency with a non-integer element")
+  end
+
+  ### YEAR
+  it "will not save an empty year" do
+    year = nil
+    indicator = generate()
+    indicator.year = year
+    assert(!indicator.save, "It saves with an empty year")
+  end
+
+  it "will not save a non-integer year" do
+    year = 20.32
+    indicator = generate()
+    indicator.year = year
+    assert(!indicator.save, "It saves with a non-integer year")
+  end
+
+  ### REPORTED_VALUES
+
+  it "will not save a non-array reported_values" do
+    reported_values = "lolhi"
+    indicator = generate()
+    indicator.reported_values = reported_values
+    assert(!indicator.save, "It saves a non-array reported_values")
+  end
+
+  it "will not save :reported_values with element values < 0" do
+    reported_values = [0.2, -0.1]
+    indicator = generate()
+    indicator.reported_values = reported_values
+    assert(!indicator.save, "It saves a non-array reported_values")
+  end
+
+  it "will not save :reported_values with non-float elements" do
+    reported_values = [0.2, 2]
+    indicator = generate()
+    indicator.reported_values = reported_values
+    assert(!indicator.save, "It saves a reported_values with a non-float element")
+  end
+
+  it "will not save :reported_values with negative elements" do
+    reported_values = [0.2, -0.1]
+    indicator = generate()
+    indicator.reported_values = reported_values
+    assert(!indicator.save, "It saves a reported_values with a non-float element")
+  end
+
+  it "will save :reported_values with a zero element" do
+    reported_values = [0.2, 0.0]
+    indicator = generate()
+    indicator.reported_values = reported_values
+    assert(indicator.save, "It won't save a reported_values with a 0.0 element")
+  end
+
+  it "will not save :reported_values with more elements than the corresponding frequency" do
+    reported_values = [0.1, 0.2, 0.3, 0.4, 0.5]
+    indicator = generate()
+    indicator.reported_values = reported_values
+    assert(!indicator.save, "It saved a :reported_values with a more elements than the corresponding :freq")
   end
 
   ### TYPE

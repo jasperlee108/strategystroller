@@ -1,6 +1,9 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :indicator_type, :name, :notes, :source, :contributing_projects_status, :status, :status_notes, :prognosis, :target, :unit, :goal_id, :user_id
-  
+  attr_accessible :actual, :description, :diff, :dir, :freq, :year, :reported_values, :indicator_type, :name, :notes, :source, :contributing_projects_status, :status, :status_notes, :prognosis, :target, :unit, :goal_id, :user_id
+
+  serialize :freq, Array
+  serialize :reported_values, Array
+
   ### ASSOCIATIONS
   ## parent
   belongs_to :goal
@@ -38,10 +41,65 @@ class Indicator < ActiveRecord::Base
   :presence => true,
   :length => { :maximum => 20 }
 
-  ## Freq = string[2]
+  ## Freq = Array[int]
   validates :freq,
-  :presence => true,
-  :length => { :maximum => 2 }
+  :presence => true
+
+  validates_each :freq do |record,attribute,value|
+    problems = ""
+    if value.is_a? Array
+      if value.empty?
+        problems << ":freq cannot be empty"
+      else
+        value.each do |month|
+          if month < 1 or month > 12
+            problems << "Each month must be a value between 1 and 12, one was #{month}"
+          end
+          unless month.is_a? Integer
+            problems << "Each month must be an Integer, one was #{month} which is not an Integer"
+          end
+        end
+      end
+      if value.length > 12
+        problems << ":freq is too long, it should only have at most 12 elements. This had #{value.length}"
+      end
+    else
+      problems << ":freq must be an array"
+    end
+    record.errors.add(:freq, problems) if problems != ""
+  end
+
+  ## Year = Integer
+  validates :year,
+            :presence => true,
+            :numericality => { :only_integer => true}
+
+  ## Only one indicator of a given name per year
+  validates_uniqueness_of :name, :scope => :year
+
+  ## reported values = Array[floats]
+  validates :reported_values,
+            :presence => true
+
+  validates_each :reported_values do |record,attribute,value|
+    problems = ""
+    if value.is_a? Array
+      value.each do |v|
+        if v < 0
+          problems << "Each value must be a greater than or equal to 0, one was #{v}"
+        end
+        unless v.is_a? Float
+          problems << "Each value must be an Float, one was #{v} which is not a Float"
+        end
+      end
+      if value.length > record.freq.length
+        problems << ":reported_values is too long, it should only have at most #{record.freq.length} elements. This had #{value.length}"
+      end
+    else
+      problems << "The reported values must be an array"
+    end
+    record.errors.add(:reported_values, problems) if problems != ""
+  end
 
   ## Type = string[10]
   validates :indicator_type,
