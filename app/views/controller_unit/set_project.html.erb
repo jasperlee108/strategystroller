@@ -1,3 +1,10 @@
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'setup_system', :controller => 'controller_unit') %>">Set system information</a></li>
+<li><a href="<%= url_for(:action => 'set_goal', :controller => 'controller_unit') %>">New goal</a></li>
+<li><a href="<%= url_for(:action => 'set_indicator', :controller => 'controller_unit') %>">New indicator</a></li>
+<li><a href="<%= url_for(:action => 'set_project', :controller => 'controller_unit') %>">New project</a></li>
+<% end %>
+
 <body>
     <div class="navbar snb">
       <div class="navbar-inner ni">
