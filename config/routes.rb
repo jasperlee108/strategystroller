@@ -22,6 +22,7 @@ StrategyStroller::Application.routes.draw do
   ## FOR OTHER LINKS / PATHS
   
   # Controller
+  match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
   match "controller_unit/input_framework" => "controller_unit#set_goal", :as => 'input_framework'
   match "controller_unit/input_framework/goals" => "controller_unit#set_goal", :as => "goals"
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"

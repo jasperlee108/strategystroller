@@ -1,6 +1,7 @@
 <% content_for :context_menu do %>
 <li><a href="<%= url_for(:action => 'goal_check', :controller => 'controller_unit') %>">Goal</a></li>
 <li><a href="<%= url_for(:action => 'indicator_check', :controller => 'controller_unit') %>">Indicator</a></li>
+<li><a href="<%= url_for(:action => 'project_check', :controller => 'controller_unit') %>">Project</a></li>
 <li><a href="<%= url_for(:action => 'activity_check', :controller => 'controller_unit') %>">Activity</a></li>
 <% end %>
 <style>
@@ -18,8 +19,10 @@ textarea {
     <%= flash[:notice] %>
     <%= flash[:error] %><br>
 
-    <%= semantic_form_for @indicator do |f| %>
+    <%= semantic_form_for @indicator, :url => indicator_check_path do |f| %>
         <%= f.inputs do %>
+        <%= hidden_field_tag :entry_id, params[:entry_id] %>
+        <%= hidden_field_tag :form_id, params[:form_id] %>
 
           <%= f.input :name, :input_html => { :value => @current_indicator.name }, :required => true, :label => "Name of Indicator" %>
           

@@ -22,8 +22,10 @@ textarea {
 <h2>Goal Form</h2>
 
 <body>
-    <%= semantic_form_for @goal do |f| %>
+    <%= semantic_form_for @goal, :url => goal_define_path do |f| %>
         <%= f.inputs do %>
+        <%= hidden_field_tag :entry_id, params[:entry_id] %>
+        <%= hidden_field_tag :form_id, params[:form_id] %>
 
           <%= f.input :name, :input_html => { :value => @current_goal.name, :readonly => true }, :label => "Name of Goal" %>
           

@@ -20,8 +20,10 @@ textarea {
 <h2>Project Form</h2>
 
 <body>
-    <%= semantic_form_for @project do |f| %>
+    <%= semantic_form_for @project, :url => project_define_path do |f| %>
         <%= f.inputs do %>
+        <%= hidden_field_tag :entry_id, params[:entry_id] %>
+        <%= hidden_field_tag :form_id, params[:form_id] %>
 
           <%= f.input :name, :input_html => { :value => @current_project.name, :readonly => true }, :label => "Name of Project" %>
           

@@ -244,6 +244,7 @@ class ControllerUnitController < ApplicationController
   def goal_check
     @user = current_user
     @goal = Goal.new
+
     form_id = params[:form_id]
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
@@ -253,7 +254,7 @@ class ControllerUnitController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_goal.update_attributes(params[:goal])
-      redirect_to cu_review
+      redirect_to cu_review_path
     end
   end
   
@@ -268,8 +269,8 @@ class ControllerUnitController < ApplicationController
     ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
-      @current_goal.update_attributes(params[:indicator])
-      redirect_to cu_review
+      @current_indicator.update_attributes(params[:indicator])
+      redirect_to cu_review_path
     end
   end
   
@@ -284,8 +285,8 @@ class ControllerUnitController < ApplicationController
     ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
-      @current_goal.update_attributes(params[:project])
-      redirect_to cu_review
+      @current_project.update_attributes(params[:project])
+      redirect_to cu_review_path
     end
   end
   
@@ -300,8 +301,8 @@ class ControllerUnitController < ApplicationController
     ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
-      @current_goal.update_attributes(params[:activity])
-      redirect_to cu_review
+      @current_activity.update_attributes(params[:activity])
+      redirect_to cu_review_path
     end
   end
 
