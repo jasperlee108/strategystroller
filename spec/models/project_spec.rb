@@ -11,7 +11,7 @@ describe Project do
     :description => "Projektbeschreibung",
     :startDate => Date.new(2013,03,27),
     :endDate => Date.new(2013,03,28),
-    :duration => 5.5,
+    :duration => 5,
     :target_manp => 5,
     :target_cost => 10.5,
     :inplan => true,
@@ -168,16 +168,16 @@ describe Project do
     assert(!project.save, "It saves on empty Duration")
   end
   
-  ## Duration = float
-  it "should have Duration as a float" do
+  ## Duration = integer
+  it "should have Duration as an integer" do
     duration = "random"
     project = generate()
     project.duration = duration
     assert(!project.save, "It saves on Duration = " + duration.to_s)
   end
 
-  ## Duration = float >= 0
-  it "should have Duration as a float >= 0" do
+  ## Duration = integer >= 0
+  it "should have Duration as an integer >= 0" do
     duration = -5
     project = generate()
     project.duration = duration
@@ -354,16 +354,16 @@ describe Project do
     assert(!project.save, "It saves on empty StatusProg")
   end
   
-  ## StatusProg = float
-  it "should have StatusProg as a float" do
+  ## StatusProg = decimal
+  it "should have StatusProg as a decimal" do
     statusProg = "random"
     project = generate()
     project.status_prog = statusProg
     assert(!project.save, "It saves on StatusProg = " + statusProg.to_s)
   end
 
-  ## StatusProg = float >= 0
-  it "should have StatusProg as a float >= 0" do
+  ## StatusProg = decimal >= 0
+  it "should have StatusProg as a decimal >= 0" do
     statusProg = -5
     project = generate()
     project.status_prog = statusProg
@@ -458,16 +458,16 @@ describe Project do
     assert(!project.save, "It saves on empty StatusGlobal")
   end
   
-  ## StatusGlobal = float
-  it "should have StatusGlobal as a float" do
+  ## StatusGlobal = decimal
+  it "should have StatusGlobal as a decimal" do
     statusGlobal = "random"
     project = generate()
     project.status_global = statusGlobal
     assert(!project.save, "It saves on StatusGlobal = " + statusGlobal.to_s)
   end
 
-  ## StatusGlobal = float >= 0
-  it "should have StatusGlobal as a float >= 0" do
+  ## StatusGlobal = decimal >= 0
+  it "should have StatusGlobal as a decimal >= 0" do
     statusGlobal = -5
     project = generate()
     project.status_global = statusGlobal

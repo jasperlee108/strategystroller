@@ -11,7 +11,7 @@ describe Goal do
     :justification => "Justification of specific goal",
     :focus => "Strategic approach",
     :notes => "Notes",
-    :status => 0.00,
+    :status => 0.01,
     :dimension_id => 1,
     :user_id => 1,
     :prereq => "A Different Goal's Name"
@@ -26,15 +26,18 @@ describe Goal do
         :description => "Beschreibung der Messgrobe",
         :source => "Quelle",
         :unit => "Einheit",
-        :freq => "hy",
+        :freq => [3,6,9,12],
+        :year => 2013,
+        :reported_values => [0.2, 0.65],
         :indicator_type => "average",
+        :prognosis => 0.6543,
         :dir => "more is better",
-        :actual => 5.5,
-        :target => 10.5,
+        :actual => 0.055,
+        :target => 0.105,
         :notes => "Anmerkungen",
         :diff => 5.0,
-        :status => 75.5,
-        :contributing_projects_status => 69.3,
+        :status => 0.755,
+        :contributing_projects_status => 0.693,
         :status_notes => "Anmerkungen zum Status",
         :goal_id => 1,
         :user_id => 1
@@ -44,15 +47,18 @@ describe Goal do
         :description => "Beschreibung der Messgrobe2",
         :source => "Quelle2",
         :unit => "Einheit2",
-        :freq => "hy",
+        :freq => [3,6,9,12],
+        :year => 2013,
+        :reported_values => [0.2, 0.65],
         :indicator_type => "average",
+        :prognosis => 0.6543,
         :dir => "more is better",
-        :actual => 5.5,
-        :target => 10.5,
+        :actual => 0.055,
+        :target => 0.105,
         :notes => "Anmerkungen2",
-        :diff => 5.0,
-        :status => 11.1,
-        :contributing_projects_status => 20.1,
+        :diff => 0.050,
+        :status => 0.111,
+        :contributing_projects_status => 0.201,
         :status_notes => "Anmerkungen zum Status2",
         :goal_id => 3,
         :user_id => 1
@@ -200,15 +206,22 @@ describe Goal do
   end
 
   ### Status Update/calculation
+  it 'can find the correct number of children' do
+    goal = gen_with_children()
+    goal.save()
+    goal_in_table = Goal.find(1)
+    assert(goal_in_table.indicators.count == 1, "goal counted #{goal_in_table.indicators.count} children, not 1 as expected")
+  end
+
   it 'can update its status using its children' do
     goal = gen_with_children()
     goal.save()
     goal_in_table = Goal.find(1)
     goal_in_table.update_status()
-    assert(goal_in_table.status == 69.3, "goal status value was #{goal_in_table.status}, not 69.3 as expected")
+    assert(goal_in_table.status == 0.693, "goal status value was #{goal_in_table.status}, not 0.693 as expected")
   end
 
-  it 'can update its even if it has no children' do
+  it 'can update itself even if it has no children' do
     goal = generate()
     goal.save()
     goal_in_table = Goal.find(1)

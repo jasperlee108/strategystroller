@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419192808) do
+ActiveRecord::Schema.define(:version => 20130422065923) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20130419192808) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
-    t.float    "status"
+    t.decimal  "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20130419192808) do
     t.string   "justification"
     t.string   "focus"
     t.string   "notes"
-    t.float    "status"
+    t.decimal  "status"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "dimension_id"
@@ -115,18 +115,18 @@ ActiveRecord::Schema.define(:version => 20130419192808) do
     t.text     "freq",                         :limit => 255
     t.string   "indicator_type"
     t.string   "dir"
-    t.float    "actual"
-    t.float    "target"
+    t.decimal  "actual"
+    t.decimal  "target"
     t.text     "notes"
-    t.float    "diff"
-    t.float    "status"
+    t.decimal  "diff"
+    t.decimal  "status"
     t.text     "status_notes"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.integer  "goal_id"
     t.integer  "user_id"
-    t.float    "contributing_projects_status"
-    t.float    "prognosis"
+    t.decimal  "contributing_projects_status"
+    t.decimal  "prognosis"
     t.integer  "year"
     t.text     "reported_values"
   end
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(:version => 20130419192808) do
     t.text     "team"
     t.date     "startDate"
     t.date     "endDate"
-    t.float    "duration"
+    t.integer  "duration"
     t.integer  "target_manp"
     t.decimal  "target_cost"
     t.boolean  "inplan"
@@ -145,11 +145,11 @@ ActiveRecord::Schema.define(:version => 20130419192808) do
     t.text     "notes"
     t.integer  "actual_manp"
     t.decimal  "actual_cost"
-    t.float    "status_prog"
+    t.decimal  "status_prog"
     t.integer  "status_ms"
     t.integer  "status_manp"
     t.decimal  "status_cost"
-    t.float    "status_global"
+    t.decimal  "status_global"
     t.text     "status_notes"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false

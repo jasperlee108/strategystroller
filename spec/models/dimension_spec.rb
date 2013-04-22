@@ -36,8 +36,20 @@ describe Dimension do
         :user_id => 1,
         :prereq => "A Different Goal's Name2"
     )
+    goal3 = Goal.new(
+        :name => "Name of Goal3",
+        :need => "Call for action3",
+        :justification => "Justification of specific goal3",
+        :focus => "Strategic approach3",
+        :notes => "Notes3",
+        :status => 0.69,
+        :dimension_id => 1,
+        :user_id => 1,
+        :prereq => "A Different Goal's Name3"
+    )
     goal1.save()
     goal2.save()
+    goal3.save()
     return dimension
   end
 
@@ -96,7 +108,7 @@ describe Dimension do
     dimension.save()
     dimension_in_table = Dimension.find(1)
     dimension_in_table.update_status()
-    assert(dimension_in_table.status == 0.23, "dimension status value was #{dimension_in_table.status}, not 0.23 as expected")
+    assert(dimension_in_table.status == 0.46, "dimension status value was #{dimension_in_table.status}, not 0.46 as expected")
   end
 
   it 'can update its even if it has no children' do

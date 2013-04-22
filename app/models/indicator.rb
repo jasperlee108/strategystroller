@@ -1,5 +1,7 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :year, :reported_values, :indicator_type, :name, :notes, :source, :contributing_projects_status, :status, :status_notes, :prognosis, :target, :unit, :goal_id, :user_id
+  attr_accessible :actual, :description, :diff, :dir, :freq, :year, :reported_values, :indicator_type,
+                  :name, :notes, :source, :contributing_projects_status, :status, :status_notes,
+                  :prognosis, :target, :unit, :goal_id, :user_id
 
   serialize :freq, Array
   serialize :reported_values, Array
@@ -53,15 +55,18 @@ class Indicator < ActiveRecord::Base
       else
         value.each do |month|
           if month < 1 or month > 12
-            problems << "Each month must be a value between 1 and 12, one was #{month}"
+            problems <<
+                "Each month must be a value between 1 and 12, one was #{month}"
           end
           unless month.is_a? Integer
-            problems << "Each month must be an Integer, one was #{month} which is not an Integer"
+            problems <<
+                "Each month must be an Integer, one was #{month} which is not an Integer"
           end
         end
       end
       if value.length > 12
-        problems << ":freq is too long, it should only have at most 12 elements. This had #{value.length}"
+        problems <<
+            ":freq is too long, it should only have at most 12 elements. This had #{value.length}"
       end
     else
       problems << ":freq must be an array"
@@ -77,7 +82,7 @@ class Indicator < ActiveRecord::Base
   ## Only one indicator of a given name per year
   validates_uniqueness_of :name, :scope => :year
 
-  ## reported values = Array[floats]
+  ## reported values = Array[decimals]
   validates :reported_values,
             :presence => true
 
@@ -88,8 +93,8 @@ class Indicator < ActiveRecord::Base
         if v < 0
           problems << "Each value must be a greater than or equal to 0, one was #{v}"
         end
-        unless v.is_a? Float
-          problems << "Each value must be an Float, one was #{v} which is not a Float"
+        unless v.is_a? BigDecimal or v.is_a? Float
+          problems << "Each value must be a float (to be converted into a BigDecimal) or a BigDecimal, one was #{v} which is neither"
         end
       end
       if value.length > record.freq.length
@@ -111,17 +116,17 @@ class Indicator < ActiveRecord::Base
   :presence => true,
   :length => { :maximum => 20 }
 
-  ## Actual = float
+  ## Actual = decimal
   ## 0.00 <= Actual
   validates :actual,
   :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
-  ## Target = float
-  ## 0.00 <= Target
+  ## Target = decimal
+  ## 0.00 < Target
   validates :target,
   :presence => true,
-  :numericality => { :greater_than_or_equal_to => 0 }
+  :numericality => { :greater_than => 0 }
   
   ## Notes = string[600]
   ## Notes can be empty
@@ -133,25 +138,19 @@ class Indicator < ActiveRecord::Base
   ## 0.00 <= Status
   validates :status,
   :presence => true,
-  :numericality => {
-    :greater_than_or_equal_to => 0
-  }
+  :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Contributing_Projects_status = long integer
   ## 0.00 <= Contributing_Projects_status
   validates :contributing_projects_status,
     :presence => true,
-    :numericality => {
-      :greater_than_or_equal_to => 0
-      }
+    :numericality => { :greater_than_or_equal_to => 0 }
 
   ## prognosis = long integer
   ## 0.00 <= prognosis
   validates :prognosis,
     :presence => true,
-    :numericality => {
-        :greater_than_or_equal_to => 0
-        }
+    :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Status Notes = string[600]
   ## Notes can be empty

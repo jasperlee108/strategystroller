@@ -14,14 +14,14 @@ describe Indicator do
     :year => 2013,
     :reported_values => [0.2, 0.65],
     :indicator_type => "average",
-    :prognosis => 65.43,
+    :prognosis => 0.6543,
     :dir => "more is better",
-    :actual => 5.5,
-    :target => 10.5,
+    :actual => 0.55,
+    :target => 0.105,
     :notes => "Anmerkungen",
-    :diff => 5.0,
-    :status => 75.5,
-    :contributing_projects_status => 69.3,
+    :diff => 0.05,
+    :status => 0.755,
+    :contributing_projects_status => 0.693,
     :status_notes => "Anmerkungen zum Status",
     :goal_id => 1,
     :user_id => 1
@@ -166,18 +166,18 @@ describe Indicator do
     assert(!indicator.save, "It saves a non-array reported_values")
   end
 
-  it "will not save :reported_values with non-float elements" do
+  it "will not save :reported_values with non-decimal elements" do
     reported_values = [0.2, 2]
     indicator = generate()
     indicator.reported_values = reported_values
-    assert(!indicator.save, "It saves a reported_values with a non-float element")
+    assert(!indicator.save, "It saves a reported_values with a non-decimal element")
   end
 
   it "will not save :reported_values with negative elements" do
     reported_values = [0.2, -0.1]
     indicator = generate()
     indicator.reported_values = reported_values
-    assert(!indicator.save, "It saves a reported_values with a non-float element")
+    assert(!indicator.save, "It saves a reported_values with a negative element")
   end
 
   it "will save :reported_values with a zero element" do
@@ -240,16 +240,16 @@ describe Indicator do
     assert(!indicator.save, "It saves on empty Actual")
   end
   
-  ## Actual = float
-  it "should have Actual as a float" do
+  ## Actual = decimal
+  it "should have Actual as a decimal" do
     actual = "random"
     indicator = generate()
     indicator.actual = actual
     assert(!indicator.save, "It saves on Actual = " + actual.to_s)
   end
 
-  ## Actual = float >= 0
-  it "should have Actual as a float >= 0" do
+  ## Actual = decimal >= 0
+  it "should have Actual as a decimal >= 0" do
     actual = -5
     indicator = generate()
     indicator.actual = actual
@@ -266,16 +266,16 @@ describe Indicator do
     assert(!indicator.save, "It saves on empty Target")
   end
   
-  ## Target = float
-  it "should have Target as a float" do
+  ## Target = decimal
+  it "should have Target as a decimal" do
     target = "random"
     indicator = generate()
     indicator.target = target
     assert(!indicator.save, "It saves on Target = " + target.to_s)
   end
 
-  ## Target = float >= 0
-  it "should have Target as a float >= 0" do
+  ## Target = decimal > 0
+  it "should have Target as a decimal > 0" do
     target = -5
     indicator = generate()
     indicator.target = target
@@ -310,16 +310,16 @@ describe Indicator do
     assert(!indicator.save, "It saves on empty Difference")
   end
   
-  ## Difference = float
-  it "should have Difference as a float" do
+  ## Difference = decimal
+  it "should have Difference as a decimal" do
     difference = "random"
     indicator = generate()
     indicator.diff = difference
     assert(!indicator.save, "It saves on Difference = " + difference.to_s)
   end
 
-  ## Difference = float >= 0
-  it "should have Difference as a float >= 0" do
+  ## Difference = decimal >= 0
+  it "should have Difference as a decimal >= 0" do
     difference = -5
     indicator = generate()
     indicator.diff = difference
@@ -336,16 +336,16 @@ describe Indicator do
     assert(!indicator.save, "It saves on empty Status")
   end
   
-  ## Status = float
-  it "should have Status as a float" do
+  ## Status = decimal
+  it "should have Status as a decimal" do
     status = "random"
     indicator = generate()
     indicator.status = status
     assert(!indicator.save, "It saves on Status = " + status.to_s)
   end
 
-  ## Status = float >= 0
-  it "should have Status as a float >= 0" do
+  ## Status = decimal >= 0
+  it "should have Status as a decimal >= 0" do
     status = -5
     indicator = generate()
     indicator.status = status
@@ -362,16 +362,16 @@ describe Indicator do
     assert(!indicator.save, "It saves on empty contributing_projects_status")
   end
 
-  ## contributing_projects_status = float
-  it "should have contributing_projects_status as a float" do
+  ## contributing_projects_status = decimal
+  it "should have contributing_projects_status as a decimal" do
     contributing_projects_status = "random"
     indicator = generate()
     indicator.contributing_projects_status = contributing_projects_status
     assert(!indicator.save, "It saves on contributing_projects_status = " + contributing_projects_status.to_s)
   end
 
-  ## contributing_projects_status = float >= 0
-  it "should have contributing_projects_status as a float >= 0" do
+  ## contributing_projects_status = decimal >= 0
+  it "should have contributing_projects_status as a decimal >= 0" do
     contributing_projects_status = -5
     indicator = generate()
     indicator.contributing_projects_status = contributing_projects_status
@@ -388,16 +388,16 @@ describe Indicator do
     assert(!indicator.save, "It saves on empty prognosis")
   end
 
-  ## prognosis = float
-  it "should have prognosis as a float" do
+  ## prognosis = decimal
+  it "should have prognosis as a decimal" do
     prognosis = "random"
     indicator = generate()
     indicator.prognosis = prognosis
     assert(!indicator.save, "It saves on prognosis = " + prognosis.to_s)
   end
 
-  ## prognosis = float >= 0
-  it "should have prognosis as a float >= 0" do
+  ## prognosis = decimal >= 0
+  it "should have prognosis as a decimal >= 0" do
     prognosis = -5
     indicator = generate()
     indicator.prognosis = prognosis

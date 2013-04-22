@@ -49,8 +49,8 @@ class Project < ActiveRecord::Base
   ## Compensation = true / false = yes / no
   validates :compensation, :inclusion => { :in => [true, false] }
 
-  ## Duration = float
-  ## 0.00 <= duration
+  ## Duration = Integer
+  ## 0 <= duration
   validates :duration,
   :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
@@ -85,7 +85,7 @@ class Project < ActiveRecord::Base
     :only_integer => true
   }
   
-  ## Status_prog = float
+  ## Status_prog = decimal
   ## 0.00 <= status_prog
   validates :status_prog,
   :presence => true,
@@ -117,7 +117,7 @@ class Project < ActiveRecord::Base
     :greater_than_or_equal_to => 0
   }
 
-  ## Status_global = float
+  ## Status_global = decimal
   ## 0.00 <= status_global
   validates :status_global,
   :presence => true,
