@@ -1,5 +1,11 @@
 namespace :fake_data do
   
+  ## INFO
+  GOAL = 1
+  INDICATOR = 2
+  PROJECT = 3
+  ACTIVITY = 4
+  
   desc "Populating with fake data"
   task :all => :environment do
 
@@ -54,6 +60,7 @@ namespace :fake_data do
     @dimension = Dimension.select('id')
     @user = User.select('id')
     @all_goals = Goal.select('name')
+    ctrl = ApplicationController.new
     for _ in how_many.times
       random_string = (0...5).map{ ( 65+rand(26) ).chr }.join
       goal = Goal.new(
@@ -73,6 +80,7 @@ namespace :fake_data do
       end
       goal.save!
       @all_goals = Goal.select('name')
+      ctrl.save_form(GOAL, goal.user_id, goal.id)
     end
   end
 
@@ -82,9 +90,10 @@ namespace :fake_data do
     frequency = ['M','Q','HY','Y']
     type = ['Average','Cumulative']
     direction = ['More is better','Less is better']
+    ctrl = ApplicationController.new
     for _ in how_many.times
       random_string = (0...5).map{ ( 65+rand(26) ).chr }.join
-      Indicator.new(
+      indicator = Indicator.new(
         :name => random_string,
         :short_name => random_string,
         :description => random_string,
@@ -101,7 +110,9 @@ namespace :fake_data do
         :status_notes => random_string,
         :goal_id => @goal.sample.id,
         :user_id => @user.sample.id
-      ).save!
+      )
+      indicator.save!
+      ctrl.save_form(INDICATOR, indicator.user_id, indicator.id)
     end
   end
 
@@ -109,6 +120,7 @@ namespace :fake_data do
     @indicator = Indicator.select('id')
     @user = User.select('id')
     bool = [true,false]
+    ctrl = ApplicationController.new
     for _ in how_many.times
       random_string = (0...5).map{ ( 65+rand(26) ).chr }.join
       project = Project.new(
@@ -135,7 +147,9 @@ namespace :fake_data do
         :head_id => @user.sample.id,
         :steer_id => @user.sample.id,
         :team => random_string
-      ).save!
+      )
+      project.save!
+      ctrl.save_form(PROJECT, project.head_id, project.id)
     end
   end
 
