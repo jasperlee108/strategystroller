@@ -21,9 +21,6 @@ textarea {
 
 <h2>Activity Form</h2>
 
-<p> These are your current Activity forms. User id is <%=@user.id %> and you are in charge of <%=Activity.where(:user_id => @user.id) %>  </p>
-
-
 <body>
     <%= semantic_form_for @activity do |f| %>
         <%= f.inputs do %>

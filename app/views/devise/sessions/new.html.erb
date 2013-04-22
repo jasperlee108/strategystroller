@@ -2,12 +2,12 @@
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "custom_form" }) do |f| %>
   <div class="wrapper">
-  <div><%= f.label :email %><br />
+  <div><%= f.label :email %>
   <%= f.text_field :email, :autofocus => true %></div>
     <!-- TODO this replaces f.email_field with f.text_field for generic login functionality with either UN or email,
      which I believe breaks auto form checking for a well-formed email -->
 
-  <div><%= f.label :password %><br />
+  <div><%= f.label :password %>
   <%= f.password_field :password %></div>
 
   <% if devise_mapping.rememberable? -%>

@@ -19,6 +19,7 @@ class ProviderController < ApplicationController
   end
    
   def goal_define
+    @user = current_user
     @goal = Goal.new
     form_id = params[:form_id]
     entry_id = params[:entry_id]
@@ -34,6 +35,7 @@ class ProviderController < ApplicationController
   end
   
   def indicator_define
+    @user = current_user
     @indicator = Indicator.new
     form_id = params[:form_id]
     entry_id = params[:entry_id]
@@ -49,6 +51,7 @@ class ProviderController < ApplicationController
   end
   
   def project_define
+    @user = current_user
     @project = Project.new
     form_id = params[:form_id]
     entry_id = params[:entry_id]
