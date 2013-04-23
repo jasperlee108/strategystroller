@@ -1,27 +1,29 @@
-<h2>Sign up</h2>
+<div class="logincontainer">
+<div class="form-signin">
+<h2 class="form-signin-heading"><%= I18n.t :sign_up%></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <% if devise_error_messages! != "" %>
+  <div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><%= devise_error_messages! %></div>
+  <% end %>
 
-  <div><%= f.label :username %>
-  <%= f.text_field :username, :autofocus => true %></div>
 
-  <div><%= f.label :email %>
-  <%= f.email_field :email %></div>
+  <%= f.text_field :username, :class => "input-block-level", :placeholder => (I18n.t :username)%>
 
-  <div><%= f.label :business_code %>
-  <%= f.text_field :business_code %></div>
+  <%= f.email_field :email, :class => "input-block-level", :placeholder => (I18n.t :email_address)%>
 
-  <div><%= f.label :controlling_unit %>
-  <%= f.check_box :controlling_unit %></div>
+  <%= f.text_field :business_code, :class => "input-block-level", :placeholder => (I18n.t :buisness_code) %>
 
-  <div><%= f.label :password %>
-  <%= f.password_field :password %></div>
+  <%= f.password_field :password, :class => "input-block-level", :placeholder => (I18n.t :password) %>
 
-  <div><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></div>
+  <%= f.password_field :password_confirmation,:class => "input-block-level", :placeholder => (I18n.t :confirm_password) %>
 
-  <div><%= f.submit "Sign up" %></div>
+	<div class="row-fluid">
+       <%= f.submit (I18n.t :sign_up), :class=> "btn btn-large btn-primary span6"%>
+       <input type=button class="btn btn-large btn-primary span6" value='<%= I18n.t :cancel %>' onclick= "cancel_button()">
+	</div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
+</div>

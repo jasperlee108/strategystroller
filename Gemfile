@@ -16,7 +16,7 @@ gem "meta_search",    '>= 1.1.0.pre'
 gem 'coffee-script-source', '~> 1.4.0'
 
 #Twitter Bootstrap
-gem "twitter-bootstrap-rails"
+#gem "twitter-bootstrap-rails"
 
 gem 'formtastic-bootstrap'
 gem 'tabulous'
@@ -49,8 +49,9 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
+  #this gem does not work on windows >.<
+  #gem 'therubyracer', :platforms => :ruby
+  gem 'bootstrap-sass-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 

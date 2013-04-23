@@ -1,0 +1,26 @@
+ <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Navigation</li>
+              <li class="active"><a href="/home/index">Home</a></li>
+              <li><a href="/admin/login">Admin</a></li>
+              <li><a href="#">New System</a></li>
+              <li><a href="#">Yearly Review</a></li>
+              <li><a href="#">Quality Check</a></li>
+              <li><a href="#">Monthly Report</a></li>
+              <li><a href="#">Quarterly Report</a></li>
+              <li class="nav-header">Context Menu</li>
+              <%= yield :context_menu %>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="hero-unit">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+            <%= yield %>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
