@@ -83,9 +83,6 @@ class Indicator < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => :year
 
   ## reported values = Array[decimals]
-  validates :reported_values,
-            :presence => true
-
   validates_each :reported_values do |record,attribute,value|
     problems = ""
     if value.is_a? Array
@@ -158,10 +155,56 @@ class Indicator < ActiveRecord::Base
   :length => { :maximum => 600 },
   :allow_blank => true
 
-  ## Difference = float
-  ## Difference >= 0.0
+  ## Difference = decimal
   validates :diff,
   :presence => true,
-  :numericality => { :greater_than_or_equal_to => 0 }
-  
+  :numericality => true
+
+  # Gives the prognosis of how the year is progressing, as specified.
+  # This assumes all values that should be included in this prognosis calculation are already
+  # reported (and thus in :reported_values)
+  def update_prognosis
+    r_values = self.reported_values
+    if r_values.empty?
+      self.prognosis = 0.0
+    else
+      sum = BigDecimal.new(r_values.reduce(:+), 10)
+      if self.indicator_type == "average"
+        self.prognosis = sum / r_values.length
+      elsif self.indicator_type == "cumulative"
+        self.prognosis = sum*12.0 / Time.now.month
+      end
+    end
+  end
+
+  def update_diff
+    update_prognosis
+    self.diff = self.prognosis - self.target
+  end
+
+  # Note this triggers calls to update_diff and update_prognosis, 
+  # so the calculation should be based on accurate values. 
+  def update_status
+    update_diff
+    raise "Target value must be nonzero, instead of #{self.target}" if self.target == 0.0
+    if self.dir == "more is better"
+      self.status=((1 + self.diff) / self.target)
+    elsif  self.dir == "less is better"
+      self.status=((1 - self.diff) / self.target)
+    end
+  end
+
+  def update_contributing_projects_status # TODO possibly add call chain to update all values this depends on
+    projs = self.projects
+    if projs.size == 0
+      self.contributing_projects_status = 0.0
+    else
+      status = 0.00
+      self.projects.each do |project|
+        status += project.status_global
+      end
+      self.contributing_projects_status = status / projs.size
+    end
+  end
+
 end

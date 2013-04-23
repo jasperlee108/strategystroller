@@ -29,6 +29,61 @@ describe Indicator do
     return indicator
   end
 
+  def gen_with_children
+    indicator = generate
+    project1 = Project.new(
+        :name => "Projekts",
+        :description => "Projektbeschreibung",
+        :startDate => Date.new(2013,03,27),
+        :endDate => Date.new(2013,03,28),
+        :duration => 5,
+        :target_manp => 5,
+        :target_cost => 10.5,
+        :inplan => true,
+        :compensation => true,
+        :notes => "Anmerkungen",
+        :actual_manp => 10,
+        :actual_cost => 0.205,
+        :status_prog => 0.755,
+        :status_ms => 50,
+        :status_manp => 10,
+        :status_cost => 10.5,
+        :status_global => 0.505,
+        :status_notes => "Anmerkungen zum Status",
+        :indicator_id => 1,
+        :head_id => 1,
+        :steer_id => 1,
+        :team => "James Bond, Andy Warhol"
+    )
+    project2 = Project.new(  # Not a child of this indicator.
+        :name => "Projekts2",
+        :description => "Projektbeschreibung2",
+        :startDate => Date.new(2013,03,27),
+        :endDate => Date.new(2013,03,28),
+        :duration => 5,
+        :target_manp => 5,
+        :target_cost => 10.5,
+        :inplan => true,
+        :compensation => true,
+        :notes => "Anmerkungen2",
+        :actual_manp => 10,
+        :actual_cost => 20.5,
+        :status_prog => 75.5,
+        :status_ms => 50,
+        :status_manp => 10,
+        :status_cost => 10.5,
+        :status_global => 50.5,
+        :status_notes => "Anmerkungen zum Status2",
+        :indicator_id => 3,
+        :head_id => 1,
+        :steer_id => 1,
+        :team => "James Bond2, Andy Warhol2"
+    )
+    project1.save
+    project2.save
+    return indicator
+  end
+
   ## Default
   it "should pass assert true sanity test" do
     assert(true, "Did not pass sanity check")
@@ -194,6 +249,13 @@ describe Indicator do
     assert(!indicator.save, "It saved a :reported_values with a more elements than the corresponding :freq")
   end
 
+  it "will save :reported_values with an empty array" do
+    reported_values = []
+    indicator = generate()
+    indicator.reported_values = reported_values
+    assert(indicator.save, "It will not save a :reported_values with an empty Array")
+  end
+
   ### TYPE
   
   ## Type is not empty
@@ -318,12 +380,12 @@ describe Indicator do
     assert(!indicator.save, "It saves on Difference = " + difference.to_s)
   end
 
-  ## Difference = decimal >= 0
-  it "should have Difference as a decimal >= 0" do
+  ## Difference = decimal
+  it "should have Difference as a decimal, negatives are ok" do
     difference = -5
     indicator = generate()
     indicator.diff = difference
-    assert(!indicator.save, "It saves on Difference = " + difference.to_s)
+    assert(indicator.save, "It won't save on Difference = " + difference.to_s)
   end
 
   ### STATUS
@@ -421,6 +483,128 @@ describe Indicator do
     indicator.status_notes = statusNotes
     assert(!indicator.save, "It saves on Status Notes longer than 600 characters")
   end
+
+  ### UPDATE_PROGNOSIS
+
+  ## :reported_values = [] --> :prognosis = 0.0
+  it "will give a prognosis of zero if there are no reoported_values" do
+    reported_values = []
+    indicator = generate
+    indicator.reported_values = reported_values
+    indicator.save
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_prognosis
+    assert(indicator_in_table.prognosis == 0.0, ":prognosis was #{indicator_in_table.prognosis}, not 0.0 as anticipated")
+  end
+
+  # :prognosis w/ indicator type average performs an average
+  it "will give a prognosis based on the average values of it is an average type" do
+    reported_values = [0.2, 0.4, 0.6]
+    indicator = generate
+    indicator.reported_values = reported_values
+    indicator.indicator_type = "average"
+    indicator.save
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_prognosis
+    assert(indicator_in_table.prognosis == 0.4, ":prognosis was #{indicator_in_table.prognosis}, not 0.4 as anticipated")
+  end
+
+  # :prognosis w/ indicator type cumulative gives a projected cumulative value
+  it "will give a prognosis based on the cumulative values of it is a cumulative type" do
+    reported_values = [0.2, 0.4, 0.6]
+    indicator = generate
+    indicator.reported_values = reported_values
+    indicator.indicator_type = "cumulative"
+    indicator.save
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_prognosis
+    assert(indicator_in_table.prognosis == BigDecimal.new(1.2,10)*12/Time.now.month, ":prognosis was #{indicator_in_table.prognosis}, not #{BigDecimal.new(1.2,10)*12/Time.now.month} as anticipated")
+  end
+
+  ### UPDATE_DIFF
+
+  #it correctly calculates and stores the difference.
+  it "will update diff" do
+    reported_values = [0.2, 0.4, 0.6]
+    indicator = generate
+    indicator.reported_values = reported_values
+    indicator.indicator_type = "average"
+    indicator.target = 0.3
+    indicator.save
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_diff
+    assert(indicator_in_table.diff == 0.1, ":diff was #{indicator_in_table.diff}, not 0.1 as anticipated")
+  end
+
+  #it correctly calculates and stores the difference.
+  it "will update diff even if it is a negative value" do
+    reported_values = [0.2, 0.4, 0.6]
+    indicator = generate
+    indicator.reported_values = reported_values
+    indicator.indicator_type = "average"
+    indicator.target = 0.5
+    indicator.save
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_diff
+    assert(indicator_in_table.diff == -0.1, ":diff was #{indicator_in_table.diff}, not -0.1 as anticipated")
+  end
+
+  ### update_status
+  #TODO confirm if it is possible for this to lead to a negative status (I suspect yes)
+
+  # correctly calculates "more is better" status
+  it "will update 'more is better' case correctly" do
+    reported_values = [0.2, 0.4, 0.6]
+    indicator = generate
+    indicator.reported_values = reported_values
+    indicator.indicator_type = "average"
+    indicator.target = 0.2
+    indicator.dir = "more is better"
+    indicator.save
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_status
+    assert(indicator_in_table.status == 6.0, ":status was #{indicator_in_table.status}, not 6.0 as anticipated")
+  end
+
+  # correctly calculates "less is better" status
+  it "will update 'less is better' case correctly" do
+    reported_values = [0.2, 0.4, 0.6]
+    indicator = generate
+    indicator.reported_values = reported_values
+    indicator.indicator_type = "average"
+    indicator.target = 0.2
+    indicator.dir = "less is better"
+    indicator.save
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_status
+    assert(indicator_in_table.status == 4.0, ":status was #{indicator_in_table.status}, not 4.0 as anticipated")
+  end
+
+  ### UPDATE_CONTRIBUTING_PROJECTS_STATUS
+
+  it 'can find the correct number of children' do
+    indicator = gen_with_children()
+    indicator.save()
+    indicator_in_table = Indicator.find(1)
+    assert(indicator_in_table.projects.count == 1, "indicator counted #{indicator_in_table.projects.count} children, not 1 as expected")
+  end
+
+  it 'can update its contributing_projects_status using its children' do
+    indicator = gen_with_children()
+    indicator.save()
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_contributing_projects_status()
+    assert(indicator_in_table.contributing_projects_status == 0.505, "indicator status value was #{indicator_in_table.contributing_projects_status}, not 0.505 as expected")
+  end
+
+  it 'can update itself even if it has no children' do
+    indicator = generate()
+    indicator.save()
+    indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_contributing_projects_status()
+    assert(indicator_in_table.contributing_projects_status == 0.0, "indicator status value was #{indicator_in_table.contributing_projects_status}, not 0.0 as expected")
+  end
+
 
   ### EXTRA
   
