@@ -36,9 +36,8 @@ describe Project do
     return project
   end
 
-  def gen_with_children
-    project = generate()
-    activity1 = Activity.new(
+  def gen_activity
+    Activity.new(
         :name => "Aktivitat",
         :description => "Wall of Text",
         :phase => "Projektphasen",
@@ -54,6 +53,11 @@ describe Project do
         :project_id => 1,
         :team => "James Bond, Andy Warhol"
     )
+  end
+
+  def gen_with_children
+    project = generate()
+    activity1 = gen_activity
     activity2 = Activity.new(   #activity for a different project
         :name => "Aktivitat2",
         :description => "Wall of Text2",
@@ -562,7 +566,7 @@ describe Project do
     project.save()
     project_in_table = Project.find(1)
     project_in_table.update_actual_cost()
-    assert(project_in_table.actual_cost == 25.25, "Project's cost = #{project_in_table.actual_cost}, not 25.25 as it should.")
+    assert(project_in_table.actual_cost == 50.50, "Project's cost = #{project_in_table.actual_cost}, not 50.50 as it should.")
   end
 
   it 'can update it\'s cost even if it has no children' do
@@ -579,7 +583,7 @@ describe Project do
     project.save()
     project_in_table = Project.find(1)
     project_in_table.update_actual_manp()
-    assert(project_in_table.actual_manp == 15, "Project's manp = #{project_in_table.actual_manp}, not 15 as it should.")
+    assert(project_in_table.actual_manp == 30, "Project's manp = #{project_in_table.actual_manp}, not 30 as it should.")
   end
 
   it 'can update it\'s manp even if it has no children' do
@@ -691,7 +695,69 @@ describe Project do
     project.yearly_target_cost = {2012 => BigDecimal(5.5, 6), 2014 => BigDecimal(5.5, 6)}
     assert(!project.save, "yearly_target_cost is saving with a year after endDate: #{project.yearly_target_cost.keys[1]}")
   end
+
+  ### INITIALIZED_YEAR_HASH
+
+  #the correct hash is returned for a project that spans one year
+  it 'will return a one-element hash for a project that is in a single year' do
+    project = generate
+    project.startDate = Date.new(2013, 3, 7)
+    project.endDate = Date.new(2013, 6, 9)
+    i_y_hash = project.initialized_year_hash
+    assert(i_y_hash == {2013 => BigDecimal(0.0, 10)}, "The wrong hash was returned. Instead of {2013=>BD0.0}, got: #{i_y_hash}")
+  end
+
+  #the correct hash is returned for a project that spans two years
+  it 'will return a two-element hash for a project that spans two years' do
+    project = generate
+    project.startDate = Date.new(2013, 3, 7)
+    project.endDate = Date.new(2014, 6, 9)
+    i_y_hash = project.initialized_year_hash
+    assert(i_y_hash == {2013 => BigDecimal(0.0, 10), 2014 => BigDecimal(0.0, 10)}, "The wrong hash was returned. Instead of {2013=>BD0.0,2014=>BD0.0}, got: #{i_y_hash}")
+  end
+
+  #the correct hash is returned for a project that spans three years
+  it 'will return a three-element hash for a project that spans three years' do
+    project = generate
+    project.startDate = Date.new(2013, 3, 7)
+    project.endDate = Date.new(2015, 6, 9)
+    i_y_hash = project.initialized_year_hash
+    assert(i_y_hash == {2013 => BigDecimal(0.0, 10), 2014 => BigDecimal(0.0, 10), 2015 => BigDecimal(0.0, 10)}, "The wrong hash was returned. Instead of {2013=>BD0.0,2014=>BD0.0,2015=>BD0.0}, got: #{i_y_hash}")
+  end
+
+  ### ACTIVITY_YEAR_FRACTIONS_HASH
+
+  it 'will return a one-element hash for an activity that is in a single year' do
+    activity = gen_activity
+    project = generate
+    activity.startDate = Date.new(2013, 3, 7)
+    activity.endDate = Date.new(2013, 6, 9)
+    ayf_hash = project.activity_year_fractions_hash(activity)
+    assert(ayf_hash == {2013 => Rational('1/1')}, "The wrong hash was returned. Instead of {2013=>R(1/1)}, got: #{ayf_hash}")
+  end
+
+  it 'will return a two-element 50/50 hash for an activity that is split evenly across two years' do
+    activity = gen_activity
+    project = generate
+    activity.startDate = Date.new(2013, 12, 1)
+    activity.endDate = Date.new(2014, 2, 1)
+    ayf_hash = project.activity_year_fractions_hash(activity)
+    assert(ayf_hash == {2013 => Rational('1/2'), 2014 => Rational('1/2')}, "The wrong hash was returned. Instead of {2013=>R(1/2),2014=>R(1/2)}, got: #{ayf_hash}")
+  end
+
+  it 'will return a three-element hash for an activity that is split across three years' do
+    activity = gen_activity
+    project = generate
+    activity.startDate = Date.new(2013, 12, 1)
+    activity.endDate = Date.new(2015, 2, 1)
+    ayf_hash = project.activity_year_fractions_hash(activity)
+    assert(ayf_hash == {2013 => Rational('31/427'), 2014 => Rational('365/427'),2015 => Rational('31/427')}, "The wrong hash was returned. Instead of {2013=>R(31/427), 2014=>R(365/427), 2015=>R(31/427)}, got: #{ayf_hash}")
+  end
   
+  ### UPDATE_YEARLY_TARGET_COST
+
+  ### UPDATE_YEARLY_TARGET_MANP
+
   ### EXTRA
   
   ## Running Rspec remotely (RoR)

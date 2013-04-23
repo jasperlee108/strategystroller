@@ -230,5 +230,56 @@ class Project < ActiveRecord::Base
     self.actual_manp = manp
   end
 
+  # returns a hash of (year, zero-BigDecimal) with one year for each year this project spans.
+  def initialized_year_hash
+    year_in_range = self.startDate.year
+    year_hash = {}
+    while year_in_range <= self.endDate.year
+      year_hash[year_in_range] = BigDecimal(0.0, 10)
+      year_in_range += 1
+    end
+    year_hash
+  end
+
+  # given an activity, returns a hash of (year, fraction of activity's time)
+  # across the activity's start and end dates.
+  # Note this is inclusive of the startDate, exclusive of the endDate.
+  def activity_year_fractions_hash(activity)
+    year_fractions = {}
+    total_activity_days = activity.endDate - activity.startDate
+    range_start = activity.startDate
+    while range_start.year < activity.endDate.year
+      range_end = Date.new(range_start.year + 1)
+      year_fractions[range_start.year] = ((range_end - range_start) / total_activity_days)
+      range_start = range_end
+    end
+    year_fractions[range_start.year] = ((activity.endDate - range_start) / total_activity_days)
+    year_fractions
+  end
+  
+  
+  def update_yearly_target_cost
+    t_cost = initialized_year_hash()
+    acts = self.activities
+    acts.each do |act|
+      cost_fraction = activity_year_fractions_hash(act)
+      t_cost.keys.each do |year|
+        t_cost[year] += (act.target_cost * cost_fraction.fetch(year, 0))
+      end
+    end
+    self.yearly_target_cost = t_cost
+  end
+
+  def update_yearly_target_manp
+    t_manp = initialized_year_hash()
+    acts = self.activities
+    acts.each do |act|
+      manp_fraction = activity_year_fractions_hash(act)
+      t_manp.keys.each do |year|
+        t_manp[year] += (act.target_manp * manp_fraction.fetch(year, 0))
+      end
+    end
+    self.yearly_target_manp = t_manp
+  end
 
 end
