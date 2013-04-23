@@ -54,7 +54,9 @@ describe Indicator do
         :indicator_id => 1,
         :head_id => 1,
         :steer_id => 1,
-        :team => "James Bond, Andy Warhol"
+        :team => "James Bond, Andy Warhol",
+        :yearly_target_manp => { 2013 => BigDecimal(5.5,6)},
+        :yearly_target_cost => { 2013 => BigDecimal(25.25,6)}
     )
     project2 = Project.new(  # Not a child of this indicator.
         :name => "Projekts2",
@@ -79,7 +81,9 @@ describe Indicator do
         :indicator_id => 3,
         :head_id => 1,
         :steer_id => 1,
-        :team => "James Bond2, Andy Warhol2"
+        :team => "James Bond2, Andy Warhol2",
+        :yearly_target_manp => {2013 => BigDecimal(5.5,6)},
+        :yearly_target_cost => {2013 => BigDecimal(25.25,6)}
     )
     project1.save
     project2.save

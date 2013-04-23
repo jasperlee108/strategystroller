@@ -2,7 +2,11 @@ class Project < ActiveRecord::Base
   attr_accessible :actual_cost, :actual_manp, :compensation, :description, :actual_duration, :target_duration,
                   :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global,
                   :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp,
-                  :indicator_id, :head_id, :steer_id, :user_ids, :team
+                  :indicator_id, :head_id, :steer_id, :user_ids, :team, :yearly_target_cost,
+                  :yearly_target_manp
+
+  serialize :yearly_target_manp, Hash
+  serialize :yearly_target_cost, Hash
 
   ### ASSOCIATIONS
   ## parent
@@ -149,6 +153,50 @@ class Project < ActiveRecord::Base
   ## startDate = date
   ## endDate = date
   validate :validDate
+
+  validates_each :yearly_target_cost do |record,attribute,value|
+    problems = ""
+    if value.is_a? Hash
+      value.each do |year, cost|
+        problems << "cost must be a BigDecimal, unlike #{cost}" unless cost.is_a? BigDecimal
+        problems << "cost must be positive" unless cost >= 0.0
+        if year.is_a? Integer
+          unless record.startDate.nil? or record.endDate.nil? #makes sure it will still save if the start/end dates haven't been initialized yet for some reason
+            problems << "year must be >= #{record.startDate.year}" unless year >= record.startDate.year
+            problems << "year must be <= #{record.endDate.year}" unless year <= record.endDate.year
+          end
+        else
+          problems << "year must be an Integer, unlike #{year}"
+        end
+      end
+    else
+      problems << "yearly_target_cost must be a hash of year keys to cost values"
+    end
+    record.errors.add(:yearly_target_cost, problems) if problems != ""
+  end
+
+  validates_each :yearly_target_manp do |record,attribute,value|
+    problems = ""
+    if value.is_a? Hash
+      value.each do |year, manp|
+        problems << "manp must be an BigDecimal, unlike #{manp}" unless manp.is_a? BigDecimal
+        problems << "manp must be positive" unless manp >= 0.0
+        if year.is_a? Integer
+          unless record.startDate.nil? or record.endDate.nil? #makes sure it will still save if the start/end dates haven't been initialized yet for some reason
+            problems << "year must be >= #{record.startDate.year}" unless year >= record.startDate.year
+            problems << "year must be <= #{record.endDate.year}" unless year <= record.endDate.year
+          end
+        else
+          problems << "year must be an Integer, unlike #{year}"
+        end
+      end
+    else
+      problems << "yearly_target_manp must be a hash of year keys to manp values"
+    end
+    record.errors.add(:yearly_target_manp, problems) if problems != ""
+  end
+
+  
   
   ### VALID DATE CHECKER, modified accordingly from source
   ## Credit: Gabe Hollombe, brettish

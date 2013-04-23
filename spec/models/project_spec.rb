@@ -9,7 +9,7 @@ describe Project do
     project = Project.new(
     :name => "Projekts",
     :description => "Projektbeschreibung",
-    :startDate => Date.new(2013,03,27),
+    :startDate => Date.new(2012,03,27),
     :endDate => Date.new(2013,03,28),
     :actual_duration => 15,
     :target_duration => 52,
@@ -29,7 +29,9 @@ describe Project do
     :indicator_id => 1,
     :head_id => 1,
     :steer_id => 1,
-    :team => "James Bond, Andy Warhol"
+    :team => "James Bond, Andy Warhol",
+    :yearly_target_manp => {2012 => BigDecimal(5.5,6), 2013 => BigDecimal(7.5,6)},
+    :yearly_target_cost => {2012 => BigDecimal(25.25,6), 2013 => BigDecimal(38.00,6)},
     )
     return project
   end
@@ -40,9 +42,9 @@ describe Project do
         :name => "Aktivitat",
         :description => "Wall of Text",
         :phase => "Projektphasen",
-        :startDate => Date.new(2013,03,26),
-        :endDate => Date.new(2013,03,27),
-        :targetManp => 20,
+        :startDate => Date.new(2012,03,27),
+        :endDate => Date.new(2013,03,28),
+        :targetManp => 11,
         :targetCost => 50.50,
         :notes => "Another Wall of Text",
         :actualManp => 15,
@@ -52,7 +54,7 @@ describe Project do
         :project_id => 1,
         :team => "James Bond, Andy Warhol"
     )
-    activity2 = Activity.new(
+    activity2 = Activity.new(   #activity for a different project
         :name => "Aktivitat2",
         :description => "Wall of Text2",
         :phase => "Projektphasen2",
@@ -68,8 +70,25 @@ describe Project do
         :project_id => 2,
         :team => "James Warhol"
     )
+    activity3 = Activity.new(
+        :name => "Aktivitat3",
+        :description => "Wall of Text3",
+        :phase => "Projektphasen3",
+        :startDate => Date.new(2013,03,27),
+        :endDate => Date.new(2013,03,28),
+        :targetManp => 2,
+        :targetCost => 12.75,
+        :notes => "Another Wall of Text3",
+        :actualManp => 15,
+        :actualCost => 25.25,
+        :actualProg => "In Progress",
+        :statusNotes => "A Different Wall of Text3",
+        :project_id => 1,
+        :team => "James Bond3, Andy Warhol3"
+    )
     activity1.save()
     activity2.save()
+    activity3.save()
     project.actual_cost = 0
     return project
   end
@@ -571,6 +590,108 @@ describe Project do
     assert(project_in_table.actual_manp == 0.0, "Project's manp = #{project_in_table.actual_manp}, not 0 as it should.")
   end
 
+  ### YEARLY_TARGET_MANP
+
+  # :yearly_target_manp will save an empty hash.
+  it 'will allow an empty target_manp hash' do
+    project = generate()
+    project.yearly_target_manp = {}
+    assert(project.save, "yearly_target_manp is not being allowed to be an empty hash")
+  end
+
+  # :yearly_target_manp will not allow a non-integer year.
+  it 'will not allow a non-integer year' do
+    project = generate()
+    project.yearly_target_manp = {2012 => BigDecimal(5.5, 6), "2013" => BigDecimal(5.5, 6)}
+    assert(!project.save, "yearly_target_manp is saving with a non-integer year: #{project.yearly_target_manp.keys[1]}")
+  end
+
+  # :yearly_target_manp will not save a non-hash.
+  it 'will not allow a non-hash yearly_target_manp' do
+    project = generate()
+    project.yearly_target_manp = []
+    assert(!project.save, "yearly_target_manp is allowing a non-hash")
+  end
+
+  # :yearly_target_manp will not allow a non-BigDecimal manp.
+  it 'will not allow a non-BigDecimal manp' do
+    project = generate()
+    project.yearly_target_manp = {2012 => BigDecimal(5.5, 6), 2013 => 5.5 }
+    assert(!project.save, "yearly_target_manp is saving with a non-BigDecimal manp: #{project.yearly_target_manp[2013]}")
+  end
+
+  # :yearly_target_manp will not allow a negative manp.
+  it 'will not allow a negative manp' do
+    project = generate()
+    project.yearly_target_manp = {2012 => BigDecimal(5.5, 6), 2013 => BigDecimal(-5.5, 6)}
+    assert(!project.save, "yearly_target_manp is saving with a negative manp: #{project.yearly_target_manp[2013]}")
+  end
+
+  # :yearly_target_manp will not allow a year before startDate.
+  it 'will not allow a year before startDate' do
+    project = generate()
+    project.yearly_target_manp = {2011 => BigDecimal(5.5, 6), 2013 => BigDecimal(5.5, 6)}
+    assert(!project.save, "yearly_target_manp is saving with a year before startDate: #{project.yearly_target_manp.keys[0]}")
+  end
+
+  # :yearly_target_manp will not allow a year after endDate.
+  it 'will not allow a year before startDate' do
+    project = generate()
+    project.yearly_target_manp = {2012 => BigDecimal(5.5, 6), 2014 => BigDecimal(5.5, 6)}
+    assert(!project.save, "yearly_target_manp is saving with a year after endDate: #{project.yearly_target_manp.keys[1]}")
+  end
+
+  ### YEARLY_TARGET_COST
+
+  # :yearly_target_cost will save an empty hash.
+  it 'will allow an empty target_cost hash' do
+    project = generate()
+    project.yearly_target_cost = {}
+    assert(project.save, "yearly_target_cost is not being allowed to be an empty hash")
+  end
+
+  # :yearly_target_cost will not allow a non-integer year.
+  it 'will not allow a non-integer year' do
+    project = generate()
+    project.yearly_target_cost = {2012 => BigDecimal(5.5, 6), "2013" => BigDecimal(5.5, 6)}
+    assert(!project.save, "yearly_target_cost is saving with a non-integer year: #{project.yearly_target_cost.keys[1]}")
+  end
+
+  # :yearly_target_cost will not save a non-hash.
+  it 'will not allow a non-hash yearly_target_cost' do
+    project = generate()
+    project.yearly_target_cost = []
+    assert(!project.save, "yearly_target_cost is allowing a non-hash")
+  end
+
+  # :yearly_target_cost will not allow a non-BigDecimal cost.
+  it 'will not allow a non-BigDecimal cost' do
+    project = generate()
+    project.yearly_target_cost = {2012 => BigDecimal(5.5, 6), 2013 => 5.5 }
+    assert(!project.save, "yearly_target_cost is saving with a non-BigDecimal cost: #{project.yearly_target_cost[2013]}")
+  end
+
+  # :yearly_target_cost will not allow a negative cost.
+  it 'will not allow a negative cost' do
+    project = generate()
+    project.yearly_target_cost = {2012 => BigDecimal(5.5, 6), 2013 => BigDecimal(-5.5, 6)}
+    assert(!project.save, "yearly_target_cost is saving with a negative cost: #{project.yearly_target_cost[2013]}")
+  end
+
+  # :yearly_target_cost will not allow a year before startDate.
+  it 'will not allow a year before startDate' do
+    project = generate()
+    project.yearly_target_cost = {2011 => BigDecimal(5.5, 6), 2013 => BigDecimal(5.5, 6)}
+    assert(!project.save, "yearly_target_cost is saving with a year before startDate: #{project.yearly_target_cost.keys[0]}")
+  end
+
+  # :yearly_target_cost will not allow a year after endDate.
+  it 'will not allow a year after endDate' do
+    project = generate()
+    project.yearly_target_cost = {2012 => BigDecimal(5.5, 6), 2014 => BigDecimal(5.5, 6)}
+    assert(!project.save, "yearly_target_cost is saving with a year after endDate: #{project.yearly_target_cost.keys[1]}")
+  end
+  
   ### EXTRA
   
   ## Running Rspec remotely (RoR)
