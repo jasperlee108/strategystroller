@@ -36,17 +36,20 @@
       <div class="navbar-inner">
       <div class="container">
         	<a class="brand" href="/">Strategy Stroller</a>
-            <div id ="cu_nav">
+            <% if signed_in? %>
+            <% if current_user.controlling_unit == true %>
+<!-- <div id ="cu_nav">-->
         					<ul class = "nav">
 <li id ="navbar_forms"><%= link_to (t :forms), "#"%></li>
 <li id="navbar_reports"><%= link_to (t :reports), "#" %></li>
-<li id= "navbar_setup"><%= link_to (t :setup), input_framework_path %></li>
+<li id= "navbar_setup"><%= link_to (t :setup), :input_framework %></li>
 <li id= "navbar_edit_users"><%= link_to (t :edit_users), "#" %></li>
 </ul>
-			<div class="btn-group pull-right">
 
-
-        	
+        <!--     </div>-->
+            <% end %>
+            
+            			<div class="btn-group pull-right">
 			  <a class="btn dropdown-toggle btn-inverse pull-right" data-toggle="dropdown">
 			    User Settings
 			    <span class="caret"></span>
@@ -56,7 +59,9 @@
 			    <li><%= render 'devise/menu/registration_items' %></li>
 			  </ul>
 			</div>
-            </div>
+            <% end %>
+           
+
             </div>
           
       </div>
@@ -64,7 +69,6 @@
 
 
     <div class="container body_container">
-
       <!-- Display messages For devise. -->
       <% if notice %>
       <div class="notice alert">
