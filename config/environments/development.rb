@@ -39,4 +39,10 @@ StrategyStroller::Application.configure do
   # In production, :host should be set to the actual host of your application."
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  config.i18n.fallbacks = true
+  
+  config.i18n.available_locales = [:de, :piglatin, :en]
+  
+  config.i18n.default_locale = :en
+  
 end
