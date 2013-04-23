@@ -11,7 +11,8 @@ describe Project do
     :description => "Projektbeschreibung",
     :startDate => Date.new(2013,03,27),
     :endDate => Date.new(2013,03,28),
-    :duration => 5,
+    :actual_duration => 15,
+    :target_duration => 52,
     :target_manp => 5,
     :target_cost => 10.5,
     :inplan => true,
@@ -158,30 +159,56 @@ describe Project do
     assert(!project.save, "It saves on non existence Date")
   end
 
-  ### DURATION
-  
-  ## Duration is not empty
-  it "should not have empty Duration" do
-    duration = nil
+  ### actual_duration
+
+  ## actual_duration is not empty
+  it "should not have empty actual_duration" do
+    actual_duration = nil
     project = generate()
-    project.duration = duration
-    assert(!project.save, "It saves on empty Duration")
-  end
-  
-  ## Duration = integer
-  it "should have Duration as an integer" do
-    duration = "random"
-    project = generate()
-    project.duration = duration
-    assert(!project.save, "It saves on Duration = " + duration.to_s)
+    project.actual_duration = actual_duration
+    assert(!project.save, "It saves on empty actual_duration")
   end
 
-  ## Duration = integer >= 0
-  it "should have Duration as an integer >= 0" do
-    duration = -5
+  ## actual_duration = integer
+  it "should have actual_duration as an integer" do
+    actual_duration = "random"
     project = generate()
-    project.duration = duration
-    assert(!project.save, "It saves on Duration = " + duration.to_s)
+    project.actual_duration = actual_duration
+    assert(!project.save, "It saves on actual_duration = " + actual_duration.to_s)
+  end
+
+  ## actual_duration = integer >= 0
+  it "should have actual_duration as an integer >= 0" do
+    actual_duration = -5
+    project = generate()
+    project.actual_duration = actual_duration
+    assert(!project.save, "It saves on actual_duration = " + actual_duration.to_s)
+  end
+
+  ### target_duration
+
+  ## target_duration is not empty
+  it "should not have empty target_duration" do
+    target_duration = nil
+    project = generate()
+    project.target_duration = target_duration
+    assert(!project.save, "It saves on empty target_duration")
+  end
+
+  ## target_duration = integer
+  it "should have target_duration as an integer" do
+    target_duration = "random"
+    project = generate()
+    project.target_duration = target_duration
+    assert(!project.save, "It saves on target_duration = " + target_duration.to_s)
+  end
+
+  ## target_duration = integer >= 0
+  it "should have target_duration as an integer >= 0" do
+    target_duration = -5
+    project = generate()
+    project.target_duration = target_duration
+    assert(!project.save, "It saves on target_duration = " + target_duration.to_s)
   end
 
   ### TARGET MAN POWER

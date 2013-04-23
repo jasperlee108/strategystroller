@@ -1,5 +1,8 @@
 class Project < ActiveRecord::Base
-  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :duration, :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global, :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp, :indicator_id, :head_id, :steer_id, :user_ids, :team
+  attr_accessible :actual_cost, :actual_manp, :compensation, :description, :actual_duration, :target_duration,
+                  :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global,
+                  :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp,
+                  :indicator_id, :head_id, :steer_id, :user_ids, :team
 
   ### ASSOCIATIONS
   ## parent
@@ -49,11 +52,17 @@ class Project < ActiveRecord::Base
   ## Compensation = true / false = yes / no
   validates :compensation, :inclusion => { :in => [true, false] }
 
-  ## Duration = Integer
-  ## 0 <= duration
-  validates :duration,
+  ## target_duration = Integer
+  ## 0 <= target_duration
+  validates :target_duration,
   :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
+
+  ## actual_duration = Integer
+  ## 0 <= actual_duration
+  validates :actual_duration,
+            :presence => true,
+            :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Target Cost = decimal
   ## 0.00 <= target_cost

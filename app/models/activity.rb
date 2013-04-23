@@ -1,5 +1,7 @@
 class Activity < ActiveRecord::Base
-  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id, :user_ids, :team
+  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes,
+                  :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id,
+                  :user_ids, :team
 
   ### ASSOCIATIONS
   ## parent
