@@ -1,9 +1,15 @@
-<h1>Edit Users</h1>
-
-<%= semantic_form_for :user do |f| %>
+<h1>Manage Users</h1>
+<%= flash[:notice] %>
+    <%= flash[:error] %><br>
+<!-- Need to specify company position and general position (CU/prov) when entering a user-->
+<%= semantic_form_for @application do |f| %>
     <%= f.inputs do %>
-        <%= f.input :username %>
+       <%= f.semantic_fields_for :users do |user| %>
+             <%= render 'user_fields', :f => user %>
+        <% end %>
+        <%= link_to_add_association 'Add User', f, :users, :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
+
     <% end %>
-    <%= f.button %>
+    <%= f.action :submit, :label => "Create User" %>
 <% end %>
 

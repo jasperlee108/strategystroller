@@ -1,5 +1,25 @@
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'setup_system', :controller => 'controller_unit') %>">Set system information</a></li>
+<li><a href="<%= url_for(:action => 'set_goal', :controller => 'controller_unit') %>">New goal</a></li>
+<li><a href="<%= url_for(:action => 'set_indicator', :controller => 'controller_unit') %>">New indicator</a></li>
+<li><a href="<%= url_for(:action => 'set_project', :controller => 'controller_unit') %>">New project</a></li>
+<% end %>
+
 <body>
-    <%= tabs %>
+    <div class="navbar snb">
+      <div class="navbar-inner ni">
+        <div class="container">
+          <ul class="nav isnb">
+            <li><a href=<%= url_for(:action => 'set_goal', :controller => 'controller_unit') %>>Goals</a></li>
+            <li><a href=<%= url_for(:action => 'set_indicator', :controller => 'controller_unit') %>>Indicators</a></li>
+            <li><a href=<%= url_for(:action => 'set_project', :controller => 'controller_unit') %>>Projects</a></li>
+            <li><a href=<%= url_for(:action => 'set_activity', :controller => 'controller_unit') %>>Activities</a></li>
+            <li><a href=<%= url_for(:action => 'setup_system', :controller => 'controller_unit') %>>Setup System</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div><!-- /.navbar -->
     <%= flash[:notice] %>
     <%= flash[:error] %><br>
 
@@ -7,6 +27,8 @@
         <%= f.inputs do %>
         
           <%= f.input :name, :required => true, :as => :string, :label => "Name of Indicator" %>
+          
+          <%= f.input :short_name, :as => :string, :label => "Short Name of Indicator" %>
 
           <%= f.input :goal_id, :as => :select, :collection => Goal.all, :required => true, :label => "Associated Goal" %>
 

@@ -1,16 +1,24 @@
 class Activity < ActiveRecord::Base
-  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id, :user_ids
+  attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes, :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id, :team, :short_name
 
   ### ASSOCIATIONS
   ## parent
   belongs_to :project
+  
   ## team
-  has_and_belongs_to_many :users
+  validates :team,
+  :length => { :maximum => 600 },
+  :allow_blank => true
 
   ## name = string[80]
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
+  
+  ## short name = string[30]
+  validates :short_name,
+  :presence => true,
+  :length => { :maximum => 30 }  
   
   # Needs a Parent
   validates :project_id,

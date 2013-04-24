@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :form_id, :prereq
+  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :prereq, :short_name
   
   ### ASSOCIATIONS
   ## parent
@@ -8,8 +8,6 @@ class Goal < ActiveRecord::Base
   belongs_to :user
   ## children
   has_many :indicators
-
-  belongs_to :form
   
   ## Needs to have Parent
   validates :dimension_id,
@@ -23,6 +21,11 @@ class Goal < ActiveRecord::Base
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
+  
+  ## short name = string[30]
+  validates :short_name,
+  :presence => true,
+  :length => { :maximum => 30 }
   
   ## Need = string[1200]
   validates :need,

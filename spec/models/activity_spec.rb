@@ -19,7 +19,9 @@ describe Activity do
     :actualCost => 25.25,
     :actualProg => "In Progress",
     :statusNotes => "A Different Wall of Text",
-    :project_id => 1
+    :project_id => 1,
+    :team => "James Bond, Andy Warhol",
+    :short_name => "Shorter name"
     )
     return activity    
   end
@@ -299,6 +301,42 @@ describe Activity do
     activity = generate()
     activity.statusNotes = statusNotes
     assert(!activity.save, "It saves on Status Notes longer than 600 characters")
+  end
+
+  ### TEAM
+  
+  ## Team Notes can be empty
+  it "can have empty Team" do
+    team = ""
+    activity = generate()
+    activity.team = team
+    assert(activity.save, "It won't save on empty Team")
+  end
+  
+  ## Team Notes max = 600
+  it "should not have Team longer than 600 characters" do
+    team = (0...601).map{ ( 65+rand(26) ).chr }.join
+    activity = generate()
+    activity.team = team
+    assert(!activity.save, "It saves on Team longer than 600 characters")
+  end
+
+  ### SHORT NAME
+  
+  ## Short Name is not empty
+  it "should not have empty Short Name" do
+    short_name = ""
+    activity = generate()
+    activity.short_name = short_name
+    assert(!activity.save, "It saves on empty Short Name")
+  end
+  
+  ## Short Name max = 30
+  it "should not have Short Name longer than 30 characters" do
+    short_name = (0...31).map{ ( 65+rand(26) ).chr }.join
+    activity = generate()
+    activity.short_name = short_name
+    assert(!activity.save, "It saves on Short Name longer than 30 characters")
   end
 
   ### EXTRA

@@ -7,19 +7,28 @@
   <div class="alert"><%= devise_error_messages! %></div>
   <% end %>
 
-<%= f.text_field :username, :class => "input-block-level", :placeholder => (t :username)%>
+  <div><%= f.label :username %>
+  <%= f.text_field :username, :autofocus => true %></div>
 
-  <%= f.email_field :email, :class => "input-block-level", :placeholder => (t :email_address)%>
+  <div><%= f.label :email %>
+  <%= f.email_field :email %></div>
 
-  <%= f.text_field :business_code, :class => "input-block-level", :placeholder => (t :buisness_code) %>
+  <div><%= f.label :business_code %>
+  <%= f.text_field :business_code %></div>
+
+  <div><%= f.label :controlling_unit %>
+  <%= f.check_box :controlling_unit %></div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div><%= t :currently_awaiting_confirmation_for%><%= resource.unconfirmed_email %></div>
   <% end %>
   <%= f.password_field :password, :autocomplete => "off", :class => "input-block-level", :placeholder => (t :password_unchanged) %>
 
-  <%= f.password_field :password_confirmation, :class => "input-block-level", :placeholder => (t :confirm_password_unchanged) %>
+  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <%= f.password_field :password, :autocomplete => "off" %></div>
 
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %></div>
   <%= f.password_field :current_password, :class => "input-block-level", :placeholder =>(t :current_password) %>
 
    <div class="row-fluid"><%= f.submit (t :update), :class=> "btn btn-large btn-primary span12" %>
@@ -29,7 +38,7 @@
 
 </br>
 
-<%= button_to "<%= t :delete_my_account %>", :class=> "btn btn-large btn-danger span12", registration_path(resource_name), :data => { :confirm => "<%= t :are_you_sure %>" }, :method => :delete %>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 
 <input type=button class="btn btn-large btn-primary span12" value= "<%= t :cancel%>" onclick= "cancel_button()">
 <%= link_to "Back", :back %>

@@ -1,50 +1,29 @@
-<<<<<<< HEAD
-<div class="logincontainer" style="background-color: #f5f5f5">
-<div class="form-signin">
-<h2 class="form-signin-heading"><%= t :sign_up%></h2>
-=======
 <h2>Sign up</h2>
->>>>>>> parent of 0cc9d89... signup and login forms
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <% if devise_error_messages! != "" %>
   <div class="alert"><%= devise_error_messages! %></div>
   <% end %>
 
-<<<<<<< HEAD
-
-  <%= f.text_field :username, :class => "input-block-level", :placeholder => (t :username)%>
-
-  <%= f.email_field :email, :class => "input-block-level", :placeholder => (t :email_address)%>
-
-  <%= f.text_field :business_code, :class => "input-block-level", :placeholder => (t :buisness_code) %>
-
-  <%= f.password_field :password, :class => "input-block-level", :placeholder => (t :password) %>
-
-  <%= f.password_field :password_confirmation,:class => "input-block-level", :placeholder => (t :confirm_password) %>
-
-	<div class="row-fluid">
-       <%= f.submit (t :sign_up), :class=> "btn btn-large btn-primary span6"%>
-       <input type=button class="btn btn-large btn-primary span6" value='<%= t :cancel %>' onclick= "cancel_button()">
-	</div>
-=======
-  <div><%= f.label :username %><br />
+  <div><%= f.label :username %>
   <%= f.text_field :username, :autofocus => true %></div>
 
-  <div><%= f.label :email %><br />
+  <div><%= f.label :email %>
   <%= f.email_field :email %></div>
 
-  <div><%= f.label :business_code %><br />
+  <div><%= f.label :business_code %>
   <%= f.text_field :business_code %></div>
 
-  <div><%= f.label :password %><br />
+  <div><%= f.label :controlling_unit %>
+  <%= f.check_box :controlling_unit %></div>
+
+  <div><%= f.label :password %>
   <%= f.password_field :password %></div>
 
-  <div><%= f.label :password_confirmation %><br />
+  <div><%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %></div>
 
   <div><%= f.submit "Sign up" %></div>
->>>>>>> parent of 0cc9d89... signup and login forms
 <% end %>
 
 <%= render "devise/shared/links" %>

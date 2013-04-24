@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :confirmable, :timeoutable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :business_code
+  attr_accessible :username, :email, :password, :password_confirmation, :business_code, :temp_password, :controlling_unit
 
   # these validations are redundant - they're ensured through a combination of the database migration/definition and in
   # devise.rb initializer and in the :validatable module. Put here for documentation mainly.
@@ -20,14 +20,20 @@ class User < ActiveRecord::Base
   has_many :indicators
   has_many :owned_projects, :class_name => "Project", :foreign_key => :head_id
   has_many :steering_projects, :class_name => "Project", :foreign_key => :steer_id
-  has_and_belongs_to_many :projects
-  has_and_belongs_to_many :activities
-  has_and_belongs_to_many :forms
+  has_many :forms
   
   ### VALIDATIONS (added 04/16/2013)
   # Business code = string[2]
   validates :business_code,
-  :presence => true,
   :length => { :maximum => 2 }
+
+  validates_uniqueness_of :email
+  
+  ### TODO: NOTE TO SELF
+  ## If you see this note, make sure to only give T/F options
+  ## Rails has this thing where most things default to False 
+
+  ## Controlling Unit = true / false = yes / no
+  validates :controlling_unit, :inclusion => { :in => [true, false] }
   
 end
