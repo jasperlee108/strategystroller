@@ -217,7 +217,7 @@ class Project < ActiveRecord::Base
   # Calculates actual cost from the activities claiming this project as a parent.
   # In the even there are no activities, sets this projects' cost to 0.
   def update_actual_cost
-    cost = 0.00
+    cost = BigDecimal(0.00, 10)
     self.activities.each do |activity|
       cost += activity.actualCost
     end
@@ -259,7 +259,8 @@ class Project < ActiveRecord::Base
     year_fractions
   end
   
-  
+  ### UNTESTED BELOW THIS **** TODO TEST
+
   def update_yearly_target_cost
     t_cost = initialized_year_hash()
     acts = self.activities
@@ -284,4 +285,64 @@ class Project < ActiveRecord::Base
     self.yearly_target_manp = t_manp
   end
 
+  # Exclusive of the endDate, inclusive of the startDate
+  def update_target_duration
+    self.target_duration = self.endDate - self.startDate
+  end
+
+  # Exclusive of the today, inclusive of the startDate
+  def update_actual_duration
+    self.actual_duration = Date.today - self.startDate
+  end
+
+  def update_status_prog
+    update_actual_duration #TODO possibly omit this so it can be only updated if the start/end date changes.
+    update_target_duration
+    self.status_prog = BigDecimal(self.actual_duration, 10) / BigDecimal(self.target_duration, 10)
+  end
+
+  def update_status_manp
+    update_actual_manp
+    update_target_manp
+    self.status_manp = BigDecimal(self.actual_manp, 10) / BigDecimal(self.target_manp, 10) 
+  end
+
+  def update_status_cost
+    update_actual_cost
+    update_target_cost
+    self.status_cost = BigDecimal(self.actual_cost, 10) / BigDecimal(self.target_cost, 10)
+  end
+
+  # TODO decide if this should be calculated from yearly_target_manp
+  def update_target_manp
+    manp = 0
+    self.activities.each do |activity|
+      manp += activity.targetmanp
+    end
+    self.target_manp = manp
+  end
+
+  # TODO decide if this should be calculated from yearly_target_cost
+  def update_target_cost
+    cost = BigDecimal(0.00, 10)
+    self.activities.each do |activity|
+      cost += activity.targetCost
+    end
+    self.target_cost = cost
+  end
+
+  def update_status_ms
+    phases_progress = { }
+    self.activities.each do |act|
+      if act.phase != Activity::PROJECT_MANAGEMENT
+        if phases_progress[act.phase].nil?
+          phases_progress[act.phase] = act.actualProg
+        elsif phases_progress[act.phase] != act.actualProg
+          phases_progress[act.phase] = Activity::IN_PROGRESS
+        end
+      end
+    end
+    self.status_ms = phases_progress.values.inject(0,:+) # NOTE Could easily be modified to return the individual values
+  end
+  
 end

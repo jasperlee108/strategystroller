@@ -19,6 +19,8 @@ class Activity < ActiveRecord::Base
   IN_PROGRESS = 1
   COMPLETED = 2
   PROGRESS = [NOT_YET_STARTED, IN_PROGRESS, COMPLETED]
+  # NOTE: The PROGRESS values are used in Project's "update_status_ms" method,
+  # changing them will break it.
   
   ## team
   validates :team,
