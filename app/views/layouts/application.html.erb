@@ -37,6 +37,7 @@
       <div class="container">
         	<a class="brand" href="/">Strategy Stroller</a>
             <% if signed_in? %>
+            <% if current_user.respond_to?('controlling_unit') %>
             <% if current_user.controlling_unit == true %>
 <!-- <div id ="cu_nav">-->
         					<ul class = "nav">
@@ -47,6 +48,7 @@
 </ul>
 
         <!--     </div>-->
+            <% end %>
             <% end %>
             
             			<div class="btn-group pull-right">

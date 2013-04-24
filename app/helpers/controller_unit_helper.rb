@@ -21,6 +21,21 @@ module ControllerUnitHelper
     end
   end
   
+  def form_type(table_id)
+    if table_id == GOAL
+      return "Goal"
+    elsif table_id == INDICATOR
+      return "Indicator"
+    elsif table_id == PROJECT
+      return "Project"
+    elsif table_id == ACTIVITY
+      return "Activity"
+    else
+      ## ERROR: Should not reach here!
+      return "Show what?"
+    end
+  end
+  
   def find_path_cu(table_id, entry_id, form_id)
     if table_id == GOAL
       return goal_check_path(:entry_id => entry_id, :form_id => form_id)
