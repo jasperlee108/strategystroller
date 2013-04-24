@@ -10,6 +10,14 @@ class ControllerUnitController < ApplicationController
     @user = current_user
   end
   
+  def goals_list
+    @goals = Goal.all
+  end
+  
+  def indicators_list
+    @indicators = Indicator.all
+  end
+  
   def set_goal
     @goal = Goal.new
     if (request.post?) 

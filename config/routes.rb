@@ -24,6 +24,8 @@ StrategyStroller::Application.routes.draw do
   # Controller
   match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
   match "controller_unit/input_framework" => "controller_unit#set_goal", :as => "input_framework"
+  match "controller_unit/input_framework/goals_list" => "controller_unit#goals_list", :as => "goals_list"
+  match "controller_unit/input_framework/indicators_list" => "controller_unit#indicators_list", :as => "indicators_list"
   match "controller_unit/input_framework/goals" => "controller_unit#set_goal", :as => "goals"
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
