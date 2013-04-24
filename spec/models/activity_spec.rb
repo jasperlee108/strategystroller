@@ -9,7 +9,7 @@ describe Activity do
     activity = Activity.new(
     :name => "Aktivitat",
     :description => "Wall of Text",
-    :phase => "Projektphasen",
+    :phase => Activity::PREREQUISITES_FULFILLED,
     :startDate => Date.new(2013,03,26),
     :endDate => Date.new(2013,03,27),
     :targetManp => 20,
@@ -75,19 +75,35 @@ describe Activity do
   ### PHASE
   
   ## Phase is not empty
-  it "should not have empty Phase" do
-    phase = ""
+  it "can not have empty Phase" do
+    phase = nil
     activity = generate()
     activity.phase = phase
     assert(!activity.save, "It saves on empty Phase")
   end
   
-  ## Phase max = 30
-  it "should not have Phase longer than 30 characters" do
-    phase = (0...31).map{ ( 65+rand(26) ).chr }.join
+  ## Phase is an integer
+  it "will not allow a non-integer phase" do
+    phase = "1-Concept completed"
     activity = generate()
     activity.phase = phase
-    assert(!activity.save, "It saves on Phase longer than 30 characters")
+    assert(!activity.save, "It saves on Phase with a non-integer phase")
+  end
+
+  ## Phase is in Activity::PHASES
+  it "will not allow a phase not in Activity::PHASES" do
+    phase = 5
+    activity = generate()
+    activity.phase = phase
+    assert(!activity.save, "It saves on an integer Phase not present in Activity::PHASES")
+  end
+
+  ## Phase allows Activity::PROJECT_MANAGEMENT
+  it "will allow the phase Activity::PROJECT_MANAGEMENT" do
+    phase = Activity::PROJECT_MANAGEMENT
+    activity = generate()
+    activity.phase = phase
+    assert(activity.save, "It will not save on Activity::PROJECT_MANAGEMENT: #{Activity::PROJECT_MANAGEMENT}")
   end
   
   ### DATE

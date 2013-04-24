@@ -21,7 +21,7 @@ describe Project do
     :actual_manp => 10,
     :actual_cost => 20.5,
     :status_prog => 75.5,
-    :status_ms => 50,
+    :status_ms => 5,
     :status_manp => 10,
     :status_cost => 10.5,
     :status_global => 50.5,
@@ -40,7 +40,7 @@ describe Project do
     Activity.new(
         :name => "Aktivitat",
         :description => "Wall of Text",
-        :phase => "Projektphasen",
+        :phase => Activity::PREREQUISITES_FULFILLED,
         :startDate => Date.new(2012,03,27),
         :endDate => Date.new(2013,03,28),
         :targetManp => 11,
@@ -61,7 +61,7 @@ describe Project do
     activity2 = Activity.new(   #activity for a different project
         :name => "Aktivitat2",
         :description => "Wall of Text2",
-        :phase => "Projektphasen2",
+        :phase => Activity::PREREQUISITES_FULFILLED,
         :startDate => Date.new(2013,03,26),
         :endDate => Date.new(2013,03,27),
         :targetManp => 20,
@@ -77,7 +77,7 @@ describe Project do
     activity3 = Activity.new(
         :name => "Aktivitat3",
         :description => "Wall of Text3",
-        :phase => "Projektphasen3",
+        :phase => Activity::PREREQUISITES_FULFILLED,
         :startDate => Date.new(2013,03,27),
         :endDate => Date.new(2013,03,28),
         :targetManp => 2,
@@ -441,6 +441,14 @@ describe Project do
   ## StatusMs = integer >= 0
   it "should have StatusMs as a integer >= 0" do
     statusMs = -5
+    project = generate()
+    project.status_ms = statusMs
+    assert(!project.save, "It saves on StatusMs = " + statusMs.to_s)
+  end
+
+  ## StatusMs = integer <= 8
+  it "should have StatusMs as a integer >= 0" do
+    statusMs = 9
     project = generate()
     project.status_ms = statusMs
     assert(!project.save, "It saves on StatusMs = " + statusMs.to_s)

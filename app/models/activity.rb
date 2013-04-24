@@ -6,6 +6,14 @@ class Activity < ActiveRecord::Base
   ### ASSOCIATIONS
   ## parent
   belongs_to :project
+
+  PROJECT_MANAGEMENT = -1
+  CONCEPT_COMPLETED = 1
+  PREREQUISITES_FULFILLED = 2
+  IMPLEMENTATION_RUNNING = 3
+  PROJECT_EFFECTIVE = 4
+  PHASES = [PROJECT_MANAGEMENT, CONCEPT_COMPLETED, PREREQUISITES_FULFILLED,
+            IMPLEMENTATION_RUNNING, PROJECT_EFFECTIVE]
   
   ## team
   validates :team,
@@ -26,11 +34,13 @@ class Activity < ActiveRecord::Base
   :length => { :maximum => 600 },
   :allow_blank => true
   
-  ## phase = string[30]
-  ## TODO: there are 4 choices here, might not need this field or change to int?
+  ## phase = Integer
+  ## -1 <= phase <= 4
+  # {"1-Concept completed", "2-Prerequisites fulfilled", "3-Implementation running", "4-Project effective"
   validates :phase,
   :presence => true,
-  :length => { :maximum => 30 }  
+  :numericality => { :only_integer => true },
+  :inclusion => PHASES
   
   ## startDate = date
   ## endDate = date

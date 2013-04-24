@@ -106,12 +106,14 @@ class Project < ActiveRecord::Base
     :greater_than_or_equal_to => 0
   }
   
-  ## Status_ms = long integer
-  ## 0.00 <= status_ms
+  ## Status_ms =  integer
+  ## 0 <= status_ms <= 8
   validates :status_ms,
   :presence => true,
   :numericality => {
-    :greater_than_or_equal_to => 0
+      :only_integer => true,
+      :greater_than_or_equal_to => 0,
+      :less_than_or_equal_to => 8
   }
   
   ## Status_manp = long integer
