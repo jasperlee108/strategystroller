@@ -48,7 +48,7 @@ describe Project do
         :notes => "Another Wall of Text",
         :actualManp => 15,
         :actualCost => 25.25,
-        :actualProg => "In Progress",
+        :actualProg => Activity::IN_PROGRESS,
         :statusNotes => "A Different Wall of Text",
         :project_id => 1,
         :team => "James Bond, Andy Warhol"
@@ -69,7 +69,7 @@ describe Project do
         :notes => "Another Wall of Text",
         :actualManp => 3,
         :actualCost => 9.50,
-        :actualProg => "In Progress",
+        :actualProg => Activity::IN_PROGRESS,
         :statusNotes => "A Different Wall of Text",
         :project_id => 2,
         :team => "James Warhol"
@@ -85,7 +85,7 @@ describe Project do
         :notes => "Another Wall of Text3",
         :actualManp => 15,
         :actualCost => 25.25,
-        :actualProg => "In Progress",
+        :actualProg => Activity::IN_PROGRESS,
         :statusNotes => "A Different Wall of Text3",
         :project_id => 1,
         :team => "James Bond3, Andy Warhol3"

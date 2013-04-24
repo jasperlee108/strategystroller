@@ -17,7 +17,7 @@ describe Activity do
     :notes => "Another Wall of Text",
     :actualManp => 10,
     :actualCost => 25.25,
-    :actualProg => "In Progress",
+    :actualProg => Activity::IN_PROGRESS,
     :statusNotes => "A Different Wall of Text",
     :project_id => 1,
     :team => "James Bond, Andy Warhol"
@@ -286,18 +286,34 @@ describe Activity do
   
   ## ActualProg is not empty
   it "should not have empty ActualProg" do
-    actualProg = ""
+    actualProg = nil
     activity = generate()
     activity.actualProg = actualProg
     assert(!activity.save, "It saves on empty ActualProg")
   end
   
-  ## ActualProg max = 30
-  it "should not have ActualProg longer than 30 characters" do
-    actualProg = (0...31).map{ ( 65+rand(26) ).chr }.join
+  ## ActualProg is an number
+  it "should not have ActualProg that is not number" do
+    actualProg = "In progress"
     activity = generate()
     activity.actualProg = actualProg
-    assert(!activity.save, "It saves on ActualProg longer than 30 characters")
+    assert(!activity.save, "It saves on ActualProg that is not a Number")
+  end
+
+  ## ActualProg is an Integer
+  it "should not have ActualProg that is not an integer" do
+    actualProg = 1.0
+    activity = generate()
+    activity.actualProg = actualProg
+    assert(!activity.save, "It saves on ActualProg that is not an Integer")
+  end
+
+  ## ActualProg is in Activity::PROGRESS
+  it "should not have ActualProg that is not in Activity.PROGRESS" do
+    actualProg = 10
+    activity = generate()
+    activity.actualProg = actualProg
+    assert(!activity.save, "It saves on ActualProg that is not in Activity.PROGRESS")
   end
 
   ### STATUS NOTES

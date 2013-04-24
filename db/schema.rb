@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424013522) do
+ActiveRecord::Schema.define(:version => 20130424042327) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130424013522) do
     t.text     "notes"
     t.integer  "actualManp"
     t.decimal  "actualCost"
-    t.string   "actualProg"
+    t.integer  "actualProg",  :limit => 255
     t.text     "statusNotes"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false

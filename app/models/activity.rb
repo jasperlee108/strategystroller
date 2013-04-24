@@ -14,6 +14,11 @@ class Activity < ActiveRecord::Base
   PROJECT_EFFECTIVE = 4
   PHASES = [PROJECT_MANAGEMENT, CONCEPT_COMPLETED, PREREQUISITES_FULFILLED,
             IMPLEMENTATION_RUNNING, PROJECT_EFFECTIVE]
+
+  NOT_YET_STARTED = 0
+  IN_PROGRESS = 1
+  COMPLETED = 2
+  PROGRESS = [NOT_YET_STARTED, IN_PROGRESS, COMPLETED]
   
   ## team
   validates :team,
@@ -91,11 +96,12 @@ class Activity < ActiveRecord::Base
   :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
   
-  ## actualProg = string = {"1-Not yet started", "2-In progress", "3-Activity completed"}
+  ## actualProg = Integer
   ## can't be empty
   validates :actualProg,
   :presence => true,
-  :length => { :maximum => 30 }
+  :numericality => { :only_integer => true },
+  :inclusion => PROGRESS
   
   ## statusNotes = string[600]
   validates :statusNotes,
