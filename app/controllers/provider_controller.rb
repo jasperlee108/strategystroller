@@ -29,6 +29,7 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_goal.update_attributes(params[:goal])
+      flash[:notice] = "Goal successfully submitted!"
       redirect_to unchecked_path
     end
   end
@@ -44,6 +45,7 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_indicator.update_attributes(params[:indicator])
+      flash[:notice] = "Indicator successfully submitted!"
       redirect_to unchecked_path
     end
   end
@@ -59,6 +61,7 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_project.update_attributes(params[:project])
+      flash[:notice] = "Project successfully submitted!"
       redirect_to unchecked_path
     end
   end
@@ -71,7 +74,7 @@ class ProviderController < ApplicationController
       # We can directly do lookup on activity table
       @activity = Activity.new(params[:activity])
       if @activity.save # activity saved
-          flash[:notice] = "Activity successfully saved!"
+        flash[:notice] = "Activity successfully saved!"
       else # activity not saved
         flash[:error] = "ERROR: Activity was not saved!"
       end

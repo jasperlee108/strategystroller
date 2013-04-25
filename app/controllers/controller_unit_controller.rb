@@ -249,11 +249,10 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_goal = Goal.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_goal.update_attributes(params[:goal])
+      flash[:notice] = "Goal review completed!"
       redirect_to cu_review_path
     end
   end
@@ -265,11 +264,10 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_indicator.update_attributes(params[:indicator])
+      flash[:notice] = "Indicator review completed!"
       redirect_to cu_review_path
     end
   end
@@ -281,11 +279,11 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
+    @activities = @current_project.activities
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_project.update_attributes(params[:project])
+      flash[:notice] = "Project review completed!"
       redirect_to cu_review_path
     end
   end
@@ -297,11 +295,10 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_activity = Activity.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_activity.update_attributes(params[:activity])
+      flash[:notice] = "Activity review completed!"
       redirect_to cu_review_path
     end
   end

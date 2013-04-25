@@ -5,6 +5,9 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# For progress bar
+gem 'css3-progress-bar-rails'
+
 # SimpleCov 
 gem 'simplecov', :require => false, :group => :test
 #gem "bcrypt-ruby" # necessary for 1.9

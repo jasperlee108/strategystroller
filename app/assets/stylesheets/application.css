@@ -10,7 +10,9 @@
  *
  *= require_self
  *= require_tree .
+ *= require 'css3-progress-bar'
  */
+
 ul.hmenu {
     list-style: none;
     padding: 0;
