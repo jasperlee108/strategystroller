@@ -1,0 +1,18 @@
+   <div class="navbar snb">
+      <div class="navbar-inner ni">
+        <div class="container">
+          <ul class="nav isnb">
+            <li class="active"><a href=<%= url_for graph_panel_path %>>Graphs</a></li>
+            <li><a href=<%= url_for all_data_path %>>Data View</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- /.navbar -->
+<h2>Graphical Panel for: <%= @user.username %>! </h2>
+<br/>
+<img src="<%= @pie_chart %>" alt="Pie Chart">
+<br/><br/>
+<img src="<%= @bar_chart %>" alt="Bar Chart">
+<br/><br/>
+<img src="<%= @line_chart %>" alt="Line Chart">
+<br/><br/>

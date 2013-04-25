@@ -11,9 +11,9 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
-//= require cocoon
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require_tree .
+//= require cocoon
+//= require_directory .
 

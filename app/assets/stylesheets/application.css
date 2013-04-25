@@ -8,8 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require formtastic-bootstrap
+ *= require twitter/bootstrap
+ *= require 'css3-progress-bar'
  *= require_self
- *= require_tree .
+ *= require_directory .
  */
 ul.hmenu {
     list-style: none;

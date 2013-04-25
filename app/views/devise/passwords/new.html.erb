@@ -1,17 +1,17 @@
-<div class="logincontainer" style="background-color: #f5f5f5">
+<div class="logincontainer">
 <div class="form-signin">
-<h2 class="form-signin-heading"><%=t :forgot_password %></h2>
+<h2 class="form-signin-heading"><%=I18n.t :forgot_password %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <% if devise_error_messages! != "" %>
-  <div class="alert"><%= devise_error_messages! %></div>
+  <div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><%= devise_error_messages! %></div>
   <% end %>
 
 
-  <%= f.email_field :email, :autofocus => true , :class => "input-block-level", :placeholder => (t :email_address)%>
+  <%= f.email_field :email, :autofocus => true , :class => "input-block-level", :placeholder => (I18n.t :email_address)%>
 
-  	<div class="row-fluid"><%= f.submit (t :send_me_reset_password_instructions), :class=> "btn btn-large btn-primary span12" %>
-   <input type=button class="btn btn-large btn-primary span12" value= "<%= t :cancel%>" onclick= "cancel_button()">
+  	<div class="row-fluid"><%= f.submit (I18n.t :send_me_reset_password_instructions), :class=> "btn btn-large btn-primary span12" %>
+   <input type=button class="btn btn-large btn-primary span12" value= "<%= I18n.t :cancel%>" onclick= "cancel_button()">
    </div>
 <% end %>
 

@@ -29,7 +29,8 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_goal.update_attributes(params[:goal])
-      redirect_to unchecked_path
+      flash[:notice] = "Goal successfully submitted!"
+      redirect_to forms_composite_path
     end
   end
   
@@ -44,11 +45,13 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_indicator.update_attributes(params[:indicator])
-      redirect_to unchecked_path
+      flash[:notice] = "Indicator successfully submitted!"
+      redirect_to forms_composite_path
     end
   end
   
   def project_define
+    session[:return_to] = request.url
     @user = current_user
     @project = Project.new
     form_id = params[:form_id]
@@ -56,10 +59,12 @@ class ProviderController < ApplicationController
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
     @current_form.update_attributes(:checked => true)
+    @activities = @current_project.activities
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_project.update_attributes(params[:project])
-      redirect_to unchecked_path
+      flash[:notice] = "Project successfully submitted!"
+      redirect_to forms_composite_path
     end
   end
   
@@ -71,11 +76,15 @@ class ProviderController < ApplicationController
       # We can directly do lookup on activity table
       @activity = Activity.new(params[:activity])
       if @activity.save # activity saved
-          flash[:notice] = "Activity successfully saved!"
+        flash[:notice] = "Activity successfully saved!"
       else # activity not saved
         flash[:error] = "ERROR: Activity was not saved!"
       end
-      redirect_to activities_path
+      if session[:return_to]
+         redirect_to session[:return_to]
+      else
+        redirect_to activities_path
+      end
     end
   end
   
@@ -96,5 +105,12 @@ class ProviderController < ApplicationController
     @user = current_user
     # do something here
   end
+  
+  def forms_composite
+    @user = current_user
+    @forms_unchecked = Form.where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
+    @forms_saved = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
+  end
+  
   
 end

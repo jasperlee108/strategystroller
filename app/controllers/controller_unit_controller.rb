@@ -5,9 +5,60 @@ class ControllerUnitController < ApplicationController
   # #should handle checking that a user is a cu, as of yet untested TODO test me.
     #redirect_to :new_user_session_path unless current_user && current_user.controlling_unit?
   #end
+  def clean_list(listie)
+    final_list = []
+    i = 0
+    listie.each do |k|
+      y=i.times.map{0}<<k
+      final_list<<y
+      i = i+1
+    end
+    return final_list
+  end
+
+  def graph_panel
+    @user = current_user
+    pname_list = Project.all.map(&:name)
+    pgs_list_uc = Project.all.map(&:status_global)
+    len_of_list = pname_list.length
+    max_val = pgs_list_uc.max
+    axis_range = "0" + "|" + (max_val/4).to_s + "|" + (max_val/2).to_s + "|" + (3*max_val/4).to_s + "|" + max_val.to_s
+    colors = len_of_list.times.map{"%06x" % (rand * 0x1000000)}
+    pgs_list = pgs_list_uc.combination(1).to_a
+
+    ### Line chart still relies on canned data.
+    @line_chart = Gchart.line(:size => '600x200',:data => [300, 100, 30, 200, 100, 200, 300, 10], :axis_with_labels => 'x,r',
+            :axis_labels => ['Jan|July|Jan|July|Jan', axis_range], :title => "Projects Status Trends",)
+
+
+    @bar_chart = Gchart.bar( 
+            :axis_with_labels => 'y',
+            :axis_labels => [axis_range],
+            :size => '500x500',
+            :theme => :pastel,
+            :title => "Projects Global Status",
+            :bar_width_and_spacing => '25,10',
+            :legend => pname_list,
+            :data => clean_list(pgs_list_uc))
+
+    @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x300',
+              :data => pgs_list_uc, :labels => pname_list )
+  end
 
   def controller_panel
     @user = current_user
+  end
+  
+  def goals_list
+    @goals = Goal.all
+  end
+  
+  def indicators_list
+    @indicators = Indicator.all
+  end
+  
+  def projects_list
+    @projects = Project.all
   end
   
   def set_goal
@@ -29,7 +80,7 @@ class ControllerUnitController < ApplicationController
       else # goal not saved
         flash[:error] = "ERROR: Goal was not saved!"
       end
-      redirect_to goals_path
+      redirect_to cu_review_path
     end
   end
   
@@ -52,7 +103,7 @@ class ControllerUnitController < ApplicationController
       else # indicator not saved
         flash[:error] = "ERROR: Indicator was not saved!"
       end
-      redirect_to indicators_path
+      redirect_to cu_review_path
     end
   end
   
@@ -75,7 +126,7 @@ class ControllerUnitController < ApplicationController
       else # project not saved
         flash[:error] = "ERROR: Project was not saved!"
       end
-      redirect_to projects_path
+      redirect_to cu_review_path
     end
   end
 
@@ -249,11 +300,10 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_goal = Goal.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_goal.update_attributes(params[:goal])
+      flash[:notice] = "Goal review completed!"
       redirect_to cu_review_path
     end
   end
@@ -265,11 +315,10 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_indicator.update_attributes(params[:indicator])
+      flash[:notice] = "Indicator review completed!"
       redirect_to cu_review_path
     end
   end
@@ -281,11 +330,11 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
+    @activities = @current_project.activities
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_project.update_attributes(params[:project])
+      flash[:notice] = "Project review completed!"
       redirect_to cu_review_path
     end
   end
@@ -297,11 +346,10 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_activity = Activity.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_activity.update_attributes(params[:activity])
+      flash[:notice] = "Activity review completed!"
       redirect_to cu_review_path
     end
   end

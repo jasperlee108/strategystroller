@@ -31,4 +31,9 @@ en:
   welcome: "Welcome"
   send_me_reset_password_instructions: "Send me reset password instructions"
   someone_requested_a_link_to_change_password: "Someone has requested a link to change your password. You can do this through the link below."
-
+  footer_string: "FOOTER &copy; Strategy Stroller 2013"
+  forms: "Forms"
+  reports: "Reports"
+  setup: "Setup"
+  edit_users: "Edit Users"
+  activites: "Activities"

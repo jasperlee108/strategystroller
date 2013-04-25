@@ -20,7 +20,7 @@ textarea {
 </style>
 
 <h2>Goal Form</h2>
-
+ <%= render "setup_alerts" %>
 <body>
     <%= semantic_form_for @goal, :url => goal_define_path do |f| %>
         <%= f.inputs do %>
