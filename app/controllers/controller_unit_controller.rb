@@ -306,4 +306,33 @@ class ControllerUnitController < ApplicationController
     end
   end
 
+  ### DISPLAY ALL DATA FOR OVERVIEW PAGE + RELATED METHODS ###
+
+  def all_data
+    @user = current_user
+    @goal_ids = []
+    @indicator_ids = []
+    @project_ids = []
+  end
+
+  def all_activity
+    @activity = Activity.find_by_id(params[:activity_id])
+  end
+  
+  def all_project
+    @project = Project.find_by_id(params[:project_id])
+  end
+  
+  def all_indicator
+    @indicator = Indicator.find_by_id(params[:indicator_id])
+  end
+  
+  def all_goal
+    @goal = Goal.find_by_id(params[:goal_id])
+  end
+  
+  def all_dimension
+    @dimension = Dimension.find_by_id(params[:dimension_id])
+  end
+  
 end
