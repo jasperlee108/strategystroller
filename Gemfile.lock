@@ -70,6 +70,8 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     colored (1.2)
+    css3-progress-bar-rails (0.4.0)
+      rails (>= 3.1)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -212,6 +214,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.4.0)
+  css3-progress-bar-rails
   devise
   formtastic-bootstrap
   googlecharts

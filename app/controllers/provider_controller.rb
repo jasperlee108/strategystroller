@@ -29,6 +29,7 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_goal.update_attributes(params[:goal])
+      flash[:notice] = "Goal successfully submitted!"
       redirect_to forms_composite_path
     end
   end
@@ -44,6 +45,7 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_indicator.update_attributes(params[:indicator])
+      flash[:notice] = "Indicator successfully submitted!"
       redirect_to forms_composite_path
     end
   end
@@ -56,9 +58,11 @@ class ProviderController < ApplicationController
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
     @current_form.update_attributes(:checked => true)
+    @activities = @current_project.activities
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_project.update_attributes(params[:project])
+      flash[:notice] = "Project successfully submitted!"
       redirect_to forms_composite_path
     end
   end
@@ -71,11 +75,11 @@ class ProviderController < ApplicationController
       # We can directly do lookup on activity table
       @activity = Activity.new(params[:activity])
       if @activity.save # activity saved
-          flash[:notice] = "Activity successfully saved!"
+        flash[:notice] = "Activity successfully saved!"
       else # activity not saved
         flash[:error] = "ERROR: Activity was not saved!"
       end
-      redirect_to forms_composite_path
+      redirect_to activities_path
     end
   end
   
@@ -95,12 +99,6 @@ class ProviderController < ApplicationController
   def saved
     @user = current_user
     # do something here
-  end
-  
-  def forms_composite
-    @user = current_user
-    @forms_unchecked = Form.where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
-    @forms_saved = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
   end
   
 end
