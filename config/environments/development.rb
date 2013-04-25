@@ -39,4 +39,14 @@ StrategyStroller::Application.configure do
   # In production, :host should be set to the actual host of your application."
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "example.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "strategystroller",
+    password: "cs169squad"
+  }
+
 end
