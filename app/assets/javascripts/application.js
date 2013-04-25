@@ -13,7 +13,10 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require twitter/bootstrap/alert
+//= require twitter/bootstrap/button
+//= require twitter/bootstrap/dropdown
+//= require twitter/bootstrap/popover
 //= require cocoon
 //= require_directory .
 

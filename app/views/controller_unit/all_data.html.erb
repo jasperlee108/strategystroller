@@ -63,7 +63,7 @@ Should you choose to modify them, please do so carefully. <br />
   <% end %>
 </table>-->
 
-
+<div class="tree">
  <ul>
   <% Dimension.all.each do |d| %>
   	  	<li><div><%= link_to d.name, all_dimension_path(:dimension_id => d.id) %></div>
@@ -94,4 +94,4 @@ Should you choose to modify them, please do so carefully. <br />
   	 </li>
     <% end %>
   	</ul> 	    				 
-  	  
+  	  </div>
