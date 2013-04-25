@@ -19,7 +19,7 @@ textarea {
 </style>
 
 <h2>Indicator Form</h2>
-
+ <%= render "setup_alerts" %>
 <body>
     <%= semantic_form_for @indicator, :url => indicator_define_path do |f| %>
         <%= f.inputs do %>

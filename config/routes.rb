@@ -15,9 +15,9 @@ StrategyStroller::Application.routes.draw do
   ## FOR MAIN PANELS
   match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
   match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
-  #match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
-  #match "provider/provider_panel/define" => 'provider#define_page', :as => 'provider_panel_define'
-  #match "provider/provider_panel/update" => 'provider#update_page', :as => 'provider_panel_update'
+  match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
+  match "provider/provider_panel/define" => 'provider#define_page', :as => 'provider_panel_define'
+  match "provider/provider_panel/update" => 'provider#update_page', :as => 'provider_panel_update'
 
   ## FOR OTHER LINKS / PATHS
   
@@ -41,6 +41,17 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/activity_check" => "controller_unit#activity_check", :as => 'activity_check'
   #match "controller_unit/indicator_update" => "controller_unit#indicator_update", :as => 'indicator_update'
   #match "controller_unit/project_update" => "controller_unit#project_update", :as => 'project_update'
+  match "controller_unit/all_data" => "controller_unit#all_data", :as => 'all_data'
+  match "controller_unit/all_activity" => "controller_unit#all_activity", :as => 'all_activity'
+  match "controller_unit/all_project" => "controller_unit#all_project", :as => 'all_project'
+  match "controller_unit/all_indicator" => "controller_unit#all_indicator", :as => 'all_indicator'
+  match "controller_unit/all_goal" => "controller_unit#all_goal", :as => 'all_goal'
+  match "controller_unit/all_dimension" => "controller_unit#all_dimension", :as => 'all_dimension'
+
+
+
+
+
 
   # Provider
   match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
@@ -51,6 +62,7 @@ StrategyStroller::Application.routes.draw do
   match "provider/activity_define" => "provider#activity_define", :as => 'activities'
   match "provider/indicator_update" => "provider#indicator_update", :as => 'indicator_update'
   match "provider/project_update" => "provider#project_update", :as => 'project_update'
+
   match "provider/home" => "provider#forms_composite", :as => "forms_composite"
 
   #applications path currently defaults to setup_system path so really we only need

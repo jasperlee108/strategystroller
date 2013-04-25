@@ -30,7 +30,10 @@ jQuery("#navbar_setup").addClass("active");
 if(nav.search("controller_unit/input_framework")!=-1){
 jQuery("#navbar_forms").addClass("active");
 }
-else if(nav.search("reports__")!=-1){
+else if(nav.search("controller_unit/graph_panel")!=-1){
+jQuery("#navbar_reports").addClass("active");
+}
+else if(nav.search("controller_unit/all_data")!=-1){
 jQuery("#navbar_reports").addClass("active");
 }
 else if(nav.search("forms/form_template")!=-1){

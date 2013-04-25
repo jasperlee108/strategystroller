@@ -51,6 +51,7 @@ class ProviderController < ApplicationController
   end
   
   def project_define
+    session[:return_to] = request.url
     @user = current_user
     @project = Project.new
     form_id = params[:form_id]
@@ -79,7 +80,11 @@ class ProviderController < ApplicationController
       else # activity not saved
         flash[:error] = "ERROR: Activity was not saved!"
       end
-      redirect_to activities_path
+      if session[:return_to]
+         redirect_to session[:return_to]
+      else
+        redirect_to activities_path
+      end
     end
   end
   
