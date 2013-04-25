@@ -296,20 +296,20 @@ class Project < ActiveRecord::Base
   end
 
   def update_status_prog
-    update_actual_duration #TODO possibly omit this so it can be only updated if the start/end date changes.
-    update_target_duration
+    #update_actual_duration #TODO possibly omit this so it can be only updated if the start/end date changes.
+    #update_target_duration
     self.status_prog = BigDecimal(self.actual_duration, 10) / BigDecimal(self.target_duration, 10)
   end
 
   def update_status_manp
-    update_actual_manp
-    update_target_manp
+    #update_actual_manp
+    #update_target_manp
     self.status_manp = BigDecimal(self.actual_manp, 10) / BigDecimal(self.target_manp, 10) 
   end
 
   def update_status_cost
-    update_actual_cost
-    update_target_cost
+    #update_actual_cost
+    #update_target_cost
     self.status_cost = BigDecimal(self.actual_cost, 10) / BigDecimal(self.target_cost, 10)
   end
 

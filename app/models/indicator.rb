@@ -178,14 +178,14 @@ class Indicator < ActiveRecord::Base
   end
 
   def update_diff
-    update_prognosis
+    #update_prognosis
     self.diff = self.prognosis - self.target
   end
 
   # Note this triggers calls to update_diff and update_prognosis, 
   # so the calculation should be based on accurate values. 
   def update_status
-    update_diff
+    #update_diff
     raise "Target value must be nonzero, instead of #{self.target}" if self.target == 0.0
     if self.dir == "more is better"
       self.status=((1 + self.diff) / self.target)

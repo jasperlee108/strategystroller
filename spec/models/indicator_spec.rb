@@ -538,6 +538,7 @@ describe Indicator do
     indicator.target = 0.3
     indicator.save
     indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_prognosis
     indicator_in_table.update_diff
     assert(indicator_in_table.diff == 0.1, ":diff was #{indicator_in_table.diff}, not 0.1 as anticipated")
   end
@@ -551,6 +552,7 @@ describe Indicator do
     indicator.target = 0.5
     indicator.save
     indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_prognosis
     indicator_in_table.update_diff
     assert(indicator_in_table.diff == -0.1, ":diff was #{indicator_in_table.diff}, not -0.1 as anticipated")
   end
@@ -568,6 +570,8 @@ describe Indicator do
     indicator.dir = "more is better"
     indicator.save
     indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_prognosis
+    indicator_in_table.update_diff
     indicator_in_table.update_status
     assert(indicator_in_table.status == 6.0, ":status was #{indicator_in_table.status}, not 6.0 as anticipated")
   end
@@ -582,6 +586,8 @@ describe Indicator do
     indicator.dir = "less is better"
     indicator.save
     indicator_in_table = Indicator.find(1)
+    indicator_in_table.update_prognosis
+    indicator_in_table.update_diff
     indicator_in_table.update_status
     assert(indicator_in_table.status == 4.0, ":status was #{indicator_in_table.status}, not 4.0 as anticipated")
   end
