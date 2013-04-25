@@ -73,7 +73,7 @@ StrategyStroller::Application.routes.draw do
   get "controller_unit/setup_system" => "controller_unit#setup_system", :as => "setup_system"
   get "controller_unit/create_users" => "controller_unit#create_users", :as => "create_users"
   get "controller_unit/remove_users" => "controller_unit#remove_users", :as => "remove_users"
-  
+   get "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
   ## FOR MAIN PAGE
   root :to => "home#index"
   match "home/index" => "home#index", :as => "home_index"
