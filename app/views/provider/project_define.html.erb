@@ -39,9 +39,9 @@ textarea {
           
           <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Team Member" %>
           
-          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Starting Date" %>
+          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 20%" }, :required => true, :label => "Starting Date" %>
           
-          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 15%" }, :required => true, :label => "Ending Date" %>
+          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 20%" }, :required => true, :label => "Ending Date" %>
           
           <%= f.input :duration, :input_html => { :value => @current_project.duration, :readonly => true }, :label => "Project Duration (months)" %>
           

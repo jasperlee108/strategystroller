@@ -266,15 +266,15 @@ describe User do
     busCode = ""
     user = generate()
     user.business_code = busCode
-    assert(user.save, "Business Code can be blank")
+    assert(user.save, "It won't save on empty Business Code")
   end
 
-  ## Business Code max 2 characters
-  it "should have Business Code max 2 characters" do
-    busCode = "CEO"
+  ## Business Code max 10 characters
+  it "should have Business Code max 10 characters" do
+    busCode = (0...11).map{ ( 65+rand(26) ).chr }.join
     user = generate()
     user.business_code = busCode
-    assert(!user.save, "Business Code is too long (maximum is 2 characters)")
+    assert(!user.save, "It saves on Business Code longer than 10 characters")
   end
 
   ### CONTROLLING UNIT
