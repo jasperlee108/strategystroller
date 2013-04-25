@@ -13,7 +13,9 @@
   <%= f.email_field :email, :class => "input-block-level", :placeholder => (I18n.t :email_address)%>
 
   <%= f.text_field :business_code, :class => "input-block-level", :placeholder => (I18n.t :buisness_code) %>
-
+  <label class="checkbox" style="font-size: 14px;color: rgb(85, 85, 85);"> 
+  <%= f.check_box :controlling_unit %> <%= I18n.t :controlling_unit %>
+  </label>
   <%= f.password_field :password, :class => "input-block-level", :placeholder => (I18n.t :password) %>
 
   <%= f.password_field :password_confirmation,:class => "input-block-level", :placeholder => (I18n.t :confirm_password) %>
