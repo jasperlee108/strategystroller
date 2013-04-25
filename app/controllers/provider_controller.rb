@@ -29,7 +29,7 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_goal.update_attributes(params[:goal])
-      redirect_to unchecked_path
+      redirect_to forms_composite_path
     end
   end
   
@@ -44,7 +44,7 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_indicator.update_attributes(params[:indicator])
-      redirect_to unchecked_path
+      redirect_to forms_composite_path
     end
   end
   
@@ -59,7 +59,7 @@ class ProviderController < ApplicationController
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_project.update_attributes(params[:project])
-      redirect_to unchecked_path
+      redirect_to forms_composite_path
     end
   end
   
@@ -75,7 +75,7 @@ class ProviderController < ApplicationController
       else # activity not saved
         flash[:error] = "ERROR: Activity was not saved!"
       end
-      redirect_to activities_path
+      redirect_to forms_composite_path
     end
   end
   

@@ -1,10 +1,10 @@
-<% content_for :context_menu do %>
-<li><a href="<%= url_for(:action => 'goal_check', :controller => 'controller_unit') %>">Goal</a></li>
-<li><a href="<%= url_for(:action => 'indicator_check', :controller => 'controller_unit') %>">Indicator</a></li>
-<li><a href="<%= url_for(:action => 'project_check', :controller => 'controller_unit') %>">Project</a></li>
-<li><a href="<%= url_for(:action => 'activity_check', :controller => 'controller_unit') %>">Activity</a></li>
-<% end %>
-
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Project Form</a>
+</ul>
+</div>
+</div>
+<style>
 <style>
 input {
     width:25em;
@@ -13,12 +13,9 @@ textarea {
     width:50em;
 }
 </style>
+    <%= render "setup_alerts" %>
+<div class="well">
 
-<h2>Project Form</h2>
-
-<body>
-    <%= flash[:notice] %>
-    <%= flash[:error] %><br>
 
     <%= semantic_form_for @project, :url => project_check_path do |f| %>
         <%= f.inputs do %>
@@ -74,4 +71,4 @@ textarea {
         <% end %>
     <%= f.action :submit, :label => "Confirm Project" %>
     <% end %>
-</body>
+</div>

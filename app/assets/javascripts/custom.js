@@ -36,6 +36,15 @@ jQuery("#navbar_reports").addClass("active");
 else if(nav.search("forms/form_template")!=-1){
 jQuery("#navbar_forms").addClass("active");
 }
+else if(nav.search("controller_unit/project_check")!=-1){
+jQuery("#navbar_forms").addClass("active");
+}
+else if(nav.search("controller_unit/goal_check")!=-1){
+jQuery("#navbar_forms").addClass("active");
+}
+else if(nav.search("controller_unit/indicator_check")!=-1){
+jQuery("#navbar_forms").addClass("active");
+}
 else if(nav.search("controller_unit/edit_users")!=-1){
 jQuery("#navbar_edit_users").addClass("active");
 }

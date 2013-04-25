@@ -80,7 +80,7 @@ class ControllerUnitController < ApplicationController
       else # goal not saved
         flash[:error] = "ERROR: Goal was not saved!"
       end
-      redirect_to goals_path
+      redirect_to cu_review_path
     end
   end
   
@@ -103,7 +103,7 @@ class ControllerUnitController < ApplicationController
       else # indicator not saved
         flash[:error] = "ERROR: Indicator was not saved!"
       end
-      redirect_to indicators_path
+      redirect_to cu_review_path
     end
   end
   
@@ -126,7 +126,7 @@ class ControllerUnitController < ApplicationController
       else # project not saved
         flash[:error] = "ERROR: Project was not saved!"
       end
-      redirect_to projects_path
+      redirect_to cu_review_path
     end
   end
 
