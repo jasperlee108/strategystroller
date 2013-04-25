@@ -24,8 +24,11 @@ function setActiveNav(nav){
 if(!nav){
     nav = window.location.href
 }
-if(nav.search("controller_unit/input_framework")!=-1){
+if(nav.search("controller_unit/setup_system")!=-1){
 jQuery("#navbar_setup").addClass("active");
+}
+if(nav.search("controller_unit/input_framework")!=-1){
+jQuery("#navbar_forms").addClass("active");
 }
 else if(nav.search("reports__")!=-1){
 jQuery("#navbar_reports").addClass("active");
@@ -59,3 +62,8 @@ setBodyColor();
 setNavType();
 setActiveNav();
 });
+
+function cu_review_button(){
+window.location.href=jQuery("#cu_review_form_select").val();
+
+}

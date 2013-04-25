@@ -41,9 +41,9 @@
             <% if current_user.controlling_unit == true %>
 <!-- <div id ="cu_nav">-->
         					<ul class = "nav">
-<li id ="navbar_forms"><%= link_to (t :forms), "#"%></li>
+<li id ="navbar_forms"><%= link_to (t :forms), cu_review_path %></li>
 <li id="navbar_reports"><%= link_to (t :reports), "#" %></li>
-<li id= "navbar_setup"><%= link_to (t :setup), :input_framework %></li>
+<li id= "navbar_setup"><%= link_to (t :setup), setup_system_path %></li>
 <li id= "navbar_edit_users"><%= link_to (t :edit_users), "#" %></li>
 </ul>
 

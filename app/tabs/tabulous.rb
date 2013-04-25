@@ -59,8 +59,7 @@ Tabulous.setup do |config|
       #---------------------------------------------------------------------------------------------------------------------------#
       [    :goals_tab                ,    'Goals'                ,    goals_list_path                ,    true        ,    true        ],
       [    :indicators_tab           ,    'Indicators'           ,    indicators_list_path           ,    true        ,    true        ],
-      [    :projects_tab             ,    'Projects'             ,    projects_path             ,    true        ,    true        ],
-      [    :activities_tab           ,    'Activities'           ,    activities_path           ,    true        ,    true        ],
+      [    :projects_tab             ,    'Projects'             ,    projects_list_path             ,    true        ,    true        ],
       [    :setup_system_tab         ,    'Setup System'         ,    applications_path         ,    true        ,    true        ]
       #---------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                  |    DISPLAY TEXT           |    PATH                      |    VISIBLE?    |    ENABLED?    #
@@ -89,8 +88,7 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------#
       [    :controller_unit      ,    :goals_list       ,    :goals_tab                ],
       [    :controller_unit      ,    :indicators_list  ,    :indicators_tab           ],
-      [    :controller_unit      ,    :set_project    ,    :projects_tab             ],
-      [    :controller_unit      ,    :set_activity   ,    :activities_tab           ],
+      [    :controller_unit      ,    :projects_list    ,    :projects_tab             ],
       [    :controller_unit      ,    :setup_system   ,    :setup_system_tab         ]
       #------------------------------------------------------------------------------#
       #    CONTROLLER            |    ACTION          |    TAB                       #

@@ -1,21 +1,13 @@
-<body>
-    <div class="navbar snb">
-      <div class="navbar-inner ni">
-        <div class="container">
-          <ul class="nav isnb">
-            <li><a href=<%= url_for(:action => 'set_goal', :controller => 'controller_unit') %>>Goals</a></li>
-            <li><a href=<%= url_for(:action => 'set_indicator', :controller => 'controller_unit') %>>Indicators</a></li>
-            <li><a href=<%= url_for(:action => 'set_project', :controller => 'controller_unit') %>>Projects</a></li>
-            <li><a href=<%= url_for(:action => 'set_activity', :controller => 'controller_unit') %>>Activities</a></li>
-            <li><a href=<%= url_for(:action => 'setup_system', :controller => 'controller_unit') %>>Setup System</a></li>
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Generating New Project</a>
+</ul>
+</div>
+</div>
 
-          </ul>
-        </div>
-      </div>
-    </div><!-- /.navbar -->
  <%= render "setup_alerts" %>
 
-
+<div class="well">
     <%= semantic_form_for @project, :html => { :class => "form-stacked"}  do |f| %>
         <%= f.inputs do %>
 <div class="row-fluid">
@@ -28,7 +20,7 @@
 <div class="span4">     
           <%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :required => true, :label => "Associated Indicator",:input_html => { :class => "span12" }  %>
 </div><div class="span4">  
-          <%= f.input :head_id, :as => :select, :collection => User.all, :required => true, :label => "Project Manager",:input_html => { :class => "span12" }  %>
+          <%= f.input :head_id, :as => :select, :collection => User.all, :required => true, :label => "Project Manager",:input_html => { :class => "span12", :id=>"responsible"}  %>
 </div><div class="span4">  
           <%= f.input :steer_id, :as => :select, :collection => User.all, :required => true, :label => "Steering Committee",:input_html => { :class => "span12" }  %>
  </div></div>   
@@ -87,6 +79,8 @@
           <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5,:class => "span12"  }, :required => false, :label => "Notes to Current Status" %>
  </div> </div>
         <% end %>
-    <center><%= f.action :submit, :label => "Save Project",:button_html => { :class=> "btn btn-primary span4" }%></center>
+    <center><div class="row-fluid">
+    <%= f.action :submit, :label => "Submit Project to Project Manager",:button_html => { :class=> "btn btn-primary span4" }%>
+    <input type=button class="btn btn-danger span4" value= "<%= I18n.t :cancel%>" onclick= "history.back()"> </input></div></center>
     <% end %>
-</body>
+ </div>

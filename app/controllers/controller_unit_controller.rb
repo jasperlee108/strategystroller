@@ -18,6 +18,10 @@ class ControllerUnitController < ApplicationController
     @indicators = Indicator.all
   end
   
+  def projects_list
+    @projects = Project.all
+  end
+  
   def set_goal
     @goal = Goal.new
     if (request.post?) 

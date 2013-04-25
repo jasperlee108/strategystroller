@@ -1,21 +1,12 @@
-<body>
-    <div class="navbar snb">
-      <div class="navbar-inner ni">
-        <div class="container">
-          <ul class="nav isnb">
-            <li><a href=<%= url_for(:action => 'set_goal', :controller => 'controller_unit') %>>Goals</a></li>
-            <li><a href=<%= url_for(:action => 'set_indicator', :controller => 'controller_unit') %>>Indicators</a></li>
-            <li><a href=<%= url_for(:action => 'set_project', :controller => 'controller_unit') %>>Projects</a></li>
-            <li><a href=<%= url_for(:action => 'set_activity', :controller => 'controller_unit') %>>Activities</a></li>
-            <li><a href=<%= url_for(:action => 'setup_system', :controller => 'controller_unit') %>>Setup System</a></li>
-
-          </ul>
-        </div>
-      </div>
-    </div><!-- /.navbar -->
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Generating New Form</a>
+</ul>
+</div>
+</div>
 
     <%= render "setup_alerts" %>
-
+<div class="well">
    <%= semantic_form_for @goal, :html => { :class => "form-stacked"} do |f|%>
         <%= f.inputs do %>
 <div class="row-fluid">
@@ -47,8 +38,11 @@
  </div><div class="span6">    
           <%= f.input :status, :required => true, :as => :number, :label => "Current Status (%)", :input_html => { :class => "span12" }%>
  </div>          
- </div>          
+ </div> 
+     
         <% end %>
-    <center><%= f.action :submit, :label => "Save Goal",:button_html => { :class=> "btn btn-primary span4" }%></center>
+    <center><div class="row-fluid">
+    <%= f.action :submit, :label => "Submit Goal to Provider Responsible",:button_html => { :class=> "btn btn-primary span4" }%>
+    <input type=button class="btn btn-danger span4" value= "<%= I18n.t :cancel%>" onclick= "history.back()"> </input></div></center>
     <% end %>
-</body>
+ </div>
