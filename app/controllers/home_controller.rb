@@ -4,9 +4,9 @@ class HomeController < ApplicationController
   def index
     @user = current_user
     if @user.controlling_unit
-      redirect_to controller_panel_path
+      redirect_to cu_review_path
     else
-      redirect_to provider_panel_path
+      redirect_to forms_composite_path
     end
   end
 end

@@ -46,7 +46,14 @@ StrategyStroller::Application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "strategystroller",
-    password: "cs169squad"
+    password: "cs169squad" ## Clear text workaround is to use environment variables
   }
+
+  config.i18n.fallbacks = true
+  
+  config.i18n.available_locales = [:de, :piglatin, :en]
+  
+  config.i18n.default_locale = :en
+  
 
 end

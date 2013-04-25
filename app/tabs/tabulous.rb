@@ -57,10 +57,10 @@ Tabulous.setup do |config|
       #---------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                  |    DISPLAY TEXT           |    PATH                      |    VISIBLE?    |    ENABLED?    #
       #---------------------------------------------------------------------------------------------------------------------------#
-      [    :goals_tab                ,    'Goals'                ,    goals_path                ,    true        ,    true        ],
-      [    :indicators_tab           ,    'Indicators'           ,    indicators_path           ,    true        ,    true        ],
-      [    :projects_tab             ,    'Projects'             ,    projects_path             ,    true        ,    true        ],
-      [    :setup_system_tab         ,    'Setup System'         ,    setup_system_path         ,    true        ,    true        ],
+      [    :goals_tab                ,    'Goals'                ,    goals_list_path                ,    true        ,    true        ],
+      [    :indicators_tab           ,    'Indicators'           ,    indicators_list_path           ,    true        ,    true        ],
+      [    :projects_tab             ,    'Projects'             ,    projects_list_path             ,    true        ,    true        ],
+      [    :setup_system_tab         ,    'Setup System'         ,    applications_path         ,    true        ,    true        ]
       #---------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                  |    DISPLAY TEXT           |    PATH                      |    VISIBLE?    |    ENABLED?    #
       #---------------------------------------------------------------------------------------------------------------------------#
@@ -86,10 +86,10 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------#
       #    CONTROLLER            |    ACTION          |    TAB                       #
       #------------------------------------------------------------------------------#
-      [    :controller_unit      ,    :set_goal       ,    :goals_tab                ],
-      [    :controller_unit      ,    :set_indicator  ,    :indicators_tab           ],
-      [    :controller_unit      ,    :set_project    ,    :projects_tab             ],
-      [    :controller_unit      ,    :setup_system   ,    :setup_system_tab         ],
+      [    :controller_unit      ,    :goals_list       ,    :goals_tab                ],
+      [    :controller_unit      ,    :indicators_list  ,    :indicators_tab           ],
+      [    :controller_unit      ,    :projects_list    ,    :projects_tab             ],
+      [    :controller_unit      ,    :setup_system   ,    :setup_system_tab         ]
       #------------------------------------------------------------------------------#
       #    CONTROLLER            |    ACTION          |    TAB                       #
       #------------------------------------------------------------------------------#
@@ -109,9 +109,9 @@ Tabulous.setup do |config|
   # Tabulous expects every controller action to be associated with a tab.
   # When an action does not have an associated tab (or subtab), you can
   # instruct tabulous how to behave:
-   #config.when_action_has_no_tab = :raise_error      # the default behavior
+   config.when_action_has_no_tab = :raise_error      # the default behavior
   #config.when_action_has_no_tab = :do_not_render  # no tab navigation HTML will be generated
-   config.when_action_has_no_tab = :render         # the tab navigation HTML will be generated,
+  # config.when_action_has_no_tab = :render         # the tab navigation HTML will be generated,
                                                     # but no tab or subtab will be active
 
   #--------------------
@@ -125,7 +125,7 @@ Tabulous.setup do |config|
   # This gives you control over what class the <ul> element that wraps the tabs
   # will have.  Good for interfacing with third-party code like Twitter
   # Bootstrap.
-  # config.tabs_ul_class = "nav nav-pills"
+   config.tabs_ul_class = "nav "
 
   # This gives you control over what class the <ul> element that wraps the subtabs
   # will have.  Good for interfacing with third-party code.
@@ -134,7 +134,7 @@ Tabulous.setup do |config|
   # Set this to true to have subtabs rendered in markup that Twitter Bootstrap
   # understands.  If this is set to true, you don't need to call subtabs in
   # your layout, just tabs.
-  # config.bootstrap_style_subtabs = true
+   config.bootstrap_style_subtabs = true
 
 
   #-------------------
@@ -157,11 +157,8 @@ Tabulous.setup do |config|
   # head start or an easy way to prototype quickly.  Set this to false if
   # you are using Twitter Bootstrap.
   # 
-  #config.css.scaffolding = true
-  config.tabs_ul_class = "navbar"
-  #config.tabs_ul_class = “nav nav-pills” # or whatever Bootstrap class you want
-  config.bootstrap_style_subtabs = true
-  config.active_tab_clickable = true
+  config.css.scaffolding = false
+
   # You can tweak the colors of the generated CSS.
   #
   # config.css.background_color = '#ccc'

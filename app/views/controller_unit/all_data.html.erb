@@ -1,9 +1,19 @@
+   <div class="navbar snb">
+      <div class="navbar-inner ni">
+        <div class="container">
+          <ul class="nav isnb">
+            <li ><a href=<%= url_for graph_panel_path %>>Graphs</a></li>
+            <li class="active"><a href=<%= url_for all_data_path %>>Data View</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- /.navbar -->
 <h2>Hi CU, <%= @user.username %>! </h2>
 Here are all the available data in the database. <br />
 Should you choose to modify them, please do so carefully. <br />
 <br />
  
-<table border=7 cellpadding=7 cellspacing=7>
+<!--<table border=7 cellpadding=7 cellspacing=7>
   <tr>
   	<th>Dimension</th>
     <th>Goal</th>
@@ -51,4 +61,37 @@ Should you choose to modify them, please do so carefully. <br />
   	  </td>
     </tr>
   <% end %>
-</table>
+</table>-->
+
+<div class="tree">
+ <ul>
+  <% Dimension.all.each do |d| %>
+  	  	<li><div><%= link_to d.name, all_dimension_path(:dimension_id => d.id) %></div>
+  	  	<ul>
+  	    <% Goal.where(:dimension_id => d.id).each do |g| %>
+  	    		<li><div><%= link_to g.name, all_goal_path(:goal_id => g.id) %></div>
+  	    		<ul>
+	  	  	  	<% Indicator.where(:goal_id => g).each do |i| %>
+  	    				<li><div><%= link_to i.name, all_indicator_path(:indicator_id => i.id) %></div>
+  	    				<ul>
+						<% Project.where(:indicator_id => i).each do |p| %>
+  	    					<li><div><%= link_to p.name, all_project_path(:project_id => p.id) %></div>
+  	    					<ul>
+ 							<% Activity.where(:project_id => p).each do |a| %>
+  	    						<li><div><%= link_to a.name, all_activity_path(:activity_id => a.id) %></div></li>
+  	    						
+  	  	    				<% end %>
+  	  	    				</ul>
+  	  	    				</li>
+  	    			     <% end %>
+  	    		  </ul>
+  	  	    	  </li>	
+			    <% end %>
+		</ul>
+  	    </li>
+	   <% end %>
+     </ul>
+  	 </li>
+    <% end %>
+  	</ul> 	    				 
+  	  </div>

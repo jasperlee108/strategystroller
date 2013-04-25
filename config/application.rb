@@ -31,8 +31,8 @@ module StrategyStroller
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
-
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:de, :piglatin, :en]
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
@@ -62,7 +62,8 @@ module StrategyStroller
     # For devise. Since we are deploying on Heroku, this is necessary to
     # "forcing your application to not access the DB or load models when precompiling your assets."
     config.assets.initialize_on_precompile = false
-
+    
+    config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
   end
   
   ## Supress deprecation warning

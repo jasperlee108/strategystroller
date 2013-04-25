@@ -1,46 +1,38 @@
-<div class="logincontainer" style="background-color: #f5f5f5">
+<div class="logincontainer">
 <div class="form-signin">
-<h2><%= :edit%><%= t :resource_name.to_s.humanize %></h2>
+<h2><%= :edit%> <%= I18n.t :resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <% if devise_error_messages! != "" %>
-  <div class="alert"><%= devise_error_messages! %></div>
+  <div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><%= devise_error_messages! %></div>
   <% end %>
 
-  <div><%= f.label :username %>
-  <%= f.text_field :username, :autofocus => true %></div>
+<%= f.text_field :username, :class => "input-block-level", :placeholder => (I18n.t :username)%>
 
-  <div><%= f.label :email %>
-  <%= f.email_field :email %></div>
+  <%= f.email_field :email, :class => "input-block-level", :placeholder => (I18n.t :email_address)%>
 
-  <div><%= f.label :business_code %>
-  <%= f.text_field :business_code %></div>
-
-  <div><%= f.label :controlling_unit %>
-  <%= f.check_box :controlling_unit %></div>
-
+  <%= f.text_field :business_code, :class => "input-block-level", :placeholder => (I18n.t :buisness_code) %>
+  <label class="checkbox" style="font-size: 14px;color: rgb(85, 85, 85);"> 
+  <%= f.check_box :controlling_unit %> <%= I18n.t :controlling_unit %>
+  </label>
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div><%= t :currently_awaiting_confirmation_for%><%= resource.unconfirmed_email %></div>
+    <div><%= I18n.t :currently_awaiting_confirmation_for%><%= resource.unconfirmed_email %></div>
   <% end %>
-  <%= f.password_field :password, :autocomplete => "off", :class => "input-block-level", :placeholder => (t :password_unchanged) %>
+  <%= f.password_field :password, :autocomplete => "off", :class => "input-block-level", :placeholder => (I18n.t :password_unchanged) %>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+  <%= f.password_field :password_confirmation, :class => "input-block-level", :placeholder => (I18n.t :confirm_password_unchanged) %>
 
-  <div><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></div>
-  <%= f.password_field :current_password, :class => "input-block-level", :placeholder =>(t :current_password) %>
+  <%= f.password_field :current_password, :class => "input-block-level", :placeholder =>(I18n.t :current_password) %>
 
-   <div class="row-fluid"><%= f.submit (t :update), :class=> "btn btn-large btn-primary span12" %>
-   <input type=button class="btn btn-large btn-primary span12" value= "<%= t :cancel%>" onclick= "cancel_button()">
+   <div class="row-fluid"><%= f.submit (I18n.t :update), :class=> "btn btn-large btn-primary span12" %>
+   <input type=button class="btn btn-large btn-primary span12" value= '<%= I18n.t :cancel%>' onclick= "cancel_button()">
    </div>
 <% end %>
 
-</br>
+<!--TODO: fix this cancel button and whole page really -->
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
 
-<input type=button class="btn btn-large btn-primary span12" value= "<%= t :cancel%>" onclick= "cancel_button()">
 <%= link_to "Back", :back %>
 </div>
 </div>

@@ -2,11 +2,15 @@ source 'https://rubygems.org'
 ruby '1.9.3' 
 gem 'rails', '3.2.11'
 
+gem 'rails-i18n'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Google Charts
 gem "googlecharts", :require => "gchart"
+# For progress bar
+gem 'css3-progress-bar-rails'
 
 # SimpleCov 
 gem 'simplecov', :require => false, :group => :test
@@ -19,7 +23,7 @@ gem "meta_search",    '>= 1.1.0.pre'
 gem 'coffee-script-source', '~> 1.4.0'
 
 #Twitter Bootstrap
-gem "twitter-bootstrap-rails"
+#gem "twitter-bootstrap-rails"
 
 gem 'formtastic-bootstrap'
 gem 'tabulous'
@@ -52,8 +56,9 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
+  #this gem does not work on windows >.<
+  #gem 'therubyracer', :platforms => :ruby
+  gem 'bootstrap-sass-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 

@@ -18,8 +18,8 @@ textarea {
 </style>
 
 <h2>Project Form</h2>
-
-<body>
+ <%= render "setup_alerts" %>
+<div class="well">
     <%= semantic_form_for @project, :url => project_define_path do |f| %>
         <%= f.inputs do %>
         <%= hidden_field_tag :entry_id, params[:entry_id] %>
@@ -71,7 +71,27 @@ textarea {
           
           <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Notes to Current Status" %>
 
+<table class="table table-hover table-bordered">
+  <tr>
+  	<th>Activity Name</th>
+  	<th>Current Overall Progress</th>
+  </tr>
+  
+  <% @activities.each do |a| %>
+    <tr>
+      <td><%= link_to a.name, all_activity_path(:activity_id => a.id) %></td>
+      <td><%= progress_bar(33, :color => 'blue', :rounded => true) %></td>
+    </tr>
+  <% end %>
+  <tr class="info">
+  	<td><%= link_to "Create New Activity", activities_path %></td>
+  	<td></td>
+  	</tr>
+</table>
+<br />
+
         <% end %>
     <%= f.action :submit, :label => "Submit Project" %>
+    <%= f.action :submit, :label => "Save Project" %>
     <% end %>
-</body>
+</div>
