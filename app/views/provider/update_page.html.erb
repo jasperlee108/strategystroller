@@ -1,0 +1,13 @@
+<script>
+document.getElementById("home").className = "";
+document.getElementById("update_page").className = "active";
+</script>
+
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'indicator_update', :controller => 'provider') %>">Indicator</a></li>
+ <li><a href="<%= url_for(:action => 'project_update', :controller => 'provider') %>">Project</a></li>
+<% end %>
+
+<h2>Welcome Provider <%= @user.username %>! </h2>
+<%= link_to "Unchecked Forms", unchecked_path %><br>
+<%= link_to "Saved Forms", saved_path %><br>

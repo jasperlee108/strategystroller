@@ -1,0 +1,36 @@
+<div class="logincontainer">
+<div class="form-signin">
+<h2><%= :edit%> <%= I18n.t :resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <% if devise_error_messages! != "" %>
+  <div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><%= devise_error_messages! %></div>
+  <% end %>
+
+<%= f.text_field :username, :class => "input-block-level", :placeholder => (I18n.t :username)%>
+
+  <%= f.email_field :email, :class => "input-block-level", :placeholder => (I18n.t :email_address)%>
+
+  <%= f.text_field :business_code, :class => "input-block-level", :placeholder => (I18n.t :buisness_code) %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div><%= I18n.t :currently_awaiting_confirmation_for%><%= resource.unconfirmed_email %></div>
+  <% end %>
+  <%= f.password_field :password, :autocomplete => "off", :class => "input-block-level", :placeholder => (I18n.t :password_unchanged) %>
+
+  <%= f.password_field :password_confirmation, :class => "input-block-level", :placeholder => (I18n.t :confirm_password_unchanged) %>
+
+  <%= f.password_field :current_password, :class => "input-block-level", :placeholder =>(I18n.t :current_password) %>
+
+   <div class="row-fluid"><%= f.submit (I18n.t :update), :class=> "btn btn-large btn-primary span12" %>
+   <input type=button class="btn btn-large btn-primary span12" value= '<%= I18n.t :cancel%>' onclick= "cancel_button()">
+   </div>
+<% end %>
+
+<!--TODO: fix this cancel button and whole page really -->
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>
+</div>
+</div>

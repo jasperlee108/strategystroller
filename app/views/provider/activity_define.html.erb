@@ -1,0 +1,61 @@
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
+<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
+<li id="activity_define"><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
+<% end %>
+
+<script>
+document.getElementById("home").className = "";
+document.getElementById("define_page").className = "active";
+document.getElementById("activity_define").className = "active";
+</script>
+
+<style>
+input {
+	width:25em;
+}
+textarea {
+	width:50em;
+}
+</style>
+
+<h2>Activity Form</h2>
+
+<body>
+    <%= semantic_form_for @activity do |f| %>
+        <%= f.inputs do %>
+
+          <%= f.input :name, :required => true, :as => :string, :label => "Name of Activity" %>
+          
+          <%= f.input :short_name, :as => :string, :label => "Short Name of Activity" %>
+
+          <%= f.input :project_id, :as => :select, :collection => Project.all, :required => true, :label => "Part of Project" %>
+          
+          <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Activity Description" %>
+          
+          <%= f.input :phase, :as => :select, :collection => ["1-Concept completed", "2-Prerequisites fulfilled", "3-Implementation running", "4-Project effective"], :required => true, :label => "Part of Phase" %>
+          
+          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 20%" }, :required => true, :label => "Starting Date" %>
+          
+          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 20%" }, :required => true, :label => "Ending Date" %>
+          
+          <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Team Member" %>
+          
+          <%= f.input :targetManp, :as => :number, :required => true, :label => "Planned Employee Resources (days)" %>
+          
+          <%= f.input :targetCost, :as => :number, :required => true, :label => "Planned External Costs (currency)" %>
+          
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
+          
+          <%= f.input :actualManp, :as => :number, :required => true, :label => "Actual Employee Resources (days)" %>
+          
+          <%= f.input :actualCost, :as => :number, :required => true, :label => "Actual External Costs (currency)" %>
+          
+          <%= f.input :actualProg, :as => :select, :collection => ["1-Not yet started", "2-In progress", "3-Activity completed"], :required => true, :label => "Status of Activity" %>
+          
+          <%= f.input :statusNotes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes on Status" %>
+
+        <% end %>
+    <%= f.action :submit, :label => "Submit Activity" %>
+    <% end %>
+</body>

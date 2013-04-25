@@ -1,0 +1,53 @@
+<% content_for :context_menu do %>
+<li id="goal_define"><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
+<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
+<li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
+<% end %>
+
+<script>
+document.getElementById("home").className = "";
+document.getElementById("define_page").className = "active";
+document.getElementById("goal_define").className = "active";
+</script>
+
+<style>
+input {
+	width:25em;
+}
+textarea {
+	width:50em;
+}
+</style>
+
+<h2>Goal Form</h2>
+
+<body>
+    <%= semantic_form_for @goal, :url => goal_define_path do |f| %>
+        <%= f.inputs do %>
+        <%= hidden_field_tag :entry_id, params[:entry_id] %>
+        <%= hidden_field_tag :form_id, params[:form_id] %>
+
+          <%= f.input :name, :input_html => { :value => @current_goal.name, :readonly => true }, :label => "Name of Goal" %>
+          
+          <%= f.input :short_name, :input_html => { :value => @current_goal.short_name, :readonly => true }, :label => "Short Name of Goal" %>
+
+          <%= f.input :dimension_id, :input_html => { :value => @current_goal.dimension_id, :readonly => true }, :label => "Associated Dimension" %>
+
+          <%= f.input :user_id, :input_html => { :value => @current_goal.user_id, :readonly => true }, :label => "Responsible" %>
+
+          <%= f.input :need, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Call for Action" %>
+          
+          <%= f.input :justification, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Justification of Specific Goal" %>
+          
+          <%= f.input :focus, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Strategic Approach" %>
+          
+          <%= f.input :prereq, :input_html => { :value => @current_goal.prereq, :readonly => true }, :label => "Prerequisites" %>
+
+          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => false, :label => "Notes" %>
+          
+          <%= f.input :status, :input_html => { :value => @current_goal.status, :readonly => true }, :label => "Current Status (%)" %>
+
+        <% end %>
+    <%= f.action :submit, :label => "Submit Goal" %>
+    <% end %>
+</body>

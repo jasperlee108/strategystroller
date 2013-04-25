@@ -1,0 +1,62 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require formtastic-bootstrap
+ *= require twitter/bootstrap
+ *= require_self
+ *= require_directory .
+ */
+ul.hmenu {
+    list-style: none;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+}
+
+ul.hmenu li {
+    display: inline;
+}
+
+.well {
+	margin-top: 2em;
+}
+
+.hero-unit {
+	margin-top: 2em;
+}
+
+.snb .ni {
+        padding: 0;
+      }
+      .snb .snb {
+        margin: 0;
+        display: table;
+        width: 100%;
+      }
+      .snb .snb li {
+        display: table-cell;
+        width: 1%;
+        float: none;
+      }
+      .snb .isnb li a {
+        font-weight: bold;
+        text-align: center;
+        border-left: 1px solid rgba(255,255,255,.75);
+        border-right: 1px solid rgba(0,0,0,.1);
+      }
+      .snb .isnb li:first-child a {
+        border-left: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .snb .isnb li:last-child a {
+        border-right: 0;
+        border-radius: 0 3px 3px 0;
+      }

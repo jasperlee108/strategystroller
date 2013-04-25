@@ -1,0 +1,7 @@
+<p>Welcome <%= @email %>!</p>
+
+<p>Your temporary password is 8I7b9UgqOi. Please navigate to edit registration to change this password after confirming your account. </p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
