@@ -23,9 +23,9 @@ class User < ActiveRecord::Base
   has_many :forms
   
   ### VALIDATIONS (added 04/16/2013)
-  # Business code = string[2]
+  # Business code = string[10]
   validates :business_code,
-  :length => { :maximum => 2 }
+  :length => { :maximum => 10 }
 
   validates_uniqueness_of :email
   

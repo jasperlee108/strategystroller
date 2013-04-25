@@ -25,10 +25,9 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_goal = Goal.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
+    @current_form.update_attributes(:checked => true)
     if (request.post?)
-      @current_form.update_attributes(:checked => true)
+      @current_form.update_attributes(:submitted => true)
       @current_goal.update_attributes(params[:goal])
       redirect_to unchecked_path
     end
@@ -41,10 +40,9 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
+    @current_form.update_attributes(:checked => true)
     if (request.post?)
-      @current_form.update_attributes(:checked => true)
+      @current_form.update_attributes(:submitted => true)
       @current_indicator.update_attributes(params[:indicator])
       redirect_to unchecked_path
     end
@@ -57,10 +55,9 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
-    ## The following if is still faulty
-    ## On success, it is redirecting to CU panel!
+    @current_form.update_attributes(:checked => true)
     if (request.post?)
-      @current_form.update_attributes(:checked => true)
+      @current_form.update_attributes(:submitted => true)
       @current_project.update_attributes(params[:project])
       redirect_to unchecked_path
     end
