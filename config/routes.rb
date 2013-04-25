@@ -38,6 +38,12 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/activity_check" => "controller_unit#activity_check", :as => 'activity_check'
   #match "controller_unit/indicator_update" => "controller_unit#indicator_update", :as => 'indicator_update'
   #match "controller_unit/project_update" => "controller_unit#project_update", :as => 'project_update'
+  match "controller_unit/all_data" => "controller_unit#all_data", :as => 'all_data'
+  match "controller_unit/all_activity" => "controller_unit#all_activity", :as => 'all_activity'
+  match "controller_unit/all_project" => "controller_unit#all_project", :as => 'all_project'
+  match "controller_unit/all_indicator" => "controller_unit#all_indicator", :as => 'all_indicator'
+  match "controller_unit/all_goal" => "controller_unit#all_goal", :as => 'all_goal'
+  match "controller_unit/all_dimension" => "controller_unit#all_dimension", :as => 'all_dimension'
 
   # Provider
   match "provider/unchecked" => "provider#unchecked", :as => "unchecked"

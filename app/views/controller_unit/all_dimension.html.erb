@@ -1,0 +1,16 @@
+<h2>Dimension</h2>
+
+<body>
+    <%= semantic_form_for @dimension, :url => all_dimension_path do |f| %>
+        <%= f.inputs do %>
+        <%= hidden_field_tag :entry_id, params[:entry_id] %>
+        <%= hidden_field_tag :form_id, params[:form_id] %>
+        
+          <%= f.input :name, :input_html => { :value => @dimension.name, :readonly => true }, :label => "Name of Dimension" %>
+          
+          <%= f.input :status, :input_html => { :value => @dimension.status, :readonly => true }, :label => "Current Status" %>
+          
+        <% end %>
+    <% end %>
+    <%= link_to "Back", :back %>
+</body>
