@@ -1,8 +1,10 @@
 <h2>Activity</h2>
 
 <body>
-    <%= semantic_form_for @activity do |f| %>
+    <%= semantic_form_for @activity, :url => all_activity_path do |f| %>
         <%= f.inputs do %>
+        <%= hidden_field_tag :entry_id, params[:entry_id] %>
+        <%= hidden_field_tag :form_id, params[:form_id] %>
 
           <%= f.input :name, :input_html => { :value => @activity.name, :readonly => true }, :label => "Name of Activity" %>
           
