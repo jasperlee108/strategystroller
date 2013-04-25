@@ -58,6 +58,7 @@ class ProviderController < ApplicationController
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
     @current_form.update_attributes(:checked => true)
+    @activities = @current_project.activities
     if (request.post?)
       @current_form.update_attributes(:submitted => true)
       @current_project.update_attributes(params[:project])
