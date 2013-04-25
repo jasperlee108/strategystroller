@@ -27,9 +27,13 @@ class ProviderController < ApplicationController
     @current_goal = Goal.find_by_id(entry_id)
     @current_form.update_attributes(:checked => true)
     if (request.post?)
-      @current_form.update_attributes(:submitted => true)
+      if (params[:commit] == "Submit Goal")
+        @current_form.update_attributes(:submitted => true)
+        flash[:notice] = "Goal successfully submitted!"
+      elsif (params[:commit] == "Save Goal")
+        flash[:notice] = "Goal successfully saved!"
+      end
       @current_goal.update_attributes(params[:goal])
-      flash[:notice] = "Goal successfully submitted!"
       redirect_to forms_composite_path
     end
   end
@@ -43,9 +47,13 @@ class ProviderController < ApplicationController
     @current_indicator = Indicator.find_by_id(entry_id)
     @current_form.update_attributes(:checked => true)
     if (request.post?)
-      @current_form.update_attributes(:submitted => true)
+      if (params[:commit] == "Submit Indicator")
+        @current_form.update_attributes(:submitted => true)
+        flash[:notice] = "Indicator successfully submitted!"
+      elsif (params[:commit] == "Save Indicator")
+        flash[:notice] = "Indicator successfully saved!"
+      end
       @current_indicator.update_attributes(params[:indicator])
-      flash[:notice] = "Indicator successfully submitted!"
       redirect_to forms_composite_path
     end
   end
@@ -61,9 +69,13 @@ class ProviderController < ApplicationController
     @current_form.update_attributes(:checked => true)
     @activities = @current_project.activities
     if (request.post?)
-      @current_form.update_attributes(:submitted => true)
+      if (params[:commit] == "Submit Project")
+        @current_form.update_attributes(:submitted => true)
+        flash[:notice] = "Project successfully submitted!"
+      elsif (params[:commit] == "Save Project")
+        flash[:notice] = "Project successfully saved!"
+      end
       @current_project.update_attributes(params[:project])
-      flash[:notice] = "Project successfully submitted!"
       redirect_to forms_composite_path
     end
   end
