@@ -30,14 +30,14 @@ class ControllerUnitController < ApplicationController
     @line_chart = Gchart.line(:size => '600x200',:data => [300, 100, 30, 200, 100, 200, 300, 10], :axis_with_labels => 'x,r',
             :axis_labels => ['Jan|July|Jan|July|Jan', axis_range], :title => "Projects Status Trends",)
 
-
+    spacing = (350/(len_of_list)).to_s + "," + (150/(len_of_list)).to_s
     @bar_chart = Gchart.bar( 
             :axis_with_labels => 'y',
             :axis_labels => [axis_range],
             :size => '500x500',
             :theme => :pastel,
             :title => "Projects Global Status",
-            :bar_width_and_spacing => '25,10',
+            :bar_width_and_spacing => spacing,
             :legend => pname_list,
             :data => clean_list(pgs_list_uc))
 
