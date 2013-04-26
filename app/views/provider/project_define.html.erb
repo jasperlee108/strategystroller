@@ -1,101 +1,164 @@
 <% content_for :context_menu do %>
-<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
-<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
-<li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
+<li>
+	<a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a>
+</li>
+<li>
+	<a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a>
+</li>
+<li>
+	<a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a>
+</li>
 <% end %>
 <script>
-document.getElementById("home").className = "";
-document.getElementById("define_page").className = "active";
+	document.getElementById("home").className = "";
+	document.getElementById("define_page").className = "active"; 
 </script>
 
 <style>
-input {
-	width:25em;
-}
-textarea {
-	width:50em;
-}
+	input {
+		width: 25em;
+	}
+	textarea {
+		width: 50em;
+	}
 </style>
 
 <h2>Project Form</h2>
- <%= render "setup_alerts" %>
+<%= render "setup_alerts" %>
 <div class="well">
-    <%= semantic_form_for @project, :url => project_define_path do |f| %>
-        <%= f.inputs do %>
-        <%= hidden_field_tag :entry_id, params[:entry_id] %>
-        <%= hidden_field_tag :form_id, params[:form_id] %>
-
-          <%= f.input :name, :input_html => { :value => @current_project.name, :readonly => true }, :label => "Name of Project" %>
-          
-          <%= f.input :short_name, :input_html => { :value => @current_project.short_name, :readonly => true }, :label => "Short Name of Project" %>
-
-          <%= f.input :indicator_id, :input_html => { :value => @current_project.indicator_id, :readonly => true }, :label => "Associated Indicator" %>
-
-          <%= f.input :head_id, :input_html => { :value => @current_project.head_id, :readonly => true }, :label => "Project Manager" %>
-
-          <%= f.input :steer_id, :input_html => { :value => @current_project.steer_id, :readonly => true }, :label => "Steering Committee" %>
-          
-          <%= f.input :description, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Project Description" %>
-          
-          <%= f.input :team, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Team Member" %>
-          
-          <%= f.input :startDate, :as => :date_select, :input_html => { :style => "width: 20%" }, :required => true, :label => "Starting Date" %>
-          
-          <%= f.input :endDate, :as => :date_select, :input_html => { :style => "width: 20%" }, :required => true, :label => "Ending Date" %>
-          
-          <%= f.input :duration, :input_html => { :value => @current_project.duration, :readonly => true }, :label => "Project Duration (months)" %>
-          
-          <%= f.input :target_manp, :input_html => { :value => @current_project.target_manp, :readonly => true }, :label => "Planned Employee Resources (days)" %>
-          
-          <%= f.input :target_cost, :input_html => { :value => @current_project.target_cost, :readonly => true }, :label => "Planned External Costs (currency)" %>
-          
-          <%= f.input :inplan, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Included in Financial Plan" %>
-          
-          <%= f.input :compensation, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Compensation Possible" %>
-          
-          <%= f.input :notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Notes" %>
-          
-          <%= f.input :actual_manp, :input_html => { :value => @current_project.actual_manp, :readonly => true }, :label => "Actual Employee Resources (days)" %>
-          
-          <%= f.input :actual_cost, :input_html => { :value => @current_project.actual_cost, :readonly => true }, :label => "Actual External Costs (currency)" %>
-          
-          <%= f.input :status_prog, :input_html => { :value => @current_project.status_prog, :readonly => true }, :label => "Current Status by Progress" %>
-          
-          <%= f.input :status_ms, :input_html => { :value => @current_project.status_ms, :readonly => true }, :label => "Current Status by Milestone" %>
-          
-          <%= f.input :status_manp, :input_html => { :value => @current_project.status_manp, :readonly => true }, :label => "Current Status by Manpower Use" %>
-          
-          <%= f.input :status_cost, :input_html => { :value => @current_project.status_cost, :readonly => true }, :label => "Current Status by Cost" %>
-          
-          <%= f.input :status_global, :input_html => { :value => @current_project.status_global, :readonly => true }, :label => "Current Status Overall" %>
-          
-          <%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :cols => 10 }, :required => true, :label => "Notes to Current Status" %>
-
-<table class="table table-hover table-bordered">
-  <tr>
-  	<th>Activity Name</th>
-  	<th>Current Overall Progress</th>
-  </tr>
-  
-  <% @activities.each do |a| %>
-    <tr>
-      <td valign="top"><%= link_to a.name, all_activity_path(:activity_id => a.id) %></td>
-      <td>
-		<div class="progress">
-		  <div class="bar" style="width: 60%;"></div>
+	<%= semantic_form_for @project, :url => project_define_path do |f| %>
+	<%= f.inputs do %>
+	<%= hidden_field_tag :entry_id, params[:entry_id] %>
+	<%= hidden_field_tag :form_id, params[:form_id] %>
+	<div class="row-fluid">
+		<div class="span4">
+			<%= f.input :name, :input_html => { :value => @current_project.name, :readonly => true, :class => "span12" }, :label => "Name of Project" %>
 		</div>
-	  </td>
-    </tr>
-  <% end %>
-  <tr class="info">
-  	<td><%= link_to "Create New Activity", activities_path %></td>
-  	<td></td>
-  </tr>
-</table>
-<br />
+		<div class="span8">
+			<%= f.input :short_name, :input_html => { :value => @current_project.short_name, :readonly => true, :class => "span12" }, :label => "Short Name of Project" %>
+		</div>
+	</div>
 
-        <% end %>
-    <%= f.action :submit, :label => "Submit Project" %>
-    <%= f.action :submit, :label => "Save Project" %>
-    <% end %>
+	<div class="row-fluid">
+		<div class="span4">
+			<%= f.input :indicator_id, :input_html => { :value => @current_project.indicator_id, :readonly => true, :class => "span12" }, :label => "Associated Indicator" %>
+		</div>
+		<div class="span4">
+			<%= f.input :head_id, :input_html => { :value => @current_project.head_id, :readonly => true, :class => "span12" }, :label => "Project Manager" %>
+		</div>
+		<div class="span4">
+			<%= f.input :steer_id, :input_html => { :value => @current_project.steer_id, :readonly => true, :class => "span12" }, :label => "Steering Committee" %>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<%= f.input :description, :as => :text, :input_html => { :value => @current_project.description, :rows => 5, :class => "span12" }, :required => true, :label => "Project Description" %>
+		</div>
+		<div class="span6">
+			<%= f.input :team, :as => :text, :input_html => { :value => @current_project.team, :rows => 5, :class => "span12" }, :required => true, :label => "Team Member" %>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="span6">
+				<%= f.input :startDate, :as => :date_select, :input_html => { :value => @current_project.startDate, :class => "span4" }, :required => true, :label => "Starting Date" %>
+			</div>
+			<div class="span6">
+				<%= f.input :endDate, :as => :date_select, :input_html => { :value => @current_project.endDate, :class => "span4" }, :required => true, :label => "Ending Date" %>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<div class="span6">
+				<%= f.input :inplan, :input_html => { :checked => @current_project.inplan }, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Included in Financial Plan" %>
+			</div>
+			<div class="span6">
+				<%= f.input :compensation, :input_html => { :checked => @current_project.compensation }, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Compensation Possible" %>
+			</div>
+		</div>
+		<div class="span6">
+			<%= f.input :notes, :as => :text, :input_html => { :value => @current_project.notes, :rows => 5, :class => "span12" }, :required => true, :label => "Notes" %>
+
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span2">
+			<%= f.input :duration, :input_html => { :value => @current_project.duration, :readonly => true, :class => "span12" }, :label => "Project Duration (months)" %>
+		</div>
+		<div class="span2">
+			<%= f.input :target_manp, :input_html => { :value => @current_project.target_manp, :readonly => true, :class => "span12" }, :label => "Planned Employee Resources (days)" %>
+		</div>
+		<div class="span2">
+			<%= f.input :target_cost, :input_html => { :value => @current_project.target_cost, :readonly => true, :class => "span12" }, :label => "Planned External Costs (currency)" %>
+		</div>
+		<div class="span2">
+			<%= f.input :actual_manp, :input_html => { :value => @current_project.actual_manp, :readonly => true, :class => "span12" }, :label => "Actual Employee Resources (days)" %>
+		</div>
+		<div class="span2">
+			<%= f.input :actual_cost, :input_html => { :value => @current_project.actual_cost, :readonly => true, :class => "span12" }, :label => "Actual External Costs (currency)" %>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span2">
+			<%= f.input :status_prog, :input_html => { :value => @current_project.status_prog, :readonly => true, :class => "span12" }, :label => "Current Status by Progress" %>
+		</div>
+		<div class="span2">
+			<%= f.input :status_ms, :input_html => { :value => @current_project.status_ms, :readonly => true, :class => "span12" }, :label => "Current Status by Milestone" %>
+		</div>
+		<div class="span2">
+			<%= f.input :status_manp, :input_html => { :value => @current_project.status_manp, :readonly => true, :class => "span12" }, :label => "Current Status by Manpower Use" %>
+		</div>
+		<div class="span2">
+			<%= f.input :status_cost, :input_html => { :value => @current_project.status_cost, :readonly => true, :class => "span12" }, :label => "Current Status by Cost" %>
+		</div>
+		<div class="span2">
+			<%= f.input :status_global, :input_html => { :value => @current_project.status_global, :readonly => true, :class => "span12" }, :label => "Current Status Overall" %>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<%= f.input :status_notes, :as => :text, :input_html => { :value => @current_project.status_notes, :rows => 5 }, :required => true, :label => "Notes to Current Status" %>
+		</div>
+	</div>
+	
+	<table class="table table-hover table-bordered">
+		<tr>
+			<th>Activity Name</th>
+			<th>Current Overall Progress</th>
+		</tr>
+
+		<% @activities.each do |a| %>
+		<tr>
+			<td valign="top"><%= link_to a.name, all_activity_path(:activity_id => a.id) %></td>
+			<td>
+			<div class="progress">
+				<div class="bar" style="width: 60%;"></div>
+			</div></td>
+		</tr>
+		<% end %>
+		<tr class="info">
+			<td><%= link_to "Create New Activity", activities_path %></td>
+			<td></td>
+		</tr>
+	</table>
+	<br />
+
+	<% end %>
+
+	<center>
+		<div class="row-fluid">
+			<%= f.action :submit, :label => "Submit Project",:button_html => { :class=> "btn btn-primary span4" }%>
+			<%= f.action :submit, :label => "Save Project",:button_html => { :class=> "btn btn-primary span4" }%>
+			</input>
+		</div>
+	</center>
+
+	<% end %>
 </div>
