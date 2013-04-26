@@ -20,9 +20,9 @@
           
           <%= f.input :team, :input_html => { :value => @project.team, :readonly => true }, :label => "Team Member" %>
           
-          <%= f.input :startDate, :input_html => { :value => @project.startDate, :readonly => true, :style => "width: 20%" }, :label => "Starting Date" %>
+          <%= f.input :startDate, :input_html => { :value => @project.startDate, :disabled => true, :style => "width: 20%" }, :label => "Starting Date" %>
           
-          <%= f.input :endDate, :input_html => { :value => @project.endDate, :readonly => true, :style => "width: 20%" }, :label => "Ending Date" %>
+          <%= f.input :endDate, :input_html => { :value => @project.endDate, :disabled => true, :style => "width: 20%" }, :label => "Ending Date" %>
           
           <%= f.input :duration, :input_html => { :value => @project.duration, :readonly => true }, :label => "Project Duration (months)" %>
           
@@ -30,9 +30,9 @@
           
           <%= f.input :target_cost, :input_html => { :value => @project.target_cost, :readonly => true }, :label => "Planned External Costs (currency)" %>
           
-          <%= f.input :inplan, :input_html => { :value => @project.inplan, :readonly => true }, :label => "Included in Financial Plan" %>
+          <%= f.input :inplan, :as => :boolean, :input_html => { :checked => @project.inplan, :disabled => true }, :checked_value => true, :unchecked_value => false, :label => "Included in Financial Plan" %>
           
-          <%= f.input :compensation, :input_html => { :value => @project.compensation, :readonly => true }, :label => "Compensation Possible" %>
+          <%= f.input :compensation, :input_html => { :checked => @project.compensation, :disabled => true }, :checked_value => true, :unchecked_value => false,:label => "Compensation Possible" %>
           
           <%= f.input :notes, :input_html => { :value => @project.notes, :readonly => true }, :label => "Notes" %>
           

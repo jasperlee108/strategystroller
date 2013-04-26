@@ -63,10 +63,10 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="span6">
-				<%= f.input :startDate, :as => :date_select, :input_html => { :value => @current_project.startDate, :class => "span4" }, :required => true, :label => "Starting Date" %>
+				<%= f.input :startDate, :as => :date_select, :input_html => { :value => @current_project.startDate, :class => "span4", :disabled => true  }, :required => true, :label => "Starting Date" %>
 			</div>
 			<div class="span6">
-				<%= f.input :endDate, :as => :date_select, :input_html => { :value => @current_project.endDate, :class => "span4" }, :required => true, :label => "Ending Date" %>
+				<%= f.input :endDate, :as => :date_select, :input_html => { :value => @current_project.endDate, :class => "span4", :disabled => true  }, :required => true, :label => "Ending Date" %>
 			</div>
 		</div>
 	</div>
@@ -74,10 +74,10 @@
 	<div class="row-fluid">
 		<div class="span6">
 			<div class="span6">
-				<%= f.input :inplan, :input_html => { :checked => @current_project.inplan }, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Included in Financial Plan" %>
+				<%= f.input :inplan, :input_html => { :checked => @current_project.inplan, :disabled => true }, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Included in Financial Plan" %>
 			</div>
 			<div class="span6">
-				<%= f.input :compensation, :input_html => { :checked => @current_project.compensation }, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Compensation Possible" %>
+				<%= f.input :compensation, :input_html => { :checked => @current_project.compensation, :disabled => true }, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Compensation Possible" %>
 			</div>
 		</div>
 		<div class="span6">
