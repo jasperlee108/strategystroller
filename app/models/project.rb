@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
 
   serialize :yearly_target_manp, Hash
   serialize :yearly_target_cost, Hash
+  serialize :status_ms, Hash
 
   ### ASSOCIATIONS
   ## parent
@@ -106,16 +107,8 @@ class Project < ActiveRecord::Base
     :greater_than_or_equal_to => 0
   }
   
-  ## Status_ms =  integer
-  ## 0 <= status_ms <= 8
-  validates :status_ms,
-  :presence => true,
-  :numericality => {
-      :only_integer => true,
-      :greater_than_or_equal_to => 0,
-      :less_than_or_equal_to => 8
-  }
-  
+
+
   ## Status_manp = long integer
   ## 0.00 <= status_manp
   validates :status_manp,
@@ -198,8 +191,28 @@ class Project < ActiveRecord::Base
     record.errors.add(:yearly_target_manp, problems) if problems != ""
   end
 
-  
-  
+  ## Status_ms =  integer
+  ## 0 <= status_ms <= 8
+  validates :status_ms,
+            :presence => true
+
+  validates_each :status_ms do |record,attribute,value|
+    problems = ""
+    if value.is_a? Hash
+      value.each do |phase, progress|
+        problems << "phase must be in Activity::PHASES, unlike #{phase}" unless Activity::PHASES.include? phase
+        problems << "progress must be in Activity::PROGRESS, unlike #{phase}" unless Activity::PROGRESS.include? progress
+        problems << "Activitiy::PROJECT_MANAGEMENT must have a progress of 0" if problems == "" and phase == Activity::PROJECT_MANAGEMENT and progress.nonzero?
+      end
+      problems << "There must be an entry for each phase" unless value.length == Activity::PHASES.length
+    else
+      problems << "status_ms must be a hash of phase keys to progress values"
+    end
+    record.errors.add(:status_ms, problems) if problems != ""
+  end
+
+
+
   ### VALID DATE CHECKER, modified accordingly from source
   ## Credit: Gabe Hollombe, brettish
   ## Source: http://stackoverflow.com/questions/1370926/rails-built-in-datetime-validation
@@ -349,8 +362,11 @@ class Project < ActiveRecord::Base
           phases_progress[act.phase] = Activity::IN_PROGRESS
         end
       end
+    # Guarantee that all phases have a value assigned.
+    # This also ensures Project Management is always set to zero, as a special case. This makes calculations across the values simpler.
+    Activity::PHASES.each { |phase| phases_progress[phase] = Activity::NOT_YET_STARTED if phases_progress[phase].nil? }
     end
-    self.status_ms = phases_progress.values.inject(0,:+) # NOTE Could easily be modified to return the individual values
+    self.status_ms = phases_progress
   end
   
 end

@@ -21,7 +21,7 @@ describe Project do
     :actual_manp => 10,
     :actual_cost => 20.5,
     :status_prog => 75.5,
-    :status_ms => 5,
+    :status_ms => {-1=>0, 1=>0, 2=>0, 3=>0, 4=>0},
     :status_manp => 10.0,
     :status_cost => 10.5,
     :status_global => 50.5,
@@ -703,6 +703,44 @@ describe Project do
     project.yearly_target_cost = {2012 => BigDecimal(5.5, 6), 2014 => BigDecimal(5.5, 6)}
     assert(!project.save, "yearly_target_cost is saving with a year after endDate: #{project.yearly_target_cost.keys[1]}")
   end
+
+  ### STAUS_MS    TODO
+  it 'will not allow a non-hash'do
+    project = generate
+    project.status_ms = [0,0,0,0,0]
+    assert(!project.save, "Project saved with an empty hash.")
+  end
+
+  it 'will not allow an empty hash'do
+    project = generate
+    project.status_ms = {}
+    assert(!project.save, "Project saved with an empty hash.")
+  end
+
+  it 'will not save if there is a phase not in Activity::PHASES' do
+    project = generate
+    project.status_ms = {-1=>0, 1=>0, 2=>0, 3=>0, 22=>0}
+    assert(!project.save, "Project saved with a phase not in Activity::PHASES.")
+  end
+
+  it 'will not save if there is a progress not in Activity::PROGRESS' do
+    project = generate
+    project.status_ms = {-1=>0, 1=>0, 2=>0, 3=>0, 4=>-1}
+    assert(!project.save, "Project saved with a project not in Activity::PROJECT.")
+  end
+
+  it 'will not save if there is not pair entry for each phase in Activity::PHASES' do
+    project = generate
+    project.status_ms = { 1=>0, 2=>0, 3=>0, 4=>0 }
+    assert(!project.save, "Project saved with a project not in Activity::PROJECT.")
+  end
+
+  it 'will not save if Activity::PROJECT_MANAGEMENT hase a nonzero phase' do
+    project = generate
+    project.status_ms = {-1=>1, 1=>0, 2=>0, 3=>0, 4=>0 }
+    assert(!project.save, "Project saved with PROJECT_MANAGEMENT with having a nonzero value")
+  end
+
 
   ### INITIALIZED_YEAR_HASH
 
