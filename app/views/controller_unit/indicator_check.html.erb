@@ -53,7 +53,7 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span3">
-			<%= f.input :indicator_type, :input_html => {:value => @current_indicator.indicator_type, :class => "span12" }, :required => true, :as => :select, :collection => ["Average", "Cummulative"], :label => "Indicator Type" %>
+			<%= f.input :indicator_type, :input_html => {:value => @current_indicator.indicator_type, :class => "span12" }, :required => true, :as => :select, :collection => ["Average", "Cumulative"], :label => "Indicator Type" %>
 		</div>
 		<div class="span3">
 			<%= f.input :dir, :input_html => {:value => @current_indicator.dir, :class => "span12" }, :required => true, :as => :select, :collection => ["More is Better", "Less is Better"], :label => "Target Direction" %>
