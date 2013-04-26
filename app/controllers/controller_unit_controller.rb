@@ -5,6 +5,12 @@ class ControllerUnitController < ApplicationController
   # #should handle checking that a user is a cu, as of yet untested TODO test me.
     #redirect_to :new_user_session_path unless current_user && current_user.controlling_unit?
   #end
+
+  GOAL = 1
+  INDICATOR = 2
+  PROJECT = 3
+  ACTIVITY = 4
+
   def clean_list(listie)
     final_list = []
     i = 0
@@ -73,8 +79,8 @@ class ControllerUnitController < ApplicationController
         else # goal and form saved
           flash[:notice] = "Goal successfully saved!"
           @user_obj = User.find_by_id(@goal.user_id)
-          # Need to populate a form
-          @form_url = encode_url(form_id)
+          @form_url = encode_url(form_id, @goal.id)
+          #save form_url
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # goal not saved
@@ -97,7 +103,7 @@ class ControllerUnitController < ApplicationController
           flash[:notice] = "Indicator successfully saved!"
           @user_obj = User.find_by_id(@indicator.user_id)
           # Need to populate a form
-          @form_url = encode_url(form_id)
+          @form_url = encode_url(form_id, @indicator.id)
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # indicator not saved
@@ -120,7 +126,7 @@ class ControllerUnitController < ApplicationController
           flash[:notice] = "Project successfully saved!"
           @user_obj = User.find_by_id(@project.head_id)
           # Need to populate a form
-          @form_url = encode_url(form_id)
+          @form_url = encode_url(form_id, @project.id)
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # project not saved
@@ -162,26 +168,27 @@ class ControllerUnitController < ApplicationController
         end
     end
 
-    def encode_id(form_id) #helper method for encode_url
-      encoded = Base64.encode64(form_id.to_s)
+    def encode_id(id) 
+      encoded = Base64.encode64(id.to_s)
       return encoded
     end
 
-    def encode_url(form_id)
-      encoded_id = encode_id(form_id.to_s)
-      url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
+    def encode_url(form_id, entry_id) #only for provider define (so far)
+      encoded_form_id = encode_id(form_id.to_s)
+      encoded_entry_id = encode_id(entry_id.to_s)
+      form = Form.find_by_id(form_id)
+      lookup = form.lookup
+      if (lookup == GOAL) 
+        category = "goal"
+      elsif (lookup == INDICATOR)
+        category = "indicator"
+      elsif (lookup == PROJECT)
+        category = "project"
+      elsif (lookup ==  ACTIVITY)
+        category = "activity"
+      end
+      url = "localhost:3000/provider/" + category + "_define?entry_id=" + encoded_entry_id + "&form_id=" + encoded_form_id #temp
     end
-
-    def decode_id(form_id)
-      decoded = Base64.decode64(form_id.to_s)
-      return decoded
-    end
-
-    def extract_id(url)
-      id = url.split("form_id=")[1]
-      return id
-    end  
-
 
     def create_users
        @application = Application.new #Just using Application model because it has a 'users' field that cocoon needs
@@ -352,6 +359,34 @@ class ControllerUnitController < ApplicationController
       flash[:notice] = "Activity review completed!"
       redirect_to cu_review_path
     end
+  end
+
+   def save_form(table_id, user_id, entry_id)
+    default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
+    if default.include? table_id
+      @form = create_form(false, table_id, false, user_id, false, Date.today, entry_id)
+      if @form.save
+        return @form.id
+      else
+        return nil
+      end
+    else
+      # ERROR: wrong table_id
+      return nil
+    end
+  end
+
+  def create_form(checked, table_id, reviewed, user_id, submitted, last, entry_id)
+    form = Form.new(
+    :checked => checked,
+    :lookup => table_id,
+    :reviewed => reviewed,
+    :user_id => user_id,
+    :submitted => submitted,
+    :last_reminder => last,
+    :entry_id => entry_id
+    )
+    return form
   end
 
   ### DISPLAY ALL DATA FOR OVERVIEW PAGE + RELATED METHODS ###
