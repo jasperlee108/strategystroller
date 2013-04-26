@@ -15,6 +15,7 @@ class Activity < ActiveRecord::Base
   PHASES = [PROJECT_MANAGEMENT, CONCEPT_COMPLETED, PREREQUISITES_FULFILLED,
             IMPLEMENTATION_RUNNING, PROJECT_EFFECTIVE]
 
+
   NOT_YET_STARTED = 0
   IN_PROGRESS = 1
   COMPLETED = 2
@@ -62,7 +63,7 @@ class Activity < ActiveRecord::Base
       errors.add(:startDate, 'must be a valid date')
     elsif (Date.parse(endDate.to_s) rescue ArgumentError) == ArgumentError
       errors.add(:endDate, 'must be a valid date')
-    elsif startDate > endDate
+    elsif startDate >= endDate
       errors.add(:endDate, 'must be before start date')
     end
   end

@@ -9,8 +9,8 @@ describe Project do
     project = Project.new(
     :name => "Projekts",
     :description => "Projektbeschreibung",
-    :startDate => Date.new(2012,03,27),
-    :endDate => Date.new(2013,03,28),
+    :startDate => Date.new(2013,03,27),
+    :endDate => Date.new(2014,03,28),
     :actual_duration => 15,
     :target_duration => 52,
     :target_manp => 5,
@@ -30,8 +30,8 @@ describe Project do
     :head_id => 1,
     :steer_id => 1,
     :team => "James Bond, Andy Warhol",
-    :yearly_target_manp => {2012 => BigDecimal(5.5,6), 2013 => BigDecimal(7.5,6)},
-    :yearly_target_cost => {2012 => BigDecimal(25.25,6), 2013 => BigDecimal(38.00,6)},
+    :yearly_target_manp => {}, # kept as an example: {2013 => BigDecimal(5.57,10), 2014 => BigDecimal(7.57,10)},
+    :yearly_target_cost => {}, # kept as an example: {2013 => BigDecimal(25.25,10), 2014 => BigDecimal(38.07,10)},
     )
     return project
   end
@@ -41,8 +41,8 @@ describe Project do
         :name => "Aktivitat",
         :description => "Wall of Text",
         :phase => Activity::PREREQUISITES_FULFILLED,
-        :startDate => Date.new(2012,03,27),
-        :endDate => Date.new(2013,03,28),
+        :startDate => Date.new(2013,07,02),  # If these dates change, the yearly_ tests will fail.
+        :endDate => Date.new(2014,07,03),
         :targetManp => 11,
         :targetCost => 50.50,
         :notes => "Another Wall of Text",
@@ -78,8 +78,8 @@ describe Project do
         :name => "Aktivitat3",
         :description => "Wall of Text3",
         :phase => Activity::PREREQUISITES_FULFILLED,
-        :startDate => Date.new(2013,03,27),
-        :endDate => Date.new(2013,03,28),
+        :startDate => Date.new(2014,07,2),  # If these dates change, the yearly_ tests will fail.
+        :endDate => Date.new(2014,07,12),
         :targetManp => 2,
         :targetCost => 12.75,
         :notes => "Another Wall of Text3",
@@ -764,10 +764,219 @@ describe Project do
   
   ### UPDATE_YEARLY_TARGET_COST
 
+  it 'properly calculates the distribution of target cost across evenly split years' do
+    project = gen_with_children
+    project.startDate = Date.new(2013,03,27)
+    project.endDate = Date.new(2014,03,28)
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_yearly_target_cost
+    assert(proj_in_table.yearly_target_cost.values == [25.25, 38], "Failed to correctly calculate yearly_target_cost, instead of {2013=>BD(25.25),2014=>BD(38.00)} got: #{proj_in_table.yearly_target_cost}")
+  end
+
+  it 'properly calculates the distribution of target cost only in one year' do
+    project = gen_with_children
+    project.startDate = Date.new(2013,03,27)
+    project.endDate = Date.new(2013,03,29)
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_yearly_target_cost
+    assert(proj_in_table.yearly_target_cost.values == [25.25], "Failed to correctly calculate yearly_target_cost, instead of {2013=>BD(25.25)} got: #{proj_in_table.yearly_target_cost}")
+  end
+
+  it 'properly calculates the distribution of target cost if there are no activities in the given years.' do
+    project = gen_with_children
+    project.startDate = Date.new(2015,03,27)
+    project.endDate = Date.new(2016,03,29)
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_yearly_target_cost
+    assert(proj_in_table.yearly_target_cost == {2015 => BigDecimal(0.0,10), 2016 => BigDecimal(0.0,10)}, "Failed to correctly calculate yearly_target_cost, instead of {2015=>BD(0.0),2016=>BD0.0} got: #{proj_in_table.yearly_target_cost}")
+  end
+
   ### UPDATE_YEARLY_TARGET_MANP
 
-  ### EXTRA
+  it 'properly calculates the distribution of target manp across evenly split years' do
+    project = gen_with_children
+    project.startDate = Date.new(2013,03,27)
+    project.endDate = Date.new(2014,03,28)
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_yearly_target_manp
+    assert(proj_in_table.yearly_target_manp.values == [5.5, 7.5], "Failed to correctly calculate yearly_target_manp, instead of {2013=>BD(5.5),2014=>BD(7.5)} got: #{proj_in_table.yearly_target_manp}")
+  end
+
+  it 'properly calculates the distribution of target manp only in one year' do
+    project = gen_with_children
+    project.startDate = Date.new(2013,03,27)
+    project.endDate = Date.new(2013,03,29)
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_yearly_target_manp
+    assert(proj_in_table.yearly_target_manp.values == [5.5], "Failed to correctly calculate yearly_target_manp, instead of {2013=>BD(5.5)} got: #{proj_in_table.yearly_target_manp}")
+  end
+
+  it 'properly calculates the distribution of target manp if there are no activities in the given years.' do
+    project = gen_with_children
+    project.startDate = Date.new(2015,03,27)
+    project.endDate = Date.new(2016,03,29)
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_yearly_target_manp
+    assert(proj_in_table.yearly_target_manp == {2015 => BigDecimal(0.0,10), 2016 => BigDecimal(0.0,10)}, "Failed to correctly calculate yearly_target_manp, instead of {2015=>BD(0.0),2016=>BD0.0} got: #{proj_in_table.yearly_target_manp}")
+  end
+
+  ### UPDATE_TARGET_DURATION
+
+  it 'correctly calculates the target_duration span of one day separated' do
+    project = gen_with_children
+    project.startDate = Date.new(2013,03,27)
+    project.endDate = Date.new(2013,03,28)
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_target_duration
+    assert(proj_in_table.target_duration == 1, "Failed to correctly calculate target_duration, instead of 1 got: #{proj_in_table.target_duration}")
+  end
+
+  it 'correctly calculates the target_duration span of one year separated' do
+    project = gen_with_children
+    project.startDate = Date.new(2013,7,2)
+    project.endDate = Date.new(2014,7,2)
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_target_duration
+    assert(proj_in_table.target_duration == 365, "Failed to correctly calculate target_duration, instead of 365 got: #{proj_in_table.target_duration}")
+  end
+
+  ### UPDATE_ACTUAL_DURATION
+
+  it 'correctly calculates the actual_duration span of one day separated' do
+    project = gen_with_children
+    project.startDate = Date.today.prev_day
+    project.endDate = Date.today.next_year  # shouldn't matter for the test as long as this provides a valid start/end combination so the record will save.
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_actual_duration
+    assert(proj_in_table.actual_duration == 1, "Failed to correctly calculate actual_duration, instead of 1 got: #{proj_in_table.actual_duration}")
+  end
+
+  it 'correctly calculates the actual_duration span of one year separated' do
+    project = gen_with_children
+    project.startDate = Date.today.prev_year
+    project.endDate = Date.today.next_year  # shouldn't matter for the test as long as this provides a valid start/end combination so the record will save.
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_actual_duration
+    assert(proj_in_table.actual_duration == Date.today - Date.today.prev_year, "Failed to correctly calculate actual_duration, instead of 365 got: #{proj_in_table.actual_duration}")
+  end
   
+  ### UPDATE_STATUS_PROG
+  it 'correctly calculates the status_prog of 1/2 done' do
+    project = gen_with_children
+    project.startDate = Date.today.prev_year.prev_year.prev_year.prev_year #years in multiples of 4 to deal with leap-year issues
+    project.endDate = Date.today.next_year.next_year.next_year.next_year
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_actual_duration
+    proj_in_table.update_target_duration
+    proj_in_table.update_status_prog
+    assert(proj_in_table.status_prog == BigDecimal(1461, 10)/ BigDecimal(2922,10), "Failed to correctly calculate status_prog, instead of 1/2 got: #{proj_in_table.status_prog}")
+  end
+
+  it 'correctly calculates the status_prog of 100% done' do
+    project = gen_with_children
+    project.startDate = Date.yesterday
+    project.endDate = Date.today
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_actual_duration
+    proj_in_table.update_target_duration
+    proj_in_table.update_status_prog
+    assert(proj_in_table.status_prog == 1, "Failed to correctly calculate status_prog, instead of 1 got: #{proj_in_table.status_prog}")
+  end
+
+  ### UPDATE_STATUS_MANP
+  it 'correctly updates the status_manp' do
+    project = generate
+    project.actual_manp = 10
+    project.target_manp = 20
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_status_manp
+    assert(proj_in_table.status_manp == BigDecimal(0.5, 10), "Failed to correctly calculate status_manp, instead of 0.5 got: #{proj_in_table.status_manp}")
+  end
+
+  it 'correctly sets status_manp if target_manp == zero' do
+    project = generate
+    project.target_manp = 0
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_status_manp
+    assert(proj_in_table.status_manp == BigDecimal(0, 10), "Failed to correctly set status_manp, instead of 0 got: #{proj_in_table.status_manp}")
+  end
+
+
+  ### UPDATE_STATUS_COST
+  it 'correctly updates the status_cost' do
+    project = generate
+    project.actual_cost = 10
+    project.target_cost = 20
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_status_cost
+    assert(proj_in_table.status_cost == BigDecimal(0.5, 10), "Failed to correctly calculate status_cost, instead of 0.5 got: #{proj_in_table.status_cost}")
+  end
+
+  it 'correctly sets status_cost if target_cost == zero' do
+    project = generate
+    project.target_cost = 0
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_status_cost
+    assert(proj_in_table.status_cost == BigDecimal(0, 10), "Failed to correctly set status_cost, instead of 0 got: #{proj_in_table.status_cost}")
+  end
+
+  ### UPDATE_TARGET_MANP
+  it 'correctly calculates its target_manp from its children' do 
+    project = gen_with_children
+    project.save()
+    proj_in_table = Project.find(1)
+    proj_in_table.update_target_manp
+    assert(proj_in_table.target_manp == 13, "Failed to correctly update target_manp, instead of 13 got: #{proj_in_table.target_manp}")
+  end
+
+  it 'correctly calculates its target_manp when it has no children' do
+    project = generate
+    project.save()
+    proj_in_table = Project.find(1)
+    proj_in_table.update_target_manp
+    assert(proj_in_table.target_manp == 0, "Failed to correctly update target_manp, instead of 0 got: #{proj_in_table.target_manp}")
+  end
+
+  ### UPDATE_TARGET_COST
+  it 'correctly calculates its target_cost from its children' do
+    project = gen_with_children
+    project.save()
+    proj_in_table = Project.find(1)
+    proj_in_table.update_target_cost
+    assert(proj_in_table.target_cost == 63.25, "Failed to correctly update target_cost, instead of 63.25 got: #{proj_in_table.target_cost}")
+  end
+
+  it 'correctly calculates its target_cost when it has no children' do
+    project = generate
+    project.save()
+    proj_in_table = Project.find(1)
+    proj_in_table.update_target_cost
+    assert(proj_in_table.target_cost == 0, "Failed to correctly update target_cost, instead of 0 got: #{proj_in_table.target_cost}")
+  end
+
+  ### UPDATE_STATUS_MS
+  it 'correctly calculates phase progress if there are no children' do
+
+  end
+
+  ### EXTRA
+
   ## Running Rspec remotely (RoR)
   ## Credit: Yong Hoon Lee
   ## Source: https://sites.google.com/a/eecs.berkeley.edu/cs169-sp13/project/setting-up-a-deployment-site

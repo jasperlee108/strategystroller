@@ -80,7 +80,7 @@ class Project < ActiveRecord::Base
   :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
-  ## Target_manp = long integer
+  ## Target_manp = integer
   ## 0.00 <= target_manp
   validates :target_manp,
   :presence => true,
@@ -89,7 +89,7 @@ class Project < ActiveRecord::Base
     :only_integer => true
   }
   
-  ## Actual_manp = long integer
+  ## Actual_manp = integer
   ## 0.00 <= actual_manp
   validates :actual_manp,
   :presence => true,
@@ -209,7 +209,7 @@ class Project < ActiveRecord::Base
       errors.add(:startDate, 'must be a valid date')
     elsif (Date.parse(endDate.to_s) rescue ArgumentError) == ArgumentError
       errors.add(:endDate, 'must be a valid date')
-    elsif startDate > endDate
+    elsif startDate >= endDate
       errors.add(:endDate, 'must be after start date')
     end
   end
@@ -248,7 +248,7 @@ class Project < ActiveRecord::Base
   # Note this is inclusive of the startDate, exclusive of the endDate.
   def activity_year_fractions_hash(activity)
     year_fractions = {}
-    total_activity_days = activity.endDate - activity.startDate
+    total_activity_days = activity.endDate - activity.startDate # Cannot be zero, by :validDate
     range_start = activity.startDate
     while range_start.year < activity.endDate.year
       range_end = Date.new(range_start.year + 1)
@@ -259,7 +259,6 @@ class Project < ActiveRecord::Base
     year_fractions
   end
   
-  ### UNTESTED BELOW THIS **** TODO TEST
 
   def update_yearly_target_cost
     t_cost = initialized_year_hash()
@@ -267,7 +266,7 @@ class Project < ActiveRecord::Base
     acts.each do |act|
       cost_fraction = activity_year_fractions_hash(act)
       t_cost.keys.each do |year|
-        t_cost[year] += (act.target_cost * cost_fraction.fetch(year, 0))
+        t_cost[year] += (act.targetCost * cost_fraction.fetch(year, 0))
       end
     end
     self.yearly_target_cost = t_cost
@@ -279,7 +278,7 @@ class Project < ActiveRecord::Base
     acts.each do |act|
       manp_fraction = activity_year_fractions_hash(act)
       t_manp.keys.each do |year|
-        t_manp[year] += (act.target_manp * manp_fraction.fetch(year, 0))
+        t_manp[year] += (act.targetManp * manp_fraction.fetch(year, 0))
       end
     end
     self.yearly_target_manp = t_manp
@@ -304,20 +303,28 @@ class Project < ActiveRecord::Base
   def update_status_manp
     #update_actual_manp
     #update_target_manp
-    self.status_manp = BigDecimal(self.actual_manp, 10) / BigDecimal(self.target_manp, 10) 
+    if self.target_manp.zero? # TODO Decide if this should be left as zero, one, or Infinity (default behavior of BigDecimal if left without if. Check how it behaves with the database)
+      self.status_manp = BigDecimal(0,10)
+    else
+      self.status_manp = BigDecimal(self.actual_manp, 10) / BigDecimal(self.target_manp, 10)
+    end
   end
 
   def update_status_cost
     #update_actual_cost
     #update_target_cost
-    self.status_cost = BigDecimal(self.actual_cost, 10) / BigDecimal(self.target_cost, 10)
+    if self.target_cost.zero? # TODO Decide if this should be left as zero, one, or Infinity (default behavior of BigDecimal if left without if. Check how it behaves with the database)
+      self.status_cost = BigDecimal(0,10)
+    else
+      self.status_cost = BigDecimal(self.actual_cost, 10) / BigDecimal(self.target_cost, 10)
+    end
   end
 
   # TODO decide if this should be calculated from yearly_target_manp
   def update_target_manp
     manp = 0
     self.activities.each do |activity|
-      manp += activity.targetmanp
+      manp += activity.targetManp
     end
     self.target_manp = manp
   end
@@ -331,6 +338,7 @@ class Project < ActiveRecord::Base
     self.target_cost = cost
   end
 
+  ### UNTESTED BELOW THIS **** TODO TEST
   def update_status_ms
     phases_progress = { }
     self.activities.each do |act|
