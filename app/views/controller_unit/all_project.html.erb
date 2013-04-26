@@ -10,11 +10,11 @@
           
           <%= f.input :short_name, :input_html => { :value => @project.short_name, :readonly => true }, :label => "Short Name of Project" %>
 
-          <%= f.input :indicator_id, :input_html => { :value => @project.indicator_id, :readonly => true }, :label => "Associated Indicator" %>
+          <%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :selected => @project.indicator_id, :input_html => { :disabled => true }, :label => "Associated Indicator" %>
 
-          <%= f.input :head_id, :input_html => { :value => @project.head_id, :readonly => true }, :label => "Project Manager" %>
+          <%= f.input :head_id, :as => :select, :collection => User.all, :selected => @project.head_id, :input_html => { :disabled => true }, :label => "Project Manager" %>
 
-          <%= f.input :steer_id, :input_html => { :value => @project.steer_id, :readonly => true }, :label => "Steering Committee" %>
+          <%= f.input :steer_id, :as => :select, :collection => User.all, :selected => @project.steer_id, :input_html => {:disabled => true }, :label => "Steering Committee" %>
           
           <%= f.input :description, :input_html => { :value => @project.description, :readonly => true }, :label => "Project Description" %>
           

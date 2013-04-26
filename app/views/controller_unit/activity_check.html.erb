@@ -29,15 +29,15 @@ textarea {
           
           <%= f.input :short_name, :input_html => { :value => @current_activity.short_name, :readonly => true }, :label => "Short Name of Activity" %>
 
-          <%= f.input :project_id, :input_html => { :value => @current_activity.project_id, :readonly => true }, :label => "Part of Project" %>
+          <%= f.input :project_id, :as => :select, :collection => Project.all, :selected => @current_activity.project_id, :input_html => { :readonly => true }, :label => "Part of Project" %>
           
           <%= f.input :description, :as => :text, :input_html => { :value => @current_activity.description, :readonly => true, :rows => 5, :cols => 10 }, :required => true, :label => "Activity Description" %>
           
           <%= f.input :phase, :input_html => { :value => @current_activity.phase, :readonly => true }, :label => "Part of Phase" %>
           
-          <%= f.input :startDate, :as => :date_select, :input_html => { :value => @current_activity.startDate, :readonly => true, :style => "width: 15%" }, :required => true, :label => "Starting Date" %>
+          <%= f.input :startDate, :as => :date_select, :input_html => { :value => @current_activity.startDate, :disabled => true, :style => "width: 15%" }, :required => true, :label => "Starting Date" %>
           
-          <%= f.input :endDate, :as => :date_select, :input_html => { :value => @current_activity.endDate, :readonly => true, :style => "width: 15%" }, :required => true, :label => "Ending Date" %>
+          <%= f.input :endDate, :as => :date_select, :input_html => { :value => @current_activity.endDate, :disabled => true, :style => "width: 15%" }, :required => true, :label => "Ending Date" %>
           
           <%= f.input :team, :as => :text, :input_html => { :value => @current_activity.team, :readonly => true, :rows => 5, :cols => 10 }, :required => true, :label => "Team Member" %>
           

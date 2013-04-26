@@ -30,10 +30,10 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span4">
-			<%= f.input :dimension_id, :input_html => { :value => @current_goal.dimension_id, :class => "span12" }, :required => true, :label => "Associated Dimension" %>
+			<%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @current_goal.dimension_id, :input_html => {:class => "span12" }, :required => true, :label => "Associated Dimension" %>
 		</div>
 		<div class="span4">
-			<%= f.input :user_id, :input_html => { :value => @current_goal.user_id, :class => "span12" }, :required => true, :label => "Responsible" %>
+			<%= f.input :user_id, :as => :select, :collection => User.all, :selected => @current_goal.user_id, :input_html => { :class => "span12" }, :required => true, :label => "Responsible" %>
 		</div>
 
 	</div>

@@ -10,9 +10,9 @@
           
           <%= f.input :short_name, :input_html => { :value => @goal.short_name, :readonly => true }, :label => "Short Name of Goal" %>
 
-          <%= f.input :dimension_id, :input_html => { :value => @goal.dimension_id, :readonly => true }, :label => "Associated Dimension" %>
+          <%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @goal.dimension_id, :input_html => { :disabled => true }, :label => "Associated Dimension" %>
 
-          <%= f.input :user_id, :input_html => { :value => @goal.user_id, :readonly => true }, :label => "Responsible" %>
+          <%= f.input :user_id, :as => :select, :collection => User.all, :selected => @goal.user_id, :input_html => { :disabled => true }, :label => "Responsible" %>
 
           <%= f.input :need, :input_html => { :value => @goal.need, :readonly => true }, :label => "Call for Action" %>
           
