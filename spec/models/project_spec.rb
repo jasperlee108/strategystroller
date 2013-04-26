@@ -22,7 +22,7 @@ describe Project do
     :actual_cost => 20.5,
     :status_prog => 75.5,
     :status_ms => 5,
-    :status_manp => 10,
+    :status_manp => 10.0,
     :status_cost => 10.5,
     :status_global => 50.5,
     :status_notes => "Anmerkungen zum Status",
