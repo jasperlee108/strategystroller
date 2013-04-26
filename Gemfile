@@ -9,8 +9,6 @@ gem 'rails-i18n'
 
 # Google Charts
 gem "googlecharts", :require => "gchart"
-# For progress bar
-gem 'css3-progress-bar-rails'
 
 # SimpleCov 
 gem 'simplecov', :require => false, :group => :test

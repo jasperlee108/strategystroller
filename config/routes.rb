@@ -48,11 +48,6 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/all_goal" => "controller_unit#all_goal", :as => 'all_goal'
   match "controller_unit/all_dimension" => "controller_unit#all_dimension", :as => 'all_dimension'
 
-
-
-
-
-
   # Provider
   match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
   match "provider/saved" => "provider#saved", :as => "saved"
@@ -62,7 +57,6 @@ StrategyStroller::Application.routes.draw do
   match "provider/activity_define" => "provider#activity_define", :as => 'activities'
   match "provider/indicator_update" => "provider#indicator_update", :as => 'indicator_update'
   match "provider/project_update" => "provider#project_update", :as => 'project_update'
-
   match "provider/home" => "provider#forms_composite", :as => "forms_composite"
 
   #applications path currently defaults to setup_system path so really we only need
@@ -73,7 +67,8 @@ StrategyStroller::Application.routes.draw do
   get "controller_unit/setup_system" => "controller_unit#setup_system", :as => "setup_system"
   get "controller_unit/create_users" => "controller_unit#create_users", :as => "create_users"
   get "controller_unit/remove_users" => "controller_unit#remove_users", :as => "remove_users"
-   get "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
+  get "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
+  
   ## FOR MAIN PAGE
   root :to => "home#index"
   match "home/index" => "home#index", :as => "home_index"

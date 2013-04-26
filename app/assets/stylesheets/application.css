@@ -10,7 +10,6 @@
  *
  *= require formtastic-bootstrap
  *= require twitter/bootstrap
- *= require 'css3-progress-bar'
  *= require_self
  *= require_directory .
  */
