@@ -1,7 +1,7 @@
 class Indicator < ActiveRecord::Base
   attr_accessible :actual, :description, :diff, :dir, :freq, :year, :reported_values, :indicator_type,
                   :name, :notes, :source, :contributing_projects_status, :status, :status_notes,
-                  :prognosis, :target, :unit, :goal_id, :user_id
+                  :prognosis, :target, :unit, :goal_id, :user_id, :short_name
 
   serialize :freq, Array
   serialize :reported_values, Array

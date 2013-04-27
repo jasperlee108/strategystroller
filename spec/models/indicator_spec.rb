@@ -441,7 +441,7 @@ describe Indicator do
     assert(!indicator.save, "It saves on Status = " + status.to_s)
   end
 
-  ### contributing_projects_status
+  ### CONTRIBUTING_PROJECTS_STATUS
 
   ## contributing_projects_status is not empty
   it "should not have empty contributing_projects_status" do
@@ -467,7 +467,7 @@ describe Indicator do
     assert(!indicator.save, "It saves on contributing_projects_status = " + contributing_projects_status.to_s)
   end
 
-  ### prognosis
+  ### PROGNOSIS
 
   ## prognosis is not empty
   it "should not have empty prognosis" do

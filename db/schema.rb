@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130426104526) do
     t.datetime "updated_at",                 :null => false
     t.integer  "project_id"
     t.text     "team"
+    t.string   "short_name"
   end
 
   create_table "admin_users", :force => true do |t|
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20130426104526) do
     t.datetime "updated_at",    :null => false
     t.boolean  "submitted"
     t.date     "last_reminder"
+    t.integer  "entry_id"
   end
 
   create_table "goals", :force => true do |t|
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20130426104526) do
     t.integer  "dimension_id"
     t.integer  "user_id"
     t.string   "prereq"
+    t.string   "short_name"
   end
 
   create_table "indicators", :force => true do |t|
@@ -125,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20130426104526) do
     t.datetime "updated_at",                                  :null => false
     t.integer  "goal_id"
     t.integer  "user_id"
+    t.string   "short_name"
     t.decimal  "contributing_projects_status"
     t.decimal  "prognosis"
     t.integer  "year"
@@ -155,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20130426104526) do
     t.integer  "indicator_id"
     t.integer  "head_id"
     t.integer  "steer_id"
+    t.string   "short_name"
     t.integer  "target_duration"
     t.integer  "actual_duration"
     t.text     "yearly_target_cost"

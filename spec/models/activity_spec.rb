@@ -21,7 +21,7 @@ describe Activity do
     :statusNotes => "A Different Wall of Text",
     :project_id => 1,
     :team => "James Bond, Andy Warhol",
-    :short_name => "Shorter name"
+    :short_name => "Akti"
     )
     return activity    
   end
