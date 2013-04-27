@@ -5,40 +5,76 @@
         <%= f.inputs do %>
         <%= hidden_field_tag :entry_id, params[:entry_id] %>
         <%= hidden_field_tag :form_id, params[:form_id] %>
-        
-          <%= f.input :name, :input_html => { :value => @indicator.name, :readonly => true }, :label => "Name of Indicator" %>
-          
-          <%= f.input :short_name, :input_html => { :value => @indicator.short_name, :readonly => true }, :label => "Short Name of Indicator" %>
-
-          <%= f.input :goal_id, :as => :select, :collection => Goal.all, :selected => @indicator.goal_id, :input_html => { :disabled => true }, :label => "Associated Goal" %>
-
-          <%= f.input :user_id, :as => :select, :collection => User.all, :selected => @indicator.user_id, :input_html => { :disabled => true }, :label => "Responsible" %>
-          
-          <%= f.input :description, :input_html => { :value => @indicator.description, :readonly => true }, :label => "Description of Indicator" %>
-          
-          <%= f.input :source, :input_html => { :value => @indicator.source, :readonly => true }, :label => "Source" %>
-          
-          <%= f.input :unit, :input_html => { :value => @indicator.unit, :readonly => true }, :label => "Unit" %>
-          
-          <%= f.input :freq, :input_html => { :value => @indicator.freq, :readonly => true }, :label => "Frequency of Acquisition" %>
-          
-          <%= f.input :indicator_type, :input_html => { :value => @indicator.indicator_type, :readonly => true }, :label => "Indicator Type" %>
-          
-          <%= f.input :dir, :input_html => { :value => @indicator.dir, :readonly => true }, :label => "Target Direction" %>
-          
-          <%= f.input :actual, :input_html => { :value => @indicator.actual, :readonly => true }, :label => "Actual Values" %>
-          
-          <%= f.input :target, :input_html => { :value => @indicator.target, :readonly => true }, :label => "Target Values" %>
-
-          <%= f.input :notes, :input_html => { :value => @indicator.notes, :readonly => true }, :label => "Notes" %>
-          
-          <%= f.input :diff, :input_html => { :value => @indicator.diff, :readonly => true }, :label => "Difference" %>
-          
-          <%= f.input :status, :input_html => { :value => @indicator.status, :readonly => true }, :label => "Current Status" %>
-          
-          <%= f.input :status_notes, :input_html => { :value => @indicator.status_notes, :readonly => true }, :label => "Notes to Current Status" %>
-          
-        <% end %>
+	<div class="row-fluid">
+		<div class="span8">        
+          <%= f.input :name, :input_html => { :value => @indicator.name, :readonly => true, :class => "span12" }, :label => "Name of Indicator" %>
+		</div>
+		<div class="span4">          
+          <%= f.input :short_name, :input_html => { :value => @indicator.short_name, :readonly => true, :class => "span12" }, :label => "Short Name of Indicator" %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+          <%= f.input :goal_id, :as => :select, :collection => Goal.all, :selected => @indicator.goal_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Associated Goal" %>
+		</div>
+		<div class="span6">
+          <%= f.input :user_id, :as => :select, :collection => User.all, :selected => @indicator.user_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Responsible" %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">          
+          <%= f.input :description, :input_html => { :value => @indicator.description, :readonly => true, :class => "span12", :rows => 5 }, :label => "Description of Indicator" %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">          
+          <%= f.input :source, :input_html => { :value => @indicator.source, :readonly => true, :class => "span12" }, :label => "Source" %>
+		</div>
+		<div class="span6">          
+          <%= f.input :unit, :input_html => { :value => @indicator.unit, :readonly => true, :class => "span12" }, :label => "Unit" %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span4">          
+          <%= f.input :freq, :input_html => { :value => @indicator.freq, :readonly => true, :class => "span12" }, :label => "Frequency of Acquisition" %>
+		</div>
+		<div class="span4">          
+          <%= f.input :indicator_type, :input_html => { :value => @indicator.indicator_type, :readonly => true, :class => "span12" }, :label => "Indicator Type" %>
+		</div>
+		<div class="span4">          
+          <%= f.input :dir, :input_html => { :value => @indicator.dir, :readonly => true, :class => "span12" }, :label => "Target Direction" %>
+		</div>
+	</div>
+	<div class="row-fluid">		
+		<div class="span4">          
+          <%= f.input :actual, :input_html => { :value => @indicator.actual, :readonly => true, :class => "span12" }, :label => "Actual Values" %>
+		</div>
+		<div class="span4">          
+          <%= f.input :target, :input_html => { :value => @indicator.target, :readonly => true, :class => "span12" }, :label => "Target Values" %>
+		</div>
+		<div class="span4">
+          <%= f.input :diff, :input_html => { :value => @indicator.diff, :readonly => true, :class => "span12" }, :label => "Difference" %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+          <%= f.input :notes, :input_html => { :value => @indicator.notes, :readonly => true, :class => "span12", :rows => 5 }, :label => "Notes" %>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">                    
+          <%= f.input :status, :input_html => { :value => @indicator.status, :readonly => true, :class => "span12" }, :label => "Current Status" %>
+		</div>
+		<div class="span6">          
+          <%= f.input :status_notes, :input_html => { :value => @indicator.status_notes, :readonly => true, :class => "span12", :rows => 5 }, :label => "Notes to Current Status" %>
+		</div>
+	</div>          
     <% end %>
-    <%= link_to "Back", :back %>
+	<center>
+		<div class="row-fluid">
+			<input type=button class="btn btn-danger span4" value= "<%= I18n.t :back%>" onclick= "history.back()">
+			</input>
+		</div>
+	</center>
+    <% end %>
 </body>
