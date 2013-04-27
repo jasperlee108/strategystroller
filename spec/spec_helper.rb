@@ -1,5 +1,6 @@
-require 'simplecov'
-SimpleCov.start 'rails'
+### TODO: Uncomment later, for now keep it like this to avoid keep updating coverage ###
+#require 'simplecov'
+#SimpleCov.start 'rails'
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'

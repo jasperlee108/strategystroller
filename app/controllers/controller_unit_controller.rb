@@ -77,7 +77,8 @@ class ControllerUnitController < ApplicationController
           Goal.delete(Goal.find_by_id(@goal.id))
           flash[:error] = "ERROR: Goal was not saved!"
         else # goal and form saved
-          flash[:notice] = "Goal successfully saved!"
+          provider = @goal.user.username
+          flash[:notice] = "Goal successfully saved! A form has been sent to " + provider + "."
           @user_obj = User.find_by_id(@goal.user_id)
           @form_url = encode_url(form_id, @goal.id)
           #save form_url
@@ -302,11 +303,13 @@ class ControllerUnitController < ApplicationController
   def goal_check
     @user = current_user
     @goal = Goal.new
-
     form_id = params[:form_id]
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_goal = Goal.find_by_id(entry_id)
+    @indicators = (@current_goal.indicators).collect{|i| i.short_name}
+    @indicators.empty? ? @indicators += ['None'] : nil
+    @prerequisites = (Goal.select('short_name')).select{|g| g.short_name != @current_goal.short_name}.collect{|g| g.short_name}
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_goal.update_attributes(params[:goal])
@@ -342,21 +345,6 @@ class ControllerUnitController < ApplicationController
       @current_form.update_attributes(:reviewed => true)
       @current_project.update_attributes(params[:project])
       flash[:notice] = "Project review completed!"
-      redirect_to cu_review_path
-    end
-  end
-  
-  def activity_check
-    @user = current_user
-    @activity = Activity.new
-    form_id = params[:form_id]
-    entry_id = params[:entry_id]
-    @current_form = Form.find_by_id(form_id)
-    @current_activity = Activity.find_by_id(entry_id)
-    if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      @current_activity.update_attributes(params[:activity])
-      flash[:notice] = "Activity review completed!"
       redirect_to cu_review_path
     end
   end
@@ -412,6 +400,9 @@ class ControllerUnitController < ApplicationController
   
   def all_goal
     @goal = Goal.find_by_id(params[:goal_id])
+    @indicators = (@goal.indicators).collect{|i| i.short_name}
+    @indicators.empty? ? @indicators += ['None'] : nil
+    @prerequisites = (Goal.select('short_name')).select{|g| g.short_name != @goal.short_name}.collect{|g| g.short_name}
   end
   
   def all_dimension

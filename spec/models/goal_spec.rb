@@ -128,7 +128,7 @@ describe Goal do
     status = nil
     goal = generate()
     goal.status = status
-    assert(!goal.save, "It saves on empty Status")
+    assert(goal.save, "It won't save on empty Status")
   end
   
   ## Status >= 0

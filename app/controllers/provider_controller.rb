@@ -108,16 +108,6 @@ class ProviderController < ApplicationController
     @user = current_user
   end
   
-  def unchecked
-    @user = current_user
-    @forms = Form.where(:checked => false).find_all_by_user_id(@user.id)
-  end
-  
-  def saved
-    @user = current_user
-    # do something here
-  end
-  
   def forms_composite
     @user = current_user
     @forms_unchecked = Form.where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)

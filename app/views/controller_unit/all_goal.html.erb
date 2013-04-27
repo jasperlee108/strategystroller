@@ -1,6 +1,6 @@
 <div class="navbar">
 	<div class="navbar-inner">
-		<a class="brand" href="#">Goal View</a>
+		<a class="brand" href="#">Goal Form</a>
 		</ul>
 	</div>
 </div>
@@ -15,56 +15,58 @@
 
 <%= render "setup_alerts" %>
 <div class="well">
-    <%= semantic_form_for @goal, :url => all_goal_path do |f| %>
-        <%= f.inputs do %>
-        <%= hidden_field_tag :entry_id, params[:entry_id] %>
-        <%= hidden_field_tag :form_id, params[:form_id] %>
+
+	<%= semantic_form_for @goal , :url => goal_check_path do |f| %>
+	<%= f.inputs do %>
+	<%= hidden_field_tag :entry_id, params[:entry_id] %>
+	<%= hidden_field_tag :form_id, params[:form_id] %>
 	<div class="row-fluid">
-		<div class="span8">        
-          <%= f.input :name, :input_html => { :value => @goal.name, :readonly => true, :class => "span12" }, :label => "Name of Goal" %>
+		<div class="span8">
+			<%= f.input :name, :input_html => { :value => @goal.name, :class => "span12", :disabled => true }, :label => "Name of Goal" %>
 		</div>
-		<div class="span4">          
-          <%= f.input :short_name, :input_html => { :value => @goal.short_name, :readonly => true, :class => "span12" }, :label => "Short Name of Goal" %>
+		<div class="span4">
+			<%= f.input :short_name, :input_html => { :value => @goal.short_name, :class => "span12", :disabled => true }, :label => "Short Name of Goal" %>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-          <%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @goal.dimension_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Associated Dimension" %>
+			<%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @goal.dimension_id, :input_html => { :class => "span12", :disabled => true }, :label => "Associated Dimension" %>
 		</div>
 		<div class="span6">
-          <%= f.input :user_id, :as => :select, :collection => User.all, :selected => @goal.user_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Responsible" %>
+			<%= f.input :user_id, :as => :select, :collection => User.all, :selected => @goal.user_id, :input_html => { :class => "span12", :disabled => true }, :label => "Responsible" %>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span6">
-          <%= f.input :need, :input_html => { :value => @goal.need, :readonly => true, :class => "span12", :rows => 5 }, :label => "Call for Action" %>
+		<div class="span8">
+			<%= f.input :need, :as => :text, :input_html => { :value => @goal.need, :rows => 5, :class => "span12", :disabled => true }, :label => "Call for Action" %>
 		</div>
-		<div class="span6">          
-          <%= f.input :justification, :input_html => { :value => @goal.justification, :readonly => true, :class => "span12", :rows => 5 }, :label => "Justification of Specific Goal" %>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span6">          
-          <%= f.input :focus, :input_html => { :value => @goal.focus, :readonly => true, :class => "span12", :rows => 5 }, :label => "Strategic Approach" %>
-		</div>
-		<div class="span6">          
-          <%= f.input :notes, :input_html => { :value => @goal.notes, :readonly => true, :class => "span12", :rows => 5 }, :label => "Notes" %>
+		<div class="span4">
+			<%= f.input :random, :as => :text, :input_html => { :value => @indicators, :rows => 5, :class => "span12", :disabled => true }, :label => "Associated Indicators"  %>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span6">          
-          <%= f.input :prereq, :input_html => { :value => @goal.prereq, :readonly => true, :class => "span12", :rows => 5 }, :label => "Prerequisites" %>
+		<div class="span8">
+			<%= f.input :justification, :as => :text, :input_html => { :value => @goal.justification, :rows => 5, :class => "span12", :disabled => true }, :label => "Justification of Specific Goal" %>
 		</div>
-		<div class="span6">          
-          <%= f.input :status, :input_html => { :value => @goal.status, :readonly => true, :class => "span12" }, :label => "Current Status (%)" %>
+		<div class="span4">
+			<%= f.input :prereq, :input_html => { :rows => 5, :class => "span12", :disabled => true }, :as => :select, :collection => @prerequisites, :selected => @goal.prereq, :label => "Prerequisites" %>
 		</div>
-	</div>          
-    <% end %>
+	</div>
+	<div class="row-fluid">
+		<div class="span8">
+			<%= f.input :focus, :as => :text, :input_html => { :value => @goal.focus, :rows => 5, :class => "span12", :disabled => true }, :label => "Strategic Approach" %>
+		</div>
+		<div class="span4">
+			<%= f.input :notes, :as => :text, :input_html => { :value => @goal.notes, :rows => 5, :class => "span12", :disabled => true }, :label => "Notes" %>
+		</div>
+	</div>
+
+	<% end %>
 	<center>
 		<div class="row-fluid">
 			<input type=button class="btn btn-danger span4" value= "<%= I18n.t :back%>" onclick= "history.back()">
 			</input>
 		</div>
 	</center>
-    <% end %>
+	<% end %>
 </div>
