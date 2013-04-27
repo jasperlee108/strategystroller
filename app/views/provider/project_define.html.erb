@@ -1,19 +1,9 @@
-<% content_for :context_menu do %>
-<li>
-	<a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a>
-</li>
-<li>
-	<a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a>
-</li>
-<li>
-	<a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a>
-</li>
-<% end %>
-<script>
-	document.getElementById("home").className = "";
-	document.getElementById("define_page").className = "active"; 
-</script>
-
+<div class="navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="#">Project Form</a>
+		</ul>
+	</div>
+</div>
 <style>
 	input {
 		width: 25em;
@@ -23,9 +13,7 @@
 	}
 </style>
 
-<h2>Project Form</h2>
 <%= render "setup_alerts" %>
-<body>
 <div class="well">
 	<%= semantic_form_for @project, :url => project_define_path do |f| %>
 	<%= f.inputs do %>
@@ -163,4 +151,3 @@
 
 	<% end %>
 </div>
-</body>

@@ -1,6 +1,20 @@
-<h2>Project</h2>
+<div class="navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="#">Project View</a>
+		</ul>
+	</div>
+</div>
+<style>
+	input {
+		width: 25em;
+	}
+	textarea {
+		width: 50em;
+	}
+</style>
 
-<body>
+<%= render "setup_alerts" %>
+<div class="well">
 	<%= semantic_form_for @project, :url => all_project_path do |f| %>
 	<%= f.inputs do %>
 	<%= hidden_field_tag :entry_id, params[:entry_id] %>
@@ -109,4 +123,4 @@
 		</div>
 	</center>
 	<% end %>
-</body>
+</div>

@@ -1,6 +1,20 @@
-<h2>Indicator</h2>
+<div class="navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="#">Indicator View</a>
+		</ul>
+	</div>
+</div>
+<style>
+	input {
+		width: 25em;
+	}
+	textarea {
+		width: 50em;
+	}
+</style>
 
-<body>
+<%= render "setup_alerts" %>
+<div class="well">
     <%= semantic_form_for @indicator, :url => all_indicator_path do |f| %>
         <%= f.inputs do %>
         <%= hidden_field_tag :entry_id, params[:entry_id] %>
@@ -77,4 +91,4 @@
 		</div>
 	</center>
     <% end %>
-</body>
+</div>
