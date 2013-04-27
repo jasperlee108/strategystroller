@@ -6,29 +6,87 @@ class ControllerUnitController < ApplicationController
     #redirect_to :new_user_session_path unless current_user && current_user.controlling_unit?
   #end
 
-  ## INFO
   GOAL = 1
   INDICATOR = 2
   PROJECT = 3
   ACTIVITY = 4
 
+  def clean_list(listie)
+    final_list = []
+    i = 0
+    listie.each do |k|
+      y=i.times.map{0}<<k
+      final_list<<y
+      i = i+1
+    end
+    return final_list
+  end
+
+  def graph_panel
+    @user = current_user
+    pname_list = Project.all.map(&:name)
+    pgs_list_uc = Project.all.map(&:status_global)
+    len_of_list = pname_list.length
+    max_val = pgs_list_uc.max
+    axis_range = "0" + "|" + (max_val/4).to_s + "|" + (max_val/2).to_s + "|" + (3*max_val/4).to_s + "|" + max_val.to_s
+    colors = len_of_list.times.map{"%06x" % (rand * 0x1000000)}
+    pgs_list = pgs_list_uc.combination(1).to_a
+
+    ### Line chart still relies on canned data.
+    @line_chart = Gchart.line(:size => '600x200',:data => [300, 100, 30, 200, 100, 200, 300, 10], :axis_with_labels => 'x,r',
+            :axis_labels => ['Jan|July|Jan|July|Jan', axis_range], :title => "Projects Status Trends",)
+
+    spacing = (350/(len_of_list)).to_s + "," + (150/(len_of_list)).to_s
+    @bar_chart = Gchart.bar( 
+            :axis_with_labels => 'y',
+            :axis_labels => [axis_range],
+            :size => '500x500',
+            :theme => :pastel,
+            :title => "Projects Global Status",
+            :bar_width_and_spacing => spacing,
+            :legend => pname_list,
+            :data => clean_list(pgs_list_uc))
+
+    @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x300',
+              :data => pgs_list_uc, :labels => pname_list )
+  end
+
   def controller_panel
     @user = current_user
+  end
+  
+  def goals_list
+    @goals = Goal.all
+  end
+  
+  def indicators_list
+    @indicators = Indicator.all
+  end
+  
+  def projects_list
+    @projects = Project.all
   end
   
   def set_goal
     @goal = Goal.new
     if (request.post?) 
       @goal = Goal.new(params[:goal])
-      result = save_form(GOAL, current_user.id)
-      if result.include? "ERROR"
-        flash[:error] = result + ' ' + "ERROR: Goal was not saved!"
-      elsif @goal.save
-        flash[:notice] = result + ' ' + " Goal successfully saved!"
-      else
-        flash[:error] = result + ' ' + "ERROR: Goal was not saved!"
+      if @goal.save # goal saved
+        form_id = save_form(GOAL, @goal.user_id, @goal.id)
+        if (!form_id) # goal saved but form not saved, so delete goal
+          Goal.delete(Goal.find_by_id(@goal.id))
+          flash[:error] = "ERROR: Goal was not saved!"
+        else # goal and form saved
+          flash[:notice] = "Goal successfully saved!"
+          @user_obj = User.find_by_id(@goal.user_id)
+          @form_url = encode_url(form_id, @goal.id)
+          #save form_url
+          FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        end
+      else # goal not saved
+        flash[:error] = "ERROR: Goal was not saved!"
       end
-      redirect_to goals_path
+      redirect_to cu_review_path
     end
   end
   
@@ -36,15 +94,22 @@ class ControllerUnitController < ApplicationController
     @indicator = Indicator.new
     if (request.post?) 
       @indicator = Indicator.new(params[:indicator])
-      result = save_form(INDICATOR, current_user.id)
-      if result.include? "ERROR"
-        flash[:error] = result + ' ' + "ERROR: Indicator was not saved!"
-      elsif @indicator.save
-        flash[:notice] = result + ' ' + " Indicator successfully saved!"
-      else
-        flash[:error] = result + ' ' + "ERROR: Indicator was not saved!"
+      if @indicator.save # indicator saved
+        form_id = save_form(INDICATOR, @indicator.user_id, @indicator.id)
+        if (!form_id) # indicator saved but form not saved, so delete indicator
+          Indicator.delete(Indicator.find_by_id(@indicator.id))
+          flash[:error] = "ERROR: Indicator was not saved!"
+        else # indicator and form saved
+          flash[:notice] = "Indicator successfully saved!"
+          @user_obj = User.find_by_id(@indicator.user_id)
+          # Need to populate a form
+          @form_url = encode_url(form_id, @indicator.id)
+          FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        end
+      else # indicator not saved
+        flash[:error] = "ERROR: Indicator was not saved!"
       end
-      redirect_to indicators_path
+      redirect_to cu_review_path
     end
   end
   
@@ -52,34 +117,25 @@ class ControllerUnitController < ApplicationController
     @project = Project.new
     if (request.post?) 
       @project = Project.new(params[:project])
-      result = save_form(PROJECT, current_user.id)
-      if result.include? "ERROR"
-        flash[:error] = result + ' ' + "ERROR: Project was not saved!"
-      elsif @project.save
-        flash[:notice] = result + ' ' + " Project successfully saved!"
-      else
-        flash[:error] = result + ' ' + "ERROR: Project was not saved!"
+      if @project.save # project saved
+        form_id = save_form(PROJECT, @project.head_id, @project.id)
+        if (!form_id) # project saved but form not saved, so delete project
+          Project.delete(Project.find_by_id(@project.id))
+          flash[:error] = "ERROR: Project was not saved!"
+        else # project and form saved
+          flash[:notice] = "Project successfully saved!"
+          @user_obj = User.find_by_id(@project.head_id)
+          # Need to populate a form
+          @form_url = encode_url(form_id, @project.id)
+          FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        end
+      else # project not saved
+        flash[:error] = "ERROR: Project was not saved!"
       end
-      redirect_to projects_path
+      redirect_to cu_review_path
     end
   end
-  
-  def set_activity
-    @activity = Activity.new
-    if (request.post?) 
-      @activity = Activity.new(params[:activity])
-      result = save_form(ACTIVITY, current_user.id)
-      if result.include? "ERROR"
-        flash[:error] = result + ' ' + "ERROR: Activity was not saved!"
-      elsif @activity.save
-        flash[:notice] = result + ' ' + " Activity successfully saved!"
-      else
-        flash[:error] = result + ' ' + "ERROR: Activity was not saved!"
-      end
-      redirect_to activities_path
-    end
-  end
-  
+
   def applications
     @application = Application.new
     if (request.post?)
@@ -103,9 +159,6 @@ class ControllerUnitController < ApplicationController
         @time_horizon = Application::TIME_HORIZON
          if (request.post?) 
             @application = Application.new(params[:application])
-            @user_obj = User.new(:username=>"username2342")
-            @form_url = "google.com"
-            FormMailer.form_email(@user_obj,@form_url).deliver
             if @application.save
                 flash[:notice] = "Setup successfully saved!"
             else
@@ -115,26 +168,27 @@ class ControllerUnitController < ApplicationController
         end
     end
 
-    def encode_id(form_id)
-      encoded = Base64.encode64(form_id.to_s)
+    def encode_id(id) 
+      encoded = Base64.encode64(id.to_s)
       return encoded
     end
 
-    def encode_url(form_id)
-      encoded_id = encode_id(form_id.to_s)
-      url = "http://localhost:3000/form_id=" + encoded_id.to_s
+    def encode_url(form_id, entry_id) #only for provider define (so far)
+      encoded_form_id = encode_id(form_id.to_s)
+      encoded_entry_id = encode_id(entry_id.to_s)
+      form = Form.find_by_id(form_id)
+      lookup = form.lookup
+      if (lookup == GOAL) 
+        category = "goal"
+      elsif (lookup == INDICATOR)
+        category = "indicator"
+      elsif (lookup == PROJECT)
+        category = "project"
+      elsif (lookup ==  ACTIVITY)
+        category = "activity"
+      end
+      url = "localhost:3000/provider/" + category + "_define?entry_id=" + encoded_entry_id + "&form_id=" + encoded_form_id #temp
     end
-
-    def decode_id(form_id)
-      decoded = Base64.decode64(form_id.to_s)
-      return decoded
-    end
-
-    def extract_id(url)
-      id = url.split("form_id=")[1]
-      return id
-    end  
-
 
     def create_users
        @application = Application.new #Just using Application model because it has a 'users' field that cocoon needs
@@ -158,6 +212,7 @@ class ControllerUnitController < ApplicationController
                         user = User.new(:username => username, :email => email, :password => temp_password, :temp_password => temp_password, :controlling_unit => cu)
                         if user.save
                             numSaved += 1
+                           user.send_confirmation_instructions #TODO TEST
                         else
                             notSaved << email
                         end
@@ -214,7 +269,7 @@ class ControllerUnitController < ApplicationController
                 end     
 
                 if (numDeleted == 0 && total == 0) #empty input boxes
-                    flash[:notice] = "Please enter Username and Email"
+                    flash[:notice] = "Please enter Email"
                 elsif (numDeleted == total) #tried to delete valid inputs and success!
                     flash[:notice] = "All users successfully removed!"
                 else #some users could not be deleted
@@ -231,42 +286,136 @@ class ControllerUnitController < ApplicationController
          end
     end
 
-  def save_form(table_id, user_id)
-    default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
-    if default.include? table_id
-      @form = create_form(false, table_id, false, user_id, false, Date.today)
-      if @form.save
-        return "Form successfully saved!"
-      else
-        return "ERROR: Form cannot be saved!"
-      end
-    else
-      # ERROR: wrong table_id
-      return "ERROR: Wrong table id!"
+  def cu_review
+    @user = current_user
+    @forms = Form.where(:checked => true, :reviewed => false, :submitted => true)
+  end
+
+  def activity_list
+    @activities = Activity.all
+  end
+
+  def view_activity
+    @activity = Activity.find_by_id(params[:activity_id])
+  end
+
+  def goal_check
+    @user = current_user
+    @goal = Goal.new
+
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_goal = Goal.find_by_id(entry_id)
+    if (request.post?)
+      @current_form.update_attributes(:reviewed => true)
+      @current_goal.update_attributes(params[:goal])
+      flash[:notice] = "Goal review completed!"
+      redirect_to cu_review_path
+    end
+  end
+  
+  def indicator_check
+    @user = current_user
+    @indicator = Indicator.new
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_indicator = Indicator.find_by_id(entry_id)
+    if (request.post?)
+      @current_form.update_attributes(:reviewed => true)
+      @current_indicator.update_attributes(params[:indicator])
+      flash[:notice] = "Indicator review completed!"
+      redirect_to cu_review_path
+    end
+  end
+  
+  def project_check
+    @user = current_user
+    @project = Project.new
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_project = Project.find_by_id(entry_id)
+    @activities = @current_project.activities
+    if (request.post?)
+      @current_form.update_attributes(:reviewed => true)
+      @current_project.update_attributes(params[:project])
+      flash[:notice] = "Project review completed!"
+      redirect_to cu_review_path
+    end
+  end
+  
+  def activity_check
+    @user = current_user
+    @activity = Activity.new
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_activity = Activity.find_by_id(entry_id)
+    if (request.post?)
+      @current_form.update_attributes(:reviewed => true)
+      @current_activity.update_attributes(params[:activity])
+      flash[:notice] = "Activity review completed!"
+      redirect_to cu_review_path
     end
   end
 
-  def create_form(checked, table_id, reviewed, user_id, submitted, last)
+   def save_form(table_id, user_id, entry_id)
+    default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
+    if default.include? table_id
+      @form = create_form(false, table_id, false, user_id, false, Date.today, entry_id)
+      if @form.save
+        return @form.id
+      else
+        return nil
+      end
+    else
+      # ERROR: wrong table_id
+      return nil
+    end
+  end
+
+  def create_form(checked, table_id, reviewed, user_id, submitted, last, entry_id)
     form = Form.new(
     :checked => checked,
     :lookup => table_id,
     :reviewed => reviewed,
     :user_id => user_id,
     :submitted => submitted,
-    :last_reminder => last
+    :last_reminder => last,
+    :entry_id => entry_id
     )
     return form
   end
 
+  ### DISPLAY ALL DATA FOR OVERVIEW PAGE + RELATED METHODS ###
 
-  def cu_review
-    if (request.post?) 
-      Form.find_by_checked_and_reviewed_and_submitted(true, false, true)
-      #get a list of forms that have been submitted, not reviewed, checked (by provider)
-      #for each form
-      #generate the link to the form -- for now, just 
-    end
+  def all_data
+    @user = current_user
+    @goal_ids = []
+    @indicator_ids = []
+    @project_ids = []
   end
 
-
+  def all_activity
+    @activity = Activity.find_by_id(params[:activity_id])
+  end
+  
+  def all_project
+    @project = Project.find_by_id(params[:project_id])
+  end
+  
+  def all_indicator
+    @indicator = Indicator.find_by_id(params[:indicator_id])
+  end
+  
+  def all_goal
+    @goal = Goal.find_by_id(params[:goal_id])
+  end
+  
+  def all_dimension
+    @dimension = Dimension.find_by_id(params[:dimension_id])
+  end
+  
 end

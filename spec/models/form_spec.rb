@@ -18,7 +18,8 @@ describe Form do
     :reviewed => true,
     :user_id => 1,
     :submitted => true,
-    :last_reminder => Date.new(2013,04,18)
+    :last_reminder => Date.new(2013,04,18),
+    :entry_id => 1
     )
     return form
   end

@@ -1,0 +1,44 @@
+<h2>Indicator</h2>
+
+<body>
+    <%= semantic_form_for @indicator, :url => all_indicator_path do |f| %>
+        <%= f.inputs do %>
+        <%= hidden_field_tag :entry_id, params[:entry_id] %>
+        <%= hidden_field_tag :form_id, params[:form_id] %>
+        
+          <%= f.input :name, :input_html => { :value => @indicator.name, :readonly => true }, :label => "Name of Indicator" %>
+          
+          <%= f.input :short_name, :input_html => { :value => @indicator.short_name, :readonly => true }, :label => "Short Name of Indicator" %>
+
+          <%= f.input :goal_id, :as => :select, :collection => Goal.all, :selected => @indicator.goal_id, :input_html => { :disabled => true }, :label => "Associated Goal" %>
+
+          <%= f.input :user_id, :as => :select, :collection => User.all, :selected => @indicator.user_id, :input_html => { :disabled => true }, :label => "Responsible" %>
+          
+          <%= f.input :description, :input_html => { :value => @indicator.description, :readonly => true }, :label => "Description of Indicator" %>
+          
+          <%= f.input :source, :input_html => { :value => @indicator.source, :readonly => true }, :label => "Source" %>
+          
+          <%= f.input :unit, :input_html => { :value => @indicator.unit, :readonly => true }, :label => "Unit" %>
+          
+          <%= f.input :freq, :input_html => { :value => @indicator.freq, :readonly => true }, :label => "Frequency of Acquisition" %>
+          
+          <%= f.input :indicator_type, :input_html => { :value => @indicator.indicator_type, :readonly => true }, :label => "Indicator Type" %>
+          
+          <%= f.input :dir, :input_html => { :value => @indicator.dir, :readonly => true }, :label => "Target Direction" %>
+          
+          <%= f.input :actual, :input_html => { :value => @indicator.actual, :readonly => true }, :label => "Actual Values" %>
+          
+          <%= f.input :target, :input_html => { :value => @indicator.target, :readonly => true }, :label => "Target Values" %>
+
+          <%= f.input :notes, :input_html => { :value => @indicator.notes, :readonly => true }, :label => "Notes" %>
+          
+          <%= f.input :diff, :input_html => { :value => @indicator.diff, :readonly => true }, :label => "Difference" %>
+          
+          <%= f.input :status, :input_html => { :value => @indicator.status, :readonly => true }, :label => "Current Status" %>
+          
+          <%= f.input :status_notes, :input_html => { :value => @indicator.status_notes, :readonly => true }, :label => "Notes to Current Status" %>
+          
+        <% end %>
+    <% end %>
+    <%= link_to "Back", :back %>
+</body>

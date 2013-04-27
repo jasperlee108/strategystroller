@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!-- Le styles -->
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
+    
     <%= stylesheet_link_tag    "application", :media => "all" %>
 
-
+    <%= javascript_include_tag "application" %>
+	<!-- Only use application for all js files or individual calls for each to prevent duplication
+    <%= javascript_include_tag "custom" %>-->
+    <!-- Added for cocoon gem -->
+    <!--<%= javascript_include_tag :cocoon %>-->
+  <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+  <script src="/assets/twitter/bootstrap/bootstrap-dropdown.js">-->
 
     <%= csrf_meta_tags %>
 
@@ -30,60 +32,69 @@
 
 
     <div class="navbar navbar-inverse navbar-fixed-top">
+    
       <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/">Strategy Stroller</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <%= render 'devise/menu/login_items' %>
-              <%= render 'devise/menu/registration_items' %>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
+      <div class="container">
+        	<a class="brand" href="/">Strategy Stroller</a>
+            <% if signed_in? %>
+            <% if current_user.respond_to?('controlling_unit') %>
+            <% if current_user.controlling_unit == true %>
+<!-- <div id ="cu_nav">-->
+        					<ul class = "nav">
+<li id ="navbar_forms"><%= link_to (t :forms), cu_review_path %></li>
+<li id="navbar_reports"><%= link_to (t :reports), graph_panel_path %></li>
+<li id= "navbar_setup"><%= link_to (t :setup), setup_system_path %></li>
+<!--<li id= "navbar_edit_users"><%= link_to (t :edit_users), edit_users_path %></li>-->
+</ul>
+
+        <!--     </div>-->
+            <% end %>
+            <% end %>
+            
+            			<div class="btn-group pull-right">
+			  <a class="btn dropdown-toggle btn-inverse pull-right" data-toggle="dropdown">
+			    User Settings
+			    <span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu">
+			  	<li><%= render 'devise/menu/login_items' %></li>
+			    <li><%= render 'devise/menu/registration_items' %></li>
+			  </ul>
+			</div>
+            <% end %>
+           
+
+            </div>
+          
       </div>
     </div>
 
 
- <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Navigation</li>
-              <li class="active"><a href="/home/index">Home</a></li>
-              <li><a href="/admin/login">Admin</a></li>
-              <li><a href="#">New System</a></li>
-              <li><a href="#">Yearly Review</a></li>
-              <li><a href="#">Quality Check</a></li>
-              <li><a href="#">Monthly Report</a></li>
-              <li><a href="#">Quarterly Report</a></li>
-              <li class="nav-header">Context Menu</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
-          <div class="hero-unit">
-            <p class="notice"><%= notice %></p>
-            <p class="alert"><%= alert %></p>
-            <%= yield %>
-          </div>
-        </div><!--/span-->
-      </div><!--/row-->
+    <div class="container body_container">
+      <!-- Display messages For devise. -->
+     <!-- <% if notice %>
+      <div class="notice alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= notice %>
+      </div>
+      
+      <% end %>
+      
+      <% if alert %>
+      <div class="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= alert %>
+      </div>
+      <% end %>-->
+      <%= yield %>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
-    <!-- Added for cocoon gem -->
-    <%= javascript_include_tag :cocoon %>
+    </div> <!-- /container -->
+
+  <!--  <div class="container">
+    <div class="footer">
+    <center><%=t :footer_string%></center>
+    </div>
+    </div>-->
   </body>
 </html>
 

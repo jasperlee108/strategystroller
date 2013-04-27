@@ -5,7 +5,9 @@ describe HomeController do
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
-      response.should be_success
+      ## Should be redirected right away,
+      ## and not render anything
+      response.should redirect_to('/users/login')
     end
   end
 

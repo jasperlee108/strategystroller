@@ -19,6 +19,11 @@ class Indicator < ActiveRecord::Base
   :presence => true,
   :length => { :maximum => 80 }
 
+  ## short name = string[30]
+  validates :short_name,
+  :presence => true,
+  :length => { :maximum => 30 }
+
   # Needs to have Parent
   validates :goal_id,
   :presence => true

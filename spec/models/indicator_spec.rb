@@ -24,7 +24,8 @@ describe Indicator do
     :contributing_projects_status => 0.693,
     :status_notes => "Anmerkungen zum Status",
     :goal_id => 1,
-    :user_id => 1
+    :user_id => 1,
+    :short_name => "Shorter name"
     )
     return indicator
   end
@@ -56,7 +57,8 @@ describe Indicator do
         :steer_id => 1,
         :team => "James Bond, Andy Warhol",
         :yearly_target_manp => { 2013 => BigDecimal(5.5,6)},
-        :yearly_target_cost => { 2013 => BigDecimal(25.25,6)}
+        :yearly_target_cost => { 2013 => BigDecimal(25.25,6)},
+        :short_name => "Shorter name"
     )
     project2 = Project.new(  # Not a child of this indicator.
         :name => "Projekts2",
@@ -83,7 +85,8 @@ describe Indicator do
         :steer_id => 1,
         :team => "James Bond2, Andy Warhol2",
         :yearly_target_manp => {2013 => BigDecimal(5.5,6)},
-        :yearly_target_cost => {2013 => BigDecimal(25.25,6)}
+        :yearly_target_cost => {2013 => BigDecimal(25.25,6)},
+        :short_name => "Shorter name"
     )
     project1.save
     project2.save
@@ -99,6 +102,24 @@ describe Indicator do
   it "should behave correctly on good inputs" do
     indicator = generate()
     assert(indicator.save, "It won't save on good inputs")
+  end
+
+  ### NAME
+
+  ## Name is not empty
+  it "should not have empty Name" do
+    name = ""
+    indicator = generate()
+    indicator.name = name
+    assert(!indicator.save, "It saves on empty Name")
+  end
+
+  ## Name max = 80
+  it "should not have Name longer than 80 characters" do
+    name = (0...81).map{ ( 65+rand(26) ).chr }.join
+    indicator = generate()
+    indicator.name = name
+    assert(!indicator.save, "It saves on Name longer than 80 characters")
   end
 
   ### DESCRIPTION
@@ -171,7 +192,7 @@ describe Indicator do
     indicator.freq = freq
     assert(!indicator.save, "It saves a non-array Frequency")
   end
-  
+
   ## Frequency max = 12 months
   it "should not have Frequency with more than 12 elements" do
     freq = [1,2,3,4,5,6,7,8,9,10,11,12,13]
@@ -488,6 +509,24 @@ describe Indicator do
     indicator = generate()
     indicator.status_notes = statusNotes
     assert(!indicator.save, "It saves on Status Notes longer than 600 characters")
+  end
+
+  ### SHORT NAME
+
+  ## Short Name is not empty
+  it "should not have empty Short Name" do
+    short_name = ""
+    indicator = generate()
+    indicator.short_name = short_name
+    assert(!indicator.save, "It saves on empty Short Name")
+  end
+
+  ## Short Name max = 30
+  it "should not have Short Name longer than 30 characters" do
+    short_name = (0...31).map{ ( 65+rand(26) ).chr }.join
+    indicator = generate()
+    indicator.short_name = short_name
+    assert(!indicator.save, "It saves on Short Name longer than 30 characters")
   end
 
   ### UPDATE_PROGNOSIS

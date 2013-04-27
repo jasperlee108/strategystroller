@@ -1,0 +1,32 @@
+<h2>Goal</h2>
+
+<body>
+    <%= semantic_form_for @goal, :url => all_goal_path do |f| %>
+        <%= f.inputs do %>
+        <%= hidden_field_tag :entry_id, params[:entry_id] %>
+        <%= hidden_field_tag :form_id, params[:form_id] %>
+        
+          <%= f.input :name, :input_html => { :value => @goal.name, :readonly => true }, :label => "Name of Goal" %>
+          
+          <%= f.input :short_name, :input_html => { :value => @goal.short_name, :readonly => true }, :label => "Short Name of Goal" %>
+
+          <%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @goal.dimension_id, :input_html => { :disabled => true }, :label => "Associated Dimension" %>
+
+          <%= f.input :user_id, :as => :select, :collection => User.all, :selected => @goal.user_id, :input_html => { :disabled => true }, :label => "Responsible" %>
+
+          <%= f.input :need, :input_html => { :value => @goal.need, :readonly => true }, :label => "Call for Action" %>
+          
+          <%= f.input :justification, :input_html => { :value => @goal.justification, :readonly => true }, :label => "Justification of Specific Goal" %>
+          
+          <%= f.input :focus, :input_html => { :value => @goal.focus, :readonly => true }, :label => "Strategic Approach" %>
+          
+          <%= f.input :prereq, :input_html => { :value => @goal.prereq, :readonly => true }, :label => "Prerequisites" %>
+
+          <%= f.input :notes, :input_html => { :value => @goal.notes, :readonly => true }, :label => "Notes" %>
+          
+          <%= f.input :status, :input_html => { :value => @goal.status, :readonly => true }, :label => "Current Status (%)" %>
+          
+        <% end %>
+    <% end %>
+    <%= link_to "Back", :back %>
+</body>

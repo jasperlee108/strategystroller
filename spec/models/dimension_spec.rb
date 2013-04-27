@@ -23,7 +23,8 @@ describe Dimension do
         :status => 0.23,
         :dimension_id => 1,
         :user_id => 1,
-        :prereq => "A Different Goal's Name"
+        :prereq => "A Different Goal's Name",
+        :short_name => "Shorter name"
     )
     goal2 = Goal.new(
         :name => "Name of Goal2",
@@ -34,7 +35,8 @@ describe Dimension do
         :status => 0.43,
         :dimension_id => 23,
         :user_id => 1,
-        :prereq => "A Different Goal's Name2"
+        :prereq => "A Different Goal's Name2",
+        :short_name => "Shorter name"
     )
     goal3 = Goal.new(
         :name => "Name of Goal3",
@@ -45,7 +47,8 @@ describe Dimension do
         :status => 0.69,
         :dimension_id => 1,
         :user_id => 1,
-        :prereq => "A Different Goal's Name3"
+        :prereq => "A Different Goal's Name3",
+        :short_name => "Shorter name"
     )
     goal1.save()
     goal2.save()

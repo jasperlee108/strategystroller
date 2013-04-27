@@ -45,6 +45,9 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
+    bootstrap-sass-rails (2.3.1.1)
+      railties (>= 3.1.0)
+      sass-rails (>= 3.1.0)
     bourbon (3.1.1)
       sass (>= 3.2.0)
       thor
@@ -84,6 +87,7 @@ GEM
     formtastic-bootstrap (2.0.0)
       formtastic (~> 2.2)
       formtastic-bootstrap
+    googlecharts (1.6.8)
     has_scope (0.5.1)
     hike (1.2.1)
     i18n (0.6.4)
@@ -132,6 +136,8 @@ GEM
       activesupport (= 3.2.11)
       bundler (~> 1.0)
       railties (= 3.2.11)
+    rails-i18n (0.7.3)
+      i18n (~> 0.5)
     railties (3.2.11)
       actionpack (= 3.2.11)
       activesupport (= 3.2.11)
@@ -185,10 +191,6 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    twitter-bootstrap-rails (2.2.6)
-      actionpack (>= 3.1)
-      execjs
-      railties (>= 3.1)
     tzinfo (0.3.37)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
@@ -205,21 +207,23 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  bootstrap-sass-rails
   capybara (= 1.1.2)
   cocoon
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.4.0)
   devise
   formtastic-bootstrap
+  googlecharts
   jquery-rails
   json
   meta_search (>= 1.1.0.pre)
   pg
   rails (= 3.2.11)
+  rails-i18n
   rspec-rails (= 2.12.2)
   sass-rails
   simplecov
   sqlite3
   tabulous
-  twitter-bootstrap-rails
   uglifier (>= 1.0.3)

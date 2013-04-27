@@ -1,5 +1,5 @@
 class Form < ActiveRecord::Base
-  attr_accessible :checked, :lookup, :reviewed, :user_id, :submitted, :last_reminder
+  attr_accessible :checked, :lookup, :reviewed, :user_id, :submitted, :last_reminder, :entry_id
   
   ## INFO
   GOAL = 1
@@ -10,8 +10,8 @@ class Form < ActiveRecord::Base
   ## Owner = Provider
   belongs_to :user
   
-  ## Needs an owner
-  validates :user_id, :presence => true
+  ## Needs an owner (EDITED-activites don't have owners)
+
   
   ## Lookup = which table to lookup from
   ## Choices: Goal/Indicator/Project/Activity table

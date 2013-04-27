@@ -29,9 +29,10 @@ describe Project do
     :indicator_id => 1,
     :head_id => 1,
     :steer_id => 1,
-    :team => "James Bond, Andy Warhol",
     :yearly_target_manp => {}, # kept as an example: {2013 => BigDecimal(5.57,10), 2014 => BigDecimal(7.57,10)},
     :yearly_target_cost => {}, # kept as an example: {2013 => BigDecimal(25.25,10), 2014 => BigDecimal(38.07,10)},
+    :team => "James Bond, Andy Warhol",
+    :short_name => "Shorter name"
     )
     return project
   end
@@ -51,7 +52,8 @@ describe Project do
         :actualProg => Activity::IN_PROGRESS,
         :statusNotes => "A Different Wall of Text",
         :project_id => 1,
-        :team => "James Bond, Andy Warhol"
+        :team => "James Bond, Andy Warhol",
+        :short_name => "Shorter name"
     )
   end
 
@@ -72,7 +74,8 @@ describe Project do
         :actualProg => Activity::IN_PROGRESS,
         :statusNotes => "A Different Wall of Text",
         :project_id => 2,
-        :team => "James Warhol"
+        :team => "James Warhol",
+        :short_name => "Shorter name"
     )
     activity3 = Activity.new(
         :name => "Aktivitat3",
@@ -88,7 +91,8 @@ describe Project do
         :actualProg => Activity::IN_PROGRESS,
         :statusNotes => "A Different Wall of Text3",
         :project_id => 1,
-        :team => "James Bond3, Andy Warhol3"
+        :team => "James Bond3, Andy Warhol3",
+        :short_name => "Shorter name"
     )
     activity1.save()
     activity2.save()
@@ -566,6 +570,24 @@ describe Project do
     project = generate()
     project.team = team
     assert(!project.save, "It saves on Team longer than 600 characters")
+  end
+
+  ### SHORT NAME
+  
+  ## Short Name is not empty
+  it "should not have empty Short Name" do
+    short_name = ""
+    project = generate()
+    project.short_name = short_name
+    assert(!project.save, "It saves on empty Short Name")
+  end
+  
+  ## Short Name max = 30
+  it "should not have Short Name longer than 30 characters" do
+    short_name = (0...31).map{ ( 65+rand(26) ).chr }.join
+    project = generate()
+    project.short_name = short_name
+    assert(!project.save, "It saves on Short Name longer than 30 characters")
   end
 
   ### update_actual_cost

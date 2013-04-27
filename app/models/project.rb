@@ -3,7 +3,7 @@ class Project < ActiveRecord::Base
                   :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global,
                   :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp,
                   :indicator_id, :head_id, :steer_id, :user_ids, :team, :yearly_target_cost,
-                  :yearly_target_manp
+                  :yearly_target_manp, :short_name
 
   serialize :yearly_target_manp, Hash
   serialize :yearly_target_cost, Hash
@@ -40,6 +40,11 @@ class Project < ActiveRecord::Base
   validates :name,
   :presence => true,
   :length => { :maximum => 80 }
+  
+  ## short name = string[30]
+  validates :short_name,
+  :presence => true,
+  :length => { :maximum => 30 }
   
   ## Description = string[600]
   ## Description can be empty

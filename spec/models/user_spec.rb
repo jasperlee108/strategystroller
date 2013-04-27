@@ -5,6 +5,7 @@ describe User do
   
   def generate
     user = User.create(
+    :username => "default user",
     :email => "default@email.com",
     :password => "defaultPass",
     :password_confirmation => "defaultPass",
@@ -19,7 +20,7 @@ describe User do
     assert(true, "Did not pass sanity check")
   end
 
-  ## Valid new Admin
+  ## Valid new User
   it "should have valid Email" do
     user = User.create(
     :email => "a@a.a",
@@ -260,20 +261,20 @@ describe User do
 
   ### BUSINESS CODE
   
-  ## Business Code can't be blank
-  it "should not have empty Business Code" do
+  ## Business Code can be blank
+  it "can have empty Business Code" do
     busCode = ""
     user = generate()
     user.business_code = busCode
-    assert(!user.save, "Business Code can't be blank")
+    assert(user.save, "It won't save on empty Business Code")
   end
 
-  ## Business Code max 2 characters
-  it "should have Business Code max 2 characters" do
-    busCode = "CEO"
+  ## Business Code max 10 characters
+  it "should have Business Code max 10 characters" do
+    busCode = (0...11).map{ ( 65+rand(26) ).chr }.join
     user = generate()
     user.business_code = busCode
-    assert(!user.save, "Business Code is too long (maximum is 2 characters)")
+    assert(!user.save, "It saves on Business Code longer than 10 characters")
   end
 
   ### CONTROLLING UNIT

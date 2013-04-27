@@ -16,28 +16,58 @@ StrategyStroller::Application.routes.draw do
   match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
   match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
   match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
+  match "provider/provider_panel/define" => 'provider#define_page', :as => 'provider_panel_define'
+  match "provider/provider_panel/update" => 'provider#update_page', :as => 'provider_panel_update'
 
   ## FOR OTHER LINKS / PATHS
-  match "controller_unit/input_framework" => "controller_unit#set_goal", :as => 'input_framework'
+  
+  # Controller
+  match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
+  match "controller_unit/input_framework" => "controller_unit#goals_list", :as => "input_framework"
+  match "controller_unit/input_framework/goals_list" => "controller_unit#goals_list", :as => "goals_list"
+  match "controller_unit/input_framework/indicators_list" => "controller_unit#indicators_list", :as => "indicators_list"
+  match "controller_unit/input_framework/projects_list" => "controller_unit#projects_list", :as => "projects_list"
   match "controller_unit/input_framework/goals" => "controller_unit#set_goal", :as => "goals"
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
-  match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
-
   match "controller_unit/cu_review" => "controller_unit#cu_review", :as => "cu_review"
+  match "controller_unit/graph_panel" => "controller_unit#graph_panel", :as => "graph_panel"
+  match "controller_unit/activity_list" => "controller_unit#activity_list", :as => "activity_list"
+  match "controller_unit/view_activity" => "controller_unit#view_activity", :as => "activity"  
+  #match "controller_unit/saved" => "controller_unit#saved", :as => "saved"
+  match "controller_unit/goal_check" => "controller_unit#goal_check", :as => 'goal_check'
+  match "controller_unit/indicator_check" => "controller_unit#indicator_check", :as => 'indicator_check'
+  match "controller_unit/project_check" => "controller_unit#project_check", :as => 'project_check'
+  match "controller_unit/activity_check" => "controller_unit#activity_check", :as => 'activity_check'
+  #match "controller_unit/indicator_update" => "controller_unit#indicator_update", :as => 'indicator_update'
+  #match "controller_unit/project_update" => "controller_unit#project_update", :as => 'project_update'
+  match "controller_unit/all_data" => "controller_unit#all_data", :as => 'all_data'
+  match "controller_unit/all_activity" => "controller_unit#all_activity", :as => 'all_activity'
+  match "controller_unit/all_project" => "controller_unit#all_project", :as => 'all_project'
+  match "controller_unit/all_indicator" => "controller_unit#all_indicator", :as => 'all_indicator'
+  match "controller_unit/all_goal" => "controller_unit#all_goal", :as => 'all_goal'
+  match "controller_unit/all_dimension" => "controller_unit#all_dimension", :as => 'all_dimension'
+
+  # Provider
+  match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
+  match "provider/saved" => "provider#saved", :as => "saved"
+  match "provider/goal_define" => "provider#goal_define", :as => 'goal_define'
+  match "provider/indicator_define" => "provider#indicator_define", :as => 'indicator_define'
+  match "provider/project_define" => "provider#project_define", :as => 'project_define'
+  match "provider/activity_define" => "provider#activity_define", :as => 'activities'
+  match "provider/indicator_update" => "provider#indicator_update", :as => 'indicator_update'
+  match "provider/project_update" => "provider#project_update", :as => 'project_update'
+  match "provider/home" => "provider#forms_composite", :as => "forms_composite"
 
   #applications path currently defaults to setup_system path so really we only need
   #first 'post' route below, but including all 'post' paths to be safe/in case we need them
   post "controller_unit/setup_system" => "controller_unit#applications", :as => "applications"
   post "controller_unit/create_users" => "controller_unit#applications"
   post "controller_unit/remove_users" => "controller_unit#applications"
-
   get "controller_unit/setup_system" => "controller_unit#setup_system", :as => "setup_system"
   get "controller_unit/create_users" => "controller_unit#create_users", :as => "create_users"
   get "controller_unit/remove_users" => "controller_unit#remove_users", :as => "remove_users"
-
-  match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
-  match "provider/saved" => "provider#saved", :as => "saved"
+  get "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
   
   ## FOR MAIN PAGE
   root :to => "home#index"
