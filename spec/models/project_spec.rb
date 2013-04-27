@@ -21,7 +21,7 @@ describe Project do
     :actual_manp => 10,
     :actual_cost => 20.5,
     :status_prog => 75.5,
-    :status_ms => {-1=>0, 1=>0, 2=>0, 3=>0, 4=>0},
+    :status_ms => {-1=>0, 1=>0, 2=>2, 3=>0, 4=>1},
     :status_manp => 10.0,
     :status_cost => 10.5,
     :status_global => 50.5,
@@ -1010,7 +1010,98 @@ describe Project do
 
   ### UPDATE_STATUS_MS
   it 'correctly calculates phase progress if there are no children' do
+    project = generate
+    project.save
+    proj_in_table = Project.find(1)
+    proj_in_table.update_status_ms
+    assert(proj_in_table.status_ms == {-1=>0, 1=>0, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase progresses,  instead of all 0, got: #{proj_in_table.status_ms}")
+  end
 
+  it 'correctly calculates phase progress from multiple children' do
+    project = generate
+    project.save
+
+    activity1 = gen_activity
+    activity1.phase = Activity::CONCEPT_COMPLETED
+    activity1.actualProg = Activity::COMPLETED
+    activity1.save
+
+    activity2 = gen_activity
+    activity2.phase = Activity::PREREQUISITES_FULFILLED
+    activity2.actualProg = Activity::COMPLETED
+    activity2.save
+
+    activity3 = gen_activity
+    activity3.phase = Activity::IMPLEMENTATION_RUNNING
+    activity3.actualProg = Activity::IN_PROGRESS
+    activity3.save
+
+    activity4 = gen_activity
+    activity4.phase = Activity::PROJECT_EFFECTIVE
+    activity4.actualProg = Activity::NOT_YET_STARTED
+    activity4.save
+
+    proj_in_table = Project.find(1)
+    proj_in_table.update_status_ms
+    assert(proj_in_table.status_ms == {-1=>0, 1=>2, 2=>2, 3=>1, 4=>0}, "Failed to correctly set phase actualProgress, got: #{proj_in_table.status_ms}")
+  end
+
+  it 'correctly calculates Completed and not started phase progress from multiple children with the same status' do
+    project = generate
+    project.save
+
+    activity1 = gen_activity
+    activity1.phase = Activity::CONCEPT_COMPLETED
+    activity1.actualProg = Activity::COMPLETED
+    activity1.save
+
+    activity2 = gen_activity
+    activity2.phase = Activity::CONCEPT_COMPLETED
+    activity2.actualProg = Activity::COMPLETED
+    activity2.save
+
+    activity3 = gen_activity
+    activity3.phase = Activity::PREREQUISITES_FULFILLED
+    activity3.actualProg = Activity::NOT_YET_STARTED
+    activity3.save
+
+    activity4 = gen_activity
+    activity4.phase = Activity::PREREQUISITES_FULFILLED
+    activity4.actualProg = Activity::NOT_YET_STARTED
+    activity4.save
+
+    proj_in_table = Project.find(1)
+    proj_in_table.update_status_ms
+    assert(proj_in_table.status_ms == {-1=>0, 1=>2, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase actualProgresses, got: #{proj_in_table.status_ms}")
+  end
+
+  it 'correctly calculates In Progress phase progress from multiple children with the completed and not_yet_started progresses' do
+    project = generate
+    project.save
+
+    activity1 = gen_activity
+    activity1.phase = Activity::CONCEPT_COMPLETED
+    activity1.actualProg = Activity::COMPLETED
+    activity1.save
+
+    activity2 = gen_activity
+    activity2.phase = Activity::CONCEPT_COMPLETED
+    activity2.actualProg = Activity::COMPLETED
+    activity2.save
+
+    activity3 = gen_activity
+    activity3.phase = Activity::CONCEPT_COMPLETED
+    activity3.actualProg = Activity::COMPLETED
+    activity3.save
+
+    activity4 = gen_activity
+    activity4.phase = Activity::CONCEPT_COMPLETED
+    activity4.actualProg = Activity::NOT_YET_STARTED
+    activity4.save
+
+    proj_in_table = Project.find(1)
+    proj_in_table.update_status_ms
+    assert(proj_in_table.status_ms == {-1=>0, 1=>1, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase actualProgresses, got: #{proj_in_table.status_ms}")
   end
 
   ### EXTRA

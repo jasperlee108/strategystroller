@@ -351,7 +351,6 @@ class Project < ActiveRecord::Base
     self.target_cost = cost
   end
 
-  ### UNTESTED BELOW THIS **** TODO TEST
   def update_status_ms
     phases_progress = { }
     self.activities.each do |act|
@@ -362,10 +361,10 @@ class Project < ActiveRecord::Base
           phases_progress[act.phase] = Activity::IN_PROGRESS
         end
       end
+    end
     # Guarantee that all phases have a value assigned.
     # This also ensures Project Management is always set to zero, as a special case. This makes calculations across the values simpler.
     Activity::PHASES.each { |phase| phases_progress[phase] = Activity::NOT_YET_STARTED if phases_progress[phase].nil? }
-    end
     self.status_ms = phases_progress
   end
   
