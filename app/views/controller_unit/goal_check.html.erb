@@ -21,7 +21,7 @@
 	<%= hidden_field_tag :entry_id, params[:entry_id] %>
 	<%= hidden_field_tag :form_id, params[:form_id] %>
 	<div class="row-fluid">
-		<div class="span6">
+		<div class="span8">
 			<%= f.input :name, :input_html => { :value => @current_goal.name, :class => "span12" }, :required => true, :label => "Name of Goal" %>
 		</div>
 		<div class="span4">
@@ -29,10 +29,10 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span4">
-			<%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @current_goal.dimension_id, :input_html => {:class => "span12" }, :required => true, :label => "Associated Dimension" %>
+		<div class="span6">
+			<%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @current_goal.dimension_id, :input_html => { :class => "span12" }, :required => true, :label => "Associated Dimension" %>
 		</div>
-		<div class="span4">
+		<div class="span6">
 			<%= f.input :user_id, :as => :select, :collection => User.all, :selected => @current_goal.user_id, :input_html => { :class => "span12" }, :required => true, :label => "Responsible" %>
 		</div>
 
@@ -50,12 +50,12 @@
 			<%= f.input :focus, :as => :text, :input_html => { :value => @current_goal.focus, :rows => 5, :class => "span12" }, :required => true, :label => "Strategic Approach" %>
 		</div>
 		<div class="span6">
-			<%= f.input :prereq, :input_html => { :value => @current_goal.prereq, :rows => 5, :class => "span12" }, :required => true, :label => "Prerequisites" %>
+			<%= f.input :notes, :as => :text, :input_html => { :value => @current_goal.notes, :rows => 5, :class => "span12" }, :label => "Notes" %>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :notes, :as => :text, :input_html => { :value => @current_goal.notes, :rows => 5, :class => "span12" }, :label => "Notes" %>
+			<%= f.input :prereq, :input_html => { :rows => 5, :class => "span12" }, :as => :select, :collection => (Goal.select('short_name')).collect{|g| g.short_name}, :selected => @current_goal.prereq, :required => true, :label => "Prerequisites" %>
 		</div>
 		<div class="span6">
 			<%= f.input :status, :input_html => { :value => @current_goal.status, :class => "span12" }, :required => true, :label => "Current Status (%)" %>

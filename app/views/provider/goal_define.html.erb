@@ -33,7 +33,7 @@
 	<%= hidden_field_tag :entry_id, params[:entry_id] %>
 	<%= hidden_field_tag :form_id, params[:form_id] %>
 	<div class="row-fluid">
-		<div class="span6">
+		<div class="span8">
 			<%= f.input :name, :input_html => { :value => @current_goal.name, :readonly => true, :class=> "span12" }, :label => "Name of Goal" %>
 		</div>
 		<div class="span4">
@@ -41,10 +41,10 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span4">
+		<div class="span6">
 			<%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @current_goal.dimension_id, :input_html => { :disabled => true, :class=> "span12" }, :label => "Associated Dimension" %>
 		</div>
-		<div class="span4">
+		<div class="span6">
 			<%= f.input :user_id, :as => :select, :collection => User.all, :selected => @current_goal.user_id, :input_html => { :disabled => true, :class=> "span12" }, :label => "Responsible" %>
 		</div>
 	</div>
