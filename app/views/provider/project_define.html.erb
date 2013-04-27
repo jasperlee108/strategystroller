@@ -32,10 +32,10 @@
 	<%= hidden_field_tag :entry_id, params[:entry_id] %>
 	<%= hidden_field_tag :form_id, params[:form_id] %>
 	<div class="row-fluid">
-		<div class="span4">
+		<div class="span8">
 			<%= f.input :name, :input_html => { :value => @current_project.name, :disabled => true, :class => "span12" }, :label => "Name of Project" %>
 		</div>
-		<div class="span8">
+		<div class="span4">
 			<%= f.input :short_name, :input_html => { :value => @current_project.short_name, :disabled => true, :class => "span12" }, :label => "Short Name of Project" %>
 		</div>
 	</div>
