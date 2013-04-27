@@ -134,7 +134,7 @@
 		</tr>
 		<% end %>
 		<tr class="info">
-			<td><%= link_to "Create New Activity", activities_path %></td>
+			<td><%= link_to "Create New Activity", activities_path(:project_id => @current_project.id) %></td>
 			<td></td>
 		</tr>
 	</table>
