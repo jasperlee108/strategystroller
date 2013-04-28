@@ -35,39 +35,39 @@ class Indicator < ActiveRecord::Base
   
   ## Source = string[200]
   validates :source,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 200 }
 
   ## Unit = string[20]
   validates :unit,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 20 }
 
   ## Freq = string[2]
   validates :freq,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 2 }
 
   ## Type = string[10]
   validates :indicator_type,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 10 }
 
   ## Dir = string[20]
   validates :dir,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 20 }
 
   ## Actual = float
   ## 0.00 <= Actual
   validates :actual,
-  :presence => true,
+  :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Target = float
   ## 0.00 <= Target
   validates :target,
-  :presence => true,
+  :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
   
   ## Notes = string[600]
@@ -79,7 +79,7 @@ class Indicator < ActiveRecord::Base
   ## Status = long integer
   ## 0.00 <= Status <= 100.00
   validates :status,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -94,7 +94,7 @@ class Indicator < ActiveRecord::Base
   ## Difference = float
   ## Difference >= 0.0
   validates :diff,
-  :presence => true,
+  :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
   
 end

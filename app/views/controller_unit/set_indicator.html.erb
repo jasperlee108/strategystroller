@@ -16,7 +16,7 @@
 			<%= f.input :name, :required => true, :as => :string, :label => "Name of Indicator",:input_html => { :class => "span12" }  %>
 		</div>
 		<div class="span4">
-			<%= f.input :short_name, :as => :string, :label => "Short Name of Indicator",:input_html => { :class => "span12" }  %>
+			<%= f.input :short_name, :as => :string, :required => true, :label => "Short Name of Indicator",:input_html => { :class => "span12" }  %>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -24,55 +24,7 @@
 			<%= f.input :goal_id, :as => :select, :collection => Goal.all, :required => true, :label => "Associated Goal",:input_html => { :class => "span12" }  %>
 		</div>
 		<div class="span6">
-			<%= f.input :user_id, :as => :select, :collection => User.all, :required => true, :label => "Responsible",:input_html => { :class => "span12" }  %>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span12">
-			<%= f.input :description, :as => :text, :input_html => { :rows => 5,  :class => "span12"}, :required => false, :label => "Description of Indicator" %>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span6">
-			<%= f.input :source, :required => true, :as => :string, :label => "Source",:input_html => { :class => "span12" }  %>
-		</div>
-		<div class="span6">
-			<%= f.input :unit, :required => true, :as => :string, :label => "Unit",:input_html => { :class => "span12" }  %>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span4">
-			<%= f.input :freq, :required => true, :as => :select, :collection => ["M", "Q", "HY", "Y"], :label => "Frequency of Acquisition" ,:input_html => { :class => "span12" } %>
-		</div>
-		<div class="span4">
-			<%= f.input :indicator_type, :required => true, :as => :select, :collection => ["Average", "Cumulative"], :label => "Indicator Type",:input_html => { :class => "span12" }  %>
-		</div>
-		<div class="span4">
-			<%= f.input :dir, :required => true, :as => :select, :collection => ["More is Better", "Less is Better"], :label => "Target Direction",:input_html => { :class => "span12" }  %>
-		</div>
-	</div>
-	<div class="row-fluid">		
-		<div class="span4">
-			<%= f.input :actual, :required => true, :as => :number, :label => "Actual Values",:input_html => { :class => "span12" }  %>
-		</div>
-		<div class="span4">
-			<%= f.input :target, :required => true, :as => :number, :label => "Target Values",:input_html => { :class => "span12" }  %>
-		</div>
-		<div class="span4">
-			<%= f.input :diff, :required => true, :as => :number, :label => "Difference",:input_html => { :class => "span12" }  %>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span12">
-			<%= f.input :notes, :as => :text, :input_html => { :rows => 5,  :class => "span12" }, :required => false, :label => "Notes" %>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span6">
-			<%= f.input :status, :required => true, :as => :number, :label => "Current Status",:input_html => { :class => "span12" }  %>
-		</div>
-		<div class="span6">
-			<%= f.input :status_notes, :as => :text, :input_html => { :rows => 5, :class => "span12" }, :required => false, :label => "Notes to Current Status" %>
+			<%= f.input :user_id, :as => :select, :collection => User.where(:controlling_unit => false), :required => true, :label => "Responsible",:input_html => { :class => "span12" }  %>
 		</div>
 	</div>
 	<% end %>

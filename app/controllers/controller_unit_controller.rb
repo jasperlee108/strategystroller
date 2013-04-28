@@ -101,7 +101,8 @@ class ControllerUnitController < ApplicationController
           Indicator.delete(Indicator.find_by_id(@indicator.id))
           flash[:error] = "ERROR: Indicator was not saved!"
         else # indicator and form saved
-          flash[:notice] = "Indicator successfully saved!"
+          provider = @indicator.user.username
+          flash[:notice] = "Indicator successfully saved! A form has been sent to " + provider + "."
           @user_obj = User.find_by_id(@indicator.user_id)
           # Need to populate a form
           @form_url = encode_url(form_id, @indicator.id)
@@ -325,6 +326,8 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
+    @projects = (@current_indicator.projects).collect{|p| p.short_name}
+    @projects.empty? ? @projects += ['None'] : nil
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_indicator.update_attributes(params[:indicator])
@@ -396,6 +399,8 @@ class ControllerUnitController < ApplicationController
   
   def all_indicator
     @indicator = Indicator.find_by_id(params[:indicator_id])
+    @projects = (@indicator.projects).collect{|p| p.short_name}
+    @projects.empty? ? @projects += ['None'] : nil
   end
   
   def all_goal

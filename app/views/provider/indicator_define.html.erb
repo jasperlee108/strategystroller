@@ -32,55 +32,50 @@
 			<%= f.input :goal_id, :as => :select, :collection => Goal.all, :selected => @current_indicator.goal_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Associated Goal" %>
 		</div>
 		<div class="span6">
-			<%= f.input :user_id, :as => :select, :collection => User.all, :selected => @current_indicator.user_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Responsible" %>
+			<%= f.input :user_id, :as => :select, :collection => User.where(:controlling_unit => false), :selected => @current_indicator.user_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Responsible" %>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span12">
+		<div class="span6">
+			<%= f.input :unit, :input_html => { :value => @current_indicator.unit, :class => "span12" }, :required => true, :as => :string, :label => "Unit" %>
+		</div>
+		<div class="span6">		
+			<div class="span6">
+			<%= f.input :actual, :input_html => { :value => @current_indicator.actual, :class => "span12" }, :required => true, :as => :number, :label => "Actual Values" %>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
 			<%= f.input :description, :as => :text, :input_html => { :value => @current_indicator.description, :rows => 5, :class => "span12" }, :required => true, :label => "Description of Indicator" %>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :source, :input_html => { :value => @current_indicator.source, :class => "span12" }, :required => true, :as => :string, :label => "Source" %>
-		</div>
-		<div class="span6">
-			<%= f.input :unit, :input_html => { :value => @current_indicator.unit, :class => "span12" }, :required => true, :as => :string, :label => "Unit" %>
+			<%= f.input :source, :input_html => { :value => @current_indicator.source, :class => "span12", :rows => 2 }, :required => true, :as => :text, :label => "Source" %>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span4">
+		<div class="span6">
 			<%= f.input :freq, :input_html => { :class => "span12" }, :required => true, :as => :select, :collection => options_for_select(["M", "Q", "HY", "Y"], @current_indicator.freq), :label => "Frequency of Acquisition" %>
 		</div>
-		<div class="span4">
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+			<div class="span6">
 			<%= f.input :indicator_type, :input_html => { :class => "span12" }, :required => true, :as => :select, :collection => options_for_select(["Average", "Cumulative"], @current_indicator.indicator_type), :label => "Indicator Type" %>
-		</div>
-		<div class="span4">
+			</div>
+			<div class="span6">
 			<%= f.input :dir, :input_html => { :class => "span12" }, :required => true, :as => :select, :collection => options_for_select(["More is Better", "Less is Better"], @current_indicator.dir), :label => "Target Direction" %>
-		</div>
-	</div>
-	<div class="row-fluid">		
-		<div class="span4">
-			<%= f.input :actual, :input_html => { :value => @current_indicator.actual, :class => "span12" }, :required => true, :as => :number, :label => "Actual Values" %>
-		</div>
-		<div class="span4">
-			<%= f.input :target, :input_html => { :value => @current_indicator.target, :class => "span12" }, :required => true, :as => :number, :label => "Target Values" %>
-		</div>
-		<div class="span4">
-			<%= f.input :diff, :input_html => { :value => @current_indicator.diff, :readonly => true, :class => "span12" }, :label => "Difference" %>
+			</div>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span12">
+		<div class="span6">
+			<div class="span6"></div>
+			<div class="span6">
 			<%= f.input :notes, :as => :text, :input_html => { :value => @current_indicator.notes, :rows => 5, :class => "span12" }, :required => false, :label => "Notes" %>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span6">
-			<%= f.input :status, :input_html => { :value => @current_indicator.status, :readonly => true, :class => "span12" }, :label => "Current Status" %>
-		</div>
-		<div class="span6">
-			<%= f.input :status_notes, :as => :text, :input_html => { :value => @current_indicator.status_notes, :rows => 5, :class => "span12" }, :required => false, :label => "Notes to Current Status" %>
+			</div>
 		</div>
 	</div>
 	<% end %>

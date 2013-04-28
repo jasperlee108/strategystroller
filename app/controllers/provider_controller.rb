@@ -46,6 +46,7 @@ class ProviderController < ApplicationController
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
     @current_form.update_attributes(:checked => true)
+    @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
       if (params[:commit] == "Submit Indicator")
         @current_form.update_attributes(:submitted => true)
@@ -88,7 +89,7 @@ class ProviderController < ApplicationController
       # NOTE: activity don't need to be in form table
       # We can directly do lookup on activity table
       @activity = Activity.new(params[:activity])
-      if @activity.save! # activity saved
+      if @activity.save # activity saved
         flash[:notice] = "Activity successfully saved!"
       else # activity not saved
         flash[:error] = "ERROR: Activity was not saved!"
