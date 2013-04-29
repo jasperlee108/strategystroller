@@ -27,6 +27,7 @@
 			<%= f.input :user_id, :as => :select, :collection => User.where(:controlling_unit => false), :required => true, :label => "Responsible",:input_html => { :class => "span12" }  %>
 		</div>
 	</div>
+	<br />
 	<% end %>
 	<center>
 		<div class="row-fluid">

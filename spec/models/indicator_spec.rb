@@ -75,7 +75,7 @@ describe Indicator do
 
   ### SOURCE
   
-  ## Source is not empty
+  ## Source can be empty
   it "can have empty Source" do
     source = ""
     indicator = generate()
@@ -93,7 +93,7 @@ describe Indicator do
 
   ### UNIT
   
-  ## Unit is not empty
+  ## Unit can be empty
   it "can have empty Unit" do
     unit = ""
     indicator = generate()
@@ -111,7 +111,7 @@ describe Indicator do
 
   ### FREQUENCY
 
-  ## Frequency is not empty
+  ## Frequency can be empty
   it "can have empty Frequency" do
     freq = ""
     indicator = generate()
@@ -129,7 +129,7 @@ describe Indicator do
 
   ### TYPE
   
-  ## Type is not empty
+  ## Type can be empty
   it "can have empty Type" do
     type = ""
     indicator = generate()
@@ -147,7 +147,7 @@ describe Indicator do
 
   ### DIRECTION
   
-  ## Direction is not empty
+  ## Direction can be empty
   it "can have empty Direction" do
     direction = ""
     indicator = generate()
@@ -165,7 +165,7 @@ describe Indicator do
 
   ### ACTUAL VALUES
 
-  ## Actual is not empty
+  ## Actual can be empty
   it "can have empty Actual" do
     actual = nil
     indicator = generate()
@@ -191,7 +191,7 @@ describe Indicator do
 
   ### TARGET VALUES
   
-  ## Target is not empty
+  ## Target can be empty
   it "can have empty Target" do
     target = nil
     indicator = generate()
@@ -235,7 +235,7 @@ describe Indicator do
 
   ### DIFFERENCE
   
-  ## Difference is not empty
+  ## Difference can be empty
   it "can have empty Difference" do
     difference = nil
     indicator = generate()
@@ -261,7 +261,7 @@ describe Indicator do
 
   ### STATUS
   
-  ## Status is not empty
+  ## Status can be empty
   it "can have empty Status" do
     status = nil
     indicator = generate()

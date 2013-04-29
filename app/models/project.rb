@@ -26,7 +26,8 @@ class Project < ActiveRecord::Base
 
   # Needs a Steer
   validates :steer_id,
-  :presence => true
+  :length => { :minimum => 0 },
+  :allow_blank => true
 
   # Name = string[80]
   validates :name,
@@ -49,33 +50,35 @@ class Project < ActiveRecord::Base
   ## Rails has this thing where most things default to False 
 
   ## Inplan = true / false = yes / no
-  validates :inplan, :inclusion => { :in => [true, false] }
+  validates :inplan, :inclusion => { :in => [true, false] },
+  :allow_blank => true
 
   ## Compensation = true / false = yes / no
-  validates :compensation, :inclusion => { :in => [true, false] }
+  validates :compensation, :inclusion => { :in => [true, false] },
+  :allow_blank => true
 
   ## Duration = float
   ## 0.00 <= duration
   validates :duration,
-  :presence => true,
+  :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Target Cost = decimal
   ## 0.00 <= target_cost
   validates :target_cost,
-  :presence => true,
+  :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Actual Cost = decimal
   ## 0.00 <= actual_cost
   validates :actual_cost,
-  :presence => true,
+  :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
   ## Target_manp = long integer
   ## 0.00 <= target_manp
   validates :target_manp,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :only_integer => true
@@ -84,7 +87,7 @@ class Project < ActiveRecord::Base
   ## Actual_manp = long integer
   ## 0.00 <= actual_manp
   validates :actual_manp,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :only_integer => true
@@ -93,7 +96,7 @@ class Project < ActiveRecord::Base
   ## Status_prog = float
   ## 0.00 <= status_prog <= 100.00
   validates :status_prog,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -102,7 +105,7 @@ class Project < ActiveRecord::Base
   ## Status_ms = long integer
   ## 0.00 <= status_ms <= 100.00
   validates :status_ms,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -111,7 +114,7 @@ class Project < ActiveRecord::Base
   ## Status_manp = long integer
   ## 0.00 <= status_manp <= 100.00
   validates :status_manp,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -120,7 +123,7 @@ class Project < ActiveRecord::Base
   ## Status_cost = long integer
   ## 0.00 <= status_cost <= 100.00
   validates :status_cost,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100
@@ -129,7 +132,7 @@ class Project < ActiveRecord::Base
   ## Status_global = float
   ## 0.00 <= status_global <= 100.00
   validates :status_global,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100

@@ -123,7 +123,7 @@ describe Goal do
   
   ### STATUS
   
-  ## Status is not empty
+  ## Status can be empty
   it "can have empty Status" do
     status = nil
     goal = generate()

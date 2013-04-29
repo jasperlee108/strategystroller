@@ -125,7 +125,8 @@ class ControllerUnitController < ApplicationController
           Project.delete(Project.find_by_id(@project.id))
           flash[:error] = "ERROR: Project was not saved!"
         else # project and form saved
-          flash[:notice] = "Project successfully saved!"
+          provider = @project.head.username
+          flash[:notice] = "Project successfully saved! A form has been sent to " + provider + "."
           @user_obj = User.find_by_id(@project.head_id)
           # Need to populate a form
           @form_url = encode_url(form_id, @project.id)
@@ -344,6 +345,7 @@ class ControllerUnitController < ApplicationController
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
     @activities = @current_project.activities
+    @project.startDate = @current_project.startDate
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_project.update_attributes(params[:project])
@@ -395,6 +397,7 @@ class ControllerUnitController < ApplicationController
   
   def all_project
     @project = Project.find_by_id(params[:project_id])
+    @activities = @project.activities
   end
   
   def all_indicator
