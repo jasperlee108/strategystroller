@@ -71,7 +71,7 @@ StrategyStroller::Application.configure do
 
   # For devise. add in
   # except with our actual host name.
-  config.action_mailer.default_url_options = { :host => 'http://strategy-stroller.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'strategy-stroller.herokuapp.com' }
   
   # For pre-compiling .js & .css
   # Added, trying to fix cocoon.js isn't precompiled error
