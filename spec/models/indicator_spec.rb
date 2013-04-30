@@ -75,12 +75,12 @@ describe Indicator do
 
   ### SOURCE
   
-  ## Source is not empty
-  it "should not have empty Source" do
+  ## Source can be empty
+  it "can have empty Source" do
     source = ""
     indicator = generate()
     indicator.source = source
-    assert(!indicator.save, "It saves on empty Source")
+    assert(indicator.save, "It won't save on empty Source")
   end
   
   ## Source max = 200
@@ -93,12 +93,12 @@ describe Indicator do
 
   ### UNIT
   
-  ## Unit is not empty
-  it "should not have empty Unit" do
+  ## Unit can be empty
+  it "can have empty Unit" do
     unit = ""
     indicator = generate()
     indicator.unit = unit
-    assert(!indicator.save, "It saves on empty Unit")
+    assert(indicator.save, "It won't save on empty Unit")
   end
   
   ## Unit max = 20
@@ -111,12 +111,12 @@ describe Indicator do
 
   ### FREQUENCY
 
-  ## Frequency is not empty
-  it "should not have empty Frequency" do
+  ## Frequency can be empty
+  it "can have empty Frequency" do
     freq = ""
     indicator = generate()
     indicator.freq = freq
-    assert(!indicator.save, "It saves on empty Frequency")
+    assert(indicator.save, "It won't save on empty Frequency")
   end
   
   ## Frequency max = 2 = { 'm', 'q', 'hy', 'y' }
@@ -129,12 +129,12 @@ describe Indicator do
 
   ### TYPE
   
-  ## Type is not empty
-  it "should not have empty Type" do
+  ## Type can be empty
+  it "can have empty Type" do
     type = ""
     indicator = generate()
     indicator.indicator_type = type
-    assert(!indicator.save, "It saves on empty Type")
+    assert(indicator.save, "It won't save on empty Type")
   end
   
   ## Type max = 10 = { 'average', 'cumulative' }
@@ -147,12 +147,12 @@ describe Indicator do
 
   ### DIRECTION
   
-  ## Direction is not empty
-  it "should not have empty Direction" do
+  ## Direction can be empty
+  it "can have empty Direction" do
     direction = ""
     indicator = generate()
     indicator.dir = direction
-    assert(!indicator.save, "It saves on empty Direction")
+    assert(indicator.save, "It won't save on empty Direction")
   end
   
   ## Direction max = 20 = { 'more is better', 'less is better' }
@@ -165,12 +165,12 @@ describe Indicator do
 
   ### ACTUAL VALUES
 
-  ## Actual is not empty
-  it "should not have empty Actual" do
+  ## Actual can be empty
+  it "can have empty Actual" do
     actual = nil
     indicator = generate()
     indicator.actual = actual
-    assert(!indicator.save, "It saves on empty Actual")
+    assert(indicator.save, "It won't save on empty Actual")
   end
   
   ## Actual = float
@@ -191,12 +191,12 @@ describe Indicator do
 
   ### TARGET VALUES
   
-  ## Target is not empty
-  it "should not have empty Target" do
+  ## Target can be empty
+  it "can have empty Target" do
     target = nil
     indicator = generate()
     indicator.target = target
-    assert(!indicator.save, "It saves on empty Target")
+    assert(indicator.save, "It won't save on empty Target")
   end
   
   ## Target = float
@@ -235,12 +235,12 @@ describe Indicator do
 
   ### DIFFERENCE
   
-  ## Difference is not empty
-  it "should not have empty Difference" do
+  ## Difference can be empty
+  it "can have empty Difference" do
     difference = nil
     indicator = generate()
     indicator.diff = difference
-    assert(!indicator.save, "It saves on empty Difference")
+    assert(indicator.save, "It won't save on empty Difference")
   end
   
   ## Difference = float
@@ -261,12 +261,12 @@ describe Indicator do
 
   ### STATUS
   
-  ## Status is not empty
-  it "should not have empty Status" do
+  ## Status can be empty
+  it "can have empty Status" do
     status = nil
     indicator = generate()
     indicator.status = status
-    assert(!indicator.save, "It saves on empty Status")
+    assert(indicator.save, "It won't save on empty Status")
   end
   
   ## Status = float

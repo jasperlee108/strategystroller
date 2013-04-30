@@ -46,6 +46,7 @@ class ProviderController < ApplicationController
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
     @current_form.update_attributes(:checked => true)
+    @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
       if (params[:commit] == "Submit Indicator")
         @current_form.update_attributes(:submitted => true)
@@ -83,6 +84,7 @@ class ProviderController < ApplicationController
   def activity_define
     @user = current_user
     @activity = Activity.new
+    @project_id = params[:project_id]
     if (request.post?)
       # NOTE: activity don't need to be in form table
       # We can directly do lookup on activity table
@@ -106,16 +108,6 @@ class ProviderController < ApplicationController
 
   def project_update
     @user = current_user
-  end
-  
-  def unchecked
-    @user = current_user
-    @forms = Form.where(:checked => false).find_all_by_user_id(@user.id)
-  end
-  
-  def saved
-    @user = current_user
-    # do something here
   end
   
   def forms_composite

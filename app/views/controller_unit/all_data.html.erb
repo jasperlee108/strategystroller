@@ -1,97 +1,123 @@
-   <div class="navbar snb">
-      <div class="navbar-inner ni">
-        <div class="container">
-          <ul class="nav isnb">
-            <li ><a href=<%= url_for graph_panel_path %>>Graphs</a></li>
-            <li class="active"><a href=<%= url_for all_data_path %>>Data View</a></li>
-          </ul>
-        </div>
-      </div>
-    </div><!-- /.navbar -->
+<div class="navbar snb">
+	<div class="navbar-inner ni">
+		<div class="container">
+			<ul class="nav isnb">
+				<li class="active">
+					<a href=<%= url_for all_data_path %>>Data View</a>
+				</li>
+				<li >
+					<a href=<%= url_for graph_panel_path %>>Graphs</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div><!-- /.navbar -->
 <h2>Hi CU, <%= @user.username %>! </h2>
-Here is all the available data in the database. <br />
+Here is all the available data in the database.
+<br />
 
 <br />
- 
+
 <!--<table border=7 cellpadding=7 cellspacing=7>
-  <tr>
-  	<th>Dimension</th>
-    <th>Goal</th>
-    <th>Indicator</th>
-    <th>Project</th>
-    <th>Activity</th>
-  </tr>
-  
-  <% Dimension.all.each do |d| %>
-    <tr>
-  	  <td valign="top">
-  	  	<%= link_to d.name, all_dimension_path(:dimension_id => d.id) %>
-  	  </td>
-  	  <td valign="top">
-  	    <% Goal.where(:dimension_id => d.id).each do |g| %>
-  	      <%= link_to g.name, all_goal_path(:goal_id => g.id) %><br />
-  	  	  <% @goal_ids += [g.id] %>
-  	    <% end %>
-  	  </td>
-  	  <td valign="top">
-  	  	<% @goal_ids.each do |g_id| %>
-  	  	  <% Indicator.where(:goal_id => g_id).each do |i| %>
-  	  	    <%= link_to i.name, all_indicator_path(:indicator_id => i.id) %><br />
-  	  	    <% @indicator_ids += [i.id] %>
-  	  	  <% end %>
-  	  	<% end %>
-  	  	<% @goal_ids = [] %>
-  	  </td>
-  	  <td valign="top">
-  	  	<% @indicator_ids.each do |i_id| %>
-  	  	  <% Project.where(:indicator_id => i_id).each do |p| %>
-  	  	    <%= link_to p.name, all_project_path(:project_id => p.id) %><br />
-  	  	    <% @project_ids += [p.id] %>
-  	  	  <% end %>
-  	  	<% end %>
-  	  	<% @indicator_ids = [] %>
-  	  </td>
-  	  <td valign="top">
-  	  	<% @project_ids.each do |p_id| %>
-  	  	  <% Activity.where(:project_id => p_id).each do |a| %>
-  	  	    <%= link_to a.name, all_activity_path(:activity_id => a.id) %><br />
-  	  	  <% end %>
-  	  	<% end %>
-  	  	<% @project_ids = [] %>
-  	  </td>
-    </tr>
-  <% end %>
+<tr>
+<th>Dimension</th>
+<th>Goal</th>
+<th>Indicator</th>
+<th>Project</th>
+<th>Activity</th>
+</tr>
+
+<% Dimension.all.each do |d| %>
+<tr>
+<td valign="top">
+<%= link_to d.name, all_dimension_path(:dimension_id => d.id) %>
+</td>
+<td valign="top">
+<% Goal.where(:dimension_id => d.id).each do |g| %>
+<%= link_to g.name, all_goal_path(:goal_id => g.id) %><br />
+<% @goal_ids += [g.id] %>
+<% end %>
+</td>
+<td valign="top">
+<% @goal_ids.each do |g_id| %>
+<% Indicator.where(:goal_id => g_id).each do |i| %>
+<%= link_to i.name, all_indicator_path(:indicator_id => i.id) %><br />
+<% @indicator_ids += [i.id] %>
+<% end %>
+<% end %>
+<% @goal_ids = [] %>
+</td>
+<td valign="top">
+<% @indicator_ids.each do |i_id| %>
+<% Project.where(:indicator_id => i_id).each do |p| %>
+<%= link_to p.name, all_project_path(:project_id => p.id) %><br />
+<% @project_ids += [p.id] %>
+<% end %>
+<% end %>
+<% @indicator_ids = [] %>
+</td>
+<td valign="top">
+<% @project_ids.each do |p_id| %>
+<% Activity.where(:project_id => p_id).each do |a| %>
+<%= link_to a.name, all_activity_path(:activity_id => a.id) %><br />
+<% end %>
+<% end %>
+<% @project_ids = [] %>
+</td>
+</tr>
+<% end %>
 </table>-->
 
 <div class="tree">
- <ul>
-  <% Dimension.all.each do |d| %>
-  	  	<li><div><%= link_to d.name, all_dimension_path(:dimension_id => d.id) %></div>
-  	  	<ul>
-  	    <% Goal.where(:dimension_id => d.id).each do |g| %>
-  	    		<li><div><%= link_to g.name, all_goal_path(:goal_id => g.id) %></div>
-  	    		<ul>
-	  	  	  	<% Indicator.where(:goal_id => g).each do |i| %>
-  	    				<li><div><%= link_to i.name, all_indicator_path(:indicator_id => i.id) %></div>
-  	    				<ul>
-						<% Project.where(:indicator_id => i).each do |p| %>
-  	    					<li><div><%= link_to p.name, all_project_path(:project_id => p.id) %></div>
-  	    					<ul>
- 							<% Activity.where(:project_id => p).each do |a| %>
-  	    						<li><div><%= link_to a.name, all_activity_path(:activity_id => a.id) %></div></li>
-  	    						
-  	  	    				<% end %>
-  	  	    				</ul>
-  	  	    				</li>
-  	    			     <% end %>
-  	    		  </ul>
-  	  	    	  </li>	
-			    <% end %>
-		</ul>
-  	    </li>
-	   <% end %>
-     </ul>
-  	 </li>
-    <% end %>
-  	</ul> 	    				 
-  	  </div>
+	<ul>
+		<% Dimension.all.each do |d| %>
+		<li>
+			<div>
+				<%= link_to d.name, all_dimension_path(:dimension_id => d.id) %>
+			</div>
+			<ul>
+				<% Goal.where(:dimension_id => d.id).each do |g| %>
+				<li>
+					<div>
+						<%= link_to g.name, all_goal_path(:goal_id => g.id) %>
+					</div>
+					<ul>
+						<% Indicator.where(:goal_id => g).each do |i| %>
+						<li>
+							<div>
+								<%= link_to i.name, all_indicator_path(:indicator_id => i.id) %>
+							</div>
+							<ul>
+								<% Project.where(:indicator_id => i).each do |p| %>
+								<li>
+									<div>
+										<%= link_to p.name, all_project_path(:project_id => p.id) %>
+									</div>
+									<ul>
+										<% Activity.where(:project_id => p).each do |a| %>
+										<li>
+											<div>
+												<%= link_to a.name, all_activity_path(:activity_id => a.id) %>
+											</div>
+										</li>
+
+										<% end %>
+									</ul>
+								</li>
+								<% end %>
+							</ul>
+						</li>
+						<% end %>
+					</ul>
+				</li>
+				<% end %>
+			</ul>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />

@@ -55,7 +55,7 @@ class Activity < ActiveRecord::Base
   
   ## targetManp = integer > 0
   validates :targetManp,
-  :presence => true,
+  :allow_blank => true,
   :numericality => {
     :only_integer => true,
     :greater_than => 0
@@ -63,7 +63,7 @@ class Activity < ActiveRecord::Base
   
   ## targetCost = currency
   validates :targetCost,
-  :presence => true,
+  :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
   
   ## notes = string[600]
@@ -87,7 +87,7 @@ class Activity < ActiveRecord::Base
   ## actualProg = string = {"1-Not yet started", "2-In progress", "3-Activity completed"}
   ## can't be empty
   validates :actualProg,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 30 }
   
   ## statusNotes = string[600]

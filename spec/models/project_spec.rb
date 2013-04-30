@@ -121,12 +121,12 @@ describe Project do
 
   ### DURATION
   
-  ## Duration is not empty
-  it "should not have empty Duration" do
+  ## Duration can be empty
+  it "can have empty Duration" do
     duration = nil
     project = generate()
     project.duration = duration
-    assert(!project.save, "It saves on empty Duration")
+    assert(project.save, "It won't save on empty Duration")
   end
   
   ## Duration = float
@@ -147,12 +147,12 @@ describe Project do
 
   ### TARGET MAN POWER
   
-  ## TargetManp is not empty
-  it "should not have empty TargetManp" do
+  ## TargetManp can be empty
+  it "can have empty TargetManp" do
     targetManp = nil
     project = generate()
     project.target_manp = targetManp
-    assert(!project.save, "It saves on empty TargetManp")
+    assert(project.save, "It won't save on empty TargetManp")
   end
   
   ## TargetManp = integer
@@ -181,12 +181,12 @@ describe Project do
 
   ### TARGET COST
   
-  ## TargetCost is not empty
-  it "should not have empty TargetCost" do
+  ## TargetCost can be empty
+  it "can have empty TargetCost" do
     targetCost = nil
     project = generate()
     project.target_cost = targetCost
-    assert(!project.save, "It saves on empty TargetCost")
+    assert(project.save, "It won't save on empty TargetCost")
   end
   
   ## TargetCost = decimal
@@ -247,12 +247,12 @@ describe Project do
 
   ### ACTUAL MAN POWER
   
-  ## ActualManp is not empty
-  it "should not have empty ActualManp" do
+  ## ActualManp can be empty
+  it "can have empty ActualManp" do
     actualManp = nil
     project = generate()
     project.actual_manp = actualManp
-    assert(!project.save, "It saves on empty ActualManp")
+    assert(project.save, "It won't save on empty ActualManp")
   end
   
   ## ActualManp = integer
@@ -281,12 +281,12 @@ describe Project do
 
   ### ACTUAL COST
   
-  ## ActualCost is not empty
-  it "should not have empty ActualCost" do
+  ## ActualCost can be empty
+  it "can have empty ActualCost" do
     actualCost = nil
     project = generate()
     project.actual_cost = actualCost
-    assert(!project.save, "It saves on empty ActualCost")
+    assert(project.save, "It won't save on empty ActualCost")
   end
   
   ## ActualCost = decimal
@@ -307,12 +307,12 @@ describe Project do
 
   ### STATUS PROGRESS
   
-  ## StatusProg is not empty
-  it "should not have empty StatusProg" do
+  ## StatusProg can be empty
+  it "can have empty StatusProg" do
     statusProg = nil
     project = generate()
     project.status_prog = statusProg
-    assert(!project.save, "It saves on empty StatusProg")
+    assert(project.save, "It won't save on empty StatusProg")
   end
   
   ## StatusProg = float
@@ -341,12 +341,12 @@ describe Project do
 
   ### STATUS MILESTONE
   
-  ## StatusMs is not empty
-  it "should not have empty StatusMs" do
+  ## StatusMs can be empty
+  it "can have empty StatusMs" do
     statusMs = nil
     project = generate()
     project.status_ms = statusMs
-    assert(!project.save, "It saves on empty StatusMs")
+    assert(project.save, "It won't save on empty StatusMs")
   end
   
   ## StatusMs = integer
@@ -375,12 +375,12 @@ describe Project do
 
   ### STATUS MAN POWER
   
-  ## StatusManp is not empty
-  it "should not have empty StatusManp" do
+  ## StatusManp can be empty
+  it "can have empty StatusManp" do
     statusManp = nil
     project = generate()
     project.status_manp = statusManp
-    assert(!project.save, "It saves on empty StatusManp")
+    assert(project.save, "It won't save on empty StatusManp")
   end
   
   ## StatusManp = integer
@@ -409,12 +409,12 @@ describe Project do
 
   ### STATUS COST
   
-  ## StatusCost is not empty
-  it "should not have empty StatusCost" do
+  ## StatusCost can be empty
+  it "can have empty StatusCost" do
     statusCost = nil
     project = generate()
     project.status_cost = statusCost
-    assert(!project.save, "It saves on empty StatusCost")
+    assert(project.save, "It won't save on empty StatusCost")
   end
   
   ## StatusCost = float
@@ -443,12 +443,12 @@ describe Project do
 
   ### STATUS GLOBAL
   
-  ## StatusGlobal is not empty
-  it "should not have empty StatusGlobal" do
+  ## StatusGlobal can be empty
+  it "can have empty StatusGlobal" do
     statusGlobal = nil
     project = generate()
     project.status_global = statusGlobal
-    assert(!project.save, "It saves on empty StatusGlobal")
+    assert(project.save, "It won't save on empty StatusGlobal")
   end
   
   ## StatusGlobal = float

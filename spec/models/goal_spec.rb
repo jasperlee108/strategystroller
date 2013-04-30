@@ -123,12 +123,12 @@ describe Goal do
   
   ### STATUS
   
-  ## Status is not empty
-  it "should not have empty Status" do
+  ## Status can be empty
+  it "can have empty Status" do
     status = nil
     goal = generate()
     goal.status = status
-    assert(!goal.save, "It saves on empty Status")
+    assert(goal.save, "It won't save on empty Status")
   end
   
   ## Status >= 0
