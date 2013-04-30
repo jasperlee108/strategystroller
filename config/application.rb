@@ -65,9 +65,6 @@ module StrategyStroller
     
     config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
    
-    # For pre-compiling .js & .css
-    # Added, trying to fix cocoon.js isn't precompiled error
-    config.assets.precompile += %w( *.js *.css )
   end
   
   ## Supress deprecation warning
