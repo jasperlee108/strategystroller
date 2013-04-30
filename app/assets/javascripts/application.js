@@ -12,7 +12,7 @@
 //
 
 //= require jquery
-//= require jquery_ujs\
+//= require jquery_ujs
 //= require cocoon
 //= require_directory .
 
