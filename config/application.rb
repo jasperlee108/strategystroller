@@ -64,6 +64,10 @@ module StrategyStroller
     config.assets.initialize_on_precompile = false
     
     config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
+    
+    # To fix bootstrap-sass pre compile error on heroku
+    # Source: https://github.com/thomas-mcdonald/bootstrap-sass/issues/209
+    config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
   end
   
   ## Supress deprecation warning
