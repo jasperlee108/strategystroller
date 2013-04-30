@@ -5,6 +5,7 @@ class FormMailer < ActionMailer::Base
   INDICATOR = 2
   PROJECT = 3
   ACTIVITY = 4
+  MAILER = ActionMailer::Base.default_url_options
 
   def decode_id(id)
       decoded = Base64.decode64(id.to_s)
@@ -35,7 +36,7 @@ class FormMailer < ActionMailer::Base
       elsif (lookup ==  ACTIVITY)
         category = "activity"
       end
-      return url = "http://localhost:3000/provider/" + category + "_define?entry_id=" + entry_id + "&form_id=" + form_id #temp
+      return url = MAILER[:host] + "/provider/" + category + "_define?entry_id=" + entry_id + "&form_id=" + form_id #temp
     end
 
   def form_email(user,form_url)

@@ -1,9 +1,11 @@
 class ProviderController < ApplicationController
   before_filter :authenticate_user!
+  
+  MAILER = ActionMailer::Base.default_url_options
 
   def encode_url(form_id)
     encoded_id = encode_id(form_id.to_s)
-    url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
+    url = MAILER[:host] + "/forms?form_id=" + encoded_id.to_s #TEMP
   end
 
   def provider_panel

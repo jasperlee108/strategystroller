@@ -10,6 +10,7 @@ class ControllerUnitController < ApplicationController
   INDICATOR = 2
   PROJECT = 3
   ACTIVITY = 4
+  MAILER = ActionMailer::Base.default_url_options
 
   def clean_list(listie)
     final_list = []
@@ -202,7 +203,7 @@ class ControllerUnitController < ApplicationController
       elsif (lookup ==  ACTIVITY)
         category = "activity"
       end
-      url = "localhost:3000/provider/" + category + "_define?entry_id=" + encoded_entry_id + "&form_id=" + encoded_form_id #temp
+      url = MAILER[:host] + "/provider/" + category + "_define?entry_id=" + encoded_entry_id + "&form_id=" + encoded_form_id #temp
     end
 
     def create_users
