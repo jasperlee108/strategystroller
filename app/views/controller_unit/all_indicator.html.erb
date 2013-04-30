@@ -54,7 +54,7 @@
 		</div>
 		<div class="span6">		
 			<div class="span6">          
-          <%= f.input :prognosis, :input_html => { :value => 64.2, :disabled => true, :class => "span12" }, :label => "Prognosis" %>
+          <%= f.input :prognosis, :input_html => { :value => 0, :disabled => true, :class => "span12" }, :label => "Prognosis" %>
 			</div>
 			<div class="span6">
           <%= f.input :diff, :input_html => { :value => @indicator.diff, :disabled => true, :class => "span12" }, :label => "Difference" %>
@@ -72,11 +72,13 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span6">          
-          <%= f.input :indicator_type, :input_html => { :value => @indicator.indicator_type, :disabled => true, :class => "span12" }, :label => "Indicator Type" %>
-		</div>
-		<div class="span6">          
-          <%= f.input :dir, :input_html => { :value => @indicator.dir, :disabled => true, :class => "span12" }, :label => "Target Direction" %>
+		<div class="span6">
+			<div class="span6">          
+	          <%= f.input :indicator_type, :input_html => { :value => @indicator.indicator_type, :disabled => true, :class => "span12" }, :label => "Indicator Type" %>
+			</div>
+			<div class="span6">          
+	          <%= f.input :dir, :input_html => { :value => @indicator.dir, :disabled => true, :class => "span12" }, :label => "Target Direction" %>
+			</div>
 		</div>
 	</div>
 	<div class="row-fluid">

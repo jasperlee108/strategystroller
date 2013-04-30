@@ -9,6 +9,7 @@
 <div class="well">
 	<%= semantic_form_for @goal, :html => { :class => "form-stacked"} do |f|%>
 	<%= f.inputs do %>
+	
 	<div class="row-fluid">
 		<div class="span8">
 			<%= f.input :name, :required => true, :as => :string, :label => "Name of Goal",:input_html => { :class => "span12" }%>

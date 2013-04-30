@@ -132,11 +132,11 @@ describe Activity do
   ### TARGET MAN POWER
   
   ## TargetManp is not empty
-  it "should not have empty TargetManp" do
+  it "can have empty TargetManp" do
     targetManp = nil
     activity = generate()
     activity.targetManp = targetManp
-    assert(!activity.save, "It saves on empty TargetManp")
+    assert(activity.save, "It won't save on empty TargetManp")
   end
   
   ## TargetManp = integer
@@ -165,12 +165,12 @@ describe Activity do
 
   ### TARGET COST
   
-  ## TargetCost is not empty
-  it "should not have empty TargetCost" do
+  ## TargetCost can be empty
+  it "can have empty TargetCost" do
     targetCost = nil
     activity = generate()
     activity.targetCost = targetCost
-    assert(!activity.save, "It saves on empty TargetCost")
+    assert(activity.save, "It won't save on empty TargetCost")
   end
   
   ## TargetCost = decimal
@@ -269,12 +269,12 @@ describe Activity do
 
   ### ACTUAL PROGRESS
   
-  ## ActualProg is not empty
-  it "should not have empty ActualProg" do
+  ## ActualProg can be empty
+  it "can have empty ActualProg" do
     actualProg = ""
     activity = generate()
     activity.actualProg = actualProg
-    assert(!activity.save, "It saves on empty ActualProg")
+    assert(activity.save, "It won't save on empty ActualProg")
   end
   
   ## ActualProg max = 30

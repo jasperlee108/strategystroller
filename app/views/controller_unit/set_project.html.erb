@@ -11,9 +11,6 @@
 	<%= semantic_form_for @project, :html => { :class => "form-stacked"}  do |f| %>
 	<%= f.inputs do %>
 
-			<%= f.input :startDate, :as => :hidden, :value => Date.current %>
-			<%= f.input :endDate, :as => :hidden, :value => Date.tomorrow %>
-
 	<div class="row-fluid">
 		<div class="span8">
 			<%= f.input :name, :as => :string, :label => "Name of Project",:input_html => { :class => "span12" }  %>

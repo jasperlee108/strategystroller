@@ -67,10 +67,10 @@
 		</div>
 		<div class="span6">
 			<div class="span6">
-			<%= f.input :actual_manp, :value => 40, :input_html => { :value => 40, :class => "span12", :disabled => true }, :label => "Actual Employee Resources (days)" %>
+			<%= f.input :actual_manp, :value => 40, :input_html => { :value => @project.actual_manp, :class => "span12", :disabled => true }, :label => "Actual Employee Resources (days)" %>
 			</div>
 			<div class="span6">
-			<%= f.input :actual_cost, :value => 30, :input_html => { :value => 30, :class => "span12", :disabled => true }, :label => "Actual External Costs (currency)" %>
+			<%= f.input :actual_cost, :value => 30, :input_html => { :value => @project.actual_cost, :class => "span12", :disabled => true }, :label => "Actual External Costs (currency)" %>
 			</div>
 		</div>
 	</div>

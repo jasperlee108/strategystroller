@@ -73,6 +73,7 @@ class ControllerUnitController < ApplicationController
     @goal = Goal.new
     if (request.post?) 
       @goal = Goal.new(params[:goal])
+      @goal.status = 0
       if @goal.save # goal saved
         form_id = save_form(GOAL, @goal.user_id, @goal.id)
         if (!form_id) # goal saved but form not saved, so delete goal
@@ -97,6 +98,7 @@ class ControllerUnitController < ApplicationController
     @indicator = Indicator.new
     if (request.post?) 
       @indicator = Indicator.new(params[:indicator])
+      @indicator.status = 0
       if @indicator.save # indicator saved
         form_id = save_form(INDICATOR, @indicator.user_id, @indicator.id)
         if (!form_id) # indicator saved but form not saved, so delete indicator
@@ -119,8 +121,16 @@ class ControllerUnitController < ApplicationController
   
   def set_project
     @project = Project.new
-    if (request.post?) 
+    if (request.post?)
       @project = Project.new(params[:project])
+      # Put some (important) default values
+      @project.startDate = Date.current
+      @project.endDate = Date.tomorrow
+      @project.status_cost = 0
+      @project.status_global = 0
+      @project.status_manp = 0
+      @project.status_ms = 0
+      @project.status_prog = 0
       if @project.save # project saved
         form_id = save_form(PROJECT, @project.head_id, @project.id)
         if (!form_id) # project saved but form not saved, so delete project
