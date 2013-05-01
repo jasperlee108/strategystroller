@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://strategy-stroller.herokuapp.com/users/login" />
+<title>Adding Project</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Adding Project</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/controller_unit/cu_review?locale=en</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=cu_review_form_select</td>
+	<td>label=Project</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Generate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=project_name</td>
+	<td>adsdasasdd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=project_short_name</td>
+	<td>sadsad</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=project_indicator_id</td>
+	<td>label=Customer information index</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=responsible</td>
+	<td>label=Andy Warhol</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Hi Controlling Unit, James Bond!</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

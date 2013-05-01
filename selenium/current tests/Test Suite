@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="Login to Provider">Login to Provider Test</a></td></tr>
+<tr><td><a href="Login to CU">Login to CU Test</a></td></tr>
+<tr><td><a href="Assert Forms Present as Provider">Assert Forms Present</a></td></tr>
+<tr><td><a href="Registration for Provider">Edit Registration for Provider</a></td></tr>
+<tr><td><a href="Verify Provider Page">Verify Provider Page</a></td></tr>
+<tr><td><a href="Adding Goal">Adding Goal</a></td></tr>
+<tr><td><a href="Adding Indicator">Adding Indicator</a></td></tr>
+<tr><td><a href="Adding Project">Adding Project</a></td></tr>
+<tr><td><a href="Check Main SS Button">Check Main SS Button</a></td></tr>
+<tr><td><a href="Check Reports">Check Reports</a></td></tr>
+<tr><td><a href="Change Setup">Change Setup</a></td></tr>
+<tr><td><a href="Edit Registration for CU">Edit Registration For CU</a></td></tr>
+<tr><td><a href="Logout Cleanup">Logout Cleanup</a></td></tr>
+</tbody></table>
+</body>
+</html>
