@@ -4,9 +4,21 @@
       <%= flash[:notice] %>
       </div>
       <% end %>
+		<% if notice %>
+		<div class="notice alert">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<%= notice %>
+			</div>
+ 		<% end %>
       <% if flash[:error] %>
       <div class="alert alert-error">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <%= flash[:error] %>
       </div>
       <% end %>
+	  <% if alert %>
+	 <div class="alert">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<%= alert %>
+			</div>
+			<% end %>
