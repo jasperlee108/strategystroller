@@ -1,5 +1,9 @@
 StrategyStroller::Application.routes.draw do
-  
+
+  ## FOR MAIN PAGE
+  ## Move this here, per: https://github.com/gregbell/active_admin/issues/2049
+  root :to => "home#index"
+  match "home/index" => "home#index", :as => "home_index"  
   get "home/index"
 
   ## FOR ACTIVE ADMIN
@@ -22,7 +26,6 @@ StrategyStroller::Application.routes.draw do
   ## FOR OTHER LINKS / PATHS
   
   # Controller
-  match "controller_unit/input_framework/activities" => "controller_unit#set_activity", :as => "activities"
   match "controller_unit/input_framework" => "controller_unit#goals_list", :as => "input_framework"
   match "controller_unit/input_framework/goals_list" => "controller_unit#goals_list", :as => "goals_list"
   match "controller_unit/input_framework/indicators_list" => "controller_unit#indicators_list", :as => "indicators_list"
@@ -34,13 +37,9 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/graph_panel" => "controller_unit#graph_panel", :as => "graph_panel"
   match "controller_unit/activity_list" => "controller_unit#activity_list", :as => "activity_list"
   match "controller_unit/view_activity" => "controller_unit#view_activity", :as => "activity"  
-  #match "controller_unit/saved" => "controller_unit#saved", :as => "saved"
   match "controller_unit/goal_check" => "controller_unit#goal_check", :as => 'goal_check'
   match "controller_unit/indicator_check" => "controller_unit#indicator_check", :as => 'indicator_check'
   match "controller_unit/project_check" => "controller_unit#project_check", :as => 'project_check'
-  match "controller_unit/activity_check" => "controller_unit#activity_check", :as => 'activity_check'
-  #match "controller_unit/indicator_update" => "controller_unit#indicator_update", :as => 'indicator_update'
-  #match "controller_unit/project_update" => "controller_unit#project_update", :as => 'project_update'
   match "controller_unit/all_data" => "controller_unit#all_data", :as => 'all_data'
   match "controller_unit/all_activity" => "controller_unit#all_activity", :as => 'all_activity'
   match "controller_unit/all_project" => "controller_unit#all_project", :as => 'all_project'
@@ -49,8 +48,6 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/all_dimension" => "controller_unit#all_dimension", :as => 'all_dimension'
 
   # Provider
-  match "provider/unchecked" => "provider#unchecked", :as => "unchecked"
-  match "provider/saved" => "provider#saved", :as => "saved"
   match "provider/goal_define" => "provider#goal_define", :as => 'goal_define'
   match "provider/indicator_define" => "provider#indicator_define", :as => 'indicator_define'
   match "provider/project_define" => "provider#project_define", :as => 'project_define'
@@ -68,10 +65,6 @@ StrategyStroller::Application.routes.draw do
   get "controller_unit/create_users" => "controller_unit#create_users", :as => "create_users"
   get "controller_unit/remove_users" => "controller_unit#remove_users", :as => "remove_users"
   get "controller_unit/edit_users" => "controller_unit#edit_users", :as => "edit_users"
-  
-  ## FOR MAIN PAGE
-  root :to => "home#index"
-  match "home/index" => "home#index", :as => "home_index"
 
   ### IGNORE RAILS AUTO GENERATED STUFF BELOW ###
 

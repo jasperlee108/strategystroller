@@ -1,41 +1,40 @@
-
 <div class="navbar">
-  <div class="navbar-inner">
-    <a class="brand" href="#">Generate New Form</a>
+	<div class="navbar-inner">
+		<a class="brand" href="#">Generate New Form</a>
 
-    <div class="navbar-form pull-right">
-  <ul class="nav">
-  <div class="pull-right">
-<select id ="cu_review_form_select">
-  <option value="<%= goals_path %>">Goal</option>
-  <option value="<%= indicators_path %>">Indicator</option>
-  <option value="<%= projects_path %>">Project</option>
-</select>
- <a class="btn" onclick="cu_review_button()">
-    Generate
-  </a>
-  </div>
-</ul>
+		<div class="navbar-form pull-right">
+			<ul class="nav">
+				<div class="pull-right">
+					<select id ="cu_review_form_select">
+						<option value="<%= goals_path %>">Goal</option>
+						<option value="<%= indicators_path %>">Indicator</option>
+						<option value="<%= projects_path %>">Project</option>
+					</select>
+					<a class="btn" onclick="cu_review_button()"> Generate </a>
+				</div>
+			</ul>
+		</div>
+	</div>
 </div>
-</div>
-</div>
+<h2>Hi Controlling Unit, <%= @user.username %>! </h2>
 <%= render "setup_alerts" %>
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
-<h4><u>Forms to Review</u></h4>
-<table class="table table-hover table-bordered" style="background-color:white;">
-  <tr>
-    <th>ID</th>
-    <th>Form</th>
-  </tr>
- <% if @forms.empty? %> 
-   <tr><td>&ndash;</td><td>&ndash;</td>
-     </tr>
-   <% end %>  
-<% @forms.each do |forms| %>
-  <tr>
-    <td><%= forms.id %></td>
-    <td><%= link_to find_label(forms.lookup), find_path_cu(forms.lookup, forms.entry_id, forms.id) %></td>
-  </tr>
-<% end %>
-</table>
+	<h4><u>Forms to Review</u></h4>
+	<table class="table table-hover table-bordered" style="background-color:white;">
+		<tr>
+			<th>ID</th>
+			<th>Form</th>
+		</tr>
+		<% if @forms.empty? %>
+		<tr>
+			<td>&ndash;</td><td>&ndash;</td>
+		</tr>
+		<% end %>
+		<% @forms.each do |forms| %>
+		<tr>
+			<td><%= forms.id %></td>
+			<td><%= link_to find_label_cu(forms.lookup, forms.entry_id), find_path_cu(forms.lookup, forms.entry_id, forms.id) %></td>
+		</tr>
+		<% end %>
+	</table>
 </div>

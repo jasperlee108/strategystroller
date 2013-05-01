@@ -22,6 +22,7 @@ gem 'coffee-script-source', '~> 1.4.0'
 
 #Twitter Bootstrap
 #gem "twitter-bootstrap-rails"
+gem 'bootstrap-sass-rails'
 
 gem 'formtastic-bootstrap'
 gem 'tabulous'
@@ -56,7 +57,6 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   #this gem does not work on windows >.<
   #gem 'therubyracer', :platforms => :ruby
-  gem 'bootstrap-sass-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 

@@ -1,16 +1,38 @@
-<h2>Dimension</h2>
+<div class="navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="#">Dimension View</a>
+		</ul>
+	</div>
+</div>
+<style>
+	input {
+		width: 25em;
+	}
+	textarea {
+		width: 50em;
+	}
+</style>
 
-<body>
+<%= render "setup_alerts" %>
+<div class="well">
     <%= semantic_form_for @dimension, :url => all_dimension_path do |f| %>
         <%= f.inputs do %>
         <%= hidden_field_tag :entry_id, params[:entry_id] %>
         <%= hidden_field_tag :form_id, params[:form_id] %>
-        
-          <%= f.input :name, :input_html => { :value => @dimension.name, :readonly => true }, :label => "Name of Dimension" %>
-          
-          <%= f.input :status, :input_html => { :value => @dimension.status, :readonly => true }, :label => "Current Status" %>
-          
-        <% end %>
+	<div class="row-fluid">
+		<div class="span6">     
+          <%= f.input :name, :input_html => { :value => @dimension.name, :readonly => true, :class => "span12" }, :label => "Name of Dimension" %>
+		</div>
+		<div class="span6">          
+          <%= f.input :status, :input_html => { :value => @dimension.status, :readonly => true, :class => "span12" }, :label => "Current Status" %>
+		</div>
+	</div>          
     <% end %>
-    <%= link_to "Back", :back %>
-</body>
+	<center>
+		<div class="row-fluid">
+			<input type=button class="btn btn-danger span4" value= "<%= I18n.t :back%>" onclick= "history.back()">
+			</input>
+		</div>
+	</center>
+    <% end %>
+</div>

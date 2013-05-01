@@ -64,6 +64,7 @@ module StrategyStroller
     config.assets.initialize_on_precompile = false
     
     config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
+   
   end
   
   ## Supress deprecation warning

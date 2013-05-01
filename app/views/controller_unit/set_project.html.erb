@@ -12,102 +12,23 @@
 	<%= f.inputs do %>
 
 	<div class="row-fluid">
-		<div class="span4">
+		<div class="span8">
 			<%= f.input :name, :as => :string, :label => "Name of Project",:input_html => { :class => "span12" }  %>
 		</div>
-		<div class="span8">
+		<div class="span4">
 			<%= f.input :short_name, :as => :string, :label => "Short Name of Project",:input_html => { :class => "span12" } %>
 		</div>
 	</div>
 
 	<div class="row-fluid">
-		<div class="span4">
+		<div class="span6">
 			<%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :required => true, :label => "Associated Indicator",:input_html => { :class => "span12" }  %>
 		</div>
-		<div class="span4">
-			<%= f.input :head_id, :as => :select, :collection => User.all, :required => true, :label => "Project Manager",:input_html => { :class => "span12", :id=>"responsible"}  %>
-		</div>
-		<div class="span4">
-			<%= f.input :steer_id, :as => :select, :collection => User.all, :required => true, :label => "Steering Committee",:input_html => { :class => "span12" }  %>
-		</div>
-	</div>
-
-	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :description, :as => :text, :input_html => { :rows => 5,:class => "span12" }, :required => false, :label => "Project Description" %>
-		</div>
-		<div class="span6">
-			<%= f.input :team, :as => :text, :input_html => { :rows => 5,:class => "span12" }, :required => false, :label => "Team Member" %>
+			<%= f.input :head_id, :as => :select, :collection => User.where(:controlling_unit => false), :required => true, :label => "Project Manager",:input_html => { :class => "span12", :id=>"responsible"}  %>
 		</div>
 	</div>
-
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="span6">
-				<%= f.input :startDate, :as => :date_select, :input_html => { :class => "span4"  }, :required => true, :label => "Starting Date" %>
-			</div>
-			<div class="span6">
-				<%= f.input :endDate, :as => :date_select, :input_html => { :class => "span4"  }, :required => true, :label => "Ending Date" %>
-			</div>
-		</div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span6">
-			<div class="span6">
-				<%= f.input :inplan, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Included in Financial Plan" %>
-			</div>
-			<div class="span6">
-				<%= f.input :compensation, :as => :boolean, :checked_value => true, :unchecked_value => false, :label => "Compensation Possible" %>
-			</div>
-		</div>
-		<div class="span6">
-			<%= f.input :notes, :as => :text, :input_html => { :rows => 5,:class => "span12" }, :required => false, :label => "Notes" %>
-		</div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span2">
-			<%= f.input :duration, :as => :number, :required => true, :label => "Project Duration (months)",:input_html => { :class => "span12" }   %>
-		</div>
-		<div class="span2">
-			<%= f.input :target_manp, :as => :number, :required => true, :label => "Planned Employee Resources (days)",:input_html => { :class => "span12" }  %>
-		</div>
-		<div class="span2">
-			<%= f.input :target_cost, :as => :number, :required => true, :label => "Planned External Costs (currency)",:input_html => { :class => "span12" }  %>
-		</div>
-		<div class="span2">
-			<%= f.input :actual_manp, :as => :number, :required => true, :label => "Actual Employee Resources (days)",:input_html => { :class => "span12" } %>
-		</div>
-		<div class="span2">
-			<%= f.input :actual_cost, :as => :number, :required => true, :label => "Actual External Costs (currency)",:input_html => { :class => "span12" } %>
-		</div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span2">
-			<%= f.input :status_prog, :required => true, :as => :number, :label => "Current Status by Progress",:input_html => { :class => "span12" } %>
-		</div>
-		<div class="span2">
-			<%= f.input :status_ms, :required => true, :as => :number, :label => "Current Status by Milestone",:input_html => { :class => "span12" } %>
-		</div>
-		<div class="span2">
-			<%= f.input :status_manp, :required => true, :as => :number, :label => "Current Status by Manpower Use",:input_html => { :class => "span12" } %>
-		</div>
-		<div class="span2">
-			<%= f.input :status_cost, :required => true, :as => :number, :label => "Current Status by Cost",:input_html => { :class => "span12" } %>
-		</div>
-		<div class="span2">
-			<%= f.input :status_global, :required => true, :as => :number, :label => "Current Status Overall",:input_html => { :class => "span12" } %>
-		</div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span12">
-			<%= f.input :status_notes, :as => :text, :input_html => { :rows => 5,:class => "span12"  }, :required => false, :label => "Notes to Current Status" %>
-		</div>
-	</div>
-
+	<br />
 	<% end %>
 	<center>
 		<div class="row-fluid">

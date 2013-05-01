@@ -10,6 +10,7 @@ class ControllerUnitController < ApplicationController
   INDICATOR = 2
   PROJECT = 3
   ACTIVITY = 4
+  MAILER = ActionMailer::Base.default_url_options
 
   def clean_list(listie)
     final_list = []
@@ -27,28 +28,30 @@ class ControllerUnitController < ApplicationController
     pname_list = Project.all.map(&:name)
     pgs_list_uc = Project.all.map(&:status_global)
     len_of_list = pname_list.length
-    max_val = pgs_list_uc.max
-    axis_range = "0" + "|" + (max_val/4).to_s + "|" + (max_val/2).to_s + "|" + (3*max_val/4).to_s + "|" + max_val.to_s
-    colors = len_of_list.times.map{"%06x" % (rand * 0x1000000)}
-    pgs_list = pgs_list_uc.combination(1).to_a
+    if len_of_list>0
+      max_val = pgs_list_uc.max
+      axis_range = "0" + "|" + (max_val/4).to_s + "|" + (max_val/2).to_s + "|" + (3*max_val/4).to_s + "|" + max_val.to_s
+      colors = len_of_list.times.map{"%06x" % (rand * 0x1000000)}
+      pgs_list = pgs_list_uc.combination(1).to_a
 
-    ### Line chart still relies on canned data.
-    @line_chart = Gchart.line(:size => '600x200',:data => [300, 100, 30, 200, 100, 200, 300, 10], :axis_with_labels => 'x,r',
-            :axis_labels => ['Jan|July|Jan|July|Jan', axis_range], :title => "Projects Status Trends",)
+      ### Line chart still relies on canned data.
+      @line_chart = Gchart.line(:size => '600x200',:data => [300, 100, 30, 200, 100, 200, 300, 10], :axis_with_labels => 'x,r',
+              :axis_labels => ['Jan|July|Jan|July|Jan', axis_range], :title => "Projects Status Trends",)
 
-    spacing = (350/(len_of_list)).to_s + "," + (150/(len_of_list)).to_s
-    @bar_chart = Gchart.bar( 
-            :axis_with_labels => 'y',
-            :axis_labels => [axis_range],
-            :size => '500x500',
-            :theme => :pastel,
-            :title => "Projects Global Status",
-            :bar_width_and_spacing => spacing,
-            :legend => pname_list,
-            :data => clean_list(pgs_list_uc))
+      spacing = (350/(len_of_list)).to_s + "," + (150/(len_of_list)).to_s
+      @bar_chart = Gchart.bar( 
+              :axis_with_labels => 'y',
+              :axis_labels => [axis_range],
+              :size => '500x500',
+              :theme => :pastel,
+              :title => "Projects Global Status",
+              :bar_width_and_spacing => spacing,
+              :legend => pname_list,
+              :data => clean_list(pgs_list_uc))
 
-    @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x300',
-              :data => pgs_list_uc, :labels => pname_list )
+      @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x300',
+                :data => pgs_list_uc, :labels => pname_list )
+    end
   end
 
   def controller_panel
@@ -71,13 +74,15 @@ class ControllerUnitController < ApplicationController
     @goal = Goal.new
     if (request.post?) 
       @goal = Goal.new(params[:goal])
+      @goal.status = 0
       if @goal.save # goal saved
         form_id = save_form(GOAL, @goal.user_id, @goal.id)
         if (!form_id) # goal saved but form not saved, so delete goal
           Goal.delete(Goal.find_by_id(@goal.id))
           flash[:error] = "ERROR: Goal was not saved!"
         else # goal and form saved
-          flash[:notice] = "Goal successfully saved!"
+          provider = @goal.user.username
+          flash[:notice] = "Goal successfully saved! A form has been sent to " + provider + "."
           @user_obj = User.find_by_id(@goal.user_id)
           @form_url = encode_url(form_id, @goal.id)
           #save form_url
@@ -94,13 +99,15 @@ class ControllerUnitController < ApplicationController
     @indicator = Indicator.new
     if (request.post?) 
       @indicator = Indicator.new(params[:indicator])
+      @indicator.status = 0
       if @indicator.save # indicator saved
         form_id = save_form(INDICATOR, @indicator.user_id, @indicator.id)
         if (!form_id) # indicator saved but form not saved, so delete indicator
           Indicator.delete(Indicator.find_by_id(@indicator.id))
           flash[:error] = "ERROR: Indicator was not saved!"
         else # indicator and form saved
-          flash[:notice] = "Indicator successfully saved!"
+          provider = @indicator.user.username
+          flash[:notice] = "Indicator successfully saved! A form has been sent to " + provider + "."
           @user_obj = User.find_by_id(@indicator.user_id)
           # Need to populate a form
           @form_url = encode_url(form_id, @indicator.id)
@@ -115,15 +122,24 @@ class ControllerUnitController < ApplicationController
   
   def set_project
     @project = Project.new
-    if (request.post?) 
+    if (request.post?)
       @project = Project.new(params[:project])
+      # Put some (important) default values
+      @project.startDate = Date.current
+      @project.endDate = Date.tomorrow
+      @project.status_cost = 0
+      @project.status_global = 0
+      @project.status_manp = 0
+      @project.status_ms = 0
+      @project.status_prog = 0
       if @project.save # project saved
         form_id = save_form(PROJECT, @project.head_id, @project.id)
         if (!form_id) # project saved but form not saved, so delete project
           Project.delete(Project.find_by_id(@project.id))
           flash[:error] = "ERROR: Project was not saved!"
         else # project and form saved
-          flash[:notice] = "Project successfully saved!"
+          provider = @project.head.username
+          flash[:notice] = "Project successfully saved! A form has been sent to " + provider + "."
           @user_obj = User.find_by_id(@project.head_id)
           # Need to populate a form
           @form_url = encode_url(form_id, @project.id)
@@ -187,7 +203,7 @@ class ControllerUnitController < ApplicationController
       elsif (lookup ==  ACTIVITY)
         category = "activity"
       end
-      url = "localhost:3000/provider/" + category + "_define?entry_id=" + encoded_entry_id + "&form_id=" + encoded_form_id #temp
+      url = MAILER[:host] + "/provider/" + category + "_define?entry_id=" + encoded_entry_id + "&form_id=" + encoded_form_id #temp
     end
 
     def create_users
@@ -302,11 +318,13 @@ class ControllerUnitController < ApplicationController
   def goal_check
     @user = current_user
     @goal = Goal.new
-
     form_id = params[:form_id]
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_goal = Goal.find_by_id(entry_id)
+    @indicators = (@current_goal.indicators).collect{|i| i.short_name}
+    @indicators.empty? ? @indicators += ['None'] : nil
+    @prerequisites = (Goal.select('short_name')).select{|g| g.short_name != @current_goal.short_name}.collect{|g| g.short_name}
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_goal.update_attributes(params[:goal])
@@ -322,6 +340,8 @@ class ControllerUnitController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
+    @projects = (@current_indicator.projects).collect{|p| p.short_name}
+    @projects.empty? ? @projects += ['None'] : nil
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_indicator.update_attributes(params[:indicator])
@@ -338,25 +358,11 @@ class ControllerUnitController < ApplicationController
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
     @activities = @current_project.activities
+    @project.startDate = @current_project.startDate
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
       @current_project.update_attributes(params[:project])
       flash[:notice] = "Project review completed!"
-      redirect_to cu_review_path
-    end
-  end
-  
-  def activity_check
-    @user = current_user
-    @activity = Activity.new
-    form_id = params[:form_id]
-    entry_id = params[:entry_id]
-    @current_form = Form.find_by_id(form_id)
-    @current_activity = Activity.find_by_id(entry_id)
-    if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      @current_activity.update_attributes(params[:activity])
-      flash[:notice] = "Activity review completed!"
       redirect_to cu_review_path
     end
   end
@@ -404,14 +410,20 @@ class ControllerUnitController < ApplicationController
   
   def all_project
     @project = Project.find_by_id(params[:project_id])
+    @activities = @project.activities
   end
   
   def all_indicator
     @indicator = Indicator.find_by_id(params[:indicator_id])
+    @projects = (@indicator.projects).collect{|p| p.short_name}
+    @projects.empty? ? @projects += ['None'] : nil
   end
   
   def all_goal
     @goal = Goal.find_by_id(params[:goal_id])
+    @indicators = (@goal.indicators).collect{|i| i.short_name}
+    @indicators.empty? ? @indicators += ['None'] : nil
+    @prerequisites = (Goal.select('short_name')).select{|g| g.short_name != @goal.short_name}.collect{|g| g.short_name}
   end
   
   def all_dimension
