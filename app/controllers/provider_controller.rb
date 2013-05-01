@@ -50,14 +50,45 @@ class ProviderController < ApplicationController
     @current_form.update_attributes(:checked => true)
     @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
+      #read workingBranch's indicator.freq implementation
+      #^ has not been merged in yet
+      #the indicator's freq field is an Array
+      #:freq is going to be a String
+      #:special_freq is going to be an Array[String]
+      # freq is going to be an Array[String]
+      freq = []
+      freqStr = params[:indicator][:freq]
+      if (freqStr == "S")
+        freqArr = params[:indicator][:special_freq]
+        freqArr.each do |month|
+          if (month != "")
+            freq << month.to_i
+          end
+        end
+      elsif (freqStr == "M")
+        freq.push(1,2,3,4,5,6,7,8,9,10,11,12)
+      elsif (freqStr == "Q") #double check this?
+        freq.push(1,4,7,10)
+      elsif (freqStr == "HY")
+        freq.push(1,7)
+      elsif (freqStr == "Y")
+        freq.push(1)
+      else #this case should never be reached
+        flash[:error] = "Wrong frequency type selected"
+      end
       params[:indicator].delete(:special_freq)
-      if (params[:commit] == "Submit Indicator")
+      params[:indicator][:freq] = freq
+
+
+      if (!(@current_indicator.update_attributes(params[:indicator]))) #fields unsuccessfully updated
+        Rails.logger.info(@current_indicator.errors.messages.inspect)
+        flash[:error] = "An error occurred in submitting the form, please try again."
+      elsif (params[:commit] == "Submit Indicator")
         @current_form.update_attributes(:submitted => true)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
         flash[:notice] = "Indicator successfully saved!"
       end
-      @current_indicator.update_attributes(params[:indicator])
       redirect_to forms_composite_path
     end
   end
