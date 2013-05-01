@@ -1,13 +1,50 @@
-<script>
-document.getElementById("home").className = "";
-document.getElementById("update_page").className = "active";
-</script>
-
-<% content_for :context_menu do %>
-<li><a href="<%= url_for(:action => 'indicator_update', :controller => 'provider') %>">Indicator</a></li>
- <li><a href="<%= url_for(:action => 'project_update', :controller => 'provider') %>">Project</a></li>
-<% end %>
-
-<h2>Welcome Provider <%= @user.username %>! </h2>
-<%= link_to "Unchecked Forms", unchecked_path %><br>
-<%= link_to "Saved Forms", saved_path %><br>
+<h2>Hi Provider, <%= @user.username %>! </h2>
+<%= render "setup_alerts" %>
+<div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
+    <h4><u>Unchecked Forms</u></h4>
+    <table class="table table-hover table-bordered" style="background-color:white;">
+        <tr>
+            <th>ID</th>
+            <th>Form</th>
+            <th>Due Date</th>
+            <th>Recieved Date</th>
+        </tr>
+        <% if @forms_unchecked.empty? %>
+        <tr>
+            <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+        </tr>
+        <% end %>
+        <% @forms_unchecked.each do |forms| %>
+        <tr>
+            <td><%= forms.id %></td>
+            <td><%= link_to find_label(forms.lookup, forms.entry_id), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
+            <td><%= forms.last_reminder %></td>
+            <td>&ndash;</td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+<div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
+    <h4><u>Saved Forms</u></h4>
+    <table class="table table-hover table-bordered" style="background-color:white;">
+        <tr>
+            <th>ID</th>
+            <th>Form</th>
+            <th>Due Date</th>
+            <th>Recieved Date</th>
+        </tr>
+        <% if @forms_saved.empty? %>
+        <tr>
+            <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+        </tr>
+        <% end %>
+        <% @forms_saved.each do |forms| %>
+        <tr>
+            <td><%= forms.id %></td>
+            <td><%= link_to find_label(forms.lookup, forms.entry_id), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
+            <td><%= forms.last_reminder %></td>
+            <td>&ndash;</td>
+        </tr>
+        <% end %>
+    </table>
+</div>

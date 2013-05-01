@@ -1,10 +1,10 @@
 class ProviderController < ApplicationController
   before_filter :authenticate_user!
 
-  def encode_url(form_id)
-    encoded_id = encode_id(form_id.to_s)
-    url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
-  end
+ # def encode_url(form_id)
+  #  encoded_id = encode_id(form_id.to_s)
+   # url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
+  #end
 
   def provider_panel
     @user = current_user
@@ -16,6 +16,8 @@ class ProviderController < ApplicationController
 
   def update_page
     @user = current_user
+    @forms_unchecked = Form.where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
+    @forms_saved = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
   end
    
   def goal_define
@@ -48,6 +50,7 @@ class ProviderController < ApplicationController
     @current_form.update_attributes(:checked => true)
     @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
+      params[:indicator].delete(:special_freq)
       if (params[:commit] == "Submit Indicator")
         @current_form.update_attributes(:submitted => true)
         flash[:notice] = "Indicator successfully submitted!"
@@ -104,6 +107,23 @@ class ProviderController < ApplicationController
   
   def indicator_update
     @user = current_user
+    @indicator = Indicator.new
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_indicator = Indicator.find_by_id(entry_id)
+    @current_form.update_attributes(:checked => true)
+    @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
+    if (request.post?)
+      if (params[:commit] == "Submit Indicator")
+        @current_form.update_attributes(:submitted => true)
+        flash[:notice] = "Indicator successfully submitted!"
+      elsif (params[:commit] == "Save Indicator")
+        flash[:notice] = "Indicator successfully saved!"
+      end
+      @current_indicator.update_attributes(params[:indicator])
+      redirect_to forms_composite_path
+    end
   end
 
   def project_update
