@@ -58,8 +58,8 @@ class ProviderController < ApplicationController
       # freq is going to be an Array[String]
       freq = []
       freqStr = params[:indicator][:freq]
+      freqArr = params[:indicator][:special_freq]
       if (freqStr == "S")
-        freqArr = params[:indicator][:special_freq]
         freqArr.each do |month|
           if (month != "")
             freq << month.to_i
@@ -73,6 +73,8 @@ class ProviderController < ApplicationController
         freq.push(1,7)
       elsif (freqStr == "Y")
         freq.push(1)
+      elsif (freqArr == [""])
+        freq = []
       else #this case should never be reached
         flash[:error] = "Wrong frequency type selected"
       end
