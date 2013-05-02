@@ -48,7 +48,7 @@ class Indicator < ActiveRecord::Base
   ## Freq = string[2]
   validates :freq,
   :allow_blank => true,
-  :length => { :maximum => 2 }
+  :length => { :minimum => 0 }
 
   ## Type = string[10]
   validates :indicator_type,
