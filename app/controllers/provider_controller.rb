@@ -158,7 +158,25 @@ class ProviderController < ApplicationController
   end
 
   def project_update
+    session[:return_to] = request.url
     @user = current_user
+    @project = Project.new
+    form_id = params[:form_id]
+    entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(form_id)
+    @current_project = Project.find_by_id(entry_id)
+    @current_form.update_attributes(:checked => true)
+    @activities = @current_project.activities
+    if (request.post?)
+      if (params[:commit] == "Submit Project")
+        @current_form.update_attributes(:submitted => true)
+        flash[:notice] = "Project successfully submitted!"
+      elsif (params[:commit] == "Save Project")
+        flash[:notice] = "Project successfully saved!"
+      end
+      @current_project.update_attributes(params[:project])
+      redirect_to forms_composite_path
+    end
   end
   
   def forms_composite

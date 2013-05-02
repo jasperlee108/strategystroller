@@ -1,5 +1,5 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :actual, :description, :diff, :dir, :freq, :specialfreq, :indicator_type, :name, :notes, :source, :status, :status_notes, :target, :unit, :goal_id, :user_id, :short_name
+  attr_accessible :actual, :description, :diff, :dir, :freq, :indicator_type, :name, :notes, :source, :status, :status_notes, :target, :unit, :goal_id, :user_id, :short_name
   
   serialize :freq, Array
 
