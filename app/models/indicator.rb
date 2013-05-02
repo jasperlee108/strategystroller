@@ -1,6 +1,8 @@
 class Indicator < ActiveRecord::Base
   attr_accessible :actual, :description, :diff, :dir, :freq, :indicator_type, :name, :notes, :source, :status, :status_notes, :target, :unit, :goal_id, :user_id, :short_name
   
+  serialize :freq, Array
+
   ### ASSOCIATIONS
   ## parent
   belongs_to :goal
@@ -46,7 +48,7 @@ class Indicator < ActiveRecord::Base
   ## Freq = string[2]
   validates :freq,
   :allow_blank => true,
-  :length => { :maximum => 2 }
+  :length => { :minimum => 0 }
 
   ## Type = string[10]
   validates :indicator_type,

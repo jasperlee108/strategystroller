@@ -10,7 +10,7 @@ describe Indicator do
     :description => "Beschreibung der Messgrobe",
     :source => "Quelle",
     :unit => "Einheit",
-    :freq => "hy",
+    :freq => [1,2,3],
     :indicator_type => "average",
     :dir => "more is better",
     :actual => 5.5,
@@ -113,18 +113,10 @@ describe Indicator do
 
   ## Frequency can be empty
   it "can have empty Frequency" do
-    freq = ""
+    freq = []
     indicator = generate()
     indicator.freq = freq
     assert(indicator.save, "It won't save on empty Frequency")
-  end
-  
-  ## Frequency max = 2 = { 'm', 'q', 'hy', 'y' }
-  it "should not have Frequency longer than 2 characters" do
-    freq = (0...3).map{ ( 65+rand(26) ).chr }.join
-    indicator = generate()
-    indicator.freq = freq
-    assert(!indicator.save, "It saves on Frequency longer than 2 characters")
   end
 
   ### TYPE

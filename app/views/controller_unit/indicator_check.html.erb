@@ -59,7 +59,12 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :freq,:input_html => {:class => "span12" }, :required => true, :as => :select, :collection => ["M", "Q", "HY", "Y"], :selected => @current_indicator.freq, :label => "Frequency of Acquisition" %>
+			<div id="freq" class="form-inline">
+			<%= f.input :freq, :input_html => { :value => @current_indicator.freq}, :required => true, :as => :radio, :collection => ["M", "Q", "HY", "Y", "S"], :label => "Frequency of Acquisition" %>
+				<div id="specialfreq">
+				<%= f.input :special_freq, :input_html => { :value => @current_indicator.special_freq}, :required => true, :as => :check_boxes, :collection => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :label => "Frequency in Months" %>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -92,3 +97,22 @@
 	</center>
 	<% end %>
 </div>
+
+<script>
+/*if ($('#freq').val() == "S") {
+	str = "#indicator_freq_s";
+}
+$(str).prop("checked", true)*/
+
+$("#specialfreq").hide();
+$('input[name="indicator[freq]"]').click(function(event)
+	{
+		if ($('#indicator_freq_s').is(":checked")) {
+			$('#specialfreq').show();
+		} else {
+			$('#specialfreq').hide();
+		}
+	});
+
+
+</script>
