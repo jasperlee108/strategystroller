@@ -42,3 +42,38 @@ Dimension.create(:name =>"customer", :status => 0.0)
 Dimension.create(:name =>"internal process", :status => 0.0)
 Dimension.create(:name =>"learning & growth", :status => 0.0)
 
+Goal.create(
+    :name => "Goal0",
+    :need => "Call for action",
+    :justification => "Justification of specific goal",
+    :focus => "Strategic approach",
+    :notes => "Notes",
+    :status => 0.01,
+    :dimension_id => 1,
+    :user_id => 2,
+    :prereq => "A Different Goal's Name",
+    :short_name => "G0"
+)
+
+Indicator.create(
+    :name => "Indicator0",
+    :description => "Beschreibung der Messgrobe",
+    :source => "Quelle",
+    :unit => "Einheit",
+    :freq => [3,6,9,12],
+    :year => 2013,
+    :reported_values => [0.2, 0.65],
+    :indicator_type => "average",
+    :prognosis => 0.6543,
+    :dir => "more is better",
+    :actual => 0.55,
+    :target => 0.105,
+    :notes => "Anmerkungen",
+    :diff => 0.05,
+    :status => 0.755,
+    :contributing_projects_status => 0.693,
+    :status_notes => "Anmerkungen zum Status",
+    :goal_id => 1,
+    :user_id => 2,
+    :short_name => "I0"
+)

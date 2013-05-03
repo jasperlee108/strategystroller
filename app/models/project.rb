@@ -62,7 +62,8 @@ class Project < ActiveRecord::Base
   :allow_blank => true
 
   ## Compensation = true / false = yes / no
-  validates :compensation, :inclusion => { :in => [true, false] }
+  validates :compensation, :inclusion => { :in => [true, false] },
+            :allow_blank => true
 
   ## target_duration = Integer
   ## 0 <= target_duration

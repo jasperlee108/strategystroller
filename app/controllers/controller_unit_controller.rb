@@ -134,12 +134,20 @@ class ControllerUnitController < ApplicationController
       # Put some (important) default values
       @project.startDate = Date.current
       @project.endDate = Date.tomorrow
+      @project.actual_duration = 0
+      @project.target_duration = 1
       @project.status_cost = 0
       @project.status_global = 0
       @project.status_manp = 0
-      @project.status_ms = 0
+      @project.update_status_ms #will set status_ms to default value.
       @project.status_prog = 0
-      if @project.save # project saved
+      @project.target_cost = 0
+      @project.actual_cost = 0
+      @project.target_manp = 0
+      @project.actual_manp = 0
+      @project.yearly_target_manp = {}
+      @project.yearly_target_cost = {}
+      if @project.save! # project saved
         form_id = save_form(PROJECT, @project.head_id, @project.id)
         if (!form_id) # project saved but form not saved, so delete project
           Project.delete(Project.find_by_id(@project.id))
@@ -399,6 +407,7 @@ class ControllerUnitController < ApplicationController
     @project.startDate = @current_project.startDate
     if (request.post?)
       @current_form.update_attributes(:reviewed => true)
+      params[:project][:indicator_id] = params[:project][:indicator_id][1] #TODO replace when multiple relations work. Now is just first non-empty element in array.
       @current_project.update_attributes(params[:project])
       flash[:notice] = "Project review completed!"
       redirect_to cu_review_path

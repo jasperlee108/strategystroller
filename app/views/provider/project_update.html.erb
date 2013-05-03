@@ -5,7 +5,7 @@
     </div>
 </div>
 <style>
-    <
+
     style > input {
         width: 25em;
     }
@@ -79,9 +79,11 @@
                 </tr>
                 <% end %>
             </table>
+         </div>
          <div class="span3">
             <%= f.input :status_notes, :as => :text, :input_html => { :value => @current_project.status_notes, :rows => 2 }, :label => "Status Notes" %>
         </div>
+      </div>
 
     <br />
     <% end %>
