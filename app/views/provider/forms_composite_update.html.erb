@@ -17,7 +17,7 @@
         <% @indicator_forms.each do |form| %>
         <tr>
             <td><%= form.id %></td>
-            <td><%= link_to find_label(form.lookup, form.entry_id), find_path(form.lookup, form.entry_id, form.id) %></td>
+            <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
             <td><%= form.last_reminder %></td>
             <td>&ndash;</td>
         </tr>
@@ -41,7 +41,7 @@
         <% @proj_forms.each do |form| %>
         <tr>
             <td><%= form.id %></td>
-            <td><%= link_to find_label(form.lookup, form.entry_id), find_path(form.lookup, form.entry_id, form.id) %></td>
+            <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
             <td><%= form.last_reminder %></td>
             <td>&ndash;</td>
         </tr>
