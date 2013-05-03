@@ -1,5 +1,6 @@
 class Form < ActiveRecord::Base
-  attr_accessible :checked, :lookup, :reviewed, :user_id, :submitted, :last_reminder, :entry_id
+  attr_accessible :checked, :lookup, :reviewed, :user_id, :submitted, :last_reminder, 
+                  :entry_id, :updated_at
   
   ## INFO
   GOAL = 1

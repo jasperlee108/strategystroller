@@ -1,13 +1,22 @@
-<h1>Create Users</h1>
-<!-- Need to specify company position and general position (CU/prov) when entering a user-->
-<%= semantic_form_for @application do |f| %>
-    <%= f.inputs do %>
-       <%= f.semantic_fields_for :users do |user| %>
-             <%= render 'create_user_fields', :f => user %>
-        <% end %>
-        <%= link_to_add_association 'Add User', f, :users, :partial => 'create_user_fields', :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
-
-    <% end %>
-    <%= f.action :submit, :label => "Create User(s)" %>
-<% end %>
-
+<div class="navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="#">Create Users</a>
+		</ul>
+	</div>
+</div>
+<div class="well">
+		<center>
+		<%= render "setup_alerts" %>
+		<!-- Need to specify company position and general position (CU/prov) when entering a user-->
+		<%= semantic_form_for @application do |f| %>
+		<%= f.inputs do %>
+		<%= f.semantic_fields_for :users do |user| %>
+		<%= render 'create_user_fields', :f => user %>
+		<% end %>
+		<%= link_to_add_association 'Add User', f, :users, :partial => 'create_user_fields', :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
+		<% end %>
+		<br />
+		<%= f.action :submit, :label => "Create User(s)" %>
+		<% end %>
+		</center>
+</div>

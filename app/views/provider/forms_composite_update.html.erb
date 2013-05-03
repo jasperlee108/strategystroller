@@ -17,7 +17,7 @@
         <% @indicator_forms.each do |form| %>
         <tr>
             <td><%= form.id %></td>
-            <td><%= link_to find_label(form.lookup, form.entry_id), find_path(form.lookup, form.entry_id, form.id) %></td>
+            <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
             <td><%= form.last_reminder %></td>
             <td>&ndash;</td>
         </tr>
@@ -33,15 +33,15 @@
             <th>Due Date</th>
             <th>Recieved Date</th>
         </tr>
-        <% if @project_forms.empty? %>
+        <% if @proj_forms.empty? %>
         <tr>
             <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
         </tr>
         <% end %>
-        <% @project_forms.each do |form| %>
+        <% @proj_forms.each do |form| %>
         <tr>
             <td><%= form.id %></td>
-            <td><%= link_to find_label(form.lookup, form.entry_id), find_path(form.lookup, form.entry_id, form.id) %></td>
+            <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
             <td><%= form.last_reminder %></td>
             <td>&ndash;</td>
         </tr>
