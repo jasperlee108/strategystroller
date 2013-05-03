@@ -49,7 +49,7 @@ class ControllerUnitController < ApplicationController
               :legend => pname_list,
               :data => clean_list(pgs_list_uc))
 
-      @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x300',
+      @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x200',
                 :data => pgs_list_uc, :labels => pname_list )
     end
   end
