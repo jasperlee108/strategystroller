@@ -17,7 +17,18 @@ module ProviderHelper
       return activity_define_path(:entry_id => entry_id, :form_id => form_id)
     else
       ## ERROR: Should not reach here!
-      return provider_panel_path
+      return forms_composite_path
+    end
+  end
+
+  def find_update_path(table_id, entry_id, form_id)
+    if table_id == INDICATOR
+      return indicator_update_path(:entry_id => entry_id, :form_id => form_id)
+    elsif table_id == PROJECT
+      return project_update_path(:entry_id => entry_id, :form_id => form_id)
+    else
+      ## ERROR: Should not reach here!
+      return forms_composite_update_path
     end
   end
   

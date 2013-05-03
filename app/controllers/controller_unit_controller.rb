@@ -340,6 +340,8 @@ class ControllerUnitController < ApplicationController
     
 
     if (request.post?)
+      params[:indicator].delete(:special_freq)
+      params[:indicator][:freq] = freq
       @current_form.update_attributes(:reviewed => true)
       @current_indicator.update_attributes(params[:indicator])
       flash[:notice] = "Indicator review completed!"
