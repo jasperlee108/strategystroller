@@ -1,5 +1,6 @@
 piglatin:
-  hello: "ello Hay"
+  ndash: "– ay"
+  times: "× ay"
   email_address: "ailEmay ess Addray"
   username: "ername Usay"
   business_code: "uisnessBay ode Cay"
@@ -31,3 +32,210 @@ piglatin:
   welcome: "elcome Way"
   send_me_reset_password_instructions: "endSay me esetray asswordpay instructions way"
   someone_requested_a_link_to_change_password: "omeoneSay ashay equestedray a inklay to angechay yourway assword.pay ouYay ancay do isthay oughthray the inklay elow. bay"
+  footer_string: "FOOTERay opy;&cay ategyStray ollerStray 2013 ay"
+  forms: "orms Fay"
+  reports: "eports Ray"
+  setup: "etup Say"
+  edit_users: "itEday ers Usay"
+  activites: "ivities Actay"
+  controlling_unit: "ontrollingCay it Unay"
+  back: "ack Bay"
+  form_template: "ormFay emplate Tay"
+  provider:
+    activity_define:
+      activity_form: "ivityActay orm Fay"
+    forms_composite:
+      hi_provider: "Hi ovider,Pray %{user_username} "
+      unchecked: "eckedUnchay orms Fay"
+      id: "ID ay"
+      form: "orm Fay"
+      due_date: "ueDay ate Day"
+      recieved_date: "ecievedRay ate Day"
+      saved_forms: "avedSay orms Fay"
+      id_1: "ID ay"
+      form_1: "orm Fay"
+      due_date_1: "ueDay ate Day"
+      recieved_date_1: "ecievedRay ate Day"
+    update_page:
+      indicator: "icator Inday"
+      project: "oject Pray"
+      welcome: "elcomeWay oviderPray %{user_username} "
+      unchecked_1: "eckedUnchay orms Fay"
+      saved_forms_1: "avedSay orms Fay"
+    provider_panel:
+      welcome_1: "elcomeWay oviderPray %{user_username} "
+      unchecked_2: "eckedUnchay orms Fay"
+      saved_forms_2: "avedSay orms Fay"
+      create_new: "eateCray ewNay ivity Actay"
+    project_define:
+      project_form: "ojectPray orm Fay"
+      activity_name: "ivityActay ame Nay"
+      current: "urrentCay erallOvay ogress Pray"
+      create_new_1: "eateCray ewNay ivity Actay"
+    indicator_define:
+      indicator_form: "icatorInday orm Fay"
+    goal_define:
+      goal_form: "oalGay orm Fay"
+    define_page:
+      goal: "oal Gay"
+      indicator_1: "icator Inday"
+      activity: "ivity Actay"
+      welcome_2: "elcomeWay oviderPray %{user_username} "
+      unchecked_3: "eckedUnchay orms Fay"
+      saved_forms_3: "avedSay orms Fay"
+  devise:
+    mailer:
+      reset_password_instructions:
+        hello: "elloHay %{resource_email} "
+        someone_has: "omeoneSay ashay equestedray a inklay to angechay yourway assword.pay ouYay ancay do isthay oughthray the inklay elow. bay"
+        change_my: "angeChay my assword pay"
+        if_you_didn_t: "If youway idn'tday equestray is,thay easeplay ignoreway isthay email. way"
+        your_password: "ourYay asswordpay on'tway angechay untilway youway accessway the inklay aboveway andway eatecray a ewnay one. way"
+      confirmation_instructions:
+        welcome_3: "elcomeWay %{email} "
+        your_temporary: "ourYay emporarytay asswordpay is %{resource_temp}  easePlay avigatenay to editway egistrationray to angechay isthay asswordpay afterway onfirmingcay yourway account. way"
+        you_can: "ouYay ancay onfirmcay yourway accountway emailway oughthray the inklay elowbay"
+        confirm_my: "onfirmCay my account way"
+      unlock_instructions:
+        hello_1: "elloHay %{resource_email} "
+        your_account: "ourYay accountway ashay eenbay ockedlay ueday to an excessiveway umbernay of unsuccessfulway ignsay in attempts. way"
+        click_the_link: "ickClay the inklay elowbay to unlockway yourway accountway"
+        unlock_my: "ockUnlay my account way"
+    registrations:
+      edit:
+        cancel_my: "ancelCay my account way"
+        unhappy: "appy?Unhay %{button_to}. "
+        back: "ack Bay"
+    menu:
+      registration_items:
+        edit: "itEday egistration ray"
+        register: "egister Ray"
+      login_items:
+        logout: "ogout Lay"
+        login: "ogin Lay"
+        admin: "in Admay"
+  controller_unit:
+    all_data:
+      data_view: "ataDay iew Vay"
+      graphs: "aphs Gray"
+      hi_controlling: "Hi ontrollingCay it,Unay %{user_username} "
+      here_is_all: "ereHay is allway the availableway ataday in the atabase. day"
+      dimension: "imension Day"
+      goal_1: "oal Gay"
+      indicator_2: "icator Inday"
+      project_1: "oject Pray"
+      activity_1: "ivity Actay"
+    goal_check:
+      goal_form_1: "oalGay orm Fay"
+    indicator_check:
+      indicator_form_1: "icatorInday orm Fay"
+    all_goal:
+      goal_form_2: "oalGay orm Fay"
+    all_indicator:
+      indicator_view: "icatorInday iew Vay"
+    set_goal:
+      generating_new: "eneratingGay ewNay oal Gay"
+    view_activity:
+      activity_2: "ivity Actay"
+      back_1: "ack Bay"
+    cu_review:
+      generate_new: "enerateGay ewNay orm Fay"
+      goal_2: "oal Gay"
+      indicator_3: "icator Inday"
+      project_2: "oject Pray"
+      generate: "enerate Gay"
+      hi_controlling_1: "Hi ontrollingCay it,Unay %{user_username} "
+      forms_to: "ormsFay to eview Ray"
+      id_2: "ID ay"
+      form_2: "orm Fay"
+    projects_list:
+      projects: "ojects Pray"
+      projects_1: "ojects Pray"
+      owner: "er Ownay"
+      status: "atus Stay"
+    edit_users:
+      manage_users: "anageMay ers Usay"
+    indicators_list:
+      indicators: "icators Inday"
+      indicators_1: "icators Inday"
+      owner_1: "er Ownay"
+      status_1: "atus Stay"
+    delete_users:
+      delete_users: "eleteDay ers Usay"
+    all_dimension:
+      dimension_view: "imensionDay iew Vay"
+    set_project:
+      generating_new_1: "eneratingGay ewNay oject Pray"
+    activity_list:
+      activity_list: "ivityActay ist Lay"
+      activity_id: "ivityActay ID ay"
+      link_to_the: "inkLay to the ivity Actay"
+    graph_panel:
+      data_view_1: "ataDay iew Vay"
+      graphs_1: "aphs Gray"
+      graphical: "aphicalGray anelPay orfay"
+    create_users:
+      create_users: "eateCray ers Usay"
+    controller_panel:
+      welcome_4: "elcomeWay ontrollerCay itUnay %{user_username} "
+      input: "utInpay amework Fray"
+      create_users_1: "eateCray ers Usay"
+      remove_users: "emoveRay ers Usay"
+      cu_review_page: "CU eviewRay age Pay"
+      view_activity: "iewVay ivityActay ist Lay"
+      view_all_data: "iewVay Allay ataDay in atabase Day"
+    all_project:
+      project_view: "ojectPray iew Vay"
+      activity_3: "ivity Actay"
+      current_1: "urrentCay erallOvay ogress Pray"
+    setup_system:
+      system_setup: "ystemSay etup Say"
+    set_indicator:
+      generating_new_2: "eneratingGay ewNay icator Inday"
+    project_check:
+      project_form_1: "ojectPray orm Fay"
+      activity_4: "ivity Actay"
+      current_2: "urrentCay erallOvay ogress Pray"
+    goals_list:
+      goals: "oals Gay"
+      goal_3: "oal Gay"
+      owner_2: "er Ownay"
+      status_2: "atus Stay"
+    remove_users:
+      remove_users_1: "emoveRay ers Usay"
+    all_activity:
+      activity_view: "ivityActay iew Vay"
+  admin:
+    admin_settings:
+      what_to_put: "atWhay to utpay ere? hay"
+    admin_panel:
+      admin_panel: "inAdmay anelPay e(Usay ailsray eneratedgay interface?) way"
+    admin_setup:
+      admin_setup: "inAdmay etup Say"
+    applications:
+      form:
+        what_to_put_1: "atWhay to utpay ere? hay"
+  layouts:
+    application:
+      strategy: "ategyStray oller Stray"
+      strategy_1: "ategyStray oller Stray"
+      user_settings: "erUsay ettings Say"
+    sidebar:
+      navigation: "avigation Nay"
+      home: "ome Hay"
+      admin_1: "in Admay"
+      new_system: "ewNay ystem Say"
+      yearly_review: "earlyYay eview Ray"
+      quality_check: "ualityQay eck Chay"
+      monthly_report: "onthlyMay eport Ray"
+      quarterly: "uarterlyQay eport Ray"
+      context_menu: "ontextCay enu May"
+    provider:
+      strategy_2: "ategyStray oller Stray"
+      strategy_3: "ategyStray oller Stray"
+      user_settings: "erUsay ettings Say"
+  home:
+    index:
+      home_index: "ome#index Hay"
+      find_me_in_app: "indFay me in app/views/home/index.html.erb way"
+      i_am_just_a: "I am ustjay a emplate,tay easeplay ignoreway me ###\n###ay ouYay illway be edirectedray appropriately,way ortlyshay ###\n###ay ouYay ouldshay otnay be eeingsay isthay agepay ### ay"
