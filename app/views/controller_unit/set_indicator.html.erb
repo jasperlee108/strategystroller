@@ -12,6 +12,16 @@
 	<%= semantic_form_for @indicator do |f| %>
 	<%= f.inputs do %>
 	
+			<%= f.input :unit, :as => :hidden, :value => "Insert Unit" %>
+			<%= f.input :actual, :as => :hidden, :value => 0 %>
+			<%= f.input :description, :as => :hidden, :value => "Insert Description of Indicator" %>
+			<%= f.input :source, :as => :hidden, :value => "Insert Source" %>
+			<%= f.input :indicator_type, :as => :hidden, :value => "Average" %>
+			<%= f.input :dir, :as => :hidden, :value => "More is Better" %>
+			<%= f.input :target, :as => :hidden, :value => 0 %>
+			<%= f.input :diff, :as => :hidden, :value => 0 %>
+			<%= f.input :status, :as => :hidden, :value => 0 %>
+	
 	<div class="row-fluid">
 		<div class="span8">
 			<%= f.input :name, :required => true, :as => :string, :label => "Name of Indicator",:input_html => { :class => "span12" }  %>
