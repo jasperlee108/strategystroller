@@ -22,26 +22,16 @@ StrategyStroller::Application.routes.draw do
 
 
   ## FOR MAIN PANELS
-  match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'
-  match "controller_unit/controller_panel" => 'controller_unit#controller_panel', :as => 'controller_panel'
-  match "provider/provider_panel" => 'provider#provider_panel', :as => 'provider_panel'
-  match "provider/provider_panel/define" => 'provider#define_page', :as => 'provider_panel_define'
-  match "provider/provider_panel/update" => 'provider#update_page', :as => 'provider_panel_update'
+  
 
   ## FOR OTHER LINKS / PATHS
   
   # Controller
-  match "controller_unit/input_framework" => "controller_unit#goals_list", :as => "input_framework"
-  match "controller_unit/input_framework/goals_list" => "controller_unit#goals_list", :as => "goals_list"
-  match "controller_unit/input_framework/indicators_list" => "controller_unit#indicators_list", :as => "indicators_list"
-  match "controller_unit/input_framework/projects_list" => "controller_unit#projects_list", :as => "projects_list"
   match "controller_unit/input_framework/goals" => "controller_unit#set_goal", :as => "goals"
   match "controller_unit/input_framework/indicators" => "controller_unit#set_indicator", :as => "indicators"
   match "controller_unit/input_framework/projects" => "controller_unit#set_project", :as => "projects"
   match "controller_unit/cu_review" => "controller_unit#cu_review", :as => "cu_review"
   match "controller_unit/graph_panel" => "controller_unit#graph_panel", :as => "graph_panel"
-  match "controller_unit/activity_list" => "controller_unit#activity_list", :as => "activity_list"
-  match "controller_unit/view_activity" => "controller_unit#view_activity", :as => "activity"  
   match "controller_unit/goal_check" => "controller_unit#goal_check", :as => 'goal_check'
   match "controller_unit/indicator_check" => "controller_unit#indicator_check", :as => 'indicator_check'
   match "controller_unit/project_check" => "controller_unit#project_check", :as => 'project_check'

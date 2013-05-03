@@ -53,22 +53,6 @@ class ControllerUnitController < ApplicationController
                 :data => pgs_list_uc, :labels => pname_list )
     end
   end
-
-  def controller_panel
-    @user = current_user
-  end
-  
-  def goals_list
-    @goals = Goal.all
-  end
-  
-  def indicators_list
-    @indicators = Indicator.all
-  end
-  
-  def projects_list
-    @projects = Project.all
-  end
   
   def set_goal
     @goal = Goal.new
@@ -305,14 +289,6 @@ class ControllerUnitController < ApplicationController
   def cu_review
     @user = current_user
     @forms = Form.where(:checked => true, :reviewed => false, :submitted => true)
-  end
-
-  def activity_list
-    @activities = Activity.all
-  end
-
-  def view_activity
-    @activity = Activity.find_by_id(params[:activity_id])
   end
 
   def goal_check

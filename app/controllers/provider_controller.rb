@@ -7,21 +7,6 @@ class ProviderController < ApplicationController
   #  encoded_id = encode_id(form_id.to_s)
    # url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
   #end
-
-
-  def provider_panel
-    @user = current_user
-  end
-
-  def define_page
-    @user = current_user
-  end
-
-  def update_page
-    @user = current_user
-    @forms_unchecked = Form.where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
-    @forms_saved = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
-  end
    
   def goal_define
     @user = current_user
