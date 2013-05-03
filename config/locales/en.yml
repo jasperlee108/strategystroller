@@ -40,6 +40,7 @@ en:
   activites: "Activities"
   controlling_unit: "Controlling Unit"
   back: "Back"
+  form_template: "Form Template"
   provider:
     activity_define:
       activity_form: "Activity Form"
@@ -214,9 +215,7 @@ en:
     applications:
       form:
         what_to_put_1: "What to put here?"
-  forms:
-    form_template:
-      form_template: "Form Template"
+      
 
   layouts:
     application:
@@ -236,7 +235,7 @@ en:
     provider:
       strategy_2: "Strategy Stroller"
       strategy_3: "Strategy Stroller"
-      user_setting: "User Settings
+      user_settings: "User Settings"
   home:
     index:
       home_index: "Home#index"
