@@ -41,6 +41,7 @@ StrategyStroller::Application.routes.draw do
   match "controller_unit/all_indicator" => "controller_unit#all_indicator", :as => 'all_indicator'
   match "controller_unit/all_goal" => "controller_unit#all_goal", :as => 'all_goal'
   match "controller_unit/all_dimension" => "controller_unit#all_dimension", :as => 'all_dimension'
+  match "controller_unit/all_form" => "controller_unit#all_form", :as => 'all_form'
 
   # Provider
   match "provider/goal_define" => "provider#goal_define", :as => 'goal_define'

@@ -39,20 +39,7 @@
 					<% if current_user.controlling_unit == true %>
 					<!-- <div id ="cu_nav">-->
 					<ul class = "nav">
-						<% if current_page? (cu_review_path) %>
-							<li id ="navbar_forms" class="active">
-						<% else %>
-							<li id ="navbar_forms">
-						<% end %>
-							<%= link_to (t :forms), cu_review_path %>
-						</li>
-						<% if current_page? (all_data_path) or current_page? (graph_panel_path) %>
-							<li id="navbar_reports" class="active">
-						<% else %>
-							<li id="navbar_reports">
-						<% end %>
-							<%= link_to (t :reports), all_data_path %>
-						</li>
+						
 						<% if current_page? (setup_system_path) %>
 							<li id= "navbar_setup" class="active">
 						<% else %>
@@ -60,6 +47,7 @@
 						<% end %>
 							<%= link_to (t :setup), setup_system_path %>
 						</li>
+						
 						<% if current_page? (create_users_path) %>
 							<li id= "navbar_create_users" class="active">
 						<% else %>
@@ -67,6 +55,31 @@
 						<% end %>
 							<%= link_to (t :create_users), create_users_path %>
 						</li>
+					
+						<% if current_page? (all_form_path) %>
+							<li id ="navbar_framework" class="active">
+						<% else %>
+							<li id ="navbar_framework">
+						<% end %>
+							<%= link_to (t :framework), all_form_path %>
+						</li>
+						
+						<% if current_page? (cu_review_path) %>
+							<li id ="navbar_review" class="active">
+						<% else %>
+							<li id ="navbar_review">
+						<% end %>
+							<%= link_to (t :review), cu_review_path %>
+						</li>
+						
+						<% if current_page? (all_data_path) or current_page? (graph_panel_path) %>
+							<li id="navbar_report" class="active">
+						<% else %>
+							<li id="navbar_report">
+						<% end %>
+							<%= link_to (t :report), all_data_path %>
+						</li>
+						
 					</ul>
 
 					<!--     </div>-->

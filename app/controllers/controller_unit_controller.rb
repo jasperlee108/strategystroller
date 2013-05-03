@@ -1,7 +1,7 @@
 class ControllerUnitController < ApplicationController
   require 'base64' 
   before_filter :authenticate_user!
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :sort_column2
 
   GOAL = 1
   INDICATOR = 2
@@ -427,6 +427,11 @@ class ControllerUnitController < ApplicationController
     @dimension = Dimension.find_by_id(params[:dimension_id])
   end
   
+  def all_form
+    @user = current_user
+    @forms = Form.order(sort_column2 + " " + sort_direction)
+  end
+  
   ### THE FOLLOWING ARE JUST HELPER METHODS ###
   
   private # Note at the top of this file
@@ -436,6 +441,13 @@ class ControllerUnitController < ApplicationController
   # modified accordingly
   def sort_column
     Form.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+
+  # Code is taken from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  # modified accordingly
+  def sort_column2
+    Form.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
   
   # Code is taken as is from:

@@ -4,7 +4,12 @@ class HomeController < ApplicationController
   def index
     @user = current_user
     if @user.controlling_unit
-      redirect_to cu_review_path
+      app = Application.all.count
+      if app > 0
+        redirect_to create_users_path
+      else
+        redirect_to setup_system_path
+      end
     else
       redirect_to forms_composite_path
     end
