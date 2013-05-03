@@ -1,5 +1,6 @@
 class ProviderController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :sort_column, :sort_direction
   
   MAILER = ActionMailer::Base.default_url_options
 
@@ -171,9 +172,25 @@ class ProviderController < ApplicationController
   
   def forms_composite
     @user = current_user
-    @forms_unchecked = Form.where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
-    @forms_saved = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
+    @forms_unchecked = Form.order(sort_column + " " + sort_direction).where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
+    @forms_saved = Form.order(sort_column + " " + sort_direction).where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
   end
+
+  ### THE FOLLOWING ARE JUST HELPER METHODS ###
   
+  private # Note at the top of this file
+  
+  # Code is taken from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  # modified accordingly
+  def sort_column
+    Form.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end 
+  
+  # Code is taken as is from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
   
 end

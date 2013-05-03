@@ -43,9 +43,9 @@
 			<td><%= find_truth_value(forms.reviewed) %></td>
 			<td><%= find_form_type(forms.lookup) %></td>
 			<% if forms.checked and forms.submitted and !forms.reviewed %>
-				<td><%= link_to find_label_cu(forms.lookup, forms.entry_id), find_path_cu(forms.lookup, forms.entry_id, forms.id) %></td>
+				<td><%= link_to find_label(forms.lookup, forms.entry_id), find_path_cu(forms.lookup, forms.entry_id, forms.id) %></td>
 			<% else %>
-				<td><%= find_label_cu(forms.lookup, forms.entry_id) %></td>
+				<td><%= find_label(forms.lookup, forms.entry_id) %></td>
 			<% end %>
 		</tr>
 		<% end %>
