@@ -1,16 +1,61 @@
 en:
-  controller_unit:
-    all_form:
-      generate_new: "Generate New Form"
-      goal: "Goal"
-      indicator: "Indicator"
-      project: "Project"
-      generate: "Generate"
-      all_available: "All Available Forms"
-      form_name: "Form Name"
-     
+  ndash: "–"
+  times: "×"
+  email_address: "Email Address"
+  username: "Username"
+  business_code: "Buisness Code"
+  password: "Password"
+  confirm_password: "Confirm Password"
+  please_sign_in: "Please Sign In"
+  cancel: "Cancel"
+  sign_in: "Sign In"
+  forgot_password: "Forgot Password?"
+  sign_up: "Sign Up"
+  remember_me: "Remember Me"
+  change_password: "Change Password"
+  new_password: "New password"
+  confirm_new_password: "Confirm New Password"
+  resend_unlock_instructions: "Resend Unlock Instructions"
+  didnt_recieve_confirmation_instructions: "Didn't receive confirmation instructions?"
+  didnt_recieve_unlock_instructions: "Didn't receive unlock instructions?"
+  sign_in_with: "Sign in with"
+  currently_awaiting_confirmation_for: "Currently awaiting confirmation for: "
+  edit: "Edit"
+  password_unchanged: "New Password (unchanged)"
+  confirm_password_unchanged: "Confirm New Password (unchanged)"
+  current_password: "Current Password"
+  resend_confirmation_instructions: "Resend Confirmation Instructions"
+  change_my_password: "Change My Password"
+  update: "Update"
+  delete_my_account: "Delete My Account"
+  are_you_sure: "Are You Sure?"
+  welcome: "Welcome"
+  send_me_reset_password_instructions: "Send me reset password instructions"
+  someone_requested_a_link_to_change_password: "Someone has requested a link to change your password. You can do this through the link below."
+  footer_string: "FOOTER &copy; Strategy Stroller 2013"
+  forms: "Forms"
+  reports: "Reports"
+  setup: "Setup"
+  edit_users: "Edit Users"
+  activites: "Activities"
+  controlling_unit: "Controlling Unit"
+  back: "Back"
+  form_template: "Form Template"
   provider:
+    activity_define:
+      activity_form: "Activity Form"
     forms_composite:
+      hi_provider: "Hi Provider, %{user_username}"
+      unchecked: "Unchecked Forms"
+      id: "ID"
+      form: "Form"
+      due_date: "Due Date"
+      recieved_date: "Recieved Date"
+      saved_forms: "Saved Forms"
+      id_1: "ID"
+      form_1: "Form"
+      due_date_1: "Due Date"
+      recieved_date_1: "Recieved Date"
       hi_provider: "Hi Provider, %{user_username}"
       unchecked: "Unchecked Forms"
       form_name_2: "Form Name"
@@ -22,11 +67,212 @@ en:
       form_name_4: "Form Name"
       saved_forms_1: "Saved Forms"
       form_name_5: "Form Name"
-    project_update:
-      project_form: "Project Form"
+        project_update:
+    project_form: "Project Form"
       activity: "Activity"
       target: "Target Manpower"
       current: "Current Manpower"
       target_cost: "Target Cost"
       current_cost: "Current Cost"
       status: "Status"
+    update_page:
+      indicator: "Indicator"
+      project: "Project"
+      welcome: "Welcome Provider %{user_username}"
+      unchecked_1: "Unchecked Forms"
+      saved_forms_1: "Saved Forms"
+    provider_panel:
+      welcome_1: "Welcome Provider %{user_username}"
+      unchecked_2: "Unchecked Forms"
+      saved_forms_2: "Saved Forms"
+      create_new: "Create New Activity"
+    project_define:
+      project_form: "Project Form"
+      activity_name: "Activity Name"
+      current: "Current Overall Progress"
+      create_new_1: "Create New Activity"
+    indicator_define:
+      indicator_form: "Indicator Form"
+    goal_define:
+      goal_form: "Goal Form"
+    define_page:
+      goal: "Goal"
+      indicator_1: "Indicator"
+      activity: "Activity"
+      welcome_2: "Welcome Provider %{user_username}"
+      unchecked_3: "Unchecked Forms"
+      saved_forms_3: "Saved Forms"
+  devise:
+    mailer:
+      reset_password_instructions:
+        hello: "Hello %{resource_email}"
+        someone_has: "Someone has requested a link to change your password. You can do this through the link below."
+        change_my: "Change my password"
+        if_you_didn_t: "If you didn't request this, please ignore this email."
+        your_password: "Your password won't change until you access the link above and create a new one."
+      confirmation_instructions:
+        welcome_3: "Welcome %{email}"
+        your_temporary: "Your temporary password is %{resource_temp}  Please navigate to edit registration to change this password after confirming your account."
+        you_can: "You can confirm your account email through the link below:"
+        confirm_my: "Confirm my account"
+      unlock_instructions:
+        hello_1: "Hello %{resource_email}"
+        your_account: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
+        click_the_link: "Click the link below to unlock your account:"
+        unlock_my: "Unlock my account"
+    registrations:
+      edit:
+        cancel_my: "Cancel my account"
+        unhappy: "Unhappy? %{button_to}."
+        back: "Back"
+    menu:
+      registration_items:
+        edit: "Edit registration"
+        register: "Register"
+      login_items:
+        logout: "Logout"
+        login: "Login"
+        admin: "Admin"
+  controller_unit:
+    all_form:
+      generate_new: "Generate New Form"
+      goal: "Goal"
+      indicator: "Indicator"
+      project: "Project"
+      generate: "Generate"
+      all_available: "All Available Forms"
+      form_name: "Form Name"
+    all_data:
+      data_view: "Data View"
+      graphs: "Graphs"
+      hi_controlling: "Hi Controlling Unit, %{user_username}"
+      here_is_all: "Here is all the available data in the database."
+      dimension: "Dimension"
+      goal_1: "Goal"
+      indicator_2: "Indicator"
+      project_1: "Project"
+      activity_1: "Activity"
+    goal_check:
+      goal_form_1: "Goal Form"
+    indicator_check:
+      indicator_form_1: "Indicator Form"
+    all_goal:
+      goal_form_2: "Goal Form"
+    all_indicator:
+      indicator_view: "Indicator View"
+    set_goal:
+      generating_new: "Generating New Goal"
+    view_activity:
+      activity_2: "Activity"
+      back_1: "Back"
+    cu_review:
+      generate_new: "Generate New Form"
+      goal_2: "Goal"
+      indicator_3: "Indicator"
+      project_2: "Project"
+      generate: "Generate"
+      hi_controlling_1: "Hi Controlling Unit, %{user_username}"
+      forms_to: "Forms to Review"
+      id_2: "ID"
+      form_2: "Form"
+      generate_new_1: "Generate New Form"
+      goal_1: "Goal"
+      indicator_1: "Indicator"
+      project_1: "Project"
+      generate_1: "Generate"
+      forms_to: "Forms to Review"
+      form_name_1: "Form Name"
+    projects_list:
+      projects: "Projects"
+      projects_1: "Projects"
+      owner: "Owner"
+      status: "Status"
+    edit_users:
+      manage_users: "Manage Users"
+    indicators_list:
+      indicators: "Indicators"
+      indicators_1: "Indicators"
+      owner_1: "Owner"
+      status_1: "Status"
+    delete_users:
+      delete_users: "Delete Users"
+    all_dimension:
+      dimension_view: "Dimension View"
+    set_project:
+      generating_new_1: "Generating New Project"
+    activity_list:
+      activity_list: "Activity List"
+      activity_id: "Activity ID"
+      link_to_the: "Link to the Activity"
+    graph_panel:
+      data_view_1: "Data View"
+      graphs_1: "Graphs"
+      graphical: "Graphical Panel for: %{user_username}"
+    create_users:
+      create_users: "Create Users"
+    controller_panel:
+      welcome_4: "Welcome Controller Unit %{user_username}"
+      input: "Input Framework"
+      create_users_1: "Create Users"
+      remove_users: "Remove Users"
+      cu_review_page: "CU Review Page"
+      view_activity: "View Activity List"
+      view_all_data: "View All Data in Database"
+    all_project:
+      project_view: "Project View"
+      activity_3: "Activity"
+      current_1: "Current Overall Progress"
+    setup_system:
+      system_setup: "System Setup"
+    set_indicator:
+      generating_new_2: "Generating New Indicator"
+    project_check:
+      project_form_1: "Project Form"
+      activity_4: "Activity"
+      current_2: "Current Overall Progress"
+    goals_list:
+      goals: "Goals"
+      goal_3: "Goal"
+      owner_2: "Owner"
+      status_2: "Status"
+    remove_users:
+      remove_users_1: "Remove Users"
+    all_activity:
+      activity_view: "Activity View"
+  admin:
+    admin_settings:
+      what_to_put: "What to put here?"
+    admin_panel:
+      admin_panel: "Admin Panel (Use rails generated interface?)"
+    admin_setup:
+      admin_setup: "Admin Setup"
+    applications:
+      form:
+        what_to_put_1: "What to put here?"
+      
+
+  layouts:
+    application:
+      strategy: "Strategy Stroller"
+      strategy_1: "Strategy Stroller"
+      user_settings: "User Settings"
+    sidebar:
+      navigation: "Navigation"
+      home: "Home"
+      admin_1: "Admin"
+      new_system: "New System"
+      yearly_review: "Yearly Review"
+      quality_check: "Quality Check"
+      monthly_report: "Monthly Report"
+      quarterly: "Quarterly Report"
+      context_menu: "Context Menu"
+    provider:
+      strategy_2: "Strategy Stroller"
+      strategy_3: "Strategy Stroller"
+      user_settings: "User Settings"
+  home:
+    index:
+      home_index: "Home#index"
+      find_me_in_app: "Find me in app/views/home/index.html.erb"
+      i_am_just_a: "I am just a template, please ignore me ###\n### You will be redirected appropriately, shortly ###\n### You should not be seeing this page ###"
+
