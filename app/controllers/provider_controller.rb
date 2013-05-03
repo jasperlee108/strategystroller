@@ -15,15 +15,15 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_goal = Goal.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     if (request.post?)
       if (params[:commit] == "Submit Goal")
-        @current_form.update_attributes(:submitted => true)
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Goal successfully submitted!"
       elsif (params[:commit] == "Save Goal")
         flash[:notice] = "Goal successfully saved!"
       end
-      @current_goal.update_attributes(params[:goal])
+      @current_goal.update_attributes(params[:goal], :updated_at => Time.current)
       redirect_to forms_composite_path
     end
   end
@@ -35,7 +35,7 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
       #read workingBranch's indicator.freq implementation
@@ -70,11 +70,11 @@ class ProviderController < ApplicationController
       params[:indicator][:freq] = freq
 
 
-      if (!(@current_indicator.update_attributes(params[:indicator]))) #fields unsuccessfully updated
+      if (!(@current_indicator.update_attributes(params[:indicator], :updated_at => Time.current))) #fields unsuccessfully updated
         Rails.logger.info(@current_indicator.errors.messages.inspect)
         flash[:error] = "An error occurred in submitting the form, please try again."
       elsif (params[:commit] == "Submit Indicator")
-        @current_form.update_attributes(:submitted => true)
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
         flash[:notice] = "Indicator successfully saved!"
@@ -91,16 +91,16 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @activities = @current_project.activities
     if (request.post?)
       if (params[:commit] == "Submit Project")
-        @current_form.update_attributes(:submitted => true)
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Project successfully submitted!"
       elsif (params[:commit] == "Save Project")
         flash[:notice] = "Project successfully saved!"
       end
-      @current_project.update_attributes(params[:project])
+      @current_project.update_attributes(params[:project], :updated_at => Time.current)
       redirect_to forms_composite_path
     end
   end
@@ -133,16 +133,16 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
       if (params[:commit] == "Submit Indicator")
-        @current_form.update_attributes(:submitted => true)
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
         flash[:notice] = "Indicator successfully saved!"
       end
-      @current_indicator.update_attributes(params[:indicator])
+      @current_indicator.update_attributes(params[:indicator], :updated_at => Time.current)
       redirect_to forms_composite_path
     end
   end
@@ -155,16 +155,16 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @activities = @current_project.activities
     if (request.post?)
       if (params[:commit] == "Submit Project")
-        @current_form.update_attributes(:submitted => true)
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Project successfully submitted!"
       elsif (params[:commit] == "Save Project")
         flash[:notice] = "Project successfully saved!"
       end
-      @current_project.update_attributes(params[:project])
+      @current_project.update_attributes(params[:project], :updated_at => Time.current)
       redirect_to forms_composite_path
     end
   end

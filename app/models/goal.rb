@@ -1,5 +1,6 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :prereq, :short_name
+  attr_accessible :focus, :justification, :name, :need, :notes, :status, 
+                  :dimension_id, :user_id, :prereq, :short_name, :updated_at
   
   ### ASSOCIATIONS
   ## parent

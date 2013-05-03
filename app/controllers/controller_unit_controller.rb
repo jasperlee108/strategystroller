@@ -1,10 +1,7 @@
 class ControllerUnitController < ApplicationController
   require 'base64' 
   before_filter :authenticate_user!
-  #before_filter do
-  # #should handle checking that a user is a cu, as of yet untested TODO test me.
-    #redirect_to :new_user_session_path unless current_user && current_user.controlling_unit?
-  #end
+  helper_method :sort_column, :sort_direction
 
   GOAL = 1
   INDICATOR = 2
@@ -288,7 +285,7 @@ class ControllerUnitController < ApplicationController
 
   def cu_review
     @user = current_user
-    @forms = Form.where(:checked => true, :reviewed => false, :submitted => true)
+    @forms = Form.order(sort_column + " " + sort_direction)
   end
 
   def goal_check
@@ -428,6 +425,23 @@ class ControllerUnitController < ApplicationController
   
   def all_dimension
     @dimension = Dimension.find_by_id(params[:dimension_id])
+  end
+  
+  ### THE FOLLOWING ARE JUST HELPER METHODS ###
+  
+  private # Note at the top of this file
+  
+  # Code is taken from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  # modified accordingly
+  def sort_column
+    Form.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+  
+  # Code is taken as is from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
 end

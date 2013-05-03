@@ -37,4 +37,29 @@ module ControllerUnitHelper
     end
   end
   
+  
+  def find_form_type(lookup_id)
+    if lookup_id == GOAL
+      return "Goal"
+    elsif lookup_id == INDICATOR
+      return "Indicator"
+    elsif lookup_id == PROJECT
+      return "Project"
+    elsif lookup_id == ACTIVITY
+      return "Activity"
+    else
+      ## ERROR: Should not reach here!
+      return "ERROR: Cannot find table!"
+    end
+  end
+  
+  
+  def find_truth_value(truth)
+    if truth
+      return "Yes"
+    end
+    return "No"
+  end
+  
+  
 end
