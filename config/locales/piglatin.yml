@@ -41,6 +41,10 @@ piglatin:
   controlling_unit: "ontrollingCay it Unay"
   back: "ack Bay"
   form_template: "ormFay emplate Tay"
+  create_users: "eateCray ers Usay"
+  framework: "amework Fray"
+  review: "eview Ray"
+  report: "eport Ray"
   provider:
     activity_define:
       activity_form: "ivityActay orm Fay"
