@@ -1,7 +1,7 @@
 class Activity < ActiveRecord::Base
   attr_accessible :actualCost, :actualManp, :actualProg, :description, :endDate, :name, :notes,
                   :phase, :startDate, :statusNotes, :targetCost, :targetManp, :project_id,
-                  :user_ids, :team, :short_name
+                  :user_ids, :team, :short_name, :updated_at
 
   ### ASSOCIATIONS
   ## parent
@@ -22,7 +22,7 @@ class Activity < ActiveRecord::Base
   PROGRESS = [NOT_YET_STARTED, IN_PROGRESS, COMPLETED]
   # NOTE: The PROGRESS values are used in Project's "update_status_ms" method,
   # changing them will break it.
-  
+
   ## team
   validates :team,
   :length => { :maximum => 600 },

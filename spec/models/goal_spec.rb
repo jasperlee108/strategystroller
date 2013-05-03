@@ -103,11 +103,11 @@ describe Goal do
   ### NEED
   
   ## Need can be empty
-  it "should be allowed to have empty Need" do
+  it "cannot have empty Need" do
     need = ""
     goal = generate()
     goal.need = need
-    assert(goal.save, "It won't save on empty Need")
+    assert(!goal.save, "It saves on empty Need")
   end
   
   ## Need max = 1200
@@ -121,11 +121,11 @@ describe Goal do
   ### JUSTIFICATION
   
   ## Justification can be empty
-  it "should be allowed to have empty Justification" do
+  it "cannot have empty Justification" do
     justification = ""
     goal = generate()
     goal.justification = justification
-    assert(goal.save, "It won't save on empty Justification")
+    assert(!goal.save, "It saves on empty Justification")
   end
   
   ## Justification max = 1200
@@ -139,11 +139,11 @@ describe Goal do
   ### FOCUS
   
   ## Focus can be empty
-  it "should be allowed to have empty Focus" do
+  it "cannot have empty Focus" do
     focus = ""
     goal = generate()
     goal.focus = focus
-    assert(goal.save, "It won't save on empty Focus")
+    assert(!goal.save, "It saves on empty Focus")
   end
   
   ## Focus max = 1200

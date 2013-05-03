@@ -1,7 +1,7 @@
 class Indicator < ActiveRecord::Base
   attr_accessible :actual, :description, :diff, :dir, :freq, :year, :reported_values, :indicator_type,
                   :name, :notes, :source, :contributing_projects_status, :status, :status_notes,
-                  :prognosis, :target, :unit, :goal_id, :user_id, :short_name, :string_freq
+                  :prognosis, :target, :unit, :goal_id, :user_id, :short_name, :string_freq, :updated_at
 
   serialize :freq, Array
   serialize :reported_values, Array
@@ -187,8 +187,8 @@ class Indicator < ActiveRecord::Base
     self.diff = self.prognosis - self.target
   end
 
-  # Note this triggers calls to update_diff and update_prognosis, 
-  # so the calculation should be based on accurate values. 
+  # Note this triggers calls to update_diff and update_prognosis,
+  # so the calculation should be based on accurate values.
   def update_status
     #update_diff
     #raise "Target value must be nonzero, instead of #{self.target}" if self.target == 0.0

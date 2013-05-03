@@ -93,16 +93,6 @@ Here is all the available data in the database.
 									<div>
 										<%= link_to p.name, all_project_path(:project_id => p.id) %>
 									</div>
-									<ul>
-										<% Activity.where(:project_id => p).each do |a| %>
-										<li>
-											<div>
-												<%= link_to a.name, all_activity_path(:activity_id => a.id) %>
-											</div>
-										</li>
-
-										<% end %>
-									</ul>
 								</li>
 								<% end %>
 							</ul>
