@@ -176,8 +176,26 @@ class ProviderController < ApplicationController
     @forms_saved = Form.order(sort_column + " " + sort_direction).where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
   end
 
+  def forms_composite_update
+    @user = current_user
+    @all_ind_forms = Form.find_all_by_user_id_and_lookup(@user.id,2) #indicator lookup = 2
+    @indicator_forms = []
+
+    @all_ind_forms.each do |form|
+      ind = Indicator.find(form.entry_id)
+      included = ind.freq.include?(Time.now.month) && ind.updated_at.month != Time.now.month
+      if (form.submitted && form.checked && form.reviewed && included)
+        @indicator_forms << form
+      end
+    end
+    
+
+    @project_forms = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
+  end
+
+
+
   ### THE FOLLOWING ARE JUST HELPER METHODS ###
-  
   private # Note at the top of this file
   
   # Code is taken from:
