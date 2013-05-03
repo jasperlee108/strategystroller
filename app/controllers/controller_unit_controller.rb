@@ -42,13 +42,14 @@ class ControllerUnitController < ApplicationController
       @bar_chart = Gchart.bar( 
               :axis_with_labels => 'y',
               :axis_labels => [axis_range],
-              :size => '500x600',
+              :size => '500x200',
+              :theme => :pastel,
               :title => "Projects Global Status",
               :bar_width_and_spacing => spacing,
               :legend => pname_list,
               :data => clean_list(pgs_list_uc))
 
-      @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '500x170',
+      @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x100',
                 :data => pgs_list_uc, :labels => pname_list )
     end
   end
