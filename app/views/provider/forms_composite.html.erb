@@ -1,17 +1,17 @@
-<h2>Hi Provider, <%= @user.username %>! </h2>
+<h2><%= t '.hi_provider', :user_username => (@user.username) %>! </h2>
 <%= render "setup_alerts" %>
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
-	<h4><u>Unchecked Forms</u></h4>
+	<h4><u><%= t '.unchecked' %></u></h4>
 	<table class="table table-hover table-bordered" style="background-color:white;">
 		<tr>
-			<th>ID</th>
-			<th>Form</th>
-			<th>Due Date</th>
-			<th>Recieved Date</th>
+			<th><%= t '.id' %></th>
+			<th><%= t '.form' %></th>
+			<th><%= t '.due_date' %></th>
+			<th><%= t '.recieved_date' %></th>
 		</tr>
 		<% if @forms_unchecked.empty? %>
 		<tr>
-			<td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+			<td><%= t 'ndash' %></td><td><%= t 'ndash' %></td><td><%= t 'ndash' %></td><td><%= t 'ndash' %></td>
 		</tr>
 		<% end %>
 		<% @forms_unchecked.each do |forms| %>
@@ -19,23 +19,23 @@
 			<td><%= forms.id %></td>
 			<td><%= link_to find_label(forms.lookup, forms.entry_id), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
 			<td><%= forms.last_reminder %></td>
-			<td>&ndash;</td>
+			<td><%= t 'ndash' %></td>
 		</tr>
 		<% end %>
 	</table>
 </div>
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
-	<h4><u>Saved Forms</u></h4>
+	<h4><u><%= t '.saved_forms' %></u></h4>
 	<table class="table table-hover table-bordered" style="background-color:white;">
 		<tr>
-			<th>ID</th>
-			<th>Form</th>
-			<th>Due Date</th>
-			<th>Recieved Date</th>
+			<th><%= t '.id_1' %></th>
+			<th><%= t '.form_1' %></th>
+			<th><%= t '.due_date_1' %></th>
+			<th><%= t '.recieved_date_1' %></th>
 		</tr>
 		<% if @forms_saved.empty? %>
 		<tr>
-			<td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+			<td><%= t 'ndash' %></td><td><%= t 'ndash' %></td><td><%= t 'ndash' %></td><td><%= t 'ndash' %></td>
 		</tr>
 		<% end %>
 		<% @forms_saved.each do |forms| %>
@@ -43,7 +43,7 @@
 			<td><%= forms.id %></td>
 			<td><%= link_to find_label(forms.lookup, forms.entry_id), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
 			<td><%= forms.last_reminder %></td>
-			<td>&ndash;</td>
+			<td><%= t 'ndash' %></td>
 		</tr>
 		<% end %>
 	</table>

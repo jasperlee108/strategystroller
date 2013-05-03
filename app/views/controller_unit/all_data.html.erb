@@ -3,28 +3,28 @@
 		<div class="container">
 			<ul class="nav isnb">
 				<li class="active">
-					<a href=<%= url_for all_data_path %>>Data View</a>
+					<a href=<%= url_for all_data_path %>><%= t '.data_view' %></a>
 				</li>
 				<li >
-					<a href=<%= url_for graph_panel_path %>>Graphs</a>
+					<a href=<%= url_for graph_panel_path %>><%= t '.graphs' %></a>
 				</li>
 			</ul>
 		</div>
 	</div>
 </div><!-- /.navbar -->
-<h2>Hi Controlling Unit, <%= @user.username %>! </h2>
-Here is all the available data in the database.
+<h2><%= t '.hi_controlling', :user_username => (@user.username) %>! </h2>
+<%= t '.here_is_all' %>
 <br />
 
 <br />
 
 <!--<table border=7 cellpadding=7 cellspacing=7>
 <tr>
-<th>Dimension</th>
-<th>Goal</th>
-<th>Indicator</th>
-<th>Project</th>
-<th>Activity</th>
+<th><%= t '.dimension' %></th>
+<th><%= t '.goal_1' %></th>
+<th><%= t '.indicator_2' %></th>
+<th><%= t '.project_1' %></th>
+<th><%= t '.activity_1' %></th>
 </tr>
 
 <% Dimension.all.each do |d| %>

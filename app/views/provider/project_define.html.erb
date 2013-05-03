@@ -1,11 +1,11 @@
 <div class="navbar">
 	<div class="navbar-inner">
-		<a class="brand" href="#">Project Form</a>
+		<a class="brand" href="#"><%= t '.project_form' %></a>
 		</ul>
 	</div>
 </div>
 <style>
-	input {
+input {
 		width: 25em;
 	}
 	textarea {
@@ -47,8 +47,8 @@
 		<div class="span6">
 			<table class="table table-hover table-bordered">
 				<tr>
-					<th>Activity Name</th>
-					<th>Current Overall Progress</th>
+					<th><%= t '.activity_name' %></th>
+					<th><%= t '.current' %></th>
 				</tr>
 		
 				<% @activities.each do |a| %>
@@ -61,7 +61,7 @@
 				</tr>
 				<% end %>
 				<tr class="info">
-					<td><%= link_to "Create New Activity", activities_path(:project_id => @current_project.id) %></td>
+					<td><%= link_to (t '.create_new_1'), activities_path(:project_id => @current_project.id) %></td>
 					<td></td>
 				</tr>
 			</table>

@@ -4,11 +4,11 @@ document.getElementById("define_page").className = "active";
 </script>
 
 <% content_for :context_menu do %>
-<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>">Goal</a></li>
-<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>">Indicator</a></li>
-<li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>">Activity</a></li>
+<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>"><%= t '.goal' %></a></li>
+<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>"><%= t '.indicator_1' %></a></li>
+<li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>"><%= t '.activity' %></a></li>
 <% end %>
 
-<h2>Welcome Provider <%= @user.username %>! </h2>
-<%= link_to "Unchecked Forms", unchecked_path %><br>
-<%= link_to "Saved Forms", saved_path %><br>
+<h2><%= t '.welcome_2', :user_username => (@user.username) %>! </h2>
+<%= link_to (t '.unchecked_3'), unchecked_path %><br>
+<%= link_to (t '.saved_forms_3'), saved_path %><br>

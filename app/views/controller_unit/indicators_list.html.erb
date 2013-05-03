@@ -1,15 +1,15 @@
 <div class="navbar">
   <div class="navbar-inner"><%= tabs %></div></div>
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
-<h4><u>Indicators</u></h4>
+<h4><u><%= t '.indicators' %></u></h4>
 <table class="table table-hover table-bordered" style="background-color:white;">
   <tr>
-    <th>Indicators</th>
-    <th>Owner</th>
-    <th>Status</th>
+    <th><%= t '.indicators_1' %></th>
+    <th><%= t '.owner_1' %></th>
+    <th><%= t '.status_1' %></th>
   </tr>
  <% if @indicators.empty? %> 
-   <tr><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+   <tr><td><%= t 'ndash' %></td><td><%= t 'ndash' %></td><td><%= t 'ndash' %></td>
      </tr>
    <% end %>  
 <% @indicators.each do |indicator| %>
