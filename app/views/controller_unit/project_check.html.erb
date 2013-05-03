@@ -32,7 +32,7 @@
 
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :selected => @current_project.indicator_id, :input_html => { :class => "span12" }, :required => true, :label => "Associated Indicator" %>
+			<%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :selected => @current_project.indicator_id, :input_html => { :class => "span12", :multiple => true }, :required => true, :label => "Associated Indicators" %>
 		</div>
 		<div class="span6">
 			<%= f.input :head_id, :as => :select, :collection => User.where(:controlling_unit => false), :selected => @current_project.head_id, :input_html => { :class => "span12" }, :required => true, :label => "Project Manager" %>

@@ -1,6 +1,8 @@
 <p>Welcome <%= @email %>!</p>
 
-<p>Your temporary password is 8I7b9UgqOi. Please navigate to edit registration to change this password after confirming your account. </p>
+<% if @resource.temp_password == nil %>
+	<p>Your temporary password is <%= @resource.temp_password %>  Please navigate to edit registration to change this password after confirming your account. </p>
+<% end %>
 
 <p>You can confirm your account email through the link below:</p>
 

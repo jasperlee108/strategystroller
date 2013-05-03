@@ -1,6 +1,12 @@
 ### TODO: Uncomment later, for now keep it like this to avoid keep updating coverage ###
-#require 'simplecov'
+require 'simplecov'
 #SimpleCov.start 'rails'
+
+SimpleCov.start 'rails' do
+  add_filter "vendor/plugins/gmail_smtp" # gmail plugins
+  add_filter "app/admin/admin_user.rb" # ActiveAdmin tested
+  add_filter "app/tabs/" # Tabulous Plugins
+end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
