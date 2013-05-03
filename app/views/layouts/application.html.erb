@@ -60,7 +60,13 @@
 						<% end %>
 							<%= link_to (t :setup), setup_system_path %>
 						</li>
-						<!--<li id= "navbar_edit_users"><%= link_to (t :edit_users), edit_users_path %></li>-->
+						<% if current_page? (create_users_path) %>
+							<li id= "navbar_create_users" class="active">
+						<% else %>
+							<li id= "navbar_create_users">
+						<% end %>
+							<%= link_to (t :create_users), create_users_path %>
+						</li>
 					</ul>
 
 					<!--     </div>-->
