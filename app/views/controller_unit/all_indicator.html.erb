@@ -55,7 +55,7 @@
 		</div>
 		<div class="span6">		
 			<div class="span6">          
-          <%= f.input :prognosis, :input_html => { :value => 0, :disabled => true, :class => "span12" }, :label => "Prognosis" %>
+          <%= f.input :prognosis, :input_html => { :value => @indicator.prognosis, :disabled => true, :class => "span12" }, :label => "Prognosis" %>
 			</div>
 			<div class="span6">
           <%= f.input :diff, :input_html => { :value => @indicator.diff, :disabled => true, :class => "span12" }, :label => "Difference" %>

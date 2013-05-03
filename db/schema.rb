@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
   create_table "activities", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "phase"
+    t.integer  "phase",       :limit => 255
     t.date     "startDate"
     t.date     "endDate"
     t.integer  "targetManp"
@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
     t.text     "notes"
     t.integer  "actualManp"
     t.decimal  "actualCost"
-    t.string   "actualProg"
+    t.integer  "actualProg",  :limit => 255
     t.text     "statusNotes"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.integer  "project_id"
     t.text     "team"
     t.string   "short_name"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
 
   create_table "dimensions", :force => true do |t|
     t.string   "name"
-    t.float    "status"
+    t.decimal  "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
     t.string   "justification"
     t.string   "focus"
     t.string   "notes"
-    t.float    "status"
+    t.decimal  "status"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "dimension_id"
@@ -115,21 +115,25 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
     t.text     "description"
     t.string   "source"
     t.string   "unit"
-    t.text     "freq",           :limit => 255
+    t.text     "freq",                         :limit => 255
     t.string   "indicator_type"
     t.string   "dir"
-    t.float    "actual"
-    t.float    "target"
+    t.decimal  "actual"
+    t.decimal  "target"
     t.text     "notes"
-    t.float    "diff"
-    t.float    "status"
+    t.decimal  "diff"
+    t.decimal  "status"
     t.text     "status_notes"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "goal_id"
     t.integer  "user_id"
+    t.decimal  "contributing_projects_status"
     t.string   "short_name"
-    t.string   "special_freq"
+    t.decimal  "prognosis"
+    t.integer  "year"
+    t.text     "reported_values"
+    t.string   "string_freq"
   end
 
   create_table "projects", :force => true do |t|
@@ -138,7 +142,6 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
     t.text     "team"
     t.date     "startDate"
     t.date     "endDate"
-    t.float    "duration"
     t.integer  "target_manp"
     t.decimal  "target_cost"
     t.boolean  "inplan"
@@ -146,18 +149,22 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
     t.text     "notes"
     t.integer  "actual_manp"
     t.decimal  "actual_cost"
-    t.float    "status_prog"
-    t.integer  "status_ms"
-    t.integer  "status_manp"
+    t.decimal  "status_prog"
+    t.text     "status_ms"
+    t.decimal  "status_manp"
     t.decimal  "status_cost"
-    t.float    "status_global"
+    t.decimal  "status_global"
     t.text     "status_notes"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "indicator_id"
     t.integer  "head_id"
     t.integer  "steer_id"
     t.string   "short_name"
+    t.integer  "target_duration"
+    t.integer  "actual_duration"
+    t.text     "yearly_target_cost"
+    t.text     "yearly_target_manp"
   end
 
   create_table "users", :force => true do |t|
