@@ -56,6 +56,25 @@ piglatin:
       form_1: "orm Fay"
       due_date_1: "ueDay ate Day"
       recieved_date_1: "ecievedRay ate Day"
+      hi_provider: "Hi ovider,Pray %{user_username} "
+      unchecked: "eckedUnchay orms Fay"
+      form_name_2: "ormFay ame Nay"
+      saved_forms: "avedSay orms Fay"
+      form_name_3: "ormFay ame Nay"
+    forms_composite_update:
+      hi_provider_1: "Hi ovider,Pray %{user_username} "
+      update: "ateUpday icators Inday"
+      form_name_4: "ormFay ame Nay"
+      saved_forms_1: "avedSay orms Fay"
+      form_name_5: "ormFay ame Nay"
+    project_update:
+      project_form: "ojectPray orm Fay"
+      activity: "ivity Actay"
+      target: "argetTay anpower May"
+      current: "urrentCay anpower May"
+      target_cost: "argetTay ost Cay"
+      current_cost: "urrentCay ost Cay"
+      status: "atus Stay"
     update_page:
       indicator: "icator Inday"
       project: "oject Pray"
@@ -115,6 +134,14 @@ piglatin:
         login: "ogin Lay"
         admin: "in Admay"
   controller_unit:
+    all_form:
+      generate_new: "enerateGay ewNay orm Fay"
+      goal: "oal Gay"
+      indicator: "icator Inday"
+      project: "oject Pray"
+      generate: "enerate Gay"
+      all_available: "Allay ailableAvay orms Fay"
+      form_name: "ormFay ame Nay"
     all_data:
       data_view: "ataDay iew Vay"
       graphs: "aphs Gray"
@@ -148,6 +175,13 @@ piglatin:
       forms_to: "ormsFay to eview Ray"
       id_2: "ID ay"
       form_2: "orm Fay"
+      generate_new_1: "enerateGay ewNay orm Fay"
+      goal_1: "oal Gay"
+      indicator_1: "icator Inday"
+      project_1: "oject Pray"
+      generate_1: "enerate Gay"
+      forms_to: "ormsFay to eview Ray"
+      form_name_1: "ormFay ame Nay"
     projects_list:
       projects: "ojects Pray"
       projects_1: "ojects Pray"
@@ -238,4 +272,4 @@ piglatin:
     index:
       home_index: "ome#index Hay"
       find_me_in_app: "indFay me in app/views/home/index.html.erb way"
-      i_am_just_a: "I am ustjay a emplate,tay easeplay ignoreway me ###\n###ay ouYay illway be edirectedray appropriately,way ortlyshay ###\n###ay ouYay ouldshay otnay be eeingsay isthay agepay ### ay"
+      i_am_just_a: "I am ustjay a emplate,tay easeplay ignoreway me ###\n###ay ouYay illway be edirectedray appropriately,way ortlyshay ###\n###ay ouYay ouldshay otnay be eeingsay isthay agepay ###ay"
