@@ -42,7 +42,7 @@ class ControllerUnitController < ApplicationController
       @bar_chart = Gchart.bar( 
               :axis_with_labels => 'y',
               :axis_labels => [axis_range],
-              :size => '500x200',
+              :size => '500x500',
               :theme => :pastel,
               :title => "Projects Global Status",
               :bar_width_and_spacing => spacing,
