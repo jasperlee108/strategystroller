@@ -45,7 +45,7 @@ class ControllerUnitController < ApplicationController
               :size => '500x600',
               :theme => :pastel,
               :title => "Projects Global Status",
-              :bar_width_and_spacing => spacing,
+              :bar_width_and_spacing => '25,10',
               :legend => pname_list,
               :data => clean_list(pgs_list_uc))
 
