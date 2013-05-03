@@ -25,8 +25,8 @@ class ControllerUnitController < ApplicationController
 
   def graph_panel
     @user = current_user
-    pname_list = Project.all.map(&:short_name)
-    pgs_list_uc = Project.all.map(&:status_global)
+    pname_list = Project.all.map(&:short_name)[0,1,2,3,4]
+    pgs_list_uc = Project.all.map(&:status_global)[0,1,2,3,4]
     len_of_list = pname_list.length
     if len_of_list>0
       max_val = pgs_list_uc.max
