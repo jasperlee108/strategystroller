@@ -30,16 +30,27 @@ def main(argv):
         split =line.split(":")
         if len(split)>1:
             rhs = split[1]
-            newfile.write(split[0]+': \"')
             trans = ""
-            for w in rhs.split(' '):
-                if trans == "":
-                    trans = (makePigLatin(w.replace('"',''))).replace("\n",' ')
-                else:
-                    trans += " "+(makePigLatin(w.replace('"',''))).replace("\n",' ')
-            print trans
-            newfile.write(trans)
-            newfile.write('\"\n')
+            if rhs!="\n":
+                newfile.write(split[0]+': \"')
+                for w in rhs.split(' '):
+                    if "%{" in w:
+                        if trans == "":
+                            trans = (w.replace('"','')).replace("\n",' ')
+                        else:
+                            trans += " "+(w.replace('"','')).replace("\n",' ')
+                    else:
+                        if trans == "":
+                            trans = (makePigLatin(w.replace('"',''))).replace("\n",' ')
+                        else:
+                            trans += " "+(makePigLatin(w.replace('"',''))).replace("\n",' ')
+                print trans
+                newfile.write(trans)
+                newfile.write('\"\n')
+            else:
+                print split[0]+':\n'
+                newfile.write(split[0]+':\n')
+            
         count +=1
     f.close()   
     

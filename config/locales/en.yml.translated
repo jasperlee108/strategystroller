@@ -1,4 +1,4 @@
-﻿en:
+en:
   ndash: "–"
   times: "×"
   email_address: "Email Address"
@@ -41,10 +41,6 @@
   controlling_unit: "Controlling Unit"
   back: "Back"
   form_template: "Form Template"
-  create_users: "Create Users"
-  framework: "Framework"
-  review: "Review"
-  report: "Report"
   provider:
     activity_define:
       activity_form: "Activity Form"
@@ -71,8 +67,8 @@
       form_name_4: "Form Name"
       saved_forms_1: "Saved Forms"
       form_name_5: "Form Name"
-    project_update:
-      project_form: "Project Form"
+        project_update:
+    project_form: "Project Form"
       activity: "Activity"
       target: "Target Manpower"
       current: "Current Manpower"
@@ -253,6 +249,8 @@
     applications:
       form:
         what_to_put_1: "What to put here?"
+      
+
   layouts:
     application:
       strategy: "Strategy Stroller"

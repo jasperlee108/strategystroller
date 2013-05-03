@@ -1,17 +1,16 @@
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" href="#">Project Form</a>
+        <a class="brand" href="#"><%= t '.project_form' %></a>
         </ul>
     </div>
 </div>
 <style>
-
-    style > input {
-        width: 25em;
-    }
-    textarea {
-        width: 50em;
-    }
+	input {
+		width: 25em;
+	}
+	textarea {
+		width: 50em;
+	}
 </style>
 <%= render "setup_alerts" %>
 <div class="well">
@@ -45,12 +44,12 @@
         <div class="span12">
             <table class="table table-hover table-bordered">
                 <tr>
-                    <th>Activity</th>
-                    <th>Target Manpower</th>
-                    <th>Current Manpower</th>
-                    <th>Target Cost</th>
-                    <th>Current Cost</th>
-                    <th>Status</th>
+                    <th><%= t '.activity' %></th>
+                    <th><%= t '.target' %></th>
+                    <th><%= t '.current' %></th>
+                    <th><%= t '.target_cost' %></th>
+                    <th><%= t '.current_cost' %></th>
+                    <th><%= t '.status' %></th>
                 </tr>
         
                 <% @activities.each do |a| %>

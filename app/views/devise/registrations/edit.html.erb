@@ -29,8 +29,8 @@
 
 <!--TODO: fix this cancel button and whole page really -->
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+<p><%= t '.unhappy', :button_to => (button_to (t '.cancel_my'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete) %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to (t '.back'), :back %>
 </div>
 </div>
