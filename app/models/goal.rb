@@ -1,5 +1,6 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :focus, :justification, :name, :need, :notes, :status, :dimension_id, :user_id, :prereq, :short_name
+  attr_accessible :focus, :justification, :name, :need, :notes, :status, 
+                  :dimension_id, :user_id, :prereq, :short_name, :updated_at
   
   ### ASSOCIATIONS
   ## parent
@@ -30,17 +31,17 @@ class Goal < ActiveRecord::Base
   ## Need = string[1200]
   validates :need,
   :length => { :maximum => 1200 },
-  :allow_blank => true
+  :presence => true
   
   ## Justification = string[1200]
   validates :justification,
   :length => { :maximum => 1200 },
-  :allow_blank => true
+  :presence => true
   
   ## Focus = string[1200]
   validates :focus,
   :length => { :maximum => 1200 },
-  :allow_blank => true
+  :presence => true
   
   ## Notes = string[600]
   ## Notes can be empty
@@ -51,7 +52,7 @@ class Goal < ActiveRecord::Base
   ## Status = long integer
   ## 0.00 <= Status <= 100.00
   validates :status,
-  :allow_blank => true,
+  :presence => true,
   :numericality => {
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 100

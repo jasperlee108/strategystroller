@@ -1,10 +1,7 @@
 class ControllerUnitController < ApplicationController
   require 'base64' 
   before_filter :authenticate_user!
-  #before_filter do
-  # #should handle checking that a user is a cu, as of yet untested TODO test me.
-    #redirect_to :new_user_session_path unless current_user && current_user.controlling_unit?
-  #end
+  helper_method :sort_column, :sort_direction, :sort_column2
 
   GOAL = 1
   INDICATOR = 2
@@ -52,22 +49,6 @@ class ControllerUnitController < ApplicationController
       @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x230',
                 :data => pgs_list_uc, :labels => pname_list )
     end
-  end
-
-  def controller_panel
-    @user = current_user
-  end
-  
-  def goals_list
-    @goals = Goal.all
-  end
-  
-  def indicators_list
-    @indicators = Indicator.all
-  end
-  
-  def projects_list
-    @projects = Project.all
   end
   
   def set_goal
@@ -304,15 +285,7 @@ class ControllerUnitController < ApplicationController
 
   def cu_review
     @user = current_user
-    @forms = Form.where(:checked => true, :reviewed => false, :submitted => true)
-  end
-
-  def activity_list
-    @activities = Activity.all
-  end
-
-  def view_activity
-    @activity = Activity.find_by_id(params[:activity_id])
+    @forms = Form.order(sort_column + " " + sort_direction)
   end
 
   def goal_check
@@ -367,6 +340,8 @@ class ControllerUnitController < ApplicationController
     
 
     if (request.post?)
+      params[:indicator].delete(:special_freq)
+      params[:indicator][:freq] = freq
       @current_form.update_attributes(:reviewed => true)
       @current_indicator.update_attributes(params[:indicator])
       flash[:notice] = "Indicator review completed!"
@@ -452,6 +427,35 @@ class ControllerUnitController < ApplicationController
   
   def all_dimension
     @dimension = Dimension.find_by_id(params[:dimension_id])
+  end
+  
+  def all_form
+    @user = current_user
+    @forms = Form.order(sort_column2 + " " + sort_direction)
+  end
+  
+  ### THE FOLLOWING ARE JUST HELPER METHODS ###
+  
+  private # Note at the top of this file
+  
+  # Code is taken from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  # modified accordingly
+  def sort_column
+    Form.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+
+  # Code is taken from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  # modified accordingly
+  def sort_column2
+    Form.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  # Code is taken as is from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
 end

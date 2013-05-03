@@ -1,5 +1,6 @@
 class ProviderController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :sort_column, :sort_direction
   
   MAILER = ActionMailer::Base.default_url_options
 
@@ -8,20 +9,10 @@ class ProviderController < ApplicationController
    # url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
   #end
 
-
-  def provider_panel
-    @user = current_user
-  end
-
-  def define_page
-    @user = current_user
-  end
-
-  def update_page
-    @user = current_user
-    @forms_unchecked = Form.where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
-    @forms_saved = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
-  end
+  GOAL = 1
+  INDICATOR = 2
+  PROJECT = 3
+  ACTIVITY = 4
    
   def goal_define
     @user = current_user
@@ -30,15 +21,15 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_goal = Goal.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     if (request.post?)
       if (params[:commit] == "Submit Goal")
-        @current_form.update_attributes(:submitted => true)
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Goal successfully submitted!"
       elsif (params[:commit] == "Save Goal")
         flash[:notice] = "Goal successfully saved!"
       end
-      @current_goal.update_attributes(params[:goal])
+      @current_goal.update_attributes(params[:goal], :updated_at => Time.current)
       redirect_to forms_composite_path
     end
   end
@@ -50,7 +41,7 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
       #read workingBranch's indicator.freq implementation
@@ -85,11 +76,11 @@ class ProviderController < ApplicationController
       params[:indicator][:freq] = freq
 
 
-      if (!(@current_indicator.update_attributes(params[:indicator]))) #fields unsuccessfully updated
+      if (!(@current_indicator.update_attributes(params[:indicator], :updated_at => Time.current))) #fields unsuccessfully updated
         Rails.logger.info(@current_indicator.errors.messages.inspect)
         flash[:error] = "An error occurred in submitting the form, please try again."
       elsif (params[:commit] == "Submit Indicator")
-        @current_form.update_attributes(:submitted => true)
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
         flash[:notice] = "Indicator successfully saved!"
@@ -106,16 +97,16 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @activities = @current_project.activities
     if (request.post?)
       if (params[:commit] == "Submit Project")
-        @current_form.update_attributes(:submitted => true)
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Project successfully submitted!"
       elsif (params[:commit] == "Save Project")
         flash[:notice] = "Project successfully saved!"
       end
-      @current_project.update_attributes(params[:project])
+      @current_project.update_attributes(params[:project], :updated_at => Time.current)
       redirect_to forms_composite_path
     end
   end
@@ -148,17 +139,45 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_indicator = Indicator.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
-    @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
+    @projects = (@current_indicator.projects).collect{|p| p.short_name}
+    @projects.empty? ? @projects += ['None'] : nil
+    #freq is Array
+    #combos are 1, 1/7, 1/4/7/10, all, any
+    freq = @current_indicator.freq
+    y = [1]
+    hy = [1,7]
+    q = [1,4,7,10]
+    m = [1,2,3,4,5,6,7,8,9,10,11,12]
+
+    if (freq == y)
+      real_freq = "Y"
+    elsif (freq == hy)
+      real_freq = "HY"
+    elsif (freq == q)
+      real_freq = "Q"
+    elsif (freq == m)
+      real_freq = "M"
+    else
+      real_freq = "S"
+      @current_indicator.special_freq = freq
+    end 
+    #current_indicator.freq needs to become a string
+    @current_indicator.freq = real_freq
+    
     if (request.post?)
-      if (params[:commit] == "Submit Indicator")
-        @current_form.update_attributes(:submitted => true)
+      params[:indicator].delete(:special_freq)
+      params[:indicator][:freq] = freq
+      if (!(@current_indicator.update_attributes(params[:indicator], :updated_at => Time.current))) #fields unsuccessfully updated
+        Rails.logger.info(@current_indicator.errors.messages.inspect)
+        flash[:error] = "An error occurred in submitting the form, please try again."
+      elsif (params[:commit] == "Update Indicator")
+        @current_indicator.update_attributes(params[:indicator], :updated_at => Time.current)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
-        flash[:notice] = "Indicator successfully saved!"
+        @current_indicator.update_attributes(params[:indicator]) #don't want to set updated_at if just saving ind
+        flash[:notice] = "Indicator changes saved!"
       end
-      @current_indicator.update_attributes(params[:indicator])
-      redirect_to forms_composite_path
+      redirect_to forms_composite_update_path
     end
   end
 
@@ -170,42 +189,67 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true)
+    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @activities = @current_project.activities
     if (request.post?)
-      if (params[:commit] == "Submit Project")
-        @current_form.update_attributes(:submitted => true)
+      if (params[:commit] == "Update Project")
+        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Project successfully submitted!"
       elsif (params[:commit] == "Save Project")
         flash[:notice] = "Project successfully saved!"
       end
-      @current_project.update_attributes(params[:project])
-      redirect_to forms_composite_path
+      @current_project.update_attributes(params[:project], :updated_at => Time.current)
+      redirect_to forms_composite_update_path
     end
   end
   
   def forms_composite
     @user = current_user
-    @forms_unchecked = Form.where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
-    @forms_saved = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
+    @forms_unchecked = Form.order(sort_column + " " + sort_direction).where(:checked => false, :submitted=>false).find_all_by_user_id(@user.id)
+    @forms_saved = Form.order(sort_column + " " + sort_direction).where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
   end
 
   def forms_composite_update
     @user = current_user
-    @all_ind_forms = Form.find_all_by_user_id_and_lookup(@user.id,2) #indicator lookup = 2
+    @all_ind_forms = Form.find_all_by_user_id_and_lookup(@user.id, INDICATOR)
     @indicator_forms = []
-
     @all_ind_forms.each do |form|
       ind = Indicator.find(form.entry_id)
-      included = ind.freq.include?(Time.now.month) && ind.updated_at.month != Time.now.month
+      #make sure month is in freq and we haven't already updated the ind this month
+      included = ind.freq.include?(Time.now.month) && (ind.updated_at.month != Time.now.month)
       if (form.submitted && form.checked && form.reviewed && included)
         @indicator_forms << form
       end
     end
-    
 
-    @project_forms = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
+     @all_proj_forms = Form.find_all_by_user_id_and_lookup(@user.id, PROJECT)
+      @proj_forms = []
+      @all_proj_forms.each do |form|
+        proj = Project.find(form.entry_id)
+        #make sure we haven't already updated the proj this month
+        included = proj.updated_at.month != Time.now.month
+        if (form.submitted && form.checked && form.reviewed && included)
+          @proj_forms << form
+        end
+      end
   end
+
+
+
+  ### THE FOLLOWING ARE JUST HELPER METHODS ###
+  private # Note at the top of this file
   
+  # Code is taken from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  # modified accordingly
+  def sort_column
+    Form.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end 
+  
+  # Code is taken as is from:
+  # http://railscasts.com/episodes/228-sortable-table-columns
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
   
 end

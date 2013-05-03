@@ -4,10 +4,10 @@
 	<h4><u>Unchecked Forms</u></h4>
 	<table class="table table-hover table-bordered" style="background-color:white;">
 		<tr>
-			<th>ID</th>
-			<th>Form</th>
-			<th>Due Date</th>
-			<th>Recieved Date</th>
+			<th><%= sortable "created_at", "Date Received" %></th>
+			<th><%= sortable "last_reminder", "Last Reminder" %></th>
+			<th><%= sortable "lookup", "Form Type" %></th>
+			<th>Form Name</th>
 		</tr>
 		<% if @forms_unchecked.empty? %>
 		<tr>
@@ -16,10 +16,10 @@
 		<% end %>
 		<% @forms_unchecked.each do |forms| %>
 		<tr>
-			<td><%= forms.id %></td>
-			<td><%= link_to find_label(forms.lookup, forms.entry_id), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
+			<td><%= forms.created_at.to_date %></td>
 			<td><%= forms.last_reminder %></td>
-			<td>&ndash;</td>
+			<td><%= find_form_type(forms.lookup) %></td>
+			<td><%= link_to find_label(forms.lookup, forms.entry_id), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
 		</tr>
 		<% end %>
 	</table>
@@ -28,10 +28,10 @@
 	<h4><u>Saved Forms</u></h4>
 	<table class="table table-hover table-bordered" style="background-color:white;">
 		<tr>
-			<th>ID</th>
-			<th>Form</th>
-			<th>Due Date</th>
-			<th>Recieved Date</th>
+			<th><%= sortable "created_at", "Date Received" %></th>
+			<th><%= sortable "last_reminder", "Last Reminder" %></th>
+			<th><%= sortable "lookup", "Form Type" %></th>
+			<th>Form Name</th>
 		</tr>
 		<% if @forms_saved.empty? %>
 		<tr>
@@ -40,10 +40,10 @@
 		<% end %>
 		<% @forms_saved.each do |forms| %>
 		<tr>
-			<td><%= forms.id %></td>
-			<td><%= link_to find_label(forms.lookup, forms.entry_id), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
+			<td><%= forms.created_at.to_date %></td>
 			<td><%= forms.last_reminder %></td>
-			<td>&ndash;</td>
+			<td><%= find_form_type(forms.lookup) %></td>
+			<td><%= link_to find_label(forms.lookup, forms.entry_id), find_path(forms.lookup, forms.entry_id, forms.id) %></td>
 		</tr>
 		<% end %>
 	</table>
