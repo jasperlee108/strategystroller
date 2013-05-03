@@ -15,7 +15,7 @@
         <% end %>
         <% @indicator_forms.each do |form| %>
         <tr>
-            <td><%= form.updated_at.to_date %></td>
+            <td><%= Indicator.find(form.entry_id).updated_at.to_date %></td>
             <td><%= form.last_reminder %></td>
             <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
         </tr>
@@ -37,7 +37,7 @@
         <% end %>
         <% @proj_forms.each do |form| %>
         <tr>
-            <td><%= form.created_at.to_date %></td>
+            <td><%= Project.find(form.entry_id).updated_at.to_date %></td>
             <td><%= form.last_reminder %></td>
             <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
         </tr>

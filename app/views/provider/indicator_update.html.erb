@@ -74,10 +74,7 @@
     <div class="row-fluid">
         <div class="span6">
             <div id="freq" class="form-inline">
-            <%= f.input :string_freq, :input_html => { :value => @current_indicator.string_freq, :disabled => true}, :required => true, :as => :radio, :collection => ["M", "Q", "HY", "Y", "S"], :label => "Frequency of Acquisition" %>
-                <div id="specialfreq">
-                <%= f.input :freq, :checked_value => true, :unchecked_value => false, :input_html => { :checked => @current_indicator.freq, :disabled => true}, :required => true, :as => :check_boxes, :collection => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :label => "Frequency in Months" %>
-                </div> <!-- TODO Make sure checkboxes are disabled here -->
+            <%= f.input :freq, :input_html => { :value => @current_indicator.freq }, :required => true, :as => :check_boxes, :collection => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :label => "Frequency of Acquisition" %>
             </div>
         </div>
     </div>
