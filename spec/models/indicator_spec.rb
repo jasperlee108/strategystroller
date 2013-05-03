@@ -161,11 +161,11 @@ describe Indicator do
   ### UNIT
   
   ## Unit is not empty
-  it "should not have empty Unit" do
+  it "should allow an empty Unit" do
     unit = ""
     indicator = generate()
     indicator.unit = unit
-    assert(!indicator.save, "It saves on empty Unit")
+    assert(indicator.save, "It won't save on empty Unit")
   end
   
   ## Unit max = 20
@@ -218,11 +218,11 @@ describe Indicator do
   end
 
   ### YEAR
-  it "will not save an empty year" do
+  it "will save with an empty year" do
     year = nil
     indicator = generate()
     indicator.year = year
-    assert(!indicator.save, "It saves with an empty year")
+    assert(indicator.save, "It won't save with an empty year")
   end
 
   it "will not save a non-integer year" do
@@ -286,11 +286,11 @@ describe Indicator do
   ### TYPE
   
   ## Type is not empty
-  it "should not have empty Type" do
+  it "should allow an empty Type" do
     type = ""
     indicator = generate()
     indicator.indicator_type = type
-    assert(!indicator.save, "It saves on empty Type")
+    assert(indicator.save, "It won't save on empty Type")
   end
   
   ## Type max = 10 = { 'average', 'cumulative' }
@@ -304,11 +304,11 @@ describe Indicator do
   ### DIRECTION
   
   ## Direction is not empty
-  it "should not have empty Direction" do
+  it "will allow an empty Direction" do
     direction = ""
     indicator = generate()
     indicator.dir = direction
-    assert(!indicator.save, "It saves on empty Direction")
+    assert(indicator.save, "It won't save on empty Direction")
   end
   
   ## Direction max = 20 = { 'More is Better', 'Less is Better' }
@@ -600,13 +600,13 @@ describe Indicator do
   #TODO confirm if it is possible for this to lead to a negative status (I suspect yes)
 
   # correctly calculates "more is better" status
-  it "will update 'more is better' case correctly" do
+  it "will update 'More is Better' case correctly" do
     reported_values = [0.2, 0.4, 0.6]
     indicator = generate
     indicator.reported_values = reported_values
     indicator.indicator_type = "average"
     indicator.target = 0.2
-    indicator.dir = "more is better"
+    indicator.dir = "More is Better"
     indicator.save
     indicator_in_table = Indicator.find(1)
     indicator_in_table.update_prognosis
@@ -616,13 +616,13 @@ describe Indicator do
   end
 
   # correctly calculates "less is better" status
-  it "will update 'less is better' case correctly" do
+  it "will update 'Less is Better' case correctly" do
     reported_values = [0.2, 0.4, 0.6]
     indicator = generate
     indicator.reported_values = reported_values
     indicator.indicator_type = "average"
     indicator.target = 0.2
-    indicator.dir = "less is better"
+    indicator.dir = "Less is Better"
     indicator.save
     indicator_in_table = Indicator.find(1)
     indicator_in_table.update_prognosis

@@ -176,6 +176,8 @@ class Indicator < ActiveRecord::Base
         self.prognosis = sum / r_values.length
       elsif self.indicator_type == "cumulative"
         self.prognosis = sum*12.0 / Time.now.month
+      else
+        raise "indicator type has not yet been set"
       end
     end
   end
@@ -190,7 +192,7 @@ class Indicator < ActiveRecord::Base
   def update_status
     #update_diff
     #raise "Target value must be nonzero, instead of #{self.target}" if self.target == 0.0
-    raise "Direction must be set for this to be calculated" if self.dir.null?
+    raise "Direction must be set for this to be calculated" if self.dir.nil?
     if self.target == 0
       self.status=999999999999999 #functionally infinite
     elsif self.dir == "More is Better"

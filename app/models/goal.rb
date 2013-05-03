@@ -52,7 +52,7 @@ class Goal < ActiveRecord::Base
   ## Status = decimal
   ## 0.00 <= Status
   validates :status,
-  :presence => true,
+  :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
   
   ## Prereq = string[80]
