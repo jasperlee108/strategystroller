@@ -236,7 +236,7 @@ en:
     provider:
       strategy_2: "Strategy Stroller"
       strategy_3: "Strategy Stroller"
-      user_settings_html: "User Settings\n			    <span class=\"caret\"></span>"
+      user_setting: "User Settings
   home:
     index:
       home_index: "Home#index"
