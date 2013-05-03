@@ -299,8 +299,8 @@ class ControllerUnitController < ApplicationController
     @indicators.empty? ? @indicators += ['None'] : nil
     @prerequisites = (Goal.select('short_name')).select{|g| g.short_name != @current_goal.short_name}.collect{|g| g.short_name}
     if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      @current_goal.update_attributes(params[:goal])
+      @current_form.update_attributes(:reviewed => true, :updated_at => Time.current)
+      @current_goal.update_attributes(params[:goal], :updated_at => Time.current)
       flash[:notice] = "Goal review completed!"
       redirect_to cu_review_path
     end
@@ -340,8 +340,8 @@ class ControllerUnitController < ApplicationController
     
 
     if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      @current_indicator.update_attributes(params[:indicator])
+      @current_form.update_attributes(:reviewed => true, :updated_at => Time.current)
+      @current_indicator.update_attributes(params[:indicator], :updated_at => Time.current)
       flash[:notice] = "Indicator review completed!"
       redirect_to cu_review_path
     end
@@ -357,8 +357,8 @@ class ControllerUnitController < ApplicationController
     @activities = @current_project.activities
     @project.startDate = @current_project.startDate
     if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      @current_project.update_attributes(params[:project])
+      @current_form.update_attributes(:reviewed => true, :updated_at => Time.current)
+      @current_project.update_attributes(params[:project], :updated_at => Time.current)
       flash[:notice] = "Project review completed!"
       redirect_to cu_review_path
     end
