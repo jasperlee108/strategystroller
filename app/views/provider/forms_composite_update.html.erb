@@ -4,22 +4,20 @@
     <h4><u>Update Indicators</u></h4>
     <table class="table table-hover table-bordered" style="background-color:white;">
         <tr>
-            <th>ID</th>
-            <th>Form</th>
-            <th>Due Date</th>
-            <th>Recieved Date</th>
+            <th><%= sortable "updated_at", "Date Last Updated" %></th>
+            <th><%= sortable "last_reminder", "Last Reminder" %></th>
+            <th>Form Name</th>
         </tr>
         <% if @indicator_forms.empty? %>
         <tr>
-            <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+            <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
         </tr>
         <% end %>
         <% @indicator_forms.each do |form| %>
         <tr>
-            <td><%= form.id %></td>
-            <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
+            <td><%= form.updated_at.to_date %></td>
             <td><%= form.last_reminder %></td>
-            <td>&ndash;</td>
+            <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
         </tr>
         <% end %>
     </table>
@@ -28,22 +26,20 @@
     <h4><u>Saved Forms</u></h4>
     <table class="table table-hover table-bordered" style="background-color:white;">
         <tr>
-            <th>ID</th>
-            <th>Form</th>
-            <th>Due Date</th>
-            <th>Recieved Date</th>
+            <th><%= sortable "updated_at", "Date Last Updated" %></th>
+            <th><%= sortable "last_reminder", "Last Reminder" %></th>
+            <th>Form Name</th>
         </tr>
         <% if @proj_forms.empty? %>
         <tr>
-            <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+            <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
         </tr>
         <% end %>
         <% @proj_forms.each do |form| %>
         <tr>
-            <td><%= form.id %></td>
-            <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
+            <td><%= form.created_at.to_date %></td>
             <td><%= form.last_reminder %></td>
-            <td>&ndash;</td>
+            <td><%= link_to find_label(form.lookup, form.entry_id), find_update_path(form.lookup, form.entry_id, form.id) %></td>
         </tr>
         <% end %>
     </table>
