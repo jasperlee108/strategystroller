@@ -25,8 +25,8 @@ class ControllerUnitController < ApplicationController
 
   def graph_panel
     @user = current_user
-    pname_list = Project.all.map(&:short_name)[0..5]
-    pgs_list_uc = Project.all.map(&:status_global)[0..5]
+    pname_list = Project.all.map(&:short_name)
+    pgs_list_uc = Project.all.map(&:status_global)
     len_of_list = pname_list.length
     if len_of_list>0
       max_val = pgs_list_uc.max
@@ -45,7 +45,7 @@ class ControllerUnitController < ApplicationController
               :size => '500x600',
               :theme => :pastel,
               :title => "Projects Global Status",
-              :bar_width_and_spacing => '25,10',
+              :bar_width_and_spacing => '7,5',
               :legend => pname_list,
               :data => clean_list(pgs_list_uc))
 
