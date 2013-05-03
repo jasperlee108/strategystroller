@@ -375,5 +375,20 @@ class Project < ActiveRecord::Base
     Activity::PHASES.each { |phase| phases_progress[phase] = Activity::NOT_YET_STARTED if phases_progress[phase].nil? }
     self.status_ms = phases_progress
   end
-  
+
+  def update_all
+    update_actual_duration
+    update_target_duration
+    update_actual_manp
+    update_target_manp
+    update_actual_cost
+    update_target_cost
+    update_yearly_target_cost
+    update_yearly_target_manp
+    update_status_cost
+    update_status_manp
+    update_status_prog
+    update_status_ms
+  end
+
 end

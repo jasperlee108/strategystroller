@@ -31,5 +31,11 @@ class Dimension < ActiveRecord::Base
       self.status = status / gls.size
     end
   end
-  
+
+  def update_all
+    self.goals.each { |goal| goal.update_all }
+    update_status
+  end
+
+
 end

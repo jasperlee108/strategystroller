@@ -213,4 +213,12 @@ class Indicator < ActiveRecord::Base
     end
   end
 
+  def update_all
+    self.projects.each { |project| project.update_all }
+    update_prognosis
+    update_diff
+    update_status
+    update_contributing_projects_status
+  end
+
 end

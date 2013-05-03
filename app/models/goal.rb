@@ -60,7 +60,7 @@ class Goal < ActiveRecord::Base
   validates :prereq, # TODO make this an array
   :length => { :maximum => 80 }
 
-  def update_status #TODO possibly add call chain to update all values this depends on
+  def update_status
     inds = self.indicators
     if inds.size == 0
       self.status=0.0
@@ -71,6 +71,11 @@ class Goal < ActiveRecord::Base
       end
       self.status = status / inds.size
     end
+  end
+
+  def update_all
+    self.indicators.each { |indicator| indicator.update_all }
+    update_status
   end
 
 end
