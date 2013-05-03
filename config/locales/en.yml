@@ -8,16 +8,7 @@ en:
       generate: "Generate"
       all_available: "All Available Forms"
       form_name: "Form Name"
-    create_users:
-      create_users: "Create Users"
-    cu_review:
-      generate_new_1: "Generate New Form"
-      goal_1: "Goal"
-      indicator_1: "Indicator"
-      project_1: "Project"
-      generate_1: "Generate"
-      forms_to: "Forms to Review"
-      form_name_1: "Form Name"
+     
   provider:
     forms_composite:
       hi_provider: "Hi Provider, %{user_username}"
