@@ -143,11 +143,11 @@ describe Indicator do
   ### SOURCE
   
   ## Source is not empty
-  it "should not have empty Source" do
+  it "should allow empty Source" do
     source = ""
     indicator = generate()
     indicator.source = source
-    assert(!indicator.save, "It saves on empty Source")
+    assert(indicator.save, "It saves on empty Source")
   end
   
   ## Source max = 200
@@ -311,7 +311,7 @@ describe Indicator do
     assert(!indicator.save, "It saves on empty Direction")
   end
   
-  ## Direction max = 20 = { 'more is better', 'less is better' }
+  ## Direction max = 20 = { 'More is Better', 'Less is Better' }
   it "should not have Direction longer than 20 characters" do
     direction = (0...21).map{ ( 65+rand(26) ).chr }.join
     indicator = generate()

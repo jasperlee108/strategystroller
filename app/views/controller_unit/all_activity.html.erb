@@ -65,6 +65,7 @@
 	<div class="row-fluid">
 		<div class="span6">
 			<%= f.input :phase, :input_html => { :value => @activity.phase, :readonly => true, :class => "span12" }, :label => "Part of Phase" %>
+          <!--TODO add in phase string functionality. This will work for now.-->
 		</div>
 		<div class="span6">
 			<%= f.input :notes, :input_html => { :value => @activity.notes, :readonly => true, :rows => 5, :class => "span12" }, :label => "Notes" %>

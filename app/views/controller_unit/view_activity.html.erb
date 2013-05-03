@@ -13,7 +13,7 @@
           <%= f.input :description, :input_html => { :value => @activity.description, :readonly => true }, :label => "Activity Description" %>
           
           <%= f.input :phase, :input_html => { :value => @activity.phase, :readonly => true }, :label => "Part of Phase" %>
-          
+          <!--TODO add in phase to string functionality, this will do for now. -->
           <%= f.input :startDate, :input_html => { :value => @activity.startDate, :readonly => true, :style => "width: 20%" }, :label => "Starting Date" %>
           
           <%= f.input :endDate, :input_html => { :value => @activity.endDate, :readonly => true, :style => "width: 20%" }, :label => "Ending Date" %>
@@ -29,9 +29,9 @@
           <%= f.input :actualManp, :input_html => { :value => @activity.actualManp, :readonly => true }, :label => "Actual Employee Resources (days)" %>
           
           <%= f.input :actualCost, :input_html => { :value => @activity.actualCost, :readonly => true }, :label => "Actual External Costs (currency)" %>
-          
+
           <%= f.input :actualProg, :input_html => { :value => @activity.actualProg, :readonly => true }, :label => "Status of Activity" %>
-          
+          <!--TODO add in actualProg to string functionality, this will do for now. -->
           <%= f.input :statusNotes, :input_html => { :value => @activity.statusNotes, :readonly => true }, :label => "Notes on Status" %>
 
         <% end %>

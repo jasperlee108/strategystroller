@@ -58,10 +58,11 @@
 	<div class="row-fluid">
 		<div class="span6">
 			<div class="form-inline">
-			<%= f.input :freq, :required => true, :as => :radio, :collection => ["M", "Q", "HY", "Y", "S"], :label => "Frequency of Acquisition" %>
-				<div id="specialfreq">
-				<%= f.input :special_freq, :required => true, :as => :check_boxes, :collection => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :label => "Frequency in Months" %>
+			<%= f.input :string_freq, :required => true, :as => :radio, :collection => ["M", "Q", "HY", "Y", "S"], :label => "Frequency of Acquisition" %>
+				<div id="stringfreq">
+				<%= f.input :freq, :required => true, :as => :check_boxes, :collection => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :label => "Frequency in Months" %>
 				</div>
+              <!--TODO get this showing up on S selection-->
 			</div>
 		</div>
 	</div>
@@ -94,13 +95,14 @@
 </div>
 
 <script>
-$("#specialfreq").hide();
-$('input[name="indicator[freq]"]').click(function(event)
-	{
-		if ($('#indicator_freq_s').is(":checked")) {
-			$('#specialfreq').show();
-		} else {
-			$('#specialfreq').hide();
-		}
-	});
+$("#stringfreq").hide();
+$('input[name="indicator[string_freq]"]').click(function(event)
+{
+    if ($('#indicator_string_freq_s').is(":checked")) {
+        $('#stringfreq').show();
+    } else {
+        $('#stringfreq').hide();
+    }
+});
+;
 </script>

@@ -1,7 +1,7 @@
 class Indicator < ActiveRecord::Base
   attr_accessible :actual, :description, :diff, :dir, :freq, :year, :reported_values, :indicator_type,
                   :name, :notes, :source, :contributing_projects_status, :status, :status_notes,
-                  :prognosis, :target, :unit, :goal_id, :user_id, :short_name
+                  :prognosis, :target, :unit, :goal_id, :user_id, :short_name, :string_freq
 
   serialize :freq, Array
   serialize :reported_values, Array
@@ -40,25 +40,23 @@ class Indicator < ActiveRecord::Base
   
   ## Source = string[200]
   validates :source,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 200 }
 
   ## Unit = string[20]
   validates :unit,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 20 }
 
   ## Freq = Array[int]
-  validates :freq,
-  :presence => true
-
   validates_each :freq do |record,attribute,value|
     problems = ""
     if value.is_a? Array
       if value.empty?
-        problems << ":freq cannot be empty"
+        # problems << ":freq cannot be empty"
       else
         value.each do |month|
+          month = month
           if month < 1 or month > 12
             problems <<
                 "Each month must be a value between 1 and 12, one was #{month}"
@@ -81,7 +79,7 @@ class Indicator < ActiveRecord::Base
 
   ## Year = Integer
   validates :year,
-            :presence => true,
+            :allow_blank => true,
             :numericality => { :only_integer => true}
 
   ## Only one indicator of a given name per year
@@ -110,12 +108,12 @@ class Indicator < ActiveRecord::Base
 
   ## Type = string[10]
   validates :indicator_type,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 10 }
 
   ## Dir = string[20]
   validates :dir,
-  :presence => true,
+  :allow_blank => true,
   :length => { :maximum => 20 }
 
   ## Actual = decimal
@@ -128,7 +126,7 @@ class Indicator < ActiveRecord::Base
   ## 0.00 < Target
   validates :target,
   :presence => true,
-  :numericality => { :greater_than => 0 }
+  :numericality => { :greater_than_or_equal_to => 0 }
   
   ## Notes = string[600]
   ## Notes can be empty
@@ -136,13 +134,13 @@ class Indicator < ActiveRecord::Base
   :length => { :maximum => 600 },
   :allow_blank => true
   
-  ## Status = long integer
+  ## Status = decimal
   ## 0.00 <= Status
   validates :status,
   :presence => true,
   :numericality => { :greater_than_or_equal_to => 0 }
 
-  ## Contributing_Projects_status = long integer
+  ## Contributing_Projects_status = decimal
   ## 0.00 <= Contributing_Projects_status
   validates :contributing_projects_status,
     :presence => true,
@@ -191,10 +189,13 @@ class Indicator < ActiveRecord::Base
   # so the calculation should be based on accurate values. 
   def update_status
     #update_diff
-    raise "Target value must be nonzero, instead of #{self.target}" if self.target == 0.0
-    if self.dir == "more is better"
+    #raise "Target value must be nonzero, instead of #{self.target}" if self.target == 0.0
+    raise "Direction must be set for this to be calculated" if self.dir.null?
+    if self.target == 0
+      self.status=999999999999999 #functionally infinite
+    elsif self.dir == "More is Better"
       self.status=((1 + self.diff) / self.target)
-    elsif  self.dir == "less is better"
+    elsif  self.dir == "Less is Better"
       self.status=((1 - self.diff) / self.target)
     end
   end

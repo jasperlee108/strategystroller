@@ -56,12 +56,11 @@ class ProviderController < ApplicationController
       #read workingBranch's indicator.freq implementation
       #^ has not been merged in yet
       #the indicator's freq field is an Array
-      #:freq is going to be a String
-      #:special_freq is going to be an Array[String]
-      # freq is going to be an Array[String]
+      #:string_freq is going to be a String
+      #:freq is going to be an Array[Integer]
       freq = []
-      freqStr = params[:indicator][:freq]
-      freqArr = params[:indicator][:special_freq]
+      freqStr = params[:indicator][:string_freq]
+      freqArr = params[:indicator][:freq]
       if (freqStr == "S")
         freqArr.each do |month|
           if (month != "")
@@ -81,7 +80,7 @@ class ProviderController < ApplicationController
       else #this case should never be reached
         flash[:error] = "Wrong frequency type selected"
       end
-      params[:indicator].delete(:special_freq)
+      params[:indicator].delete(:string_freq)
       params[:indicator][:freq] = freq
 
 

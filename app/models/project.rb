@@ -34,7 +34,8 @@ class Project < ActiveRecord::Base
 
   # Needs a Steer
   validates :steer_id,
-  :presence => true
+  :length => { :minimum => 0 },
+  :allow_blank => true
 
   # Name = string[80]
   validates :name,
@@ -57,7 +58,8 @@ class Project < ActiveRecord::Base
   ## Rails has this thing where most things default to False 
 
   ## Inplan = true / false = yes / no
-  validates :inplan, :inclusion => { :in => [true, false] }
+  validates :inplan, :inclusion => { :in => [true, false] },
+  :allow_blank => true
 
   ## Compensation = true / false = yes / no
   validates :compensation, :inclusion => { :in => [true, false] }

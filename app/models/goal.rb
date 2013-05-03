@@ -57,7 +57,7 @@ class Goal < ActiveRecord::Base
   
   ## Prereq = string[80]
   ## Can have zero pre-req if it's the first
-  validates :prereq,
+  validates :prereq, # TODO make this an array
   :length => { :maximum => 80 }
 
   def update_status #TODO possibly add call chain to update all values this depends on

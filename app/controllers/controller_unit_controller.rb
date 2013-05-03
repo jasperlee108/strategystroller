@@ -95,11 +95,18 @@ class ControllerUnitController < ApplicationController
     end
   end
   
-  def set_indicator
+  def set_indicator  #FIXME MERGE
     @indicator = Indicator.new
-    if (request.post?) 
+    if (request.post?)
       @indicator = Indicator.new(params[:indicator])
       @indicator.status = 0
+      @indicator.contributing_projects_status = 0
+      @indicator.actual = 0
+      @indicator.target = 1
+      @indicator.prognosis = 0
+      @indicator.diff = 0
+      @indicator.reported_values = []
+      @indicator.freq = []
       if @indicator.save # indicator saved
         form_id = save_form(INDICATOR, @indicator.user_id, @indicator.id)
         if (!form_id) # indicator saved but form not saved, so delete indicator
@@ -344,7 +351,14 @@ class ControllerUnitController < ApplicationController
     @projects.empty? ? @projects += ['None'] : nil
     #freq is Array
     #combos are 1, 1/7, 1/4/7/10, all, any
-    freq = @current_indicator.freq
+    #TODO freq is all broken, doesn't propagate properly. See c_u/indicator_check.html.erb
+    freq = []
+    freqArr = @current_indicator.freq
+    freqArr.each do |month|
+      if (month != "")
+        freq << month.to_i
+      end
+    end
     y = [1]
     hy = [1,7]
     q = [1,4,7,10]
@@ -360,10 +374,10 @@ class ControllerUnitController < ApplicationController
       real_freq = "M"
     else
       real_freq = "S"
-      @current_indicator.special_freq = freq
+      #@current_indicator.string_freq = freq
     end 
     #current_indicator.freq needs to become a string
-    @current_indicator.freq = real_freq
+    @current_indicator.string_freq = real_freq
     
 
     if (request.post?)
