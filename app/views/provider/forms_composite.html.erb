@@ -1,17 +1,17 @@
-<h2>Hi Provider, <%= @user.username %>! </h2>
+<h2><%= t '.hi_provider', :user_username => (@user.username) %>! </h2>
 <%= render "setup_alerts" %>
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
-	<h4><u>Unchecked Forms</u></h4>
+	<h4><u><%= t '.unchecked' %></u></h4>
 	<table class="table table-hover table-bordered" style="background-color:white;">
 		<tr>
 			<th><%= sortable "created_at", "Date Received" %></th>
 			<th><%= sortable "last_reminder", "Last Reminder" %></th>
 			<th><%= sortable "lookup", "Form Type" %></th>
-			<th>Form Name</th>
+			<th><%= t '.form_name_2' %></th>
 		</tr>
 		<% if @forms_unchecked.empty? %>
 		<tr>
-			<td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+			<td><%= t '.ndash_9' %></td><td><%= t '.ndash_10' %></td><td><%= t '.ndash_11' %></td><td><%= t '.ndash_12' %></td>
 		</tr>
 		<% end %>
 		<% @forms_unchecked.each do |forms| %>
@@ -25,17 +25,17 @@
 	</table>
 </div>
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
-	<h4><u>Saved Forms</u></h4>
+	<h4><u><%= t '.saved_forms' %></u></h4>
 	<table class="table table-hover table-bordered" style="background-color:white;">
 		<tr>
 			<th><%= sortable "created_at", "Date Received" %></th>
 			<th><%= sortable "last_reminder", "Last Reminder" %></th>
 			<th><%= sortable "lookup", "Form Type" %></th>
-			<th>Form Name</th>
+			<th><%= t '.form_name_3' %></th>
 		</tr>
 		<% if @forms_saved.empty? %>
 		<tr>
-			<td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+			<td><%= t '.ndash_13' %></td><td><%= t '.ndash_14' %></td><td><%= t '.ndash_15' %></td><td><%= t '.ndash_16' %></td>
 		</tr>
 		<% end %>
 		<% @forms_saved.each do |forms| %>

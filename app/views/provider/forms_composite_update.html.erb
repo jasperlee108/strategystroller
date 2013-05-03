@@ -1,16 +1,16 @@
-<h2>Hi Provider, <%= @user.username %>! </h2>
+<h2><%= t '.hi_provider_1', :user_username => (@user.username) %>! </h2>
 <%= render "setup_alerts" %>
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
-    <h4><u>Update Indicators</u></h4>
+    <h4><u><%= t '.update' %></u></h4>
     <table class="table table-hover table-bordered" style="background-color:white;">
         <tr>
             <th><%= sortable "updated_at", "Date Last Updated" %></th>
             <th><%= sortable "last_reminder", "Last Reminder" %></th>
-            <th>Form Name</th>
+            <th><%= t '.form_name_4' %></th>
         </tr>
         <% if @indicator_forms.empty? %>
         <tr>
-            <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+            <td><%= t '.ndash_17' %></td><td><%= t '.ndash_18' %></td><td><%= t '.ndash_19' %></td>
         </tr>
         <% end %>
         <% @indicator_forms.each do |form| %>
@@ -23,16 +23,16 @@
     </table>
 </div>
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
-    <h4><u>Saved Forms</u></h4>
+    <h4><u><%= t '.saved_forms_1' %></u></h4>
     <table class="table table-hover table-bordered" style="background-color:white;">
         <tr>
             <th><%= sortable "updated_at", "Date Last Updated" %></th>
             <th><%= sortable "last_reminder", "Last Reminder" %></th>
-            <th>Form Name</th>
+            <th><%= t '.form_name_5' %></th>
         </tr>
         <% if @proj_forms.empty? %>
         <tr>
-            <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+            <td><%= t '.ndash_20' %></td><td><%= t '.ndash_21' %></td><td><%= t '.ndash_22' %></td>
         </tr>
         <% end %>
         <% @proj_forms.each do |form| %>
