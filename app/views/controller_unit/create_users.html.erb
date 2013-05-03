@@ -5,18 +5,22 @@
 	</div>
 </div>
 <div class="well">
-		<center>
-		<%= render "setup_alerts" %>
-		<!-- Need to specify company position and general position (CU/prov) when entering a user-->
-		<%= semantic_form_for @application do |f| %>
-		<%= f.inputs do %>
-		<%= f.semantic_fields_for :users do |user| %>
-		<%= render 'create_user_fields', :f => user %>
+		<div class="row-fluid">
+			<div class="span4 offset5">
+				<%= render "setup_alerts" %>
+				<!-- Need to specify company position and general position (CU/prov) when entering a user-->
+				<%= semantic_form_for @application do |f| %>
+				<%= f.inputs do %>
+				<%= f.semantic_fields_for :users do |user| %>
+				<%= render 'create_user_fields', :f => user %>
+				<% end %>
+				<%= link_to_add_association 'Add User', f, :users, :partial => 'create_user_fields', :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
+			<% end %>
+			<br />
+		</div>
+		<div class="span4 offset5">
+			<%= f.action :submit, :label => "Create User(s)" %>
+		</div>
 		<% end %>
-		<%= link_to_add_association 'Add User', f, :users, :partial => 'create_user_fields', :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
-		<% end %>
-		<br />
-		<%= f.action :submit, :label => "Create User(s)" %>
-		<% end %>
-		</center>
+		</div>
 </div>
