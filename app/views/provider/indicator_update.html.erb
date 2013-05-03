@@ -1,0 +1,111 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">Indicator Form</a>
+        </ul>
+    </div>
+</div>
+<style>
+    input {
+        width: 25em;
+    }
+    textarea {
+        width: 50em;
+    }
+</style>
+
+<%= render "setup_alerts" %>
+<div class="well">
+    <%= semantic_form_for @indicator, :url => indicator_define_path do |f| %>
+    <%= f.inputs do %>
+    <%= hidden_field_tag :entry_id, params[:entry_id] %>
+    <%= hidden_field_tag :form_id, params[:form_id] %>
+    <div class="row-fluid">
+        <div class="span8">
+            <%= f.input :name, :input_html => { :value => @current_indicator.name, :readonly => true, :class => "span12" }, :label => "Name of Indicator" %>
+        </div>
+        <div class="span4">
+            <%= f.input :short_name, :input_html => { :value => @current_indicator.short_name, :readonly => true, :class => "span12" }, :label => "Short Name of Indicator" %>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <%= f.input :goal_id, :as => :select, :collection => Goal.all, :selected => @current_indicator.goal_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Associated Goal" %>
+        </div>
+        <div class="span6">
+            <%= f.input :user_id, :as => :select, :collection => User.where(:controlling_unit => false), :selected => @current_indicator.user_id, :input_html => { :disabled => true, :class => "span12" }, :label => "Responsible" %>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <%= f.input :unit, :input_html => { :value => @current_indicator.unit, :class => "span12", :readonly => true }, :required => true, :as => :string, :label => "Unit" %>
+        </div>
+        <div class="span6">     
+            <div class="span6">
+            <%= f.input :actual, :input_html => { :value => @current_indicator.actual, :class => "span12", :readonly => true }, :required => true, :as => :number, :label => "Historical Data" %>
+            </div>
+            <div class="span6">
+            <%= f.input :target, :input_html => { :value => @current_indicator.target, :class => "span12", :readonly => true }, :required => true, :as => :number, :label => "Target Data" %>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <%= f.input :description, :as => :text, :input_html => { :value => @current_indicator.description, :rows => 5, :class => "span12", :readonly => true}, :required => true, :label => "Description of Indicator" %>
+        </div>
+        <div class="span6"> 
+             <!-- NEED to insert prognosis here --> 
+           
+            <%= f.input :diff, :as => :text, :input_html => { :value => @current_indicator.diff, :rows => 1, :class => "span12", :readonly => true}, :required => true, :label => "Difference" %>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <%= f.input :source, :input_html => { :value => @current_indicator.source, :class => "span12", :rows => 1, :readonly => true }, :required => true, :as => :text, :label => "Source" %>
+        </div>
+        <div class="span12">
+            <!-- Status updates go here -->
+        </div>
+        <div class="span12">
+            <!-- More status updates -->
+        </div>
+
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div id="freq" class="form-inline">
+            <%= f.input :freq, :input_html => { :value => @current_indicator.freq, :disabled => true}, :required => true, :as => :radio, :collection => ["M", "Q", "HY", "Y", "S"], :label => "Frequency of Acquisition" %>
+                <div id="specialfreq">
+                <%= f.input :special_freq, :checked_value => true, :unchecked_value => false, :input_html => { :checked => @current_indicator.special_freq, :disabled => true}, :required => true, :as => :check_boxes, :collection => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :label => "Frequency in Months" %>
+                </div> <!-- Make sure checkboxes are disabled here -->
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="span6">
+            <%= f.input :indicator_type, :input_html => { :class => "span12", :disabled => true }, :required => true, :as => :select, :collection => options_for_select(["Average", "Cumulative"], @current_indicator.indicator_type), :label => "Indicator Type" %>
+            </div>
+            <div class="span6">
+            <%= f.input :dir, :input_html => { :class => "span12", :disabled => true }, :required => true, :as => :select, :collection => options_for_select(["More is Better", "Less is Better"], @current_indicator.dir), :label => "Target Direction" %>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="span6"></div>
+            <div class="span6">
+            <%= f.input :notes, :as => :text, :input_html => { :value => @current_indicator.notes, :rows => 5, :class => "span12" }, :required => false, :label => "Notes" %>
+            </div>
+        </div>
+        <div class="span6">
+            <%= f.input :status_notes, :as => :text, :input_html => { :value => @current_indicator.notes, :rows => 5, :class => "span12" }, :required => false, :label => "Status notes" %>
+        </div>
+    </div>
+    <% end %>
+    <center>
+        <div class="row-fluid">
+            <%= f.action :submit, :label => "Submit Indicator",:button_html => { :class=> "btn btn-primary span4" }%>
+            <%= f.action :submit, :label => "Save Indicator",:button_html => { :class=> "btn btn-primary span4" }%>
+        </div>
+    </center>
+    <% end %>
+</div>

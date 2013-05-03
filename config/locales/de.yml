@@ -2,7 +2,7 @@
   hello: "Hallo"
   email_address: "Email-Adresse"
   username: "Benutzername"
-  buisness_code: "Positionskürzel"
+  business_code: "Positionskürzel"
   password: "Passwort"
   confirm_password: "Passwort bestätigen"
   please_sign_in: "Bitte anmelden"

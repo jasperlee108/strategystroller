@@ -6,8 +6,12 @@ StrategyStroller::Application.routes.draw do
   match "home/index" => "home#index", :as => "home_index"  
   get "home/index"
 
+ 
   ## FOR ACTIVE ADMIN
   ActiveAdmin.routes(self)
+
+
+  #get "admin/setup_system" => "admin#setup_system", :as => "asetup_system"
 
   ## FOR DEVISE
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -15,6 +19,7 @@ StrategyStroller::Application.routes.draw do
 
   ## FOR FORMTASTIC
   resources :user
+
 
   ## FOR MAIN PANELS
   match "admin/admin_panel" => 'admin#admin_panel', :as => 'admin_panel'

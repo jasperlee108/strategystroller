@@ -2,7 +2,7 @@ en:
   hello: "Hello"
   email_address: "Email Address"
   username: "Username"
-  buisness_code: "Buisness Code"
+  business_code: "Buisness Code"
   password: "Password"
   confirm_password: "Confirm Password"
   please_sign_in: "Please Sign In"
