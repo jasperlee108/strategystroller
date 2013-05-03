@@ -10,6 +10,10 @@ gem 'rails-i18n'
 # Google Charts
 gem "googlecharts", :require => "gchart"
 
+
+# Factory Girl
+gem "factory_girl_rails", "~> 4.0"
+
 # SimpleCov 
 gem 'simplecov', :require => false, :group => :test
 #gem "bcrypt-ruby" # necessary for 1.9

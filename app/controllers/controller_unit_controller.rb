@@ -25,7 +25,7 @@ class ControllerUnitController < ApplicationController
 
   def graph_panel
     @user = current_user
-    pname_list = Project.all.map(&:name)
+    pname_list = Project.all.map(&:short_name)
     pgs_list_uc = Project.all.map(&:status_global)
     len_of_list = pname_list.length
     if len_of_list>0
@@ -42,14 +42,14 @@ class ControllerUnitController < ApplicationController
       @bar_chart = Gchart.bar( 
               :axis_with_labels => 'y',
               :axis_labels => [axis_range],
-              :size => '500x500',
+              :size => '500x600',
               :theme => :pastel,
               :title => "Projects Global Status",
-              :bar_width_and_spacing => spacing,
+              :bar_width_and_spacing => '7,5',
               :legend => pname_list,
               :data => clean_list(pgs_list_uc))
 
-      @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x300',
+      @pie_chart = Gchart.pie_3d(:title => 'Project Status Distribution', :size => '600x230',
                 :data => pgs_list_uc, :labels => pname_list )
     end
   end
