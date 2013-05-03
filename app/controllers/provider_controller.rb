@@ -8,6 +8,11 @@ class ProviderController < ApplicationController
   #  encoded_id = encode_id(form_id.to_s)
    # url = "http://localhost:3000/forms?form_id=" + encoded_id.to_s #TEMP
   #end
+
+  GOAL = 1
+  INDICATOR = 2
+  PROJECT = 3
+  ACTIVITY = 4
    
   def goal_define
     @user = current_user
@@ -178,19 +183,27 @@ class ProviderController < ApplicationController
 
   def forms_composite_update
     @user = current_user
-    @all_ind_forms = Form.find_all_by_user_id_and_lookup(@user.id,2) #indicator lookup = 2
+    @all_ind_forms = Form.find_all_by_user_id_and_lookup(@user.id, INDICATOR)
     @indicator_forms = []
-
     @all_ind_forms.each do |form|
       ind = Indicator.find(form.entry_id)
+      #make sure month is in freq and we haven't already updated the ind this month
       included = ind.freq.include?(Time.now.month) && ind.updated_at.month != Time.now.month
       if (form.submitted && form.checked && form.reviewed && included)
         @indicator_forms << form
       end
     end
-    
 
-    @project_forms = Form.where(:checked => true, :submitted=>false).find_all_by_user_id(@user.id)
+     @all_proj_forms = Form.find_all_by_user_id_and_lookup(@user.id, PROJECT)
+      @proj_forms = []
+      @all_proj_forms.each do |form|
+        proj = Project.find(form.entry_id)
+        #make sure we haven't already updated the proj this month
+        included = proj.updated_at.month != Time.now.month
+        if (form.submitted && form.checked && form.reviewed && included)
+          @proj_forms << form
+        end
+      end
   end
 
 
