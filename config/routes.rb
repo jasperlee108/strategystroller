@@ -50,6 +50,7 @@ StrategyStroller::Application.routes.draw do
   match "provider/indicator_update" => "provider#indicator_update", :as => 'indicator_update'
   match "provider/project_update" => "provider#project_update", :as => 'project_update'
   match "provider/home" => "provider#forms_composite", :as => "forms_composite"
+  match "provider/update" => "provider#forms_composite_update", :as => "forms_composite_update"
 
   #applications path currently defaults to setup_system path so really we only need
   #first 'post' route below, but including all 'post' paths to be safe/in case we need them

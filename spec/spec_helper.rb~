@@ -1,5 +1,5 @@
 ### TODO: Uncomment later, for now keep it like this to avoid keep updating coverage ###
-require 'simplecov'
+#require 'simplecov'
 #SimpleCov.start 'rails'
 
 SimpleCov.start 'rails' do
