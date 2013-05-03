@@ -4,13 +4,13 @@
       <div class="navbar-inner ni">
         <div class="container">
           <ul class="nav isnb">
-            <li><a href=<%= url_for all_data_path %>>Data View</a></li>
-            <li class="active"><a href=<%= url_for graph_panel_path %>>Graphs</a></li>
+            <li><a href=<%= url_for all_data_path %>><%= t '.data_view_1' %></a></li>
+            <li class="active"><a href=<%= url_for graph_panel_path %>><%= t '.graphs_1' %></a></li>
           </ul>
         </div>
       </div>
     </div><!-- /.navbar -->
-<h2>Graphical Panel for: <%= @user.username %>! </h2>
+<h2><%= t '.graphical', :user_username => (@user.username) %>! </h2>
 <br/>
 <img src="<%= @pie_chart %>" alt="Pie Chart" id="piechart">
 <br/><br/><br/><br/>

@@ -1,0 +1,14 @@
+<script>
+document.getElementById("home").className = "";
+document.getElementById("define_page").className = "active";
+</script>
+
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'goal_define', :controller => 'provider') %>"><%= t '.goal' %></a></li>
+<li><a href="<%= url_for(:action => 'indicator_define', :controller => 'provider') %>"><%= t '.indicator_1' %></a></li>
+<li><a href="<%= url_for(:action => 'activity_define', :controller => 'provider') %>"><%= t '.activity' %></a></li>
+<% end %>
+
+<h2><%= t '.welcome_2', :user_username => (@user.username) %>! </h2>
+<%= link_to (t '.unchecked_3'), unchecked_path %><br>
+<%= link_to (t '.saved_forms_3'), saved_path %><br>

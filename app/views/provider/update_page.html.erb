@@ -1,0 +1,13 @@
+<script>
+document.getElementById("home").className = "";
+document.getElementById("update_page").className = "active";
+</script>
+
+<% content_for :context_menu do %>
+<li><a href="<%= url_for(:action => 'indicator_update', :controller => 'provider') %>"><%= t '.indicator' %></a></li>
+ <li><a href="<%= url_for(:action => 'project_update', :controller => 'provider') %>"><%= t '.project' %></a></li>
+<% end %>
+
+<h2><%= t '.welcome', :user_username => (@user.username) %>! </h2>
+<%= link_to (t '.unchecked_1'), unchecked_path %><br>
+<%= link_to (t '.saved_forms_1'), saved_path %><br>

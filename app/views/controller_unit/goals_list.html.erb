@@ -1,0 +1,24 @@
+<div class="navbar">
+  <div class="navbar-inner"><%= tabs %></div></div>
+<div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
+<h4><u><%= t '.goals' %></u></h4>
+<table class="table table-hover table-bordered" style="background-color:white;">
+  <tr>
+    <th><%= t '.goal_3' %></th>
+    <th><%= t '.owner_2' %></th>
+    <th><%= t '.status_2' %></th>
+  </tr>
+ <% if @goals.empty? %> 
+   <tr><td><%= t 'ndash' %></td><td><%= t 'ndash' %></td><td><%= t 'ndash' %></td>
+     </tr>
+   <% end %>  
+<% @goals.each do |goal| %>
+  <tr>
+  <td> <%= link_to goal.short_name , goal_check_path(goal.id) %></td>
+  <td><%= goal.user_id %> </td>
+  <td><%= goal.status %> </td>
+
+  </tr>
+<% end %>
+</table>
+</div>
