@@ -36,16 +36,16 @@ class Indicator < ActiveRecord::Base
   ## Description can be empty
   validates :description,
   :length => { :maximum => 600 },
-  :allow_blank => true
+  :presence => true
   
   ## Source = string[200]
   validates :source,
-  :allow_blank => true,
+  :presence => true,
   :length => { :maximum => 200 }
 
   ## Unit = string[20]
   validates :unit,
-  :allow_blank => true,
+  :presence => true,
   :length => { :maximum => 20 }
 
   ## Freq = Array[int]
@@ -108,12 +108,12 @@ class Indicator < ActiveRecord::Base
 
   ## Type = string[10]
   validates :indicator_type,
-  :allow_blank => true,
+  :presence => true,
   :length => { :maximum => 10 }
 
   ## Dir = string[20]
   validates :dir,
-  :allow_blank => true,
+  :presence => true,
   :length => { :maximum => 20 }
 
   ## Actual = decimal

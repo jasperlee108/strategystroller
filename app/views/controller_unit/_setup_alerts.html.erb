@@ -1,24 +1,24 @@
       <% if flash[:notice] %>
       <div class="alert" >
-      <button type="button" class="close" data-dismiss="alert"><%= t '.times_8' %></button>
+      <button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
       <%= flash[:notice] %>
       </div>
       <% end %>
 		<% if notice %>
 		<div class="notice alert">
-			<button type="button" class="close" data-dismiss="alert"><%= t '.times_9' %></button>
+			<button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
 			<%= notice %>
 			</div>
  		<% end %>
       <% if flash[:error] %>
       <div class="alert alert-error">
-      <button type="button" class="close" data-dismiss="alert"><%= t '.times_10' %></button>
+      <button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
       <%= flash[:error] %>
       </div>
       <% end %>
 	  <% if alert %>
 	 <div class="alert">
-			<button type="button" class="close" data-dismiss="alert"><%= t '.times_11' %></button>
+			<button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
 			<%= alert %>
 			</div>
 			<% end %>
