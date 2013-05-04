@@ -44,10 +44,7 @@ class ProviderController < ApplicationController
     @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
-      if (!(@current_indicator.update_attributes(params[:indicator], :updated_at => Time.current))) #fields unsuccessfully updated
-        Rails.logger.info(@current_indicator.errors.messages.inspect)
-        flash[:error] = "An error occurred in submitting the form, please try again."
-      elsif (params[:commit] == "Submit Indicator")
+      if (params[:commit] == "Submit Indicator")
         @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
@@ -110,11 +107,11 @@ class ProviderController < ApplicationController
     @projects = (@current_indicator.projects).collect{|p| p.short_name}
     @projects.empty? ? @projects += ['None'] : nil
     if (request.post?)
-       params[:indicator][:freq].delete("")
-      if (!(@current_indicator.update_attributes(params[:indicator], :updated_at => Time.current))) #fields unsuccessfully updated
-        Rails.logger.info(@current_indicator.errors.messages.inspect)
-        flash[:error] = "An error occurred in submitting the form, please try again."
-      elsif (params[:commit] == "Update Indicator")
+      params[:indicator][:freq].delete_if{|k,v| k==""}
+      params[:indicator][:freq].map! do |month|
+          month = month.to_i
+      end
+      if (params[:commit] == "Update Indicator")
         @current_indicator.update_attributes(params[:indicator], :updated_at => Time.current)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
@@ -135,7 +132,6 @@ class ProviderController < ApplicationController
     @current_project = Project.find_by_id(entry_id)
     @activities = @current_project.activities
     if (request.post?)
-      @msg="bye"
       if (params[:commit] == "Update Project")
         flash[:notice] = "Project successfully submitted!"
       elsif (params[:commit] == "Save Project")
