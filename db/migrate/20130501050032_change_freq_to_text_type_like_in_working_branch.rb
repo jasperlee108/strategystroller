@@ -1,6 +1,7 @@
 class ChangeFreqToTextTypeLikeInWorkingBranch < ActiveRecord::Migration
   def change
-    change_column :indicators, :freq, :text
+    remove_column :indicators, :freq
+    add_column :indicators, :freq, :text
   end
 
 end
