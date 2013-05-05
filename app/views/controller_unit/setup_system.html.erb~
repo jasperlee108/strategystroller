@@ -6,7 +6,6 @@
 </div>
 <div class="well">
 <center>
- <%= render "setup_alerts" %>
 
 
     <%= semantic_form_for @application do |f| %>

@@ -1,3 +1,9 @@
+<style>
+	.checkbox {
+		margin-left: 5px;
+   		margin-right: 5px;
+	}
+</style>
 <div class="navbar">
 	<div class="navbar-inner">
 		<a class="brand" href="#">Create Users</a>
@@ -15,12 +21,9 @@
 				<%= render 'create_user_fields', :f => user %>
 				<% end %>
 				<%= link_to_add_association 'Add User', f, :users, :partial => 'create_user_fields', :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
-			<% end %>
-			<br />
-		</div>
-		<div class="span4 offset5">
-			<%= f.action :submit, :label => "Create User(s)" %>
-		</div>
-		<% end %>
+				<% end %>
+				<br/><br/>
+				<%= f.action :submit, :label => "Create User(s)" %><% end %>
+			</div>
 		</div>
 </div>
