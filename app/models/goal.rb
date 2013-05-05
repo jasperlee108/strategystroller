@@ -1,6 +1,6 @@
 class Goal < ActiveRecord::Base
-  attr_accessible :focus, :justification, :name, :need, :notes, :status, 
-                  :dimension_id, :user_id, :prereq, :short_name, :updated_at
+  attr_accessible :focus, :justification, :name, :need, :notes, :status,
+                  :dimension_id, :prereq, :short_name, :user_id, :updated_at
   
   ### ASSOCIATIONS
   ## parent
@@ -49,17 +49,33 @@ class Goal < ActiveRecord::Base
   :length => { :maximum => 600 },
   :allow_blank => true
   
-  ## Status = long integer
-  ## 0.00 <= Status <= 100.00
+  ## Status = decimal
+  ## 0.00 <= Status
   validates :status,
-  :presence => true,
-  :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 100
-  }
+  :allow_blank => true,
+  :numericality => { :greater_than_or_equal_to => 0 }
   
   ## Prereq = string[80]
   ## Can have zero pre-req if it's the first
-  validates :prereq,
+  validates :prereq, # TODO make this an array
   :length => { :maximum => 80 }
+
+  def update_status
+    inds = self.indicators
+    if inds.size == 0
+      self.status=0.0
+    else
+      status = 0.0
+      inds.each do |indicator|
+        status += indicator.contributing_projects_status
+      end
+      self.status = status / inds.size
+    end
+  end
+
+  def update_all
+    self.indicators.each { |indicator| indicator.update_all }
+    update_status
+  end
+
 end

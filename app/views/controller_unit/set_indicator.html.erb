@@ -1,6 +1,6 @@
 <div class="navbar">
 	<div class="navbar-inner">
-		<a class="brand" href="#">Generating New Indicator</a>
+		<a class="brand" href="#"><%= t '.generating_new_2' %></a>
 		</ul>
 	</div>
 </div>
@@ -11,6 +11,16 @@
 
 	<%= semantic_form_for @indicator do |f| %>
 	<%= f.inputs do %>
+	
+			<%= f.input :unit, :as => :hidden, :value => "Insert Unit" %>
+			<%= f.input :actual, :as => :hidden, :value => 0 %>
+			<%= f.input :description, :as => :hidden, :value => "Insert Description of Indicator" %>
+			<%= f.input :source, :as => :hidden, :value => "Insert Source" %>
+			<%= f.input :indicator_type, :as => :hidden, :value => "Average" %>
+			<%= f.input :dir, :as => :hidden, :value => "More is Better" %>
+			<%= f.input :target, :as => :hidden, :value => 0 %>
+			<%= f.input :diff, :as => :hidden, :value => 0 %>
+			<%= f.input :status, :as => :hidden, :value => 0 %>
 	
 	<div class="row-fluid">
 		<div class="span8">

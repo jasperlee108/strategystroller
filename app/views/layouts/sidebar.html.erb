@@ -3,15 +3,15 @@
         <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
-              <li class="nav-header">Navigation</li>
-              <li class="active"><a href="/home/index">Home</a></li>
-              <li><a href="/admin/login">Admin</a></li>
-              <li><a href="#">New System</a></li>
-              <li><a href="#">Yearly Review</a></li>
-              <li><a href="#">Quality Check</a></li>
-              <li><a href="#">Monthly Report</a></li>
-              <li><a href="#">Quarterly Report</a></li>
-              <li class="nav-header">Context Menu</li>
+              <li class="nav-header"><%= t '.navigation' %></li>
+              <li class="active"><a href="/home/index"><%= t '.home' %></a></li>
+              <li><a href="/admin/login"><%= t '.admin_1' %></a></li>
+              <li><a href="#"><%= t '.new_system' %></a></li>
+              <li><a href="#"><%= t '.yearly_review' %></a></li>
+              <li><a href="#"><%= t '.quality_check' %></a></li>
+              <li><a href="#"><%= t '.monthly_report' %></a></li>
+              <li><a href="#"><%= t '.quarterly' %></a></li>
+              <li class="nav-header"><%= t '.context_menu' %></li>
               <%= yield :context_menu %>
             </ul>
           </div><!--/.well -->

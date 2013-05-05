@@ -11,7 +11,7 @@ describe Goal do
     :justification => "Justification of specific goal",
     :focus => "Strategic approach",
     :notes => "Notes",
-    :status => 0.00,
+    :status => 0.01,
     :dimension_id => 1,
     :user_id => 1,
     :prereq => "A Different Goal's Name",
@@ -19,7 +19,58 @@ describe Goal do
     )
     return goal
   end
-  
+
+  def gen_with_children
+    goal = generate()
+    indicator1 = Indicator.new(
+        :name => "Name der Messgrobe",
+        :description => "Beschreibung der Messgrobe",
+        :source => "Quelle",
+        :unit => "Einheit",
+        :freq => [3,6,9,12],
+        :year => 2013,
+        :reported_values => [0.2, 0.65],
+        :indicator_type => "average",
+        :prognosis => 0.6543,
+        :dir => "more is better",
+        :actual => 0.055,
+        :target => 0.105,
+        :notes => "Anmerkungen",
+        :diff => 5.0,
+        :status => 0.755,
+        :contributing_projects_status => 0.693,
+        :status_notes => "Anmerkungen zum Status",
+        :goal_id => 1,
+        :user_id => 1,
+        :short_name => "Shorter name"
+    )
+    indicator2 = Indicator.new(  # Not a child of this goal.
+        :name => "Name der Messgrobe2",
+        :description => "Beschreibung der Messgrobe2",
+        :source => "Quelle2",
+        :unit => "Einheit2",
+        :freq => [3,6,9,12],
+        :year => 2013,
+        :reported_values => [0.2, 0.65],
+        :indicator_type => "average",
+        :prognosis => 0.6543,
+        :dir => "more is better",
+        :actual => 0.055,
+        :target => 0.105,
+        :notes => "Anmerkungen2",
+        :diff => 0.050,
+        :status => 0.111,
+        :contributing_projects_status => 0.201,
+        :status_notes => "Anmerkungen zum Status2",
+        :goal_id => 3,
+        :user_id => 1,
+        :short_name => "Shorter name"
+    )
+    indicator1.save()
+    indicator2.save()
+    return goal
+  end
+
   ## Default
   it "should pass assert true sanity test" do
     assert(true, "Did not pass sanity check")
@@ -124,11 +175,11 @@ describe Goal do
   ### STATUS
   
   ## Status can be empty
-  it "cannot have empty Status" do
+  it "can have empty Status" do
     status = nil
     goal = generate()
     goal.status = status
-    assert(!goal.save, "It saves on empty Status")
+    assert(goal.save, "It won't save on empty Status")
   end
   
   ## Status >= 0
@@ -139,14 +190,6 @@ describe Goal do
     assert(!goal.save, "It saves on Status less than 0")
   end
   
-  ## Status <= 100
-  it "should have Status of at most 100" do
-    status = 100.50
-    goal = generate()
-    goal.status = status
-    assert(!goal.save, "It saves on Status more than 100")    
-  end
-
   ### PREREQUISITE
 
   ## Prereq can be empty
@@ -166,7 +209,7 @@ describe Goal do
   end
 
   ### SHORT NAME
-  
+
   ## Short Name is not empty
   it "should not have empty Short Name" do
     short_name = ""
@@ -174,13 +217,37 @@ describe Goal do
     goal.short_name = short_name
     assert(!goal.save, "It saves on empty Short Name")
   end
-  
+
   ## Short Name max = 30
   it "should not have Short Name longer than 30 characters" do
     short_name = (0...31).map{ ( 65+rand(26) ).chr }.join
     goal = generate()
     goal.short_name = short_name
     assert(!goal.save, "It saves on Short Name longer than 30 characters")
+  end
+
+  ### Status Update/calculation
+  it 'can find the correct number of children' do
+    goal = gen_with_children()
+    goal.save()
+    goal_in_table = Goal.find(1)
+    assert(goal_in_table.indicators.count == 1, "goal counted #{goal_in_table.indicators.count} children, not 1 as expected")
+  end
+
+  it 'can update its status using its children' do
+    goal = gen_with_children()
+    goal.save()
+    goal_in_table = Goal.find(1)
+    goal_in_table.update_status()
+    assert(goal_in_table.status == 0.693, "goal status value was #{goal_in_table.status}, not 0.693 as expected")
+  end
+
+  it 'can update itself even if it has no children' do
+    goal = generate()
+    goal.save()
+    goal_in_table = Goal.find(1)
+    goal_in_table.update_status()
+    assert(goal_in_table.status == 0.0, "goal status value was #{goal_in_table.status}, not 0.0 as expected")
   end
 
   ### EXTRA
@@ -190,5 +257,6 @@ describe Goal do
   ## Source: https://sites.google.com/a/eecs.berkeley.edu/cs169-sp13/project/setting-up-a-deployment-site
   after(:each) do
     Goal.delete_all
+    Indicator.delete_all
   end
 end

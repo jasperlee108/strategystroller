@@ -44,42 +44,7 @@ class ProviderController < ApplicationController
     @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @goal_short_names = (Goal.select('short_name')).collect{|g| g.short_name}
     if (request.post?)
-      #read workingBranch's indicator.freq implementation
-      #^ has not been merged in yet
-      #the indicator's freq field is an Array
-      #:freq is going to be a String
-      #:special_freq is going to be an Array[String]
-      # freq is going to be an Array[String]
-      freq = []
-      freqStr = params[:indicator][:freq]
-      freqArr = params[:indicator][:special_freq]
-      if (freqStr == "S")
-        freqArr.each do |month|
-          if (month != "")
-            freq << month.to_i
-          end
-        end
-      elsif (freqStr == "M")
-        freq.push(1,2,3,4,5,6,7,8,9,10,11,12)
-      elsif (freqStr == "Q") #double check this?
-        freq.push(1,4,7,10)
-      elsif (freqStr == "HY")
-        freq.push(1,7)
-      elsif (freqStr == "Y")
-        freq.push(1)
-      elsif (freqArr == [""])
-        freq = []
-      else #this case should never be reached
-        flash[:error] = "Wrong frequency type selected"
-      end
-      params[:indicator].delete(:special_freq)
-      params[:indicator][:freq] = freq
-
-
-      if (!(@current_indicator.update_attributes(params[:indicator], :updated_at => Time.current))) #fields unsuccessfully updated
-        Rails.logger.info(@current_indicator.errors.messages.inspect)
-        flash[:error] = "An error occurred in submitting the form, please try again."
-      elsif (params[:commit] == "Submit Indicator")
+      if (params[:commit] == "Submit Indicator")
         @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
@@ -119,7 +84,7 @@ class ProviderController < ApplicationController
       # NOTE: activity don't need to be in form table
       # We can directly do lookup on activity table
       @activity = Activity.new(params[:activity])
-      if @activity.save # activity saved
+      if @activity.save! # activity saved
         flash[:notice] = "Activity successfully saved!"
       else # activity not saved
         flash[:error] = "ERROR: Activity was not saved!"
@@ -141,36 +106,12 @@ class ProviderController < ApplicationController
     @current_indicator = Indicator.find_by_id(entry_id)
     @projects = (@current_indicator.projects).collect{|p| p.short_name}
     @projects.empty? ? @projects += ['None'] : nil
-    #freq is Array
-    #combos are 1, 1/7, 1/4/7/10, all, any
-    freq = @current_indicator.freq
-    y = [1]
-    hy = [1,7]
-    q = [1,4,7,10]
-    m = [1,2,3,4,5,6,7,8,9,10,11,12]
-
-    if (freq == y)
-      real_freq = "Y"
-    elsif (freq == hy)
-      real_freq = "HY"
-    elsif (freq == q)
-      real_freq = "Q"
-    elsif (freq == m)
-      real_freq = "M"
-    else
-      real_freq = "S"
-      @current_indicator.special_freq = freq
-    end 
-    #current_indicator.freq needs to become a string
-    @current_indicator.freq = real_freq
-    
     if (request.post?)
-      params[:indicator].delete(:special_freq)
-      params[:indicator][:freq] = freq
-      if (!(@current_indicator.update_attributes(params[:indicator], :updated_at => Time.current))) #fields unsuccessfully updated
-        Rails.logger.info(@current_indicator.errors.messages.inspect)
-        flash[:error] = "An error occurred in submitting the form, please try again."
-      elsif (params[:commit] == "Update Indicator")
+      params[:indicator][:freq].delete_if{|k,v| k==""}
+      params[:indicator][:freq].map! do |month|
+          month = month.to_i
+      end
+      if (params[:commit] == "Update Indicator")
         @current_indicator.update_attributes(params[:indicator], :updated_at => Time.current)
         flash[:notice] = "Indicator successfully submitted!"
       elsif (params[:commit] == "Save Indicator")
@@ -189,16 +130,14 @@ class ProviderController < ApplicationController
     entry_id = params[:entry_id]
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
-    @current_form.update_attributes(:checked => true, :updated_at => Time.current)
     @activities = @current_project.activities
     if (request.post?)
       if (params[:commit] == "Update Project")
-        @current_form.update_attributes(:submitted => true, :updated_at => Time.current)
         flash[:notice] = "Project successfully submitted!"
       elsif (params[:commit] == "Save Project")
         flash[:notice] = "Project successfully saved!"
       end
-      @current_project.update_attributes(params[:project], :updated_at => Time.current)
+      @current_project.update_ttributes(params[:project], :updated_at => Time.current)
       redirect_to forms_composite_update_path
     end
   end

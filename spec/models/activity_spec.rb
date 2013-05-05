@@ -9,7 +9,7 @@ describe Activity do
     activity = Activity.new(
     :name => "Aktivitat",
     :description => "Wall of Text",
-    :phase => "Projektphasen",
+    :phase => Activity::PREREQUISITES_FULFILLED,
     :startDate => Date.new(2013,03,26),
     :endDate => Date.new(2013,03,27),
     :targetManp => 20,
@@ -17,11 +17,11 @@ describe Activity do
     :notes => "Another Wall of Text",
     :actualManp => 10,
     :actualCost => 25.25,
-    :actualProg => "In Progress",
+    :actualProg => Activity::IN_PROGRESS,
     :statusNotes => "A Different Wall of Text",
     :project_id => 1,
     :team => "James Bond, Andy Warhol",
-    :short_name => "Shorter name"
+    :short_name => "Akti"
     )
     return activity    
   end
@@ -76,19 +76,35 @@ describe Activity do
   ### PHASE
   
   ## Phase is not empty
-  it "should not have empty Phase" do
-    phase = ""
+  it "can not have empty Phase" do
+    phase = nil
     activity = generate()
     activity.phase = phase
     assert(!activity.save, "It saves on empty Phase")
   end
   
-  ## Phase max = 30
-  it "should not have Phase longer than 30 characters" do
-    phase = (0...31).map{ ( 65+rand(26) ).chr }.join
+  ## Phase is an integer
+  it "will not allow a non-integer phase" do
+    phase = "1-Concept completed"
     activity = generate()
     activity.phase = phase
-    assert(!activity.save, "It saves on Phase longer than 30 characters")
+    assert(!activity.save, "It saves on Phase with a non-integer phase")
+  end
+
+  ## Phase is in Activity::PHASES
+  it "will not allow a phase not in Activity::PHASES" do
+    phase = 5
+    activity = generate()
+    activity.phase = phase
+    assert(!activity.save, "It saves on an integer Phase not present in Activity::PHASES")
+  end
+
+  ## Phase allows Activity::PROJECT_MANAGEMENT
+  it "will allow the phase Activity::PROJECT_MANAGEMENT" do
+    phase = Activity::PROJECT_MANAGEMENT
+    activity = generate()
+    activity.phase = phase
+    assert(activity.save, "It will not save on Activity::PROJECT_MANAGEMENT: #{Activity::PROJECT_MANAGEMENT}")
   end
   
   ### DATE
@@ -132,11 +148,11 @@ describe Activity do
   ### TARGET MAN POWER
   
   ## TargetManp is not empty
-  it "can have empty TargetManp" do
+  it "should not have empty TargetManp" do
     targetManp = nil
     activity = generate()
     activity.targetManp = targetManp
-    assert(activity.save, "It won't save on empty TargetManp")
+    assert(!activity.save, "It saves on empty TargetManp")
   end
   
   ## TargetManp = integer
@@ -165,12 +181,12 @@ describe Activity do
 
   ### TARGET COST
   
-  ## TargetCost can be empty
-  it "can have empty TargetCost" do
+  ## TargetCost is not empty
+  it "should not have empty TargetCost" do
     targetCost = nil
     activity = generate()
     activity.targetCost = targetCost
-    assert(activity.save, "It won't save on empty TargetCost")
+    assert(!activity.save, "It saves on empty TargetCost")
   end
   
   ## TargetCost = decimal
@@ -269,20 +285,36 @@ describe Activity do
 
   ### ACTUAL PROGRESS
   
-  ## ActualProg can be empty
-  it "can have empty ActualProg" do
-    actualProg = ""
+  ## ActualProg is not empty
+  it "should not have empty ActualProg" do
+    actualProg = nil
     activity = generate()
     activity.actualProg = actualProg
-    assert(activity.save, "It won't save on empty ActualProg")
+    assert(!activity.save, "It saves on empty ActualProg")
   end
   
-  ## ActualProg max = 30
-  it "should not have ActualProg longer than 30 characters" do
-    actualProg = (0...31).map{ ( 65+rand(26) ).chr }.join
+  ## ActualProg is an number
+  it "should not have ActualProg that is not number" do
+    actualProg = "In progress"
     activity = generate()
     activity.actualProg = actualProg
-    assert(!activity.save, "It saves on ActualProg longer than 30 characters")
+    assert(!activity.save, "It saves on ActualProg that is not a Number")
+  end
+
+  ## ActualProg is an Integer
+  it "should not have ActualProg that is not an integer" do
+    actualProg = 1.0
+    activity = generate()
+    activity.actualProg = actualProg
+    assert(!activity.save, "It saves on ActualProg that is not an Integer")
+  end
+
+  ## ActualProg is in Activity::PROGRESS
+  it "should not have ActualProg that is not in Activity.PROGRESS" do
+    actualProg = 10
+    activity = generate()
+    activity.actualProg = actualProg
+    assert(!activity.save, "It saves on ActualProg that is not in Activity.PROGRESS")
   end
 
   ### STATUS NOTES

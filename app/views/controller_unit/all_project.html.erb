@@ -1,6 +1,6 @@
 <div class="navbar">
 	<div class="navbar-inner">
-		<a class="brand" href="#">Project View</a>
+		<a class="brand" href="#"><%= t '.project_view' %></a>
 		</ul>
 	</div>
 </div>
@@ -50,8 +50,8 @@
 		<div class="span6">
 			<table class="table table-hover table-bordered">
 				<tr>
-					<th>Activity</th>
-					<th>Current Overall Progress</th>
+					<th><%= t '.activity_3' %></th>
+					<th><%= t '.current_1' %></th>
 				</tr>
 		
 				<% @activities.each do |a| %>
@@ -123,12 +123,13 @@
 		<div class="span6"></div>
 		<div class="span6">
 			<div class="span6">
-				<%= f.input :duration, :input_html => { :value => @project.duration, :readonly => true, :class => "span12" }, :label => "Project Duration (months)" %>
+				<%= f.input :target_duration, :input_html => { :value => @project.target_duration, :readonly => true, :class => "span12" }, :label => "Project Target Duration (months)" %>
 			</div>
 			<div class="span6">
 				<%= f.input :status_ms, :input_html => { :value => @project.status_ms, :readonly => true, :class => "span12" }, :label => "Current Status by Milestone" %>
 			</div>
 		</div>
+    </div>
 
 	<div class="row-fluid">
 		<div class="span6"></div>

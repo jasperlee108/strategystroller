@@ -1,8 +1,8 @@
 <div class="navbar">
-	<div class="navbar-inner">
-		<a class="brand" href="#">Indicator Form</a>
-		</ul>
-	</div>
+    <div class="navbar-inner">
+        <a class="brand" href="#"><%= t '.indicator_form' %></a>
+        </ul>
+    </div>
 </div>
 <style>
 	input {
@@ -58,10 +58,7 @@
 	<div class="row-fluid">
 		<div class="span6">
 			<div class="form-inline">
-			<%= f.input :freq, :required => true, :as => :radio, :collection => ["M", "Q", "HY", "Y", "S"], :label => "Frequency of Acquisition" %>
-				<div id="specialfreq">
-				<%= f.input :special_freq, :required => true, :as => :check_boxes, :collection => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :label => "Frequency in Months" %>
-				</div>
+			<%= f.input :freq, :required => true, :as => :checkboxes, :collection => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :label => "Frequency of Acquisition" %>
 			</div>
 		</div>
 	</div>
@@ -93,14 +90,15 @@
 	<% end %>
 </div>
 
-<script>
-$("#specialfreq").hide();
-$('input[name="indicator[freq]"]').click(function(event)
-	{
-		if ($('#indicator_freq_s').is(":checked")) {
-			$('#specialfreq').show();
-		} else {
-			$('#specialfreq').hide();
-		}
-	});
-</script>
+<!--<script>
+$("#stringfreq").hide();
+$('input[name="indicator[string_freq]"]').click(function(event)
+{
+    if ($('#indicator_string_freq_s').is(":checked")) {
+        $('#stringfreq').show();
+    } else {
+        $('#stringfreq').hide();
+    }
+});
+;
+</script>*/ -->

@@ -1,6 +1,6 @@
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#">System Setup</a>
+    <a class="brand" href="#"><%= t '.system_setup' %></a>
 </ul>
 </div>
 </div>
@@ -16,10 +16,6 @@
           <%= f.input :curr_year, :label => "Current Year", :as => :select, :collection => @years, :prompt => true %>
 
           <%= f.input :init_year, :label => "Initial Year", :as => :select, :collection => @years, :prompt => true %>
-
-          <%= f.input :language, :as => :select, :collection => @languages, :prompt => true %>
-
-          <%= f.input :time_horizon, :as => :select, :collection => @time_horizon, :prompt => true %>
 
         <% end %>
     <br><%= f.action :submit, :label => "Save Setup" ,:button_html => { :class=> "btn btn-primary span4" }%>

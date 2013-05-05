@@ -1,6 +1,6 @@
 <div class="navbar">
 	<div class="navbar-inner">
-		<a class="brand" href="#">Indicator View</a>
+		<a class="brand" href="#"><%= t '.indicator_view' %></a>
 		</ul>
 	</div>
 </div>
@@ -11,7 +11,6 @@
 	textarea {
 		width: 50em;
 	}
-    
 </style>
 
 <%= render "setup_alerts" %>
@@ -55,7 +54,7 @@
 		</div>
 		<div class="span6">		
 			<div class="span6">          
-          <%= f.input :prognosis, :input_html => { :value => 0, :disabled => true, :class => "span12" }, :label => "Prognosis" %>
+          <%= f.input :prognosis, :input_html => { :value => @indicator.prognosis, :disabled => true, :class => "span12" }, :label => "Prognosis" %>
 			</div>
 			<div class="span6">
           <%= f.input :diff, :input_html => { :value => @indicator.diff, :disabled => true, :class => "span12" }, :label => "Difference" %>

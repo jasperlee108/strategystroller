@@ -37,34 +37,45 @@
       <div class="container">
         	<a class="brand" href="/">Strategy Stroller</a>
             <% if signed_in? %>
+
            <% if current_user.controlling_unit == false %>
- <div id ="pr_nav">
-        					<ul class = "nav">
-<li id ="navbar_pr_define"><%= link_to (t :define), forms_composite_path %></li>
-<li id ="navbar_pr_update"><%= link_to (t :update), forms_composite_update_path%></li>
-
-</ul>
-
-             </div>
+        	 <ul class = "nav">
+              <% if current_page? (forms_composite_path) %>
+              <li id= "navbar_define" class="active">
+            <% else %>
+              <li id= "navbar_define">
             <% end %>
+              <%= link_to (t :define), forms_composite_path %>
+            </li>
+
+            <% if current_page? (forms_composite_update_path) %>
+              <li id= "navbar_update" class="active">
+            <% else %>
+              <li id= "navbar_update">
+            <% end %>
+              <%= link_to (t :update), forms_composite_update_path %>
+            </li>
+
+          </ul>
+
+
+
+          <% end %>
             
-            			<div class="btn-group pull-right">
-			  <a class="btn dropdown-toggle btn-inverse pull-right" data-toggle="dropdown">
-			    User Settings
-			    <span class="caret"></span>
-			  </a>
+          <div class="btn-group pull-right">
+			      <a class="btn dropdown-toggle btn-inverse pull-right" data-toggle="dropdown"> User Settings <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 			  	<li><%= render 'devise/menu/login_items' %></li>
 			    <li><%= render 'devise/menu/registration_items' %></li>
 			  </ul>
 			</div>
-            <% end %>
+      <% end %>
            
 
-            </div>
-          
-      </div>
     </div>
+      
+  </div>
+</div>
 
 
     <div class="container body_container">
@@ -94,4 +105,5 @@
     </div>-->
   </body>
 </html>
+
 

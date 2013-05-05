@@ -26,12 +26,4 @@ class Application < ActiveRecord::Base
   :presence => true
   # validate valid year?
   
-  # language
-  validates :language,
-  :presence => true
-  # Only English and German?
-  
-  # time_horizon
-  validates :time_horizon,
-  :presence => true
 end

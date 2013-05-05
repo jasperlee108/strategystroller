@@ -1,9 +1,9 @@
-<p>Welcome <%= @email %>!</p>
+<p><%= t '.welcome_3', :email => (@email) %>!</p>
 
 <% if @resource.temp_password == nil %>
-	<p>Your temporary password is <%= @resource.temp_password %>  Please navigate to edit registration to change this password after confirming your account. </p>
+	<p><%= t '.your_temporary', :resource_temp => (@resource.temp_password) %> </p>
 <% end %>
 
-<p>You can confirm your account email through the link below:</p>
+<p><%= t '.you_can' %></p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p><%= link_to (t '.confirm_my'), confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

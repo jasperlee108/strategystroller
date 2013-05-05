@@ -1,22 +1,20 @@
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" href="#">Project Form</a>
+        <a class="brand" href="#"><%= t '.project_form' %></a>
         </ul>
     </div>
 </div>
 <style>
-    <
-    style > input {
-        width: 25em;
-    }
-    textarea {
-        width: 50em;
-    }
+	input {
+		width: 25em;
+	}
+	textarea {
+		width: 50em;
+	}
 </style>
 <%= render "setup_alerts" %>
 <div class="well">
-
-    <%= semantic_form_for @project, :url => project_check_path do |f| %>
+    <%= semantic_form_for @project, :url => project_update_path do |f| %>
     <%= f.inputs do %>
     <%= hidden_field_tag :entry_id, params[:entry_id] %>
     <%= hidden_field_tag :form_id, params[:form_id] %>
@@ -42,53 +40,56 @@
 
 
     <div class="row-fluid">
-        <div class="span6">
+        <div class="span12">
             <table class="table table-hover table-bordered">
                 <tr>
-                    <th>Activity</th>
-                    <th>Target Manpower</th>
-                    <th>Current Manpower</th>
-                    <th>Target Cost</th>
-                    <th>Current Cost</th>
-                    <th>Status</th>
+                    <th><%= t '.activity' %></th>
+                    <th><%= t '.target' %></th>
+                    <th><%= t '.current' %></th>
+                    <th><%= t '.target_cost' %></th>
+                    <th><%= t '.current_cost' %></th>
+                    <th><%= t '.status' %></th>
                 </tr>
         
                 <% @activities.each do |a| %>
                 <tr>
-                    <td valign="top"><%= link_to a.name, all_activity_path(:activity_id => a.id) %></td>
-                    <%= semantic_form_for a, :url => project_update_path do |f| %>
-                    <td>
+                    <td class="span4" valign="top"><%= link_to a.name, all_activity_path(:activity_id => a.id) %>
+                    <%= semantic_form_for a, :url => all_activity_path do |f| %></td>
+                    <td class="span1">
                         <%= f.input :targetManp, :input_html => {:readonly => true, :class => "span24" }, :label => false %>
                     </td>
-                    <td>
+                    <td class="span1">
                         <%= f.input :actualManp,:input_html => {:class => "span24"}, :label => false %>
                     </td>
-                    <td>
+                    <td class="span1">
                         <%= f.input :targetCost, :input_html => {:readonly => true, :class => "span24" }, :label => false %>
                     </td>
-                    <td>
+                    <td class="span1">
                         <%= f.input :actualCost, :input_html => {:class => "span24"},:label => false %>
                     </td>
-                    <td>
-                        <!-- is this the right field? -->
-                        <!--Look up the collection -->
-                        <%= f.input :actualProg, :input_html => {:class => "span24"}, :as => :select, :label => false %>
+                    <td class="span4">
+                        <%= f.input :actualProg, :collection => [["Not Yet Started", 0], ["In Progress", 1], ["Completed", 2]], :input_html => {:class => "span24"}, :allow_blank => false, :as => :select, :label => false %>
                     </td>
                     <% end %>
 
                 </tr>
                 <% end %>
             </table>
-         <div class="span3">
+         </div>
+     </div>
+
+     <div class="row-fluid">
+        <div class="span12">
             <%= f.input :status_notes, :as => :text, :input_html => { :value => @current_project.status_notes, :rows => 2 }, :label => "Status Notes" %>
+            </div>
         </div>
 
     <br />
     <% end %>
     <center>
         <div class="row-fluid">
-            <%= f.action :submit, :label => "Update Project",:button_html => { :class=> "btn btn-primary span4" }%>
-            <%= f.action :submit, :label => "Save Project",:button_html => { :class=> "btn btn-primary span4" }%>
+            <%= f.action :submit, :label => "Update Project",:button_html => { :method => :post, :class=> "btn btn-primary span4" }%>
+            <%= f.action :submit, :label => "Save Project",:button_html => { :method => :post, :class=> "btn btn-primary span4" }%>
             <input type=button class="btn btn-danger span4" value= "<%= I18n.t :cancel%>" onclick= "history.back()">
             </input>
         </div>
