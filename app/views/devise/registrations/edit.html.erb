@@ -1,6 +1,6 @@
 <div class="logincontainer">
 <div class="form-signin">
-<h2><%= :edit%> <%= I18n.t :resource_name.to_s.humanize %></h2>
+<h2><%=I18n.t :edit %> <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 <%= render "devise/shared/setup_alerts" %>
@@ -29,8 +29,9 @@
 
 <!--TODO: fix this cancel button and whole page really -->
 
-<p><%= t '.unhappy', :button_to => (button_to (t '.cancel_my'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete) %></p>
 
+<%= t '.unhappy'  %>
+<p><%= button_to (t '.cancel_my'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 <%= link_to (t '.back'), :back %>
 </div>
 </div>
