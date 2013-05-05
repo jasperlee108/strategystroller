@@ -5,37 +5,67 @@ class ChangeFromFloatToCorrectDatatypesInIndicatorsProjectsGoalsAndDimensions < 
   # business setting, so precision is worth the increased overhead of using decimal values.
 
   def up
-    change_column :dimensions, :status, :decimal
+    remove_column :dimensions, :status
 
-    change_column :goals, :status, :decimal
+    remove_column :goals, :status
 
-    change_column :indicators, :actual, :decimal
-    change_column :indicators, :target, :decimal
-    change_column :indicators, :diff, :decimal
-    change_column :indicators, :status, :decimal
-    change_column :indicators, :contributing_projects_status, :decimal
-    change_column :indicators, :prognosis, :decimal
+    remove_column :indicators, :actual
+    remove_column :indicators, :target
+    remove_column :indicators, :diff
+    remove_column :indicators, :status
+    remove_column :indicators, :contributing_projects_status
+    remove_column :indicators, :prognosis
 
-    change_column :projects, :duration, :integer # as specified in the excel spreadsheet, duration is months as an integer (formulas document has it as days as an integer, though an integer regardless).
-    change_column :projects, :status_prog, :decimal
-    change_column :projects, :status_global, :decimal
+    remove_column :projects, :duration # as specified in the excel spreadsheet, duration is months as an integer (formulas document has it as days as an integer, though an integer regardless).
+    remove_column :projects, :status_prog
+    remove_column :projects, :status_global
+    
+    add_column :dimensions, :status, :decimal
+
+    add_column :goals, :status, :decimal
+
+    add_column :indicators, :actual, :decimal
+    add_column :indicators, :target, :decimal
+    add_column :indicators, :diff, :decimal
+    add_column :indicators, :status, :decimal
+    add_column :indicators, :contributing_projects_status, :decimal
+    add_column :indicators, :prognosis, :decimal
+
+    add_column :projects, :duration, :integer # as specified in the excel spreadsheet, duration is months as an integer (formulas document has it as days as an integer, though an integer regardless).
+    add_column :projects, :status_prog, :decimal
+    add_column :projects, :status_global, :decimal
   end
 
   def down
-    change_column :dimensions, :status, :float
+    remove_column :dimensions, :status
 
-    change_column :goals, :status, :float
+    remove_column :goals, :status
 
-    change_column :indicators, :actual, :float
-    change_column :indicators, :target, :float
-    change_column :indicators, :diff, :float
-    change_column :indicators, :status, :float
-    change_column :indicators, :contributing_projects_status, :float
-    change_column :indicators, :prognosis, :float
+    remove_column :indicators, :actual
+    remove_column :indicators, :target
+    remove_column :indicators, :diff
+    remove_column :indicators, :status
+    remove_column :indicators, :contributing_projects_status
+    remove_column :indicators, :prognosis
 
-    change_column :projects, :duration, :float
-    change_column :projects, :status_prog, :float
-    change_column :projects, :status_global, :float
+    remove_column :projects, :duration
+    remove_column :projects, :status_prog
+    remove_column :projects, :status_global
+
+    add_column :dimensions, :status, :float
+
+    add_column :goals, :status, :float
+
+    add_column :indicators, :actual, :float
+    add_column :indicators, :target, :float
+    add_column :indicators, :diff, :float
+    add_column :indicators, :status, :float
+    add_column :indicators, :contributing_projects_status, :float
+    add_column :indicators, :prognosis, :float
+
+    add_column :projects, :duration, :float
+    add_column :projects, :status_prog, :float
+    add_column :projects, :status_global, :float
   end
 
 end
