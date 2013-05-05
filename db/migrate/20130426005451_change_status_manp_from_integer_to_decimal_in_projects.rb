@@ -1,9 +1,11 @@
 class ChangeStatusManpFromIntegerToDecimalInProjects < ActiveRecord::Migration
   def up
-    change_column :projects, :status_manp, :decimal
+    remove_column :projects, :status_manp
+    add_column :projects, :status_manp, :decimal
   end
 
   def down
-    change_column :projects, :status_manp, :integer
+    remove_column :projects, :status_manp
+    add_column :projects, :status_manp, :integer
   end
 end

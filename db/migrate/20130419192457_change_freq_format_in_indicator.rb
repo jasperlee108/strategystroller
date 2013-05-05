@@ -1,9 +1,11 @@
 class ChangeFreqFormatInIndicator < ActiveRecord::Migration
   def up
-    change_column :indicators, :freq, :text
+    remove_column :indicators, :freq
+    add_column :indicators, :freq, :text
   end
 
   def down
-    change_column :indicators, :freq, :string
+    remove_column :indicators, :freq
+    add_column :indicators, :freq, :string
   end
 end
