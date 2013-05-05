@@ -1,12 +1,11 @@
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#"><%= t '.system_setup' %></a>
+    <a class="brand" href="#">System Setup</a>
 </ul>
 </div>
 </div>
 <div class="well">
 <center>
- <%= render "setup_alerts" %>
 
 
     <%= semantic_form_for @application do |f| %>
@@ -16,6 +15,10 @@
           <%= f.input :curr_year, :label => "Current Year", :as => :select, :collection => @years, :prompt => true %>
 
           <%= f.input :init_year, :label => "Initial Year", :as => :select, :collection => @years, :prompt => true %>
+
+          <%= f.input :language, :as => :select, :collection => @languages, :prompt => true %>
+
+          <%= f.input :time_horizon, :as => :select, :collection => @time_horizon, :prompt => true %>
 
         <% end %>
     <br><%= f.action :submit, :label => "Save Setup" ,:button_html => { :class=> "btn btn-primary span4" }%>
