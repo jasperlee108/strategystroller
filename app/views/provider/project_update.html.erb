@@ -50,11 +50,16 @@
                     <th><%= t '.current_cost' %></th>
                     <th><%= t '.status' %></th>
                 </tr>
-        
+                <% acts = {} %>
+                
                 <% @activities.each do |a| %>
+                <% acts[a.id] = a %>
                 <tr>
                     <td class="span4" valign="top"><%= link_to a.name, all_activity_path(:activity_id => a.id) %>
-                    <%= semantic_form_for a, :url => all_activity_path do |f| %></td>
+                    <%= semantic_form_for a, :url => all_activity_path do |f| %>
+
+                </td>
+
                     <td class="span1">
                         <%= f.input :targetManp, :input_html => {:readonly => true, :class => "span24" }, :label => false %>
                     </td>
@@ -62,7 +67,7 @@
                         <%= f.input :actualManp,:input_html => {:class => "span24"}, :label => false %>
                     </td>
                     <td class="span1">
-                        <%= f.input :targetCost, :input_html => {:readonly => true, :class => "span24" }, :label => false %>
+                        <%= f.input :targetCost, :input_html => {:disabled => true, :class => "span24" }, :label => false %>
                     </td>
                     <td class="span1">
                         <%= f.input :actualCost, :input_html => {:class => "span24"},:label => false %>
@@ -85,11 +90,12 @@
         </div>
 
     <br />
+    <%= hidden_field_tag :acts, params[:activity] %>
     <% end %>
     <center>
         <div class="row-fluid">
-            <%= f.action :submit, :label => "Update Project",:button_html => { :method => :post, :class=> "btn btn-primary span4" }%>
-            <%= f.action :submit, :label => "Save Project",:button_html => { :method => :post, :class=> "btn btn-primary span4" }%>
+            <%= f.action :submit, :_method => :post, :label => "Update Project",:button_html => {  :class=> "btn btn-primary span4" } %>
+            <%= f.action :submit, :method => :post, :label => "Save Project",:button_html => {  :class=> "btn btn-primary span4" } %>
             <input type=button class="btn btn-danger span4" value= "<%= I18n.t :cancel%>" onclick= "history.back()">
             </input>
         </div>
@@ -99,5 +105,6 @@
     </center>
     
     <% end %>
+    
 </div>
 
