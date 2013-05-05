@@ -1,6 +1,6 @@
 <p><%= t '.welcome_3', :email => (@email) %>!</p>
 
-<% if @resource.temp_password == nil %>
+<% if @resource.temp_password != nil %>
 	<p><%= t '.your_temporary', :resource_temp => (@resource.temp_password) %> </p>
 <% end %>
 
