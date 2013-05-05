@@ -4,7 +4,9 @@ menu :priority => 1, :label =>  "Settings"
 config.clear_action_items!
 controller do
 	def index
-		redirect_to "/admin/applications/1/edit"
+        if Application.find(1)
+            redirect_to "/admin/applications/1/edit"
+        end
 	end
 
 end

@@ -1,24 +1,29 @@
-      <% if flash[:notice] %>
-      <div class="alert" >
-      <button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
-      <%= flash[:notice] %>
-      </div>
-      <% end %>
-		<% if notice %>
-		<div class="notice alert">
+      <% if flash[:notice] or notice %>
+          <% if notice == flash[:notice]%>
+              <div class="alert" >
+              <button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
+              <%= flash[:notice] %>
+              </div>
+          <% else %>
+            <div class="notice alert">
 			<button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
-			<%= notice %>
+			<%= flash[:notice] %>
+            <%= notice %>
 			</div>
- 		<% end %>
-      <% if flash[:error] %>
-      <div class="alert alert-error">
-      <button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
-      <%= flash[:error] %>
-      </div>
+          <% end %>
       <% end %>
-	  <% if alert %>
-	 <div class="alert">
-			<button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
-			<%= alert %>
-			</div>
+      <% if flash[:error] or alert %>
+            <% if flash[:error] == alert %>
+                <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
+                <%= flash[:error] %>
+                </div>
+            <% else %>
+                <div class="alert  alert-error">
+                <button type="button" class="close" data-dismiss="alert"><%= t 'times' %></button>
+                <%= flash[:error] %>
+                <%= alert %>
+                </div>
 			<% end %>
+      <% end %>
+	 
