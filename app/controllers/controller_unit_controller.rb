@@ -314,9 +314,18 @@ class ControllerUnitController < ApplicationController
     @indicators.empty? ? @indicators += ['None'] : nil
     @prerequisites = (Goal.select('short_name')).select{|g| g.short_name != @current_goal.short_name}.collect{|g| g.short_name}
     if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      @current_goal.update_attributes(params[:goal])
-      flash[:notice] = "Goal review completed!"
+      if (params[:commit] == "Confirm Goal")
+        @current_form.update_attributes(:reviewed => true)
+        @current_goal.update_attributes(params[:goal])
+        flash[:notice] = "Goal review completed!"
+      elsif (params[:commit] == "Send back to Provider")
+        @current_form.update_attributes(:reviewed => false, :submitted => false, :checked => false)
+        @current_goal.update_attributes(params[:goal])
+        @user_obj = User.find_by_id(@goal.user_id)
+        @form_url = encode_url(form_id, @goal.id)
+        #save form_url
+        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+      end
       redirect_to cu_review_path
     end
   end
@@ -362,11 +371,20 @@ class ControllerUnitController < ApplicationController
     
 
     if (request.post?)
-      params[:indicator].delete(:string_freq)
-      params[:indicator][:freq] = freq
-      @current_form.update_attributes(:reviewed => true)
-      @current_indicator.update_attributes(params[:indicator])
-      flash[:notice] = "Indicator review completed!"
+      if (params[:commit] == "Confirm Indicator")
+        params[:indicator].delete(:string_freq)
+        params[:indicator][:freq] = freq
+        @current_form.update_attributes(:reviewed => true)
+        @current_indicator.update_attributes(params[:indicator])
+        flash[:notice] = "Indicator review completed!"
+      elsif (params[:commit] == "Send back to Provider")
+        @current_form.update_attributes(:reviewed => false, :submitted => false, :checked => false)
+        @current_indicator.update_attributes(params[:indicator])
+        @user_obj = User.find_by_id(@indicator.user_id)
+        @form_url = encode_url(form_id, @indicator.id)
+        #save form_url
+        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+      end
       redirect_to cu_review_path
     end
   end
@@ -381,10 +399,20 @@ class ControllerUnitController < ApplicationController
     @activities = @current_project.activities
     @project.startDate = @current_project.startDate
     if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      params[:project][:indicator_id] = params[:project][:indicator_id][1] #TODO replace when multiple relations work. Now is just first non-empty element in array.
-      @current_project.update_attributes(params[:project])
-      flash[:notice] = "Project review completed!"
+      if (params[:commit] == "Confirm Project")
+        @current_form.update_attributes(:reviewed => true)
+        params[:project][:indicator_id] = params[:project][:indicator_id][1] #TODO replace when multiple relations work. Now is just first non-empty element in array.
+        @current_project.update_attributes(params[:project])
+        flash[:notice] = "Project review completed!"
+      elsif (params[:commit] == "Send back to Provider")
+        @current_form.update_attributes(:reviewed => false, :submitted => false, :checked => false)
+        @current_project.update_attributes(params[:project])
+        @user_obj = User.find_by_id(@project.user_id)
+        @form_url = encode_url(form_id, @project.id)
+        #save form_url
+        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        flash[:notice] = "Project form sent back to Provider"
+      end
       redirect_to cu_review_path
     end
   end

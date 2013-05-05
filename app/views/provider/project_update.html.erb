@@ -53,10 +53,9 @@
                 <% acts = {} %>
                 
                 <% @activities.each do |a| %>
-                <% acts[a.id] = a %>
                 <tr>
                     <td class="span4" valign="top"><%= link_to a.name, all_activity_path(:activity_id => a.id) %>
-                    <%= semantic_form_for a, :url => all_activity_path do |f| %>
+                    <%= semantic_form_for a, :url => all_activity_path, :as => "activity" + a.id.to_s do |f| %>
 
                 </td>
 
@@ -78,6 +77,7 @@
                     <% end %>
 
                 </tr>
+                <% acts[a.id] = a %>
                 <% end %>
             </table>
          </div>
@@ -90,7 +90,7 @@
         </div>
 
     <br />
-    <%= hidden_field_tag :acts, params[:activity] %>
+    <%= hidden_field_tag :acts, acts %>
     <% end %>
     <center>
         <div class="row-fluid">
