@@ -127,7 +127,7 @@
     registrations:
       edit:
         cancel_my: "Cancel my account"
-        unhappy: "Unhappy? %{button_to}."
+        unhappy: "Unhappy?"
         back: "Back"
     menu:
       registration_items:
