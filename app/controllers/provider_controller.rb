@@ -106,7 +106,7 @@ class ProviderController < ApplicationController
     @current_indicator = Indicator.find_by_id(entry_id)
     @projects = (@current_indicator.projects).collect{|p| p.short_name}
     @projects.empty? ? @projects += ['None'] : nil
-    if (request.post?)
+    if (request.post? || request.put?)
       params[:indicator][:freq].delete_if{|k,v| k==""}
       params[:indicator][:freq].map! do |month|
           month = month.to_i
@@ -131,13 +131,17 @@ class ProviderController < ApplicationController
     @current_form = Form.find_by_id(form_id)
     @current_project = Project.find_by_id(entry_id)
     @activities = @current_project.activities
-    if (request.post?)
+    
+    if (request.post? || request.put?)
       if (params[:commit] == "Update Project")
         flash[:notice] = "Project successfully submitted!"
       elsif (params[:commit] == "Save Project")
         flash[:notice] = "Project successfully saved!"
       end
-      @current_project.update_ttributes(params[:project], :updated_at => Time.current)
+      params[:activity].each do |act|
+        #update each activity
+      end
+      @current_project.update_atributes(params[:project], :updated_at => Time.current)
       redirect_to forms_composite_update_path
     end
   end
