@@ -52,31 +52,44 @@
 
 				<% @activities.each do |a| %>
 				<tr>
-					<td class="span3" valign="top"> <%= link_to a.name, all_activity_path(:activity_id => a.id) %> </td>
+					<td class="span3" valign="top"><%= link_to a.name, all_activity_path(:activity_id => a.id) %></td>
 
 					<%= semantic_form_for a, :url => project_update_path(:entry_id => @entry_id, :form_id => @form_id) do |f| %>
 
 					<%= f.input :id, :as => :hidden, :value => a.id %>
 
-					<td class="span1"> <%= f.input :targetManp, :input_html => {:readonly => true, :class => "span24" }, :label => false %> </td>
-					<td class="span1"> <%= f.input :actualManp,:input_html => {:class => "span24"}, :label => false %> </td>
-					<td class="span1"> <%= f.input :targetCost, :input_html => {:disabled => true, :class => "span24" }, :label => false %> </td>
-					<td class="span1"> <%= f.input :actualCost, :input_html => {:class => "span24"},:label => false %> </td>
-					<td class="span3"> <%= f.input :actualProg, :collection => [["Not Yet Started", 0], ["In Progress", 1], ["Completed", 2]], :input_html => {:class => "span24"}, :allow_blank => false, :as => :select, :label => false %> </td>
+					<td class="span1"><%= f.input :targetManp, :input_html => {:readonly => true, :class => "span24" }, :label => false %></td>
+					<% @total_t_manp += a.targetManp %>
+					<td class="span1"><%= f.input :actualManp,:input_html => {:class => "span24"}, :label => false %></td>
+					<% @total_a_manp += a.actualManp %>
+					<td class="span1"><%= f.input :targetCost, :input_html => {:readonly => true, :class => "span24" }, :label => false %></td>
+					<% @total_t_cost += a.targetCost %>
+					<td class="span1"><%= f.input :actualCost, :input_html => {:class => "span24"},:label => false %></td>
+					<% @total_a_cost += a.actualCost %>
+					<td class="span3"><%= f.input :actualProg, :collection => [["Not Yet Started", 0], ["In Progress", 1], ["Completed", 2]], :input_html => {:class => "span24"}, :allow_blank => false, :as => :select, :label => false %></td>
 
-					<td class="span2"> <%= f.action :submit, :label => "Update",:button_html => {  :class=> "btn btn-info span12" } %> </td>
+					<td class="span2"><%= f.action :submit, :label => "Update",:button_html => {  :class=> "btn btn-info span12" } %></td>
 
 					<% end %>
 
 				</tr>
 				<% end %>
+
+				<tr>
+					<td class="span3">Sum</td>
+					<td class="span1"><%= f.input :random1, :input_html => {:value => @total_t_manp, :readonly => true, :class => "span24" }, :label => false %></td>
+					<td class="span1"><%= f.input :random2,:input_html => {:value => @total_a_manp, :readonly => true, :class => "span24"}, :label => false %></td>
+					<td class="span1"><%= f.input :random3, :input_html => {:value => @total_t_cost, :readonly => true, :class => "span24" }, :label => false %></td>
+					<td class="span1"><%= f.input :random4, :input_html => {:value => @total_a_cost, :readonly => true, :class => "span24"},:label => false %></td>
+					<td class="span3"></td><td class="span2"></td>
+				</tr>
 			</table>
 		</div>
 	</div>
 
 	<div class="row-fluid">
 		<div class="span12">
-			<%= f.input :status_notes, :as => :text, :input_html => { :value => @current_project.status_notes, :rows => 2 }, :label => "Status Notes" %>
+			<%= f.input :status_notes, :as => :text, :input_html => { :value => @current_project.status_notes, :rows => 2, :class => "span12" }, :label => "Status Notes" %>
 		</div>
 	</div>
 

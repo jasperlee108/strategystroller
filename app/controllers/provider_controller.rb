@@ -131,6 +131,10 @@ class ProviderController < ApplicationController
     @current_form = Form.find_by_id(@form_id)
     @current_project = Project.find_by_id(@entry_id)
     @activities = @current_project.activities
+    @total_t_manp = 0
+    @total_a_manp = 0
+    @total_t_cost = 0
+    @total_a_cost = 0
     
     if (request.post? || request.put?)
       if (params[:commit] == "Update")
@@ -176,16 +180,16 @@ class ProviderController < ApplicationController
       end
     end
 
-     @all_proj_forms = Form.find_all_by_user_id_and_lookup(@user.id, PROJECT)
-      @proj_forms = []
-      @all_proj_forms.each do |form|
-        proj = Project.find(form.entry_id)
-        #make sure we haven't already updated the proj this month
-        included = proj.updated_at.month != Time.now.month
-        if (form.submitted && form.checked && form.reviewed && included)
-          @proj_forms << form
-        end
+    @all_proj_forms = Form.find_all_by_user_id_and_lookup(@user.id, PROJECT)
+    @proj_forms = []
+    @all_proj_forms.each do |form|
+      proj = Project.find(form.entry_id)
+      #make sure we haven't already updated the proj this month
+      included = proj.updated_at.month != Time.now.month
+      if (form.submitted && form.checked && form.reviewed && included)
+        @proj_forms << form
       end
+    end
   end
 
 
