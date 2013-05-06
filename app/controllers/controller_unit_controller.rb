@@ -79,6 +79,7 @@ class ControllerUnitController < ApplicationController
   def set_indicator  #FIXME MERGE
     @indicator = Indicator.new
     if (request.post?)
+      params[:indicator][:goal_ids].delete("")
       @indicator = Indicator.new(params[:indicator])
       @indicator.status = 0
       @indicator.contributing_projects_status = 0
@@ -111,6 +112,7 @@ class ControllerUnitController < ApplicationController
   def set_project
     @project = Project.new
     if (request.post?)
+      params[:project][:indicator_ids].delete("")
       @project = Project.new(params[:project])
       # Put some (important) default values
       @project.startDate = Date.current
@@ -381,8 +383,8 @@ class ControllerUnitController < ApplicationController
     @activities = @current_project.activities
     @project.startDate = @current_project.startDate
     if (request.post?)
+      params[:project][:indicator_ids].delete("")
       @current_form.update_attributes(:reviewed => true)
-      params[:project][:indicator_id] = params[:project][:indicator_id][1] #TODO replace when multiple relations work. Now is just first non-empty element in array.
       @current_project.update_attributes(params[:project])
       flash[:notice] = "Project review completed!"
       redirect_to cu_review_path

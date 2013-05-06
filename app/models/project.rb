@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   attr_accessible :actual_cost, :actual_manp, :compensation, :description, :actual_duration, :target_duration,
                   :endDate, :inplan, :name, :notes, :startDate, :status_cost, :status_global,
                   :status_manp, :status_ms, :status_notes, :status_prog, :target_cost, :target_manp,
-                  :indicator_id, :head_id, :steer_id, :user_ids, :team, :yearly_target_cost,
+                  :indicator_ids, :head_id, :steer_id, :user_ids, :team, :yearly_target_cost,
                   :yearly_target_manp, :short_name, :updated_at
 
   serialize :yearly_target_manp, Hash
@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
 
   ### ASSOCIATIONS
   ## parent
-  belongs_to :indicator
+  has_and_belongs_to_many :indicators
   ## owner
   belongs_to :head, :class_name => "User", :foreign_key => :head_id
   ## steer
@@ -25,8 +25,8 @@ class Project < ActiveRecord::Base
   :allow_blank => true
   
   # Needs a Parent
-  validates :indicator_id,
-  :presence => true
+  #validates :indicator_id,
+  #:presence => true
 
   # Needs an Owner
   validates :head_id,
