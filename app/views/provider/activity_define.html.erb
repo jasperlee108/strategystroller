@@ -76,7 +76,7 @@
 	
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :phase, :as => :select, :collection => [["1-Concept completed", 1], ["2-Prerequisites fulfilled", 2], ["3-Implementation running", 3], ["4-Project effective", 4]], :required => true, :label => "Part of Phase", :input_html => { :class=> "span12" } %>
+			<%= f.input :phase, :as => :select, :collection => [["0-Ongoing", 0], ["1-Concept completed", 1], ["2-Prerequisites fulfilled", 2], ["3-Implementation running", 3], ["4-Project in effect", 4]], :required => true, :label => "Part of Phase", :input_html => { :class=> "span12" } %>
           <!--TODO make this collection not hard-coded, but passed up from the model-->
           <!--TODO Decide if we should put the project management option here, or elsewhere-->
 		</div>
