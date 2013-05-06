@@ -48,6 +48,8 @@ piglatin:
   provider:
     activity_define:
       activity_form: "ivityActay orm Fay"
+    activity_edit:
+      activity_edit: "ivityActay itEday"
     forms_composite:
       hi_provider: "Hi ovider,Pray %{user_username} "
       unchecked: "eckedUnchay orms Fay"

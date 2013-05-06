@@ -15,8 +15,6 @@
 
           <%= f.input :curr_year, :label => "Current Year", :as => :select, :collection => @years, :prompt => true %>
 
-          <%= f.input :init_year, :label => "Initial Year", :as => :select, :collection => @years, :prompt => true %>
-
         <% end %>
     <br><%= f.action :submit, :label => "Save Setup" ,:button_html => { :class=> "btn btn-primary span4" }%>
     <% end %>
