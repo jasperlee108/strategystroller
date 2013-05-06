@@ -11,6 +11,8 @@
 	<%= semantic_form_for @project, :html => { :class => "form-stacked"}  do |f| %>
 	<%= f.inputs do %>
 
+			<%= f.input :description, :as => :hidden, :value => "Insert Project Description" %>
+
 	<div class="row-fluid">
 		<div class="span8">
 			<%= f.input :name, :as => :string, :label => "Name of Project",:input_html => { :class => "span12" }  %>
@@ -22,7 +24,7 @@
 
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :required => true, :label => "Associated Indicator",:input_html => { :class => "span12" }  %>
+			<%= f.input :indicator_ids, :as => :select, :collection => Indicator.all, :required => true, :label => "Associated Indicator",:input_html => { :class => "span12", :multiple => true }  %>
 		</div>
 		<div class="span6">
 			<%= f.input :head_id, :as => :select, :collection => User.where(:controlling_unit => false), :required => true, :label => "Project Manager",:input_html => { :class => "span12", :id=>"responsible"}  %>

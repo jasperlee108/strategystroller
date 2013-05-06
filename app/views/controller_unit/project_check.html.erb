@@ -31,7 +31,7 @@
 
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :selected => @current_project.indicator_id, :input_html => { :class => "span12", :multiple => true }, :required => true, :label => "Associated Indicators" %>
+			<%= f.input :indicator_ids, :as => :select, :collection => Indicator.all, :selected => @current_project.indicator_ids, :input_html => { :class => "span12", :multiple => true }, :required => true, :label => "Associated Indicators" %>
 		</div>
 		<div class="span6">
 			<%= f.input :head_id, :as => :select, :collection => User.where(:controlling_unit => false), :selected => @current_project.head_id, :input_html => { :class => "span12" }, :required => true, :label => "Project Manager" %>
@@ -96,7 +96,7 @@
 	<center>
 		<div class="row-fluid">
 			<%= f.action :submit, :label => "Confirm Project",:button_html => { :class=> "btn btn-primary span4" }%>
-			<%= f.action :submit, :label => "Send back to Provider", :button_html => {:class => "btn btn-primary span4"} %>
+			<%= f.action :submit, :label => "Revise", :button_html => {:class => "btn btn-primary span4"} %>
 			<input type=button class="btn btn-danger span4" value= "<%= I18n.t :cancel%>" onclick= "history.back()">
 			</input>
 		</div>

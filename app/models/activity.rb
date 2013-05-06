@@ -45,7 +45,7 @@ class Activity < ActiveRecord::Base
   ## description = string[600]
   validates :description,
   :length => { :maximum => 600 },
-  :allow_blank => true
+  :presence => true
   
   ## phase = Integer
   ## -1 <= phase <= 4
