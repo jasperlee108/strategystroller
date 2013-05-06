@@ -64,7 +64,8 @@
 	<% end %>
 	<center>
 		<div class="row-fluid">
-			<%= f.action :submit, :label => "Confirm Goal",:button_html => { :class=> "btn btn-primary span4" }%>
+			<%= f.action :submit, :label => "Revise",:button_html => { :class=> "btn btn-warning span4" }%>
+			<%= f.action :submit, :label => "Confirm Goal",:button_html => { :class=> "btn btn-success span4" }%>
 			<input type=button class="btn btn-danger span4" value= "<%= I18n.t :cancel%>" onclick= "history.back()">
 			</input>
 		</div>

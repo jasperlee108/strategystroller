@@ -316,9 +316,19 @@ class ControllerUnitController < ApplicationController
     @indicators.empty? ? @indicators += ['None'] : nil
     @prerequisites = (Goal.select('short_name')).select{|g| g.short_name != @current_goal.short_name}.collect{|g| g.short_name}
     if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      @current_goal.update_attributes(params[:goal])
-      flash[:notice] = "Goal review completed!"
+      if params[:commit] == "Confirm Goal"
+        @current_form.update_attributes(:reviewed => true)
+        @current_goal.update_attributes(params[:goal])
+        flash[:notice] = "Goal review completed!"
+      elsif params[:commit] == "Revise"
+        @current_form.update_attributes(:checked => false, :submitted => false, :reviewed => false)
+        @user_obj = User.find_by_id(@current_form.user_id)
+        @form_url = encode_url(@current_form.id, @current_form.entry_id)
+        #save form_url
+        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        provider = @user_obj.username
+        flash[:notice] = "Goal form has been resent to provider " + provider + "!"
+      end
       redirect_to cu_review_path
     end
   end
