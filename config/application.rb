@@ -51,7 +51,7 @@ module StrategyStroller
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
+    config.active_record.whitelist_attributes = false
 
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -62,7 +62,6 @@ module StrategyStroller
     # For devise. Since we are deploying on Heroku, this is necessary to
     # "forcing your application to not access the DB or load models when precompiling your assets."
     config.assets.initialize_on_precompile = false
-    
     config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
    
   end
