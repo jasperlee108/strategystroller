@@ -1,6 +1,6 @@
 <div class='nested-fields'>
-    <%= f.input :username, :label => "Enter User Name" %>
-    <%= f.input :email, :label => "Enter User Email" %>
+    <%= f.input :username, :label => (I18n.t :enter_user_name) %>
+    <%= f.input :email, :label => (I18n.t :enter_user_email) %>
     <%= f.input :controlling_unit, :label => false, :input_html => { :class => "checkbox", :type => "checkbox" } %>
     <%= link_to_remove_association "Remove User", f %><br>
 </div>

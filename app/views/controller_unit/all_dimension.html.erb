@@ -21,10 +21,10 @@
         <%= hidden_field_tag :form_id, params[:form_id] %>
 	<div class="row-fluid">
 		<div class="span6">     
-          <%= f.input :name, :input_html => { :value => @dimension.name, :readonly => true, :class => "span12" }, :label => "Name of Dimension" %>
+          <%= f.input :name, :input_html => { :value => @dimension.name, :readonly => true, :class => "span12" }, :label => (I18n.t :name_of_dimension) %>
 		</div>
 		<div class="span6">          
-          <%= f.input :status, :input_html => { :value => @dimension.status, :readonly => true, :class => "span12" }, :label => "Current Status" %>
+          <%= f.input :status, :input_html => { :value => @dimension.status, :readonly => true, :class => "span12" }, :label => (I18n.t :current_status) %>
 		</div>
 	</div>          
     <% end %>

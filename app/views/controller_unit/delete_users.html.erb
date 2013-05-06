@@ -8,5 +8,5 @@
         <%= link_to_add_association 'Delete User', f, :users, :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
 
     <% end %>
-    <%= f.action :submit, :label => "Delete User(s)" %>
+    <%= f.action :submit, :label => (I18n.t :delete_user_s) %>
 <% end %>

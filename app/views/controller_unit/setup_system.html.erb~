@@ -12,16 +12,16 @@
         <%= f.inputs do %>
           <%= f.input :company %>
 
-          <%= f.input :curr_year, :label => "Current Year", :as => :select, :collection => @years, :prompt => true %>
+          <%= f.input :curr_year, :label => (I18n.t :current_year), :as => :select, :collection => @years, :prompt => true %>
 
-          <%= f.input :init_year, :label => "Initial Year", :as => :select, :collection => @years, :prompt => true %>
+          <%= f.input :init_year, :label => (I18n.t :initial_year), :as => :select, :collection => @years, :prompt => true %>
 
           <%= f.input :language, :as => :select, :collection => @languages, :prompt => true %>
 
           <%= f.input :time_horizon, :as => :select, :collection => @time_horizon, :prompt => true %>
 
         <% end %>
-    <br><%= f.action :submit, :label => "Save Setup" ,:button_html => { :class=> "btn btn-primary span4" }%>
+    <br><%= f.action :submit, :label => (I18n.t :save_setup) ,:button_html => { :class=> "btn btn-primary span4" }%>
     <% end %>
     </center>
 </div>

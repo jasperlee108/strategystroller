@@ -16,6 +16,7 @@
 //= require twitter/bootstrap/alert
 //= require twitter/bootstrap/button
 //= require twitter/bootstrap/dropdown
+//= require twitter/bootstrap/tooltip
 //= require twitter/bootstrap/popover
 //= require cocoon
 //= require_directory .

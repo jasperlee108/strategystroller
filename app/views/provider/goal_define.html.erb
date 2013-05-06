@@ -21,36 +21,36 @@
 	<%= hidden_field_tag :form_id, params[:form_id] %>
 	<div class="row-fluid">
 		<div class="span8">
-			<%= f.input :name, :input_html => { :value => @current_goal.name, :readonly => true, :class=> "span12" }, :label => "Name of Goal" %>
+			<%= f.input :name, :input_html => { :value => @current_goal.name, :readonly => true, :class=> "span12" }, :label => (I18n.t :name_of_goal) %>
 		</div>
 		<div class="span4">
-			<%= f.input :short_name, :input_html => { :value => @current_goal.short_name, :readonly => true, :class=> "span12" }, :label => "Short Name of Goal" %>
+			<%= f.input :short_name, :input_html => { :value => @current_goal.short_name, :readonly => true, :class=> "span12" }, :label => (I18n.t :short_name_of_goal) %>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @current_goal.dimension_id, :input_html => { :disabled => true, :class=> "span12" }, :label => "Associated Dimension" %>
+			<%= f.input :dimension_id, :as => :select, :collection => Dimension.all, :selected => @current_goal.dimension_id, :input_html => { :disabled => true, :class=> "span12" }, :label => (I18n.t :associated_dimension) %>
 		</div>
 		<div class="span6">
-			<%= f.input :user_id, :as => :select, :collection => User.where(:controlling_unit => false), :selected => @current_goal.user_id, :input_html => { :disabled => true, :class=> "span12" }, :label => "Responsible" %>
+			<%= f.input :user_id, :as => :select, :collection => User.where(:controlling_unit => false), :selected => @current_goal.user_id, :input_html => { :disabled => true, :class=> "span12" }, :label => (I18n.t :responsible) %>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span8">
-			<%= f.input :need, :as => :text, :input_html => { :value => @current_goal.need, :rows => 5, :class=> "span12" }, :required => true, :label => "Call for Action" %>
+			<%= f.input :need, :as => :text, :input_html => { :value => @current_goal.need, :rows => 5, :class=> "span12" }, :required => true, :label => (I18n.t :call_for_action) %>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span8">
-			<%= f.input :justification, :as => :text, :input_html => { :value => @current_goal.justification, :rows => 5, :class=> "span12" }, :required => true, :label => "Justification of Specific Goal" %>
+			<%= f.input :justification, :as => :text, :input_html => { :value => @current_goal.justification, :rows => 5, :class=> "span12" }, :required => true, :label => (I18n.t :justification_of_specific_goal) %>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span8">
-			<%= f.input :focus, :as => :text, :input_html => { :value => @current_goal.focus, :rows => 5, :class=> "span12" }, :required => true, :label => "Strategic Approach" %>
+			<%= f.input :focus, :as => :text, :input_html => { :value => @current_goal.focus, :rows => 5, :class=> "span12" }, :required => true, :label => (I18n.t :strategic_approach) %>
 		</div>
 		<div class="span4">
-			<%= f.input :notes, :as => :text, :input_html => { :value => @current_goal.notes, :rows => 5, :class=> "span12" }, :required => false, :label => "Notes" %>
+			<%= f.input :notes, :as => :text, :input_html => { :value => @current_goal.notes, :rows => 5, :class=> "span12" }, :required => false, :label => (I18n.t :notes) %>
 		</div>
 	</div>
 
@@ -58,8 +58,8 @@
 
 	<center>
 		<div class="row-fluid">
-			<%= f.action :submit, :label => "Submit Goal",:button_html => { :class=> "btn btn-primary span4" }%>
-			<%= f.action :submit, :label => "Save Goal",:button_html => { :class=> "btn btn-primary span4" }%>
+			<%= f.action :submit, :label => (I18n.t :submit_goal),:button_html => { :class=> "btn btn-primary span4" }%>
+			<%= f.action :submit, :label => (I18n.t :save_goal),:button_html => { :class=> "btn btn-primary span4" }%>
 		</div>
 	</center>
 
