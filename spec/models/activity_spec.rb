@@ -58,11 +58,11 @@ describe Activity do
   ### DESCRIPTION
   
   ## Description can be empty
-  it "can have empty Description" do
+  it "cannot have empty Description" do
     description = ""
     activity = generate()
     activity.description = description
-    assert(activity.save, "It won't save on empty Description")
+    assert(!activity.save, "It saves on empty Description")
   end
   
   ## Description max = 600

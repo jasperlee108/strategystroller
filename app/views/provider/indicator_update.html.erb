@@ -104,6 +104,7 @@
         <div class="row-fluid">
             <%= f.action :submit, :method => :post,  :label => "Update Indicator",:button_html => { :class=> "btn btn-primary span4" }%>
             <%= f.action :submit, :method => :post, :label => "Save Indicator",:button_html => { :class=> "btn btn-primary span4" }%>
+             <input type=button class="btn btn-danger span4" value= "<%= I18n.t :cancel%>" onclick= "history.back()">
         </div>
     </center>
     <% end %>

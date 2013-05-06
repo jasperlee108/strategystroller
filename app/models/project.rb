@@ -51,19 +51,21 @@ class Project < ActiveRecord::Base
   ## Description can be empty
   validates :description,
   :length => { :maximum => 600 },
-  :allow_blank => true
+  :presence => true
 
   ### TODO: NOTE TO SELF
   ## If you see this note, make sure to only give T/F options
   ## Rails has this thing where most things default to False 
 
   ## Inplan = true / false = yes / no
-  validates :inplan, :inclusion => { :in => [true, false] },
+  validates :inplan, 
+  :inclusion => { :in => [true, false] },
   :allow_blank => true
 
   ## Compensation = true / false = yes / no
-  validates :compensation, :inclusion => { :in => [true, false] },
-            :allow_blank => true
+  validates :compensation, 
+  :inclusion => { :in => [true, false] },
+  :allow_blank => true
 
   ## target_duration = Integer
   ## 0 <= target_duration

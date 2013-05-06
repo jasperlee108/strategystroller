@@ -116,6 +116,7 @@ class Indicator < ActiveRecord::Base
   :presence => true,
   :length => { :maximum => 20 }
 
+  # TODO I've realized actual == prognosis at 12 months, and a slight variation on prognosis for earlier periods. Not from formulas, but should be added and updated later, with an update function.
   ## Actual = decimal
   ## 0.00 <= Actual
   validates :actual,

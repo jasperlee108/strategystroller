@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+Application.create(:company => 'Default Company', :curr_year=>2013, :init_year=>2013, :language=>"English",:time_horizon=>2)
 
 
 AdminUser.create(
