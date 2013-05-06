@@ -32,7 +32,7 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :goal_id, :as => :select, :collection => Goal.all, :required => true, :label => "Associated Goal",:input_html => { :class => "span12" }  %>
+			<%= f.input :goal_ids, :as => :select, :collection => Goal.all, :required => true, :label => "Associated Goal",:input_html => { :class => "span12", :multiple => true }  %>
 		</div>
 		<div class="span6">
 			<%= f.input :user_id, :as => :select, :collection => User.where(:controlling_unit => false), :required => true, :label => "Responsible",:input_html => { :class => "span12" }  %>

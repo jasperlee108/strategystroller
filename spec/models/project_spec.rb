@@ -133,11 +133,11 @@ describe Project do
   ### DESCRIPTION
   
   ## Description can be empty
-  it "can have empty Description" do
+  it "cannot have empty Description" do
     description = ""
     project = generate()
     project.description = description
-    assert(project.save, "It won't save on empty Description")
+    assert(!project.save, "It saves on empty Description")
   end
   
   ## Description max = 600

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130501050032) do
+ActiveRecord::Schema.define(:version => 20130506060552) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -102,12 +102,17 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
     t.string   "focus"
     t.string   "notes"
     t.decimal  "status"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "dimension_id"
     t.integer  "user_id"
-    t.string   "prereq"
+    t.text     "prereq",        :limit => 255
     t.string   "short_name"
+  end
+
+  create_table "goals_indicators", :force => true do |t|
+    t.integer "indicator_id"
+    t.integer "goal_id"
   end
 
   create_table "indicators", :force => true do |t|
@@ -126,14 +131,18 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
     t.text     "status_notes"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
-    t.integer  "goal_id"
     t.integer  "user_id"
-    t.string   "short_name"
     t.decimal  "contributing_projects_status"
+    t.string   "short_name"
     t.decimal  "prognosis"
     t.integer  "year"
     t.text     "reported_values"
     t.string   "string_freq"
+  end
+
+  create_table "indicators_projects", :force => true do |t|
+    t.integer "project_id"
+    t.integer "indicator_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -157,7 +166,6 @@ ActiveRecord::Schema.define(:version => 20130501050032) do
     t.text     "status_notes"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "indicator_id"
     t.integer  "head_id"
     t.integer  "steer_id"
     t.string   "short_name"

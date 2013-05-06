@@ -25,6 +25,28 @@ cu = User.new(
 cu.skip_confirmation!
 cu.save
 
+jelly = User.new(
+    :email => 'jellybean@jelly.com',
+    :password => 'jellybean',
+    :business_code => 'T3',
+    :password_confirmation => 'jellybean',
+    :controlling_unit => true,
+    :username => "jelly"
+)
+jelly.skip_confirmation!
+jelly.save
+
+greentea = User.new(
+    :email => 'greentea@d.com',
+    :password => 'greentea',
+    :business_code => "E2",
+    :password_confirmation => 'greentea',
+    :controlling_unit => false,
+    :username => 'greentea'
+)
+greentea.skip_confirmation!
+greentea.save
+
 provider = User.new(
     :email => 'provider@example.com',
     :password => 'password',
@@ -52,7 +74,7 @@ Goal.create(
     :status => 0.01,
     :dimension_id => 1,
     :user_id => 2,
-    :prereq => "A Different Goal's Name",
+    :prereq => ["A Different Goal's Name"],
     :short_name => "G0"
 )
 
@@ -74,7 +96,11 @@ Indicator.create(
     :status => 0.755,
     :contributing_projects_status => 0.693,
     :status_notes => "Anmerkungen zum Status",
-    :goal_id => 1,
     :user_id => 2,
     :short_name => "I0"
+)
+
+GoalIndicator.create(
+    :goal_id => 1,
+    :indicator_id => 1
 )
