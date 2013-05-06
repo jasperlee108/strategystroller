@@ -91,7 +91,38 @@ describe ControllerUnitController do
 
 
   describe "POST #set_indicator" do
+    before :all do
+      Indicator.delete_all
+      User.delete_all
+      Goal.delete_all
+    end
+    context "valid parameters" do
+      before :each do
+        create(:goal, name: "Goal 1")
+        create(:goal, name: "Goal 2")
+        provider = create(:user, controlling_unit: false, username: "Provider In Charge", email: "providerincucctrl@test.com")
+        post :set_indicator, indicator: { name: "Test Indicator", user_id: provider, short_name: "TInd", goal_ids: ["", 1, 2] }
+      end
 
+      after :each do
+        Indicator.delete_all
+        User.delete_all
+        Goal.delete_all
+      end
+
+      it "saves an indicator object" do
+        assert(Indicator.count == 1, "Failed to save on valid input")
+      end
+
+      it "correctly handles blank strings in goal_ids in saving" do
+        assert(Indicator.last.goal_ids == [1,2], "Failed to save correctly on valid input")
+      end
+
+    end
+
+    context "passed invalid parameters" do
+
+    end
   end
 
   describe "POST #set_project" do
@@ -153,6 +184,38 @@ describe ControllerUnitController do
     end
   end
 
+  describe "#all_" do
+    it "redirects on all_data" do
+      get :all_data
+      assert_response(:success)
+    end
+
+    it "redirects on all_activity" do
+      get :all_activity
+      assert_response(:success)
+    end
+    it "redirects on all_project" do
+      get :all_project
+      assert_response(:success)
+    end
+
+    it "redirects on all_indicator" do
+      get :all_indicator
+      assert_response(:success)
+    end
+    it "redirects on all_goal" do
+      get :all_goal
+      assert_response(:success)
+    end
+    it "redirects on all_dimension" do
+      get :all_dimension
+      assert_response(:success)
+    end
+    it "redirects on all_form" do
+      get :all_form
+      assert_response(:success)
+    end
+  end
 
 
   describe "Testing Encode ID Helper" do
