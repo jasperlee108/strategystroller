@@ -1,18 +1,18 @@
 class Indicator < ActiveRecord::Base
   attr_accessible :actual, :description, :diff, :dir, :freq, :year, :reported_values, :indicator_type,
                   :name, :notes, :source, :contributing_projects_status, :status, :status_notes,
-                  :prognosis, :target, :unit, :goal_id, :user_id, :short_name, :string_freq, :updated_at
+                  :prognosis, :target, :unit, :goal_ids, :project_ids, :user_id, :short_name, :string_freq, :updated_at
 
   serialize :freq, Array
   serialize :reported_values, Array
 
   ### ASSOCIATIONS
   ## parent
-  belongs_to :goal
+  has_and_belongs_to_many :goals
   ## owner
   belongs_to :user
   ## children
-  has_many :projects 
+  has_and_belongs_to_many :projects 
   
   # Name = string[80]
   validates :name,
@@ -25,8 +25,8 @@ class Indicator < ActiveRecord::Base
   :length => { :maximum => 30 }
 
   # Needs to have Parent
-  validates :goal_id,
-  :presence => true
+  #validates :goal_id,
+  #:presence => true
 
   # Needs to have Owner
   validates :user_id,
@@ -116,6 +116,7 @@ class Indicator < ActiveRecord::Base
   :presence => true,
   :length => { :maximum => 20 }
 
+  # TODO I've realized actual == prognosis at 12 months, and a slight variation on prognosis for earlier periods. Not from formulas, but should be added and updated later, with an update function.
   ## Actual = decimal
   ## 0.00 <= Actual
   validates :actual,

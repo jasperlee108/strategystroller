@@ -5,24 +5,8 @@ describe Activity do
   ### NOTE: Using ruby format, not Rspec
   ### TODO: user_ids for "team" is not yet tested
   
-  def generate
-    activity = Activity.new(
-    :name => "Aktivitat",
-    :description => "Wall of Text",
-    :phase => Activity::PREREQUISITES_FULFILLED,
-    :startDate => Date.new(2013,03,26),
-    :endDate => Date.new(2013,03,27),
-    :targetManp => 20,
-    :targetCost => 50.50,
-    :notes => "Another Wall of Text",
-    :actualManp => 10,
-    :actualCost => 25.25,
-    :actualProg => Activity::IN_PROGRESS,
-    :statusNotes => "A Different Wall of Text",
-    :project_id => 1,
-    :team => "James Bond, Andy Warhol",
-    :short_name => "Akti"
-    )
+  def generate  #TODO refactor this out.
+    activity = build(:activity)
     return activity    
   end
   
@@ -58,11 +42,11 @@ describe Activity do
   ### DESCRIPTION
   
   ## Description can be empty
-  it "can have empty Description" do
+  it "cannot have empty Description" do
     description = ""
     activity = generate()
     activity.description = description
-    assert(activity.save, "It won't save on empty Description")
+    assert(!activity.save, "It saves on empty Description")
   end
   
   ## Description max = 600

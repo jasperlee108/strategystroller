@@ -5,51 +5,15 @@ describe Dimension do
   ### NOTE: Using ruby format, not Rspec
   
   def generate
-    dimension = Dimension.new(
-    :name => "Dimension",
-    :status => 75.50
-    )
+    dimension = build(:dimension) # TODO refactor method out
     return dimension
   end
 
   def gen_with_children
     dimension = generate()
-    goal1 = Goal.new(
-        :name => "Name of Goal",
-        :need => "Call for action",
-        :justification => "Justification of specific goal",
-        :focus => "Strategic approach",
-        :notes => "Notes",
-        :status => 0.23,
-        :dimension_id => 1,
-        :user_id => 1,
-        :prereq => "A Different Goal's Name",
-        :short_name => "Shorter name"
-    )
-    goal2 = Goal.new(
-        :name => "Name of Goal2",
-        :need => "Call for action2",
-        :justification => "Justification of specific goal2",
-        :focus => "Strategic approach2",
-        :notes => "Notes2",
-        :status => 0.43,
-        :dimension_id => 23,
-        :user_id => 1,
-        :prereq => "A Different Goal's Name2",
-        :short_name => "Shorter name"
-    )
-    goal3 = Goal.new(
-        :name => "Name of Goal3",
-        :need => "Call for action3",
-        :justification => "Justification of specific goal3",
-        :focus => "Strategic approach3",
-        :notes => "Notes3",
-        :status => 0.69,
-        :dimension_id => 1,
-        :user_id => 1,
-        :prereq => "A Different Goal's Name3",
-        :short_name => "Shorter name"
-    )
+    goal1 = build(:goal, status: 0.23)
+    goal2 = build(:goal, name: "Test Goal 2", status: 0.43, dimension_id: 3) #a different dimension's goal
+    goal3 = build(:goal, name: "Test Goal 3", status: 0.69)
     goal1.save()
     goal2.save()
     goal3.save()

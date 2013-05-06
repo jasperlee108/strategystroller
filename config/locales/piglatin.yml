@@ -48,6 +48,8 @@ piglatin:
   provider:
     activity_define:
       activity_form: "ivityActay orm Fay"
+    activity_edit:
+      activity_edit: "ivityActay itEday"
     forms_composite:
       hi_provider: "Hi ovider,Pray %{user_username} "
       unchecked: "eckedUnchay orms Fay"
@@ -67,9 +69,9 @@ piglatin:
       form_name_3: "ormFay ame Nay"
     forms_composite_update:
       hi_provider_1: "Hi ovider,Pray %{user_username} "
-      update: "ateUpday icators Inday"
+      update_1: "ateUpday icators Inday"
       form_name_4: "ormFay ame Nay"
-      saved_forms_1: "avedSay orms Fay"
+      update_2: "ateUpday oject Pray"
       form_name_5: "ormFay ame Nay"
     project_update:
       project_form: "ojectPray orm Fay"

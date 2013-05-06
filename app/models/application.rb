@@ -1,7 +1,7 @@
 class Application < ActiveRecord::Base
 
-  attr_accessible :company, :curr_year, :curr_qtr, :curr_month,:init_year, 
-  :language, :time_horizon, :users
+  attr_accessible :company, :curr_year, :curr_qtr, :curr_month, 
+                  :language, :users
   has_many :users
   accepts_nested_attributes_for :users
 
@@ -10,19 +10,12 @@ class Application < ActiveRecord::Base
 
   LANGUAGES = ["English", "German"]
 
-  TIME_HORIZON = [2,3,4,5]
-
   # company
   validates :company,
   :presence => true
   
   # curr_year
   validates :curr_year,
-  :presence => true
-  # validate valid year?
-  
-  # init_year
-  validates :init_year,
   :presence => true
   # validate valid year?
   
