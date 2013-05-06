@@ -39,7 +39,7 @@
 			<%= f.input :startDate, :as => :date_select, :input_html => { :class => "span4" }, :required => true, :label => (I18n.t :starting_date) %>
 		</div>
 		<div class="span6">
-			<%= f.input :actualManp, :as => :number, :required => true, :label => (I18n.t :actual_employee_resources_(days)), :input_html => { :class=> "span12" } %>
+			<%= f.input :actualManp, :as => :number, :required => true, :label => (I18n.t :actual_employee_resources_days), :input_html => { :class=> "span12" } %>
 		</div>
 	</div>
 
@@ -48,16 +48,16 @@
 			<%= f.input :endDate, :as => :date_select, :input_html => { :class => "span4" }, :required => true, :label => (I18n.t :ending_date) %>
 		</div>
 		<div class="span6">
-			<%= f.input :actualCost, :as => :number, :required => true, :label => (I18n.t :actual_external_costs_(currency)), :input_html => { :class=> "span12" } %>
+			<%= f.input :actualCost, :as => :number, :required => true, :label => (I18n.t :actual_external_costs_currency), :input_html => { :class=> "span12" } %>
 		</div>
 	</div>
 
           <div class="row-fluid">
             <div class="span4">
-              <%= f.input :targetManp, :as => :number, :step => 1, :required => true, :label => (I18n.t :target_manpower_(man-months)), :input_html => { :class => "span12" } %>
+              <%= f.input :targetManp, :as => :number, :step => 1, :required => true, :label => (I18n.t :target_manpower_man_months), :input_html => { :class => "span12" } %>
             </div>
             <div class="span4">
-              <%= f.input :targetCost, :as => :number, :required => true, :label => (I18n.t :target_external_costs_(currency)), :input_html => { :class=> "span12" } %>
+              <%= f.input :targetCost, :as => :number, :required => true, :label => (I18n.t :target_external_costs_currency), :input_html => { :class=> "span12" } %>
             </div>
             <div class="span4">
               <%= f.input :actualProg, :as => :select, :collection => [["Not Yet Started", 0], ["In Progress", 1], ["Completed", 2]], :required => true, :label => (I18n.t :progress_in_phase), :input_html => { :class=> "span12" } %>
