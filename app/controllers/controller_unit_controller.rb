@@ -343,6 +343,10 @@ class ControllerUnitController < ApplicationController
     @projects = (@current_indicator.projects).collect{|p| p.short_name}
     @projects.empty? ? @projects += ['None'] : nil
     if (request.post?)
+      params[:indicator][:freq].delete_if{|k,v| k==""}
+      params[:indicator][:freq].map! do |month|
+          month = month.to_i
+      end
       if params[:commit] == "Confirm Indicator"
         params[:indicator][:goal_ids].delete("")
         params[:indicator][:freq].delete("")

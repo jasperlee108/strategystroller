@@ -119,7 +119,7 @@ class ProviderController < ApplicationController
       if (@current_indicator.reported_values == nil)
         params[:indicator][:reported_values] =  reported_val.to_s
       else
-        params[:indicator][:reported_values] = @current_indicator.reported_values << reported_val.to_i
+        params[:indicator][:reported_values] = @current_indicator.reported_values << reported_val.to_f #Need to account for BIG VALUE
       end
       if (params[:commit] == "Update Indicator")
         @current_form.update_attributes(:reviewed => false)

@@ -109,7 +109,7 @@
                 <% if freq != [] %>
                     <% freq.each do |f| %>
                         <% @current_indicator.reported_values.each do |val| %>
-                           <%= f.to_s + ":" + val.to_s %> 
+                           <%= f.to_s + ": " + val.to_s %> 
                           <br \>
                         <% end %>
                     <% end %>
