@@ -25,8 +25,8 @@ class Indicator < ActiveRecord::Base
   :length => { :maximum => 30 }
 
   # Needs to have Parent
-  #validates :goal_id,
-  #:presence => true
+  validates :goal_ids,
+  :presence => true
 
   # Needs to have Owner
   validates :user_id,

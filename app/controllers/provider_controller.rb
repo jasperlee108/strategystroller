@@ -162,6 +162,10 @@ class ProviderController < ApplicationController
         redirect_to project_update_path(:entry_id => @entry_id, :form_id => @form_id)
       else
         # update the project
+        params[:project].delete(:random1) #randomx just used to display sum in view
+        params[:project].delete(:random2)
+        params[:project].delete(:random3)
+        params[:project].delete(:random4)
         if (params[:commit] == "Update Project")
           @current_form.update_attributes(:reviewed => false)
           @current_project.update_attributes(params[:project], :updated_at => Time.current)

@@ -130,7 +130,7 @@ class ControllerUnitController < ApplicationController
       @project.actual_manp = 0
       @project.yearly_target_manp = {}
       @project.yearly_target_cost = {}
-      if @project.save! # project saved
+      if @project.save # project saved
         form_id = save_form(PROJECT, @project.head_id, @project.id)
         if (!form_id) # project saved but form not saved, so delete project
           Project.delete(Project.find_by_id(@project.id))
