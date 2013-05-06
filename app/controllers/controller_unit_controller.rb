@@ -174,7 +174,7 @@ class ControllerUnitController < ApplicationController
          if (request.post?) 
             @application = Application.new(params[:application])
             if @application.save
-                flash[:error] = "Setup successfully saved!"
+                flash[:notice] = "Setup successfully saved!"
             else
                 flash[:error] = "ERROR: Setup was not saved"
                 return
