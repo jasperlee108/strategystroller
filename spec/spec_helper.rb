@@ -1,6 +1,6 @@
 ### TODO: Uncomment later, for now keep it like this to avoid keep updating coverage ###
 require 'simplecov'
-#SimpleCov.start 'rails'
+SimpleCov.start 'rails'
 
 SimpleCov.start 'rails' do
   add_filter "vendor/plugins/gmail_smtp" # gmail plugins
@@ -45,4 +45,10 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # Add in FactoryGirl syntax core set of syntax methods
+  # (build, build_stubbed, create, attributes_for, and their *_list counterparts)
+  # without having to call them on FactoryGirl directly:
+  config.include FactoryGirl::Syntax::Methods
+
 end

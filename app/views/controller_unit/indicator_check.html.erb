@@ -51,7 +51,48 @@
 		<div class="span6">
 			<%= f.input :description, :as => :text, :input_html => { :value => @current_indicator.description, :rows => 5,:class => "span12" }, :label => "Description of Indicator" %>
 		</div>
-	</div>
+		<div class="span6">
+			<center>
+            	<h3> Status Updates </h3>
+            
+	            <% freq = [] %>
+	            <% @current_indicator.freq.each do |f| %>
+	               <% if (f == 1) %>
+	                <% freq << 'Jan' %>
+	               <% elsif (f == 2 ) %>
+	                 <% freq << 'Feb' %>
+	               <% elsif (f == 3) %>
+	                 <% freq << 'Mar '%>
+	               <% elsif (f == 4) %>
+	                <% freq << "Apr" %>
+	              <% elsif (f == 5) %>
+	                <% freq << "May" %>
+	              <% elsif (f == 6) %>
+	                <% freq << "June" %>
+	               <% elsif (f == 7) %>
+	                <% freq << "July" %>
+	               <% elsif (f == 8) %>
+	                 <% freq << "Aug" %>
+	              <% elsif (f == 9) %>
+	                <% freq << "Sept" %>
+	              <% elsif (f == 10) %>
+	                <% freq << "Oct" %>
+	              <% elsif (f == 11) %>
+	               <%  freq << "Nov" %>
+	               <% elsif (f == 12) %>
+	                 <% freq << "Dec" %>
+	              <% end %>
+	            <% end %>
+	            <% if freq != [] %>
+	                <% for i in 0..freq.length %>
+	                       <%= freq[i].to_s + ":" + @current_indicator.reported_values[i].to_s %> 
+	                      <br \>
+	                    <% end %>
+	                <% end %>
+
+	        </div>
+    	</center>
+    </div>
 	<div class="row-fluid">
 		<div class="span6">
 			<%= f.input :source, :input_html => {:value => @current_indicator.source, :class => "span12", :rows => 2 }, :required => true, :as => :text, :label => "Source" %>
@@ -96,10 +137,6 @@
 </div>
 
 <script>
-/*if ($('#freq').val() == "S") {
-	str = "#indicator_freq_s";
-}
-$(str).prop("checked", true)*/
 
 $("#stringfreq").hide();
 $('input[name="indicator[string_freq]"]').click(function(event)
