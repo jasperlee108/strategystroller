@@ -132,8 +132,8 @@ ActiveRecord::Schema.define(:version => 20130506060552) do
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.integer  "user_id"
-    t.decimal  "contributing_projects_status"
     t.string   "short_name"
+    t.decimal  "contributing_projects_status"
     t.decimal  "prognosis"
     t.integer  "year"
     t.text     "reported_values"
