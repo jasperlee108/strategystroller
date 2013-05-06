@@ -12,12 +12,18 @@
 		</div>
 	</div>
 </div><!-- /.navbar -->
-<h2><%= t '.hi_controlling', :user_username => (@user.username) %>! </h2>
+<!--<h2><%= t '.hi_controlling', :user_username => (@user.username) %>! </h2>
 <%= t '.here_is_all' %>
 <br />
 
-<br />
+<br />-->
 
+<div class="well nocorner keybar">
+<span class="label label-info nocorner"><center>Dimension</center></span>
+<span class="label label-info nocorner"><center>Goal</center></span>
+<span class="label label-info nocorner"><center>Indicator</center></span>
+<span class="label label-info nocorner"><center>Project</center></span>
+</div>
 <!--<table border=7 cellpadding=7 cellspacing=7>
 <tr>
 <th><%= t '.dimension' %></th>
@@ -71,28 +77,36 @@
 <div class="tree">
 	<ul>
 		<% Dimension.all.each do |d| %>
-		<li>
-			<div>
+		<li class = "li_tree_dim">
+			<div class="tree_dim">
+                <span class="label treebadge nocorner">
 				<%= link_to d.name, all_dimension_path(:dimension_id => d.id) %>
-			</div>
+                </span>
+            </div>
 			<ul>
 				<% Goal.where(:dimension_id => d.id).each do |g| %>
-				<li>
+				<li class = "li_tree_goal">
 					<div>
+                        <span class="label treebadge nocorner">
 						<%= link_to g.name, all_goal_path(:goal_id => g.id) %>
-					</div>
+                        </span>
+                    </div>
 					<ul>
 						<% Indicator.where(:goal_id => g).each do |i| %>
-						<li>
+						<li class = "li_tree_indic">
 							<div>
+                                <span class="label treebadge nocorner">
 								<%= link_to i.name, all_indicator_path(:indicator_id => i.id) %>
-							</div>
+                                </span>
+                            </div>
 							<ul>
 								<% Project.where(:indicator_id => i).each do |p| %>
-								<li>
+								<li class = "li_tree_proj">
 									<div>
+                                        <span class="label treebadge nocorner">
 										<%= link_to p.name, all_project_path(:project_id => p.id) %>
-									</div>
+                                        </span>
+                                    </div>
 								</li>
 								<% end %>
 							</ul>

@@ -1,5 +1,9 @@
 @import "twitter/bootstrap";
 
+.nocorner {
+ border-radius: 0;
+}
+
 .navbar{
 	background-color: rgba(128, 128, 128, 0);
 	background-image:rgba(128, 128, 128, 0);
