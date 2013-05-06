@@ -333,7 +333,7 @@ class ControllerUnitController < ApplicationController
     if (request.post?)
       params[:indicator][:goal_ids].delete("")
       params[:indicator][:freq].delete("")
-      params[:indicator][:freq] = params[:indicator][:freq].insert { |s| s.to_i }
+      params[:indicator][:freq] = params[:indicator][:freq].map { |s| s.to_i }
       @current_form.update_attributes(:reviewed => true)
       @current_indicator.update_attributes(params[:indicator])
       flash[:notice] = "Indicator review completed!"
