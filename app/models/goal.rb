@@ -1,6 +1,6 @@
 class Goal < ActiveRecord::Base
   attr_accessible :focus, :justification, :name, :need, :notes, :status,
-                  :dimension_id, :prereq, :short_name, :user_id, :updated_at, :indicators
+                  :dimension_id, :prereq, :short_name, :user_id, :updated_at, :indicator_ids
   
 
   serialize :prereq, Array
