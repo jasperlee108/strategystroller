@@ -23,7 +23,7 @@
 				<%= link_to_add_association 'Add User', f, :users, :partial => 'create_user_fields', :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
 				<% end %>
 				<br/><br/>
-				<%= f.action :submit, :label => "Create User(s)" %><% end %>
+				<%= f.action :submit, :label => (I18n.t :create_user_s ) %><% end %>
 			</div>
 		</div>
 </div>

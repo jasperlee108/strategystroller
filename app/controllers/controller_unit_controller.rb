@@ -70,7 +70,7 @@ class ControllerUnitController < ApplicationController
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # goal not saved
-        flash[:error] = "ERROR: Goal was not saved!"
+        flash[:error] = "ERROR: Goal was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
       redirect_to cu_review_path
     end
@@ -103,7 +103,7 @@ class ControllerUnitController < ApplicationController
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # indicator not saved
-        flash[:error] = "ERROR: Indicator was not saved!"
+        flash[:error] = "ERROR: Indicator was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
       redirect_to cu_review_path
     end
@@ -130,7 +130,7 @@ class ControllerUnitController < ApplicationController
       @project.actual_manp = 0
       @project.yearly_target_manp = {}
       @project.yearly_target_cost = {}
-      if @project.save! # project saved
+      if @project.save # project saved
         form_id = save_form(PROJECT, @project.head_id, @project.id)
         if (!form_id) # project saved but form not saved, so delete project
           Project.delete(Project.find_by_id(@project.id))
@@ -144,7 +144,7 @@ class ControllerUnitController < ApplicationController
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # project not saved
-        flash[:error] = "ERROR: Project was not saved!"
+        flash[:error] = "ERROR: Project was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
       redirect_to cu_review_path
     end
@@ -174,7 +174,7 @@ class ControllerUnitController < ApplicationController
          if (request.post?) 
             @application = Application.new(params[:application])
             if @application.save
-                flash[:error] = "Setup successfully saved!"
+                flash[:notice] = "Setup successfully saved!"
             else
                 flash[:error] = "ERROR: Setup was not saved"
                 return
@@ -305,7 +305,7 @@ class ControllerUnitController < ApplicationController
     @forms = Form.order(sort_column + " " + sort_direction)
   end
 
-  def goal_check
+    def goal_check
     @user = current_user
     @goal = Goal.new
     form_id = params[:form_id]
@@ -316,14 +316,24 @@ class ControllerUnitController < ApplicationController
     @indicators.empty? ? @indicators += ['None'] : nil
     @prerequisites = (Goal.select('short_name')).select{|g| g.short_name != @current_goal.short_name}.collect{|g| g.short_name}
     if (request.post?)
-      @current_form.update_attributes(:reviewed => true)
-      @current_goal.update_attributes(params[:goal])
-      flash[:notice] = "Goal review completed!"
+      if params[:commit] == "Confirm Goal"
+        @current_form.update_attributes(:reviewed => true)
+        @current_goal.update_attributes(params[:goal])
+        flash[:notice] = "Goal review completed!"
+      elsif params[:commit] == "Revise"
+        @current_form.update_attributes(:checked => false, :submitted => false, :reviewed => false)
+        @user_obj = User.find_by_id(@current_form.user_id)
+        @form_url = encode_url(@current_form.id, @current_form.entry_id)
+        #save form_url
+        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        provider = @user_obj.username
+        flash[:notice] = "Goal form has been resent to provider " + provider + "!"
+      end
       redirect_to cu_review_path
     end
   end
   
-  def indicator_check
+   def indicator_check
     @user = current_user
     @indicator = Indicator.new
     form_id = params[:form_id]
@@ -332,43 +342,26 @@ class ControllerUnitController < ApplicationController
     @current_indicator = Indicator.find_by_id(entry_id)
     @projects = (@current_indicator.projects).collect{|p| p.short_name}
     @projects.empty? ? @projects += ['None'] : nil
-    #freq is Array
-    #combos are 1, 1/7, 1/4/7/10, all, any
-    #TODO freq is all broken, doesn't propagate properly. See c_u/indicator_check.html.erb
-    freq = []
-    freqArr = @current_indicator.freq
-    freqArr.each do |month|
-      if (month != "")
-        freq << month.to_i
-      end
-    end
-    y = [1]
-    hy = [1,7]
-    q = [1,4,7,10]
-    m = [1,2,3,4,5,6,7,8,9,10,11,12]
-
-    if (freq == y)
-      real_freq = "Y"
-    elsif (freq == hy)
-      real_freq = "HY"
-    elsif (freq == q)
-      real_freq = "Q"
-    elsif (freq == m)
-      real_freq = "M"
-    else
-      real_freq = "S"
-      #@current_indicator.string_freq = freq
-    end 
-    #current_indicator.freq needs to become a string
-    @current_indicator.string_freq = real_freq
-    
-
     if (request.post?)
-      params[:indicator].delete(:string_freq)
-      params[:indicator][:freq] = freq
-      @current_form.update_attributes(:reviewed => true)
-      @current_indicator.update_attributes(params[:indicator])
-      flash[:notice] = "Indicator review completed!"
+      params[:indicator][:freq].delete_if{|k,v| k==""}
+      params[:indicator][:freq].map! do |month|
+          month = month.to_i
+      end
+      if params[:commit] == "Confirm Indicator"
+        params[:indicator][:goal_ids].delete("")
+        params[:indicator][:freq].delete("")
+        @current_form.update_attributes(:reviewed => true)
+        @current_indicator.update_attributes(params[:indicator])
+        flash[:notice] = "Indicator review completed!"
+      elsif params[:commit] == "Revise"
+        @current_form.update_attributes(:checked => false, :submitted => false, :reviewed => false)
+        @user_obj = User.find_by_id(@current_form.user_id)
+        @form_url = encode_url(@current_form.id, @current_form.entry_id)
+        #save form_url
+        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        provider = @user_obj.username
+        flash[:notice] = "Indicator form has been resent to provider " + provider + "!"
+      end
       redirect_to cu_review_path
     end
   end
@@ -383,10 +376,20 @@ class ControllerUnitController < ApplicationController
     @activities = @current_project.activities
     @project.startDate = @current_project.startDate
     if (request.post?)
-      params[:project][:indicator_ids].delete("")
-      @current_form.update_attributes(:reviewed => true)
-      @current_project.update_attributes(params[:project])
-      flash[:notice] = "Project review completed!"
+      if params[:commit] == "Confirm Project"
+        params[:project][:indicator_ids].delete("")
+        @current_form.update_attributes(:reviewed => true)
+        @current_project.update_attributes(params[:project])
+        flash[:notice] = "Project review completed!"
+      elsif params[:commit] == "Revise"
+        @current_form.update_attributes(:checked => false, :submitted => false, :reviewed => false)
+        @user_obj = User.find_by_id(@current_form.user_id)
+        @form_url = encode_url(@current_form.id, @current_form.entry_id)
+        #save form_url
+        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        provider = @user_obj.username
+        flash[:notice] = "Project form has been resent to provider " + provider + "!"
+      end
       redirect_to cu_review_path
     end
   end

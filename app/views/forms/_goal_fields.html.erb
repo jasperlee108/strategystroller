@@ -1,16 +1,16 @@
 <div class='nested-fields'>
 <!-- Choose one input and one interaction to dynamically generate -->
     <br><%= f.input :as => :select, :collection => [:name, :need, :justification, :focus, :notes, :status], :prompt => true %>
-    <br><%= f.input :name, :label => "" %>
-    <br><%= f.input :dimension_id, :label => "" %>
-    <br><%= f.input :id, :label => "" %>
-    <br><%= f.input :user_id, :label => "" %>
-    <br><%= f.input :need, :label => "" %>
-    <br><%= f.input :justification, :label => "" %>
-    <br><%= f.input :focus, :label => "" %>
+    <br><%= f.input :name, :label => (I18n.t :) %>
+    <br><%= f.input :dimension_id, :label => (I18n.t :) %>
+    <br><%= f.input :id, :label => (I18n.t :) %>
+    <br><%= f.input :user_id, :label => (I18n.t :) %>
+    <br><%= f.input :need, :label => (I18n.t :) %>
+    <br><%= f.input :justification, :label => (I18n.t :) %>
+    <br><%= f.input :focus, :label => (I18n.t :) %>
 
-    <br><%= f.input :notes, :label => "" %>
+    <br><%= f.input :notes, :label => (I18n.t :) %>
 
-    <br><%= f.input :status, :label => "" %>
+    <br><%= f.input :status, :label => (I18n.t :) %>
 
 </div>

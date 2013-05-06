@@ -1,20 +1,53 @@
 @import "twitter/bootstrap";
 
+.nocorner {
+ border-radius: 0;
+}
+
 .navbar{
 	background-color: rgba(128, 128, 128, 0);
 	background-image:rgba(128, 128, 128, 0);
     min-width:615px;
+    
 }
  .navbar-fixed-top .container{
     max-width:840px;
-    min-width:615px;
+    min-width:750px;
     padding-right:10px;
     padding-left:10px;
     width:auto;
     margin-right:auto;
     margin-left:auto;
+    
 
 }
+ .navbar-fixed-top .container .nav{
+    width:60%;
+ }
+ .navbar-fixed-top .container .nav li{
+    width:20%;
+    text-align:center;
+
+}
+.navbar-fixed-top .nav > li > a{
+height:40px;
+
+}
+.navbar-fixed-top .nav{
+margin-right:5px;
+}
+
+.right_navbar_drop{
+width:13%;
+left:25px;
+
+}
+
+.brand{
+width:20%;
+right:20px;
+}
+
 .setup_container{
 margin-top:40px;
 }
@@ -27,18 +60,19 @@ padding-left:100px;
 
 .container{
     max-width:840px;
-    min-width:615px;
+    min-width:750px;
     width:auto;
     padding-right:10px;
     padding-left:10px;
     margin-right:auto;
     margin-left:auto;
+    
 }
 .body_container{
 background-color:white;
 min-height:100%;
     position:relative;
-    top:40px;
+    top:60px;
     
 }
 .alert{

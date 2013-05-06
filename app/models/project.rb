@@ -25,8 +25,8 @@ class Project < ActiveRecord::Base
   :allow_blank => true
   
   # Needs a Parent
-  #validates :indicator_id,
-  #:presence => true
+  validates :indicator_ids,
+  :presence => true
 
   # Needs an Owner
   validates :head_id,

@@ -54,4 +54,23 @@ namespace :rspec do
     system("rspec ./spec/models/form_spec.rb")
   end
 
+  desc "Run cu_helper tests"
+  task :cu_helper => :environment do
+    system("echo Running controller_unit_helper_spec test..")
+    system("rspec ./spec/helpers/controller_unit_helper_spec.rb")
+  end  
+
+  desc "Run provider_helper tests"
+  task :pro_helper => :environment do
+    system("echo Running provider_helper_spec test..")
+    system("rspec ./spec/helpers/provider_helper_spec.rb")
+  end  
+
+  desc "Run application_helper tests"
+  task :app_helper => :environment do
+    system("echo Running application_helper test..")
+    system("rspec ./spec/helpers/application_helper_spec.rb")
+  end  
+
+
 end

@@ -10,6 +10,6 @@
         <%= link_to_add_association 'Add User', f, :users, :data => {"association-insertion-position" => "before", "association-insertion-node" => "this"} %>
 
     <% end %>
-    <%= f.action :submit, :label => "Create User" %>
+    <%= f.action :submit, :label => (I18n.t :create_user) %>
 <% end %>
 

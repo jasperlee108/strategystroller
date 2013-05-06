@@ -1,6 +1,6 @@
 class Goal < ActiveRecord::Base
   attr_accessible :focus, :justification, :name, :need, :notes, :status,
-                  :dimension_id, :prereq, :short_name, :user_id, :updated_at, :indicators
+                  :dimension_id, :prereq, :short_name, :user_id, :updated_at, :indicator_ids
   
 
   serialize :prereq, Array
@@ -57,10 +57,8 @@ class Goal < ActiveRecord::Base
   :allow_blank => true,
   :numericality => { :greater_than_or_equal_to => 0 }
   
-  ## Prereq = string[80]
   ## Can have zero pre-req if it's the first
-  validates :prereq, # TODO make this an array
-  :length => { :maximum => 80 }
+  #validates :prereq # TODO make validation for the prereq array
 
   def update_status
     inds = self.indicators

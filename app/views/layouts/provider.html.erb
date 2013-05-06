@@ -35,7 +35,7 @@
     
       <div class="navbar-inner">
       <div class="container">
-        	<a class="brand" href="/">Strategy Stroller</a>
+        	<a class="brand" href="/"><%= t '.strategy_2' %></a>
             <% if signed_in? %>
 
            <% if current_user.controlling_unit == false %>
@@ -61,14 +61,17 @@
 
 
           <% end %>
-            
-          <div class="btn-group pull-right">
-			      <a class="btn dropdown-toggle btn-inverse pull-right" data-toggle="dropdown"> User Settings <span class="caret"></span></a>
-			  <ul class="dropdown-menu">
-			  	<li><%= render 'devise/menu/login_items' %></li>
-			    <li><%= render 'devise/menu/registration_items' %></li>
-			  </ul>
-			</div>
+          <div class="btn-group pull-right right_navbar_drop">
+						<a class="btn dropdown-toggle btn-inverse pull-right" data-toggle="dropdown"> <%= t '.user_settings' %> <span class="caret"></span> </a>
+						<ul class="dropdown-menu">
+							<li>
+								<%= render 'devise/menu/login_items' %>
+							</li>
+							<li>
+								<%= render 'devise/menu/registration_items' %>
+							</li>
+						</ul>
+					</div>
       <% end %>
            
 

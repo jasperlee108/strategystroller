@@ -5,69 +5,15 @@ describe Goal do
   ### NOTE: Using ruby format, not Rspec
   
   def generate
-    goal = Goal.new(
-    :name => "Name of Goal",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 0.01,
-    :dimension_id => 1,
-    :user_id => 1,
-    :prereq => "A Different Goal's Name",
-    :short_name => "Shorter name"
-    )
+    goal = build(:goal) #TODO refactor method out
     return goal
   end
 
   def gen_with_children
-    goal = generate()
-    indicator1 = Indicator.new(
-        :name => "Name der Messgrobe",
-        :description => "Beschreibung der Messgrobe",
-        :source => "Quelle",
-        :unit => "Einheit",
-        :freq => [3,6,9,12],
-        :year => 2013,
-        :reported_values => [0.2, 0.65],
-        :indicator_type => "average",
-        :prognosis => 0.6543,
-        :dir => "more is better",
-        :actual => 0.055,
-        :target => 0.105,
-        :notes => "Anmerkungen",
-        :diff => 5.0,
-        :status => 0.755,
-        :contributing_projects_status => 0.693,
-        :status_notes => "Anmerkungen zum Status",
-        :goal_id => 1,
-        :user_id => 1,
-        :short_name => "Shorter name"
-    )
-    indicator2 = Indicator.new(  # Not a child of this goal.
-        :name => "Name der Messgrobe2",
-        :description => "Beschreibung der Messgrobe2",
-        :source => "Quelle2",
-        :unit => "Einheit2",
-        :freq => [3,6,9,12],
-        :year => 2013,
-        :reported_values => [0.2, 0.65],
-        :indicator_type => "average",
-        :prognosis => 0.6543,
-        :dir => "more is better",
-        :actual => 0.055,
-        :target => 0.105,
-        :notes => "Anmerkungen2",
-        :diff => 0.050,
-        :status => 0.111,
-        :contributing_projects_status => 0.201,
-        :status_notes => "Anmerkungen zum Status2",
-        :goal_id => 3,
-        :user_id => 1,
-        :short_name => "Shorter name"
-    )
-    indicator1.save()
-    indicator2.save()
+    goal = create(:goal)
+    indicator1 = create(:indicator)
+    indicator2 = create(:indicator, name: "Test Indicator 2") # Not a child of this goal
+    goal.indicators = [indicator1]
     return goal
   end
 
@@ -194,20 +140,12 @@ describe Goal do
 
   ## Prereq can be empty
   it "should be allowed to have empty Prereq" do
-    prereq = ""
+    prereq = []
     goal = generate()
     goal.prereq = prereq
     assert(goal.save, "It won't save on empty Prereq")
   end
   
-  ## Prereq max = 80
-  it "should not have Prereq longer than 80 characters" do
-    prereq = (0...81).map{ ( 65+rand(26) ).chr }.join
-    goal = generate()
-    goal.prereq = prereq
-    assert(!goal.save, "It saves on Prereq longer than 80 characters")
-  end
-
   ### SHORT NAME
 
   ## Short Name is not empty
@@ -228,15 +166,13 @@ describe Goal do
 
   ### Status Update/calculation
   it 'can find the correct number of children' do
-    goal = gen_with_children()
-    goal.save()
+    gen_with_children()
     goal_in_table = Goal.find(1)
     assert(goal_in_table.indicators.count == 1, "goal counted #{goal_in_table.indicators.count} children, not 1 as expected")
   end
 
   it 'can update its status using its children' do
-    goal = gen_with_children()
-    goal.save()
+    gen_with_children()
     goal_in_table = Goal.find(1)
     goal_in_table.update_status()
     assert(goal_in_table.status == 0.693, "goal status value was #{goal_in_table.status}, not 0.693 as expected")

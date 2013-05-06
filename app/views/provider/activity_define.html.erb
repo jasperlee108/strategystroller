@@ -21,74 +21,74 @@
 
 	<div class="row-fluid">
 		<div class="span12">
-			<%= f.input :name, :required => true, :as => :string, :label => "Name of Activity", :input_html => { :class=> "span12" } %>
+			<%= f.input :name, :required => true, :as => :string, :label => (I18n.t :name_of_activity), :input_html => { :class=> "span12" } %>
 		</div>
 	</div>
 
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :project_id, :as => :select, :collection => Project.all, :selected => @project_id, :label => "Part of Project", :input_html => { :class=> "span12", :disabled => true } %>
+			<%= f.input :project_id, :as => :select, :collection => Project.all, :selected => @project_id, :label => (I18n.t :part_of_project), :input_html => { :class=> "span12", :disabled => true } %>
 		</div>
 		<div class="span6">
-			<%= f.input :short_name, :as => :string, :label => "Short Name of Activity", :input_html => { :class=> "span12" } %>
-		</div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="span6">
-			<%= f.input :startDate, :as => :date_select, :input_html => { :class => "span4" }, :required => true, :label => "Starting Date" %>
-		</div>
-		<div class="span6">
-			<%= f.input :actualManp, :as => :number, :required => true, :label => "Actual Employee Resources (days)", :input_html => { :class=> "span12" } %>
+			<%= f.input :short_name, :as => :string, :label => (I18n.t :short_name_of_activity), :input_html => { :class=> "span12" } %>
 		</div>
 	</div>
 
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :endDate, :as => :date_select, :input_html => { :class => "span4" }, :required => true, :label => "Ending Date" %>
+			<%= f.input :startDate, :as => :date_select, :input_html => { :class => "span4" }, :required => true, :label => (I18n.t :starting_date) %>
 		</div>
 		<div class="span6">
-			<%= f.input :actualCost, :as => :number, :required => true, :label => "Actual External Costs (currency)", :input_html => { :class=> "span12" } %>
+			<%= f.input :actualManp, :as => :number, :required => true, :label => (I18n.t :actual_employee_resources_(days)), :input_html => { :class=> "span12" } %>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<%= f.input :endDate, :as => :date_select, :input_html => { :class => "span4" }, :required => true, :label => (I18n.t :ending_date) %>
+		</div>
+		<div class="span6">
+			<%= f.input :actualCost, :as => :number, :required => true, :label => (I18n.t :actual_external_costs_(currency)), :input_html => { :class=> "span12" } %>
 		</div>
 	</div>
 
           <div class="row-fluid">
             <div class="span4">
-              <%= f.input :targetManp, :as => :number, :step => 1, :required => true, :label => "Target Manpower (Man-Months)", :input_html => { :class => "span12" } %>
+              <%= f.input :targetManp, :as => :number, :step => 1, :required => true, :label => (I18n.t :target_manpower_(man-months)), :input_html => { :class => "span12" } %>
             </div>
             <div class="span4">
-              <%= f.input :targetCost, :as => :number, :required => true, :label => "Target External Costs (currency)", :input_html => { :class=> "span12" } %>
+              <%= f.input :targetCost, :as => :number, :required => true, :label => (I18n.t :target_external_costs_(currency)), :input_html => { :class=> "span12" } %>
             </div>
             <div class="span4">
-              <%= f.input :actualProg, :as => :select, :collection => [["Not Yet Started", 0], ["In Progress", 1], ["Completed", 2]], :required => true, :label => "Progress in Phase", :input_html => { :class=> "span12" } %>
+              <%= f.input :actualProg, :as => :select, :collection => [["Not Yet Started", 0], ["In Progress", 1], ["Completed", 2]], :required => true, :label => (I18n.t :progress_in_phase), :input_html => { :class=> "span12" } %>
             </div>
           </div>
 
 
           <div class="row-fluid">
 		<div class="span6">
-			<%= f.input :description, :as => :text, :input_html => { :rows => 5, :class=> "span12" }, :required => true, :label => "Activity Description" %>
+			<%= f.input :description, :as => :text, :input_html => { :rows => 5, :class=> "span12" }, :required => true, :label => (I18n.t :activity_description) %>
 		</div>
 		<div class="span6">
-			<%= f.input :team, :as => :text, :input_html => { :rows => 5, :class => "span12" }, :required => false, :label => "Team Member" %>
+			<%= f.input :team, :as => :text, :input_html => { :rows => 5, :class => "span12" }, :required => false, :label => (I18n.t :team_member) %>
 		</div>
 	</div>
 	
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :phase, :as => :select, :collection => [["1-Concept completed", 1], ["2-Prerequisites fulfilled", 2], ["3-Implementation running", 3], ["4-Project effective", 4]], :required => true, :label => "Part of Phase", :input_html => { :class=> "span12" } %>
+			<%= f.input :phase, :as => :select, :collection => [["0-Ongoing", 0], ["1-Concept completed", 1], ["2-Prerequisites fulfilled", 2], ["3-Implementation running", 3], ["4-Project in effect", 4]], :required => true, :label => (I18n.t :part_of_phase), :input_html => { :class=> "span12" } %>
           <!--TODO make this collection not hard-coded, but passed up from the model-->
           <!--TODO Decide if we should put the project management option here, or elsewhere-->
 		</div>
 		<div class="span6">
-			<%= f.input :notes, :as => :text, :input_html => { :rows => 5, :class => "span12" }, :required => false, :label => "Notes" %>
+			<%= f.input :notes, :as => :text, :input_html => { :rows => 5, :class => "span12" }, :required => false, :label => (I18n.t :notes) %>
 		</div>
 	</div>
 
 	<% end %>
 	<center>
 		<div class="row-fluid">
-			<%= f.action :submit, :label => "Submit Activity",:button_html => { :class=> "btn btn-primary span4" }%>
+			<%= f.action :submit, :label => (I18n.t :submit_activity),:button_html => { :class=> "btn btn-primary span4" }%>
 			<input type=button class="btn btn-danger span4" value= "<%= I18n.t :cancel%>" onclick= "history.back()">
 			</input>
 		</div>
