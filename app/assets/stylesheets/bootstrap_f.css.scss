@@ -1,5 +1,9 @@
 @import "twitter/bootstrap";
 
+.nocorner {
+ border-radius: 0;
+}
+
 .navbar{
 	background-color: rgba(128, 128, 128, 0);
 	background-image:rgba(128, 128, 128, 0);
@@ -7,7 +11,7 @@
 }
  .navbar-fixed-top .container{
     max-width:840px;
-    min-width:615px;
+    min-width:730px;
     padding-right:10px;
     padding-left:10px;
     width:auto;
@@ -27,7 +31,7 @@ padding-left:100px;
 
 .container{
     max-width:840px;
-    min-width:615px;
+    min-width:730px;
     width:auto;
     padding-right:10px;
     padding-left:10px;

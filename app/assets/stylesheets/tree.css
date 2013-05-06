@@ -6,24 +6,129 @@
 }
 .tree li {
   list-style-type: none;
-  border-left: 2px solid #000;
+  border-left: 2px dotted #000;
   margin-left: 1em;
 }
-.tree li div {
-  padding-left: 1em;
+/*.tree li div {
+  padding-left: 14em;
   position: relative;
-}
-.tree li div::before {
+}*/
+/*.tree li div::before {
   content:'';
   position: absolute;
   top: 0;
   left: -2px;
   bottom: 50%;
-  width: 0.75em;
-  border: 2px solid #000;
+  width: 14em;
+  border: 2px dotted #000;
+  border-top: 0 none transparent;
+  border-right: 0 none transparent;
+}*/
+/*.tree ul > li:last-child {
+  border-left: 70px solid transparent;
+}*/
+.keybar{
+padding-top: 5px;
+padding-bottom: 5px;
+padding-left:40px;
+min-width: 780px;
+width: 780px;
+}
+
+.keybar .label{
+line-height: 22px;
+font-size: 22px;
+padding-left: 15px;
+padding-right: 15px;
+margin-left: 20px;
+margin-right: 20px;
+width:120px;
+}
+.keybar .label:hover{
+background-color: rgb(58, 135, 173);
+}
+.treebadge{
+padding-left: 15px;
+padding-right: 15px;
+width:120px;
+margin-bottom:4px;
+margin-top:4px;
+}
+.treebadge a{
+font-weight: bold;
+color: white;
+line-height: 18px;
+font-size: 18px;
+white-space: normal;
+
+}
+
+.li_tree_dim div {
+padding-left: 3em;
+position: relative;
+}
+.li_tree_dim div::before{
+  content:'';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  bottom: 50%;
+  width: 3em;
+  border: 2px dotted #000;
   border-top: 0 none transparent;
   border-right: 0 none transparent;
 }
-.tree ul > li:last-child {
-  border-left: 2px solid transparent;
+.li_tree_dim ul > li:last-child {
+  border-left: 100px solid transparent;
+}
+.li_tree_goal div {
+padding-left: 9em;
+position: relative;
+}
+.li_tree_goal div::before{
+  content:'';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  bottom: 50%;
+  width: 9em;
+  border: 2px dotted #000;
+  border-top: 0 none transparent;
+  border-right: 0 none transparent;
+}
+.li_tree_goal ul > li:last-child {
+  border-left: 190px solid transparent;
+}
+.li_tree_indic div {
+padding-left: 8em;
+position: relative;
+}
+.li_tree_indic div::before{
+  content:'';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  bottom: 50%;
+  width: 8em;
+  border: 2px dotted #000;
+  border-top: 0 none transparent;
+  border-right: 0 none transparent;
+}
+.li_tree_indic ul > li:last-child {
+  border-left: 180px solid transparent;
+}
+.li_tree_proj div {
+padding-left: 8em;
+position: relative;
+}
+.li_tree_proj div::before{
+  content:'';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  bottom: 50%;
+  width: 8em;
+  border: 2px dotted #000;
+  border-top: 0 none transparent;
+  border-right: 0 none transparent;
 }
