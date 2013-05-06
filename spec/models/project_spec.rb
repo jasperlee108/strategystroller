@@ -675,10 +675,10 @@ describe Project do
     assert(!project.save, "Project saved with a project not in Activity::PROJECT.")
   end
 
-  it 'will not save if Activity::PROJECT_MANAGEMENT hase a nonzero phase' do
+  it 'will not save if Activity::ONGOING hase a nonzero phase' do
     project = generate
     project.status_ms = {-1=>1, 1=>0, 2=>0, 3=>0, 4=>0 }
-    assert(!project.save, "Project saved with PROJECT_MANAGEMENT with having a nonzero value")
+    assert(!project.save, "Project saved with ONGOING with having a nonzero value")
   end
 
 
@@ -954,7 +954,7 @@ describe Project do
     project.save
     proj_in_table = Project.find(1)
     proj_in_table.update_status_ms
-    assert(proj_in_table.status_ms == {-1=>0, 1=>0, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase progresses,  instead of all 0, got: #{proj_in_table.status_ms}")
+    assert(proj_in_table.status_ms == {0=>0, 1=>0, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase progresses,  instead of all 0, got: #{proj_in_table.status_ms}")
   end
 
   it 'correctly calculates phase progress from multiple children' do
@@ -983,7 +983,7 @@ describe Project do
 
     proj_in_table = Project.find(1)
     proj_in_table.update_status_ms
-    assert(proj_in_table.status_ms == {-1=>0, 1=>2, 2=>2, 3=>1, 4=>0}, "Failed to correctly set phase actualProgress, got: #{proj_in_table.status_ms}")
+    assert(proj_in_table.status_ms == {0=>0, 1=>2, 2=>2, 3=>1, 4=>0}, "Failed to correctly set phase actualProgress, got: #{proj_in_table.status_ms}")
   end
 
   it 'correctly calculates Completed and not started phase progress from multiple children with the same status' do
@@ -1012,7 +1012,7 @@ describe Project do
 
     proj_in_table = Project.find(1)
     proj_in_table.update_status_ms
-    assert(proj_in_table.status_ms == {-1=>0, 1=>2, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase actualProgresses, got: #{proj_in_table.status_ms}")
+    assert(proj_in_table.status_ms == {0=>0, 1=>2, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase actualProgresses, got: #{proj_in_table.status_ms}")
   end
 
   it 'correctly calculates In Progress phase progress from multiple children with the completed and not_yet_started progresses' do
@@ -1041,7 +1041,7 @@ describe Project do
 
     proj_in_table = Project.find(1)
     proj_in_table.update_status_ms
-    assert(proj_in_table.status_ms == {-1=>0, 1=>1, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase actualProgresses, got: #{proj_in_table.status_ms}")
+    assert(proj_in_table.status_ms == {0=>0, 1=>1, 2=>0, 3=>0, 4=>0}, "Failed to correctly set phase actualProgresses, got: #{proj_in_table.status_ms}")
   end
 
   ### EXTRA
