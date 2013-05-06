@@ -56,7 +56,7 @@ class Indicator < ActiveRecord::Base
         # problems << ":freq cannot be empty"
       else
         value.each do |month|
-          month = month
+          month = month.to_i
           if month < 1 or month > 12
             problems <<
                 "Each month must be a value between 1 and 12, one was #{month}"

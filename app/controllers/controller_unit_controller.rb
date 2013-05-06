@@ -70,7 +70,7 @@ class ControllerUnitController < ApplicationController
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # goal not saved
-        flash[:error] = "ERROR: Goal was not saved!"
+        flash[:error] = "ERROR: Goal was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
       redirect_to cu_review_path
     end
@@ -103,7 +103,7 @@ class ControllerUnitController < ApplicationController
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # indicator not saved
-        flash[:error] = "ERROR: Indicator was not saved!"
+        flash[:error] = "ERROR: Indicator was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
       redirect_to cu_review_path
     end
@@ -144,7 +144,7 @@ class ControllerUnitController < ApplicationController
           FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
         end
       else # project not saved
-        flash[:error] = "ERROR: Project was not saved!"
+        flash[:error] = "ERROR: Project was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
       redirect_to cu_review_path
     end
