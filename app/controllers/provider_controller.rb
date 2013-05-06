@@ -126,23 +126,34 @@ class ProviderController < ApplicationController
     session[:return_to] = request.url
     @user = current_user
     @project = Project.new
-    form_id = params[:form_id]
-    entry_id = params[:entry_id]
-    @current_form = Form.find_by_id(form_id)
-    @current_project = Project.find_by_id(entry_id)
+    @form_id = params[:form_id]
+    @entry_id = params[:entry_id]
+    @current_form = Form.find_by_id(@form_id)
+    @current_project = Project.find_by_id(@entry_id)
     @activities = @current_project.activities
     
     if (request.post? || request.put?)
-      if (params[:commit] == "Update Project")
-        flash[:notice] = "Project successfully submitted!"
-      elsif (params[:commit] == "Save Project")
-        flash[:notice] = "Project successfully saved!"
+      if (params[:commit] == "Update")
+        # just update activity
+        @current_activity = Activity.find_by_id(params[:activity][:id])
+        @current_activity.update_attributes(
+          :actualManp => params[:activity][:actualManp],
+          :actualCost => params[:activity][:actualCost],
+          :actualProg => params[:activity][:actualProg],
+          :updated_at => Time.current
+        )
+        flash[:notice] = "Activity successfully updated!"
+        redirect_to project_update_path(:entry_id => @entry_id, :form_id => @form_id)
+      else
+        # update the project
+        if (params[:commit] == "Update Project")
+          flash[:notice] = "Project successfully submitted!"
+        elsif (params[:commit] == "Save Project")
+          flash[:notice] = "Project successfully saved!"
+        end
+        @current_project.update_attributes(params[:project], :updated_at => Time.current)
+        redirect_to forms_composite_update_path
       end
-      params[:activity].each do |act|
-        #update each activity
-      end
-      @current_project.update_atributes(params[:project], :updated_at => Time.current)
-      redirect_to forms_composite_update_path
     end
   end
   
