@@ -83,12 +83,12 @@ describe Activity do
     assert(!activity.save, "It saves on an integer Phase not present in Activity::PHASES")
   end
 
-  ## Phase allows Activity::PROJECT_MANAGEMENT
-  it "will allow the phase Activity::PROJECT_MANAGEMENT" do
-    phase = Activity::PROJECT_MANAGEMENT
+  ## Phase allows Activity::ONGOING
+  it "will allow the phase Activity::ONGOING" do
+    phase = Activity::ONGOING
     activity = generate()
     activity.phase = phase
-    assert(activity.save, "It will not save on Activity::PROJECT_MANAGEMENT: #{Activity::PROJECT_MANAGEMENT}")
+    assert(activity.save, "It will not save on Activity::ONGOING: #{Activity::ONGOING}")
   end
   
   ### DATE

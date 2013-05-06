@@ -1,12 +1,28 @@
 FactoryGirl.define do
 
-  #Sample code
-  #factory :user, class: User do
-  #  first_name "John"
-  #  last_name  "Doe"
-  #  admin false
-  #end
+  ## User
+  factory :user, class: User do
+    username "Test User"
+    email "test@user.com"
+    controlling_unit true
 
+    after (:build) do |user|
+      user.password_confirmation = user.password = "testpassword"
+      user.skip_confirmation!
+    end
+
+    before (:create) do |user|
+      user.password_confirmation = user.password = "testpassword"
+      user.skip_confirmation!
+    end
+
+  end
+
+  ## Application
+  factory :application, class: Application do
+    company "Test Company"
+    curr_year 2013
+  end
 
   ## Dimension
   factory :dimension, class: Dimension do
@@ -68,7 +84,7 @@ FactoryGirl.define do
     actual_manp  10
     actual_cost  0.205
     status_prog  0.755
-    status_ms {{ Activity::PROJECT_MANAGEMENT      =>  Activity::NOT_YET_STARTED,
+    status_ms {{ Activity::ONGOING      =>  Activity::NOT_YET_STARTED,
                  Activity::CONCEPT_COMPLETED       =>  Activity::IN_PROGRESS,
                  Activity::PREREQUISITES_FULFILLED =>  Activity::NOT_YET_STARTED,
                  Activity::IMPLEMENTATION_RUNNING  =>  Activity::NOT_YET_STARTED,

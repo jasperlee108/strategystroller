@@ -21,7 +21,15 @@ end
   def save_form(table_id, user_id, entry_id)
     default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
     if default.include? table_id
-      @form = create_form(false, table_id, false, user_id, false, Date.current, entry_id)
+      @form = Form.new(
+          :checked => false,
+          :lookup => table_id,
+          :reviewed => false,
+          :user_id => user_id,
+          :submitted => false,
+          :last_reminder => Date.current,
+          :entry_id => entry_id
+      )
       if @form.save
         return @form.id
       end
@@ -30,17 +38,5 @@ end
     return nil
   end
 
-  def create_form(checked, table_id, reviewed, user_id, submitted, last, entry_id)
-    form = Form.new(
-    :checked => checked,
-    :lookup => table_id,
-    :reviewed => reviewed,
-    :user_id => user_id,
-    :submitted => submitted,
-    :last_reminder => last,
-    :entry_id => entry_id
-    )
-    return form
-  end
-  
+
 end

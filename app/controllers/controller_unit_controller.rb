@@ -53,12 +53,11 @@ class ControllerUnitController < ApplicationController
   
   def set_goal
     @goal = Goal.new
-    if (request.post?) 
+    if (request.post?)
       @goal = Goal.new(params[:goal])
-      @goal.status = 0
       if @goal.save # goal saved
         form_id = save_form(GOAL, @goal.user_id, @goal.id)
-        if (!form_id) # goal saved but form not saved, so delete goal
+        if (!form_id) # goal saved but form not saved, so delete goal #TODO will never fail, since goal is hard- coded and it is the only thing it can fail on. No uniqueness, etc.
           Goal.delete(Goal.find_by_id(@goal.id))
           flash[:error] = "ERROR: Goal was not saved!"
         else # goal and form saved
@@ -394,33 +393,6 @@ class ControllerUnitController < ApplicationController
     end
   end
 
-   def save_form(table_id, user_id, entry_id)
-    default = [GOAL,INDICATOR,PROJECT,ACTIVITY]
-    if default.include? table_id
-      @form = create_form(false, table_id, false, user_id, false, Date.today, entry_id)
-      if @form.save
-        return @form.id
-      else
-        return nil
-      end
-    else
-      # ERROR: wrong table_id
-      return nil
-    end
-  end
-
-  def create_form(checked, table_id, reviewed, user_id, submitted, last, entry_id)
-    form = Form.new(
-    :checked => checked,
-    :lookup => table_id,
-    :reviewed => reviewed,
-    :user_id => user_id,
-    :submitted => submitted,
-    :last_reminder => last,
-    :entry_id => entry_id
-    )
-    return form
-  end
 
   ### DISPLAY ALL DATA FOR OVERVIEW PAGE + RELATED METHODS ###
 

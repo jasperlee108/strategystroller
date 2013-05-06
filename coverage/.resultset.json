@@ -1,7 +1,11 @@
 {
   "RSpec": {
     "coverage": {
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/controllers/application_controller.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/controllers/application_controller.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         1,
@@ -13,43 +17,43 @@
         1,
         1,
         1,
+        null,
+        1,
+        19,
+        null,
+        1,
+        27,
+        27,
+        null,
         null,
         1,
         3,
-        null,
-        1,
         3,
         3,
         null,
         null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
         null,
         null,
         null,
         null,
         null,
         null,
-        1,
-        0,
+        3,
+        3,
         null,
         null,
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        0,
         null,
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/models/application.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/application.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         1,
@@ -73,7 +77,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/helpers/application_helper.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/helpers/application_helper.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         null,
@@ -135,14 +143,23 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/helpers/admin_helper.rb": [
         1,
         null
       ],
       "/home/jasper/Desktop/ITERATION3/app/helpers/controller_unit_helper.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/helpers/admin_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/helpers/controller_unit_helper.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         null,
+        1,
         1,
         1,
         1,
@@ -160,9 +177,32 @@
         null,
         null,
         null,
+        1,
+        2,
+        2,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/helpers/forms_helper.rb": [
         1,
         null
@@ -172,6 +212,17 @@
         null
       ],
       "/home/jasper/Desktop/ITERATION3/app/helpers/provider_helper.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/helpers/forms_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/helpers/home_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/helpers/provider_helper.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         null,
@@ -205,7 +256,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/admin/dashboard.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/admin_user.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         1,
@@ -240,7 +295,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/admin/application.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/application.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         null,
@@ -270,7 +329,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/admin/users.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/dashboard.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         0,
@@ -318,6 +381,20 @@
         null,
         null,
         null,
+<<<<<<< HEAD
+=======
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/dimension.rb": [
+        1,
+        null,
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/dimension.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         1,
@@ -352,12 +429,20 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/admin/project.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/form.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/models/project.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/form.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         null,
@@ -399,15 +484,31 @@
         null,
         null,
         1,
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         8,
+=======
+        12,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         2,
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
         null,
         null,
         null,
+<<<<<<< HEAD
         null,
+=======
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/goal.rb": [
+        1,
+        null,
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/goal.rb": [
+        1,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         null,
@@ -491,7 +592,19 @@
         null,
         null,
         null,
+<<<<<<< HEAD
         null,
+=======
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/indicator.rb": [
+        1,
+        null,
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/indicator.rb": [
+        1,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         null,
@@ -828,19 +941,34 @@
         null,
         1,
 <<<<<<< HEAD
+<<<<<<< HEAD
         0,
         0,
         0,
 =======
+=======
+        2,
+        2,
+        1,
+        null,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         1,
         null,
+<<<<<<< HEAD
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
         0,
         0,
         0,
         0,
+=======
+        1,
+        null,
+        null,
+        null,
+        1,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         0,
         0,
         0,
@@ -850,12 +978,20 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/admin/goal.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/project.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/models/goal.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/project.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         null,
@@ -1082,11 +1218,18 @@
         null,
         1,
         null,
+<<<<<<< HEAD
         null,
 =======
         106,
         106,
         105,
+=======
+        1,
+        108,
+        108,
+        107,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         10,
         10,
         10,
@@ -1101,13 +1244,13 @@
         null,
         1,
         null,
-        106,
+        108,
         null,
         null,
         1,
-        106,
-        106,
-        105,
+        108,
+        108,
+        107,
         10,
         10,
         10,
@@ -1124,9 +1267,13 @@
         1,
         null,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         106,
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
+=======
+        108,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
         null,
         null,
@@ -1141,19 +1288,23 @@
         1,
 =======
         1,
-        106,
-        106,
-        101,
-        500,
-        500,
-        500,
+        108,
+        108,
+        103,
+        510,
+        510,
+        510,
         null,
-        101,
+        103,
         null,
         5,
         null,
+<<<<<<< HEAD
         106,
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
+=======
+        108,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
         null,
         null,
@@ -1166,13 +1317,17 @@
         null,
         1,
 <<<<<<< HEAD
+<<<<<<< HEAD
         null,
 =======
         106,
+=======
+        108,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         2,
-        104,
+        106,
         1,
-        103,
+        105,
         1,
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
         null,
@@ -1181,22 +1336,33 @@
         null,
         null,
         1,
-        0,
-        0,
-        0,
+        2,
+        2,
+        2,
         null,
+<<<<<<< HEAD
         0,
         0,
         0,
         0,
         0,
+=======
+        2,
         null,
-        0,
+        null,
+        1,
+        2,
+        2,
+        2,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
+        null,
+        2,
         null,
         null,
         null,
         null,
         1,
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         3,
@@ -1205,13 +1371,21 @@
         6,
         6,
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
+=======
+        9,
+        9,
+        9,
+        16,
+        16,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
-        3,
+        9,
         null,
         null,
         null,
         null,
         1,
+<<<<<<< HEAD
 <<<<<<< HEAD
         null,
         null,
@@ -1231,14 +1405,24 @@
         3,
         3,
         3,
+=======
+        15,
+        15,
+        15,
+        15,
+        9,
+        9,
+        9,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
-        3,
-        3,
+        15,
+        15,
         null,
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
         null,
         null,
         1,
+<<<<<<< HEAD
         0,
         0,
         0,
@@ -1248,15 +1432,38 @@
         0,
         null,
         0,
+=======
+        3,
+        3,
+        3,
+        6,
+        6,
+        10,
+        null,
+        null,
+        3,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
         null,
         null,
         1,
+<<<<<<< HEAD
         0,
         0,
         0,
         0,
         0,
+=======
+        3,
+        3,
+        3,
+        6,
+        6,
+        10,
+        null,
+        null,
+        3,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
         null,
         null
@@ -1269,44 +1476,104 @@
       "/home/jasper/Desktop/ITERATION3/app/models/form.rb": [
         1,
         1,
+<<<<<<< HEAD
+=======
+        4,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
         null,
         null,
         1,
+<<<<<<< HEAD
         1,
         1,
         1,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+=======
+        4,
         null,
         null,
         1,
         null,
         null,
-        1,
+        2,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
         null,
         1,
         null,
         null,
+<<<<<<< HEAD
+        null,
+=======
+        2,
+        1,
+        null,
+        1,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+<<<<<<< HEAD
+=======
+        2,
+        1,
+        null,
+        1,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
+        null,
+        null,
+        null,
+        null,
+<<<<<<< HEAD
+        null,
+=======
+        1,
+        2,
+        2,
+        2,
+        null,
+        2,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
+        null,
+        1,
+        null,
+        null,
+        1,
+<<<<<<< HEAD
+        null,
+        null,
+        1,
+=======
+        2,
+        2,
+        2,
+        null,
+        2,
+        null,
+        null,
+        1,
+        4,
+        4,
+        12,
+        12,
+        7,
+        null,
+        1,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
+        null,
+        null,
         1,
         null,
         null,
         null,
+<<<<<<< HEAD
+=======
+        24,
+        4,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
         null,
         1,
@@ -1317,7 +1584,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/models/admin_user.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/settings.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         null,
@@ -1378,7 +1649,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/admin/settings.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/admin/users.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         1,
@@ -1394,7 +1669,14 @@
         0,
         0,
         null,
+<<<<<<< HEAD
         0,
+=======
+        null
+      ],
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/user.rb": [
+        1,
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         null,
         null,
         null,
@@ -1424,14 +1706,22 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/controllers/admin_controller.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/controllers/admin_controller.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         null,
         1,
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/controllers/controller_unit_controller.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/controllers/controller_unit_controller.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         1,
@@ -1486,273 +1776,26 @@
         null,
         null,
         1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
+        5,
+        5,
+        5,
+        5,
+        3,
+        3,
         0,
         0,
         null,
-        0,
+        3,
+        3,
+        3,
+        3,
+        null,
+        3,
         null,
         null,
-        0,
-        null,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        null,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        null,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        2,
         2,
         null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+        5,
         null,
         null,
         null,
@@ -1772,7 +1815,216 @@
         0,
         0,
         0,
+        0,
+        0,
         null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        3,
+        3,
+        3,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        6,
+        6,
+        6,
+        6,
+        5,
+        5,
+        2,
+        null,
+        3,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        8,
+        8,
+        null,
+        null,
+        1,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        3,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
         null,
         null,
         1,
@@ -1799,26 +2051,36 @@
         0,
         0,
         0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         null,
         null,
         null,
         1,
         0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
         null,
         null,
         null,
@@ -1887,6 +2149,7 @@
         null,
         null
       ],
+<<<<<<< HEAD
 <<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/controllers/forms_controller.rb": [
         1,
@@ -1998,25 +2261,32 @@
 =======
       "C:/cs169/main-project/strategystroller/app/controllers/home_controller.rb": [
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/controllers/home_controller.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         null,
         1,
-        0,
-        0,
-        0,
-        0,
-        0,
+        3,
+        3,
+        2,
+        2,
+        1,
         null,
-        0,
+        1,
         null,
         null,
-        0,
+        1,
         null,
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/controllers/provider_controller.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/controllers/provider_controller.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         1,
@@ -2278,7 +2548,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/mailers/form_mailer.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/mailers/form_mailer.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         null,
@@ -2289,27 +2563,27 @@
         1,
         null,
         1,
-        0,
-        0,
+        6,
+        6,
         null,
         null,
         1,
-        0,
-        0,
+        3,
+        3,
         null,
         null,
         1,
-        0,
-        0,
+        3,
+        3,
         null,
         null,
         1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
         0,
         0,
         0,
@@ -2317,17 +2591,21 @@
         0,
         0,
         null,
-        0,
+        3,
         null,
         null,
         1,
-        0,
-        0,
-        0,
+        3,
+        3,
+        3,
         null,
         null
       ],
+<<<<<<< HEAD
       "/home/jasper/Desktop/ITERATION3/app/models/activity.rb": [
+=======
+      "/Users/antarais/workspace/softwareEngineeringCS169/strategystroller/app/models/activity.rb": [
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
         1,
         1,
         null,
@@ -2337,7 +2615,6 @@
         null,
         1,
         null,
-        1,
         1,
         1,
         1,
@@ -2450,9 +2727,13 @@
       ]
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "timestamp": 1367825393
 =======
     "timestamp": 1367848289
 >>>>>>> c3223c87ecad26c3f6c8bb4e00969f8c85fa0a0a
+=======
+    "timestamp": 1367869317
+>>>>>>> 53837e892c1d0f9b45ec870aba5997d2284c997f
   }
 }
