@@ -84,7 +84,7 @@ class ProviderController < ApplicationController
       # NOTE: activity don't need to be in form table
       # We can directly do lookup on activity table
       @activity = Activity.new(params[:activity])
-      if @activity.save! # activity saved
+      if @activity.save # activity saved
         flash[:notice] = "Activity successfully saved!"
       else # activity not saved
         flash[:error] = "ERROR: Activity was not saved!"
