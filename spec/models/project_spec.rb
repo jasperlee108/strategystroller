@@ -6,94 +6,15 @@ describe Project do
   ### TODO: user_ids for "team" is not yet tested
   
   def generate
-    project = Project.new(
-    :name => "Projekts",
-    :description => "Projektbeschreibung",
-    :startDate => Date.new(2013,03,27),
-    :endDate => Date.new(2014,03,28),
-    :actual_duration => 15,
-    :target_duration => 52,
-    :target_manp => 5,
-    :target_cost => 10.5,
-    :inplan => true,
-    :compensation => true,
-    :notes => "Anmerkungen",
-    :actual_manp => 10,
-    :actual_cost => 20.5,
-    :status_prog => 75.5,
-    :status_ms => {-1=>0, 1=>0, 2=>2, 3=>0, 4=>1},
-    :status_manp => 10.0,
-    :status_cost => 10.5,
-    :status_global => 50.5,
-    :status_notes => "Anmerkungen zum Status",
-    :indicator_id => 1,
-    :head_id => 1,
-    :steer_id => 1,
-    :yearly_target_manp => {}, # kept as an example: {2013 => BigDecimal(5.57,10), 2014 => BigDecimal(7.57,10)},
-    :yearly_target_cost => {}, # kept as an example: {2013 => BigDecimal(25.25,10), 2014 => BigDecimal(38.07,10)},
-    :team => "James Bond, Andy Warhol",
-    :short_name => "Shorter name"
-    )
+    project = build(:project)
     return project
-  end
-
-  def gen_activity
-    Activity.new(
-        :name => "Aktivitat",
-        :description => "Wall of Text",
-        :phase => Activity::PREREQUISITES_FULFILLED,
-        :startDate => Date.new(2013,07,02),  # If these dates change, the yearly_ tests will fail.
-        :endDate => Date.new(2014,07,03),
-        :targetManp => 11,
-        :targetCost => 50.50,
-        :notes => "Another Wall of Text",
-        :actualManp => 15,
-        :actualCost => 25.25,
-        :actualProg => Activity::IN_PROGRESS,
-        :statusNotes => "A Different Wall of Text",
-        :project_id => 1,
-        :team => "James Bond, Andy Warhol",
-        :short_name => "Shorter name"
-    )
   end
 
   def gen_with_children
     project = generate()
-    activity1 = gen_activity
-    activity2 = Activity.new(   #activity for a different project
-        :name => "Aktivitat2",
-        :description => "Wall of Text2",
-        :phase => Activity::PREREQUISITES_FULFILLED,
-        :startDate => Date.new(2013,03,26),
-        :endDate => Date.new(2013,03,27),
-        :targetManp => 20,
-        :targetCost => 50.50,
-        :notes => "Another Wall of Text",
-        :actualManp => 3,
-        :actualCost => 9.50,
-        :actualProg => Activity::IN_PROGRESS,
-        :statusNotes => "A Different Wall of Text",
-        :project_id => 2,
-        :team => "James Warhol",
-        :short_name => "Shorter name"
-    )
-    activity3 = Activity.new(
-        :name => "Aktivitat3",
-        :description => "Wall of Text3",
-        :phase => Activity::PREREQUISITES_FULFILLED,
-        :startDate => Date.new(2014,07,2),  # If these dates change, the yearly_ tests will fail.
-        :endDate => Date.new(2014,07,12),
-        :targetManp => 2,
-        :targetCost => 12.75,
-        :notes => "Another Wall of Text3",
-        :actualManp => 15,
-        :actualCost => 25.25,
-        :actualProg => Activity::IN_PROGRESS,
-        :statusNotes => "A Different Wall of Text3",
-        :project_id => 1,
-        :team => "James Bond3, Andy Warhol3",
-        :short_name => "Shorter name"
-    )
+    activity1 = build(:activity, startDate: Date.new(2013,07,2), endDate: Date.new(2014,07,03), targetManp: 11, targetCost: 50.50, actualManp: 15, actualCost: 25.25) # If these dates change, the yearly_ tests will fail.
+    activity2 = build(:activity, project_id: 3) # Activity from a different project
+    activity3 = build(:activity, startDate: Date.new(2014,07,2), endDate: Date.new(2014,07,12), targetManp: 2, targetcost: 12.75, actualManp: 15, actualCost: 25.25)  # If these dates change, the yearly_ tests will fail.
     activity1.save()
     activity2.save()
     activity3.save()
@@ -796,7 +717,7 @@ describe Project do
   ### ACTIVITY_YEAR_FRACTIONS_HASH
 
   it 'will return a one-element hash for an activity that is in a single year' do
-    activity = gen_activity
+    activity = build(:activity)
     project = generate
     activity.startDate = Date.new(2013, 3, 7)
     activity.endDate = Date.new(2013, 6, 9)
@@ -805,7 +726,7 @@ describe Project do
   end
 
   it 'will return a two-element 50/50 hash for an activity that is split evenly across two years' do
-    activity = gen_activity
+    activity = build(:activity)
     project = generate
     activity.startDate = Date.new(2013, 12, 1)
     activity.endDate = Date.new(2014, 2, 1)
@@ -814,7 +735,7 @@ describe Project do
   end
 
   it 'will return a three-element hash for an activity that is split across three years' do
-    activity = gen_activity
+    activity = build(:activity)
     project = generate
     activity.startDate = Date.new(2013, 12, 1)
     activity.endDate = Date.new(2015, 2, 1)
@@ -1043,22 +964,22 @@ describe Project do
     project = generate
     project.save
 
-    activity1 = gen_activity
+    activity1 = build(:activity)
     activity1.phase = Activity::CONCEPT_COMPLETED
     activity1.actualProg = Activity::COMPLETED
     activity1.save
 
-    activity2 = gen_activity
+    activity2 = build(:activity)
     activity2.phase = Activity::PREREQUISITES_FULFILLED
     activity2.actualProg = Activity::COMPLETED
     activity2.save
 
-    activity3 = gen_activity
+    activity3 = build(:activity)
     activity3.phase = Activity::IMPLEMENTATION_RUNNING
     activity3.actualProg = Activity::IN_PROGRESS
     activity3.save
 
-    activity4 = gen_activity
+    activity4 = build(:activity)
     activity4.phase = Activity::PROJECT_EFFECTIVE
     activity4.actualProg = Activity::NOT_YET_STARTED
     activity4.save
@@ -1072,22 +993,22 @@ describe Project do
     project = generate
     project.save
 
-    activity1 = gen_activity
+    activity1 = build(:activity)
     activity1.phase = Activity::CONCEPT_COMPLETED
     activity1.actualProg = Activity::COMPLETED
     activity1.save
 
-    activity2 = gen_activity
+    activity2 = build(:activity)
     activity2.phase = Activity::CONCEPT_COMPLETED
     activity2.actualProg = Activity::COMPLETED
     activity2.save
 
-    activity3 = gen_activity
+    activity3 = build(:activity)
     activity3.phase = Activity::PREREQUISITES_FULFILLED
     activity3.actualProg = Activity::NOT_YET_STARTED
     activity3.save
 
-    activity4 = gen_activity
+    activity4 = build(:activity)
     activity4.phase = Activity::PREREQUISITES_FULFILLED
     activity4.actualProg = Activity::NOT_YET_STARTED
     activity4.save
@@ -1101,22 +1022,22 @@ describe Project do
     project = generate
     project.save
 
-    activity1 = gen_activity
+    activity1 = build(:activity)
     activity1.phase = Activity::CONCEPT_COMPLETED
     activity1.actualProg = Activity::COMPLETED
     activity1.save
 
-    activity2 = gen_activity
+    activity2 = build(:activity)
     activity2.phase = Activity::CONCEPT_COMPLETED
     activity2.actualProg = Activity::COMPLETED
     activity2.save
 
-    activity3 = gen_activity
+    activity3 = build(:activity)
     activity3.phase = Activity::CONCEPT_COMPLETED
     activity3.actualProg = Activity::COMPLETED
     activity3.save
 
-    activity4 = gen_activity
+    activity4 = build(:activity)
     activity4.phase = Activity::CONCEPT_COMPLETED
     activity4.actualProg = Activity::NOT_YET_STARTED
     activity4.save

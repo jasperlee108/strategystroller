@@ -100,7 +100,7 @@ Indicator.create(
     :short_name => "I0"
 )
 
-GoalIndicator.create(
-    :goal_id => 1,
-    :indicator_id => 1
-)
+#GoalIndicator.create(
+#    :goal_id => 1,
+#    :indicator_id => 1
+#)

@@ -5,67 +5,14 @@ describe Goal do
   ### NOTE: Using ruby format, not Rspec
   
   def generate
-    goal = Goal.new(
-    :name => "Name of Goal",
-    :need => "Call for action",
-    :justification => "Justification of specific goal",
-    :focus => "Strategic approach",
-    :notes => "Notes",
-    :status => 0.01,
-    :dimension_id => 1,
-    :user_id => 1,
-    :prereq => "A Different Goal's Name",
-    :short_name => "Shorter name"
-    )
+    goal = build(:goal) #TODO refactor method out
     return goal
   end
 
   def gen_with_children
     goal = generate()
-    indicator1 = Indicator.new(
-        :name => "Name der Messgrobe",
-        :description => "Beschreibung der Messgrobe",
-        :source => "Quelle",
-        :unit => "Einheit",
-        :freq => [3,6,9,12],
-        :year => 2013,
-        :reported_values => [0.2, 0.65],
-        :indicator_type => "average",
-        :prognosis => 0.6543,
-        :dir => "more is better",
-        :actual => 0.055,
-        :target => 0.105,
-        :notes => "Anmerkungen",
-        :diff => 5.0,
-        :status => 0.755,
-        :contributing_projects_status => 0.693,
-        :status_notes => "Anmerkungen zum Status",
-        :goal_id => 1,
-        :user_id => 1,
-        :short_name => "Shorter name"
-    )
-    indicator2 = Indicator.new(  # Not a child of this goal.
-        :name => "Name der Messgrobe2",
-        :description => "Beschreibung der Messgrobe2",
-        :source => "Quelle2",
-        :unit => "Einheit2",
-        :freq => [3,6,9,12],
-        :year => 2013,
-        :reported_values => [0.2, 0.65],
-        :indicator_type => "average",
-        :prognosis => 0.6543,
-        :dir => "more is better",
-        :actual => 0.055,
-        :target => 0.105,
-        :notes => "Anmerkungen2",
-        :diff => 0.050,
-        :status => 0.111,
-        :contributing_projects_status => 0.201,
-        :status_notes => "Anmerkungen zum Status2",
-        :goal_id => 3,
-        :user_id => 1,
-        :short_name => "Shorter name"
-    )
+    indicator1 = build(:indictor)
+    indicator2 = build(:indicator, goal_id: 3) # Not a child of this goal
     indicator1.save()
     indicator2.save()
     return goal

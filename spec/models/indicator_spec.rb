@@ -4,90 +4,43 @@ describe Indicator do
 
   ### NOTE: Using ruby format, not Rspec
   
-  def generate
-    indicator = Indicator.new(
-    :name => "Name der Messgrobe",
-    :description => "Beschreibung der Messgrobe",
-    :source => "Quelle",
-    :unit => "Einheit",
-    :freq => [3,6,9,12],
-    :year => 2013,
-    :reported_values => [0.2, 0.65],
-    :indicator_type => "average",
-    :prognosis => 0.6543,
-    :dir => "more is better",
-    :actual => 0.55,
-    :target => 0.105,
-    :notes => "Anmerkungen",
-    :diff => 0.05,
-    :status => 0.755,
-    :contributing_projects_status => 0.693,
-    :status_notes => "Anmerkungen zum Status",
-    :goal_id => 1,
-    :user_id => 1,
-    :short_name => "Shorter name"
-    )
+  def generate   #TODO refactor out
+    indicator = build(:indicator)
     return indicator
   end
 
   def gen_with_children
     indicator = generate
-    project1 = Project.new(
-        :name => "Projekts",
-        :description => "Projektbeschreibung",
-        :startDate => Date.new(2013,03,27),
-        :endDate => Date.new(2013,03,28),
-        :actual_duration => 15,
-        :target_duration => 52,
-        :target_manp => 5,
-        :target_cost => 10.5,
-        :inplan => true,
-        :compensation => true,
-        :notes => "Anmerkungen",
-        :actual_manp => 10,
-        :actual_cost => 0.205,
-        :status_prog => 0.755,
-        :status_ms => {-1=>0, 1=>0, 2=>0, 3=>0, 4=>0},
-        :status_manp => 10,
-        :status_cost => 10.5,
-        :status_global => 0.505,
-        :status_notes => "Anmerkungen zum Status",
-        :indicator_id => 1,
-        :head_id => 1,
-        :steer_id => 1,
-        :team => "James Bond, Andy Warhol",
-        :yearly_target_manp => { 2013 => BigDecimal(5.5,6)},
-        :yearly_target_cost => { 2013 => BigDecimal(25.25,6)},
-        :short_name => "Shorter name"
-    )
-    project2 = Project.new(  # Not a child of this indicator.
-        :name => "Projekts2",
-        :description => "Projektbeschreibung2",
-        :startDate => Date.new(2013,03,27),
-        :endDate => Date.new(2013,03,28),
-        :actual_duration => 15,
-        :target_duration => 52,
-        :target_manp => 5,
-        :target_cost => 10.5,
-        :inplan => true,
-        :compensation => true,
-        :notes => "Anmerkungen2",
-        :actual_manp => 10,
-        :actual_cost => 20.5,
-        :status_prog => 75.5,
-        :status_ms => {-1=>0, 1=>0, 2=>0, 3=>0, 4=>0},
-        :status_manp => 10,
-        :status_cost => 10.5,
-        :status_global => 50.5,
-        :status_notes => "Anmerkungen zum Status2",
-        :indicator_id => 3,
-        :head_id => 1,
-        :steer_id => 1,
-        :team => "James Bond2, Andy Warhol2",
-        :yearly_target_manp => {2013 => BigDecimal(5.5,6)},
-        :yearly_target_cost => {2013 => BigDecimal(25.25,6)},
-        :short_name => "Shorter name"
-    )
+    project1 = build(:project)
+    #    Project.new(
+    #    :name => "Projekts",
+    #    :description => "Projektbeschreibung",
+    #    :startDate => Date.new(2013,03,27),
+    #    :endDate => Date.new(2013,03,28),
+    #    :actual_duration => 15,
+    #    :target_duration => 52,
+    #    :target_manp => 5,
+    #    :target_cost => 10.5,
+    #    :inplan => true,
+    #    :compensation => true,
+    #    :notes => "Anmerkungen",
+    #    :actual_manp => 10,
+    #    :actual_cost => 0.205,
+    #    :status_prog => 0.755,
+    #    :status_ms => {-1=>0, 1=>0, 2=>0, 3=>0, 4=>0},
+    #    :status_manp => 10,
+    #    :status_cost => 10.5,
+    #    :status_global => 0.505,
+    #    :status_notes => "Anmerkungen zum Status",
+    #    :indicator_id => 1,
+    #    :head_id => 1,
+    #    :steer_id => 1,
+    #    :team => "James Bond, Andy Warhol",
+    #    :yearly_target_manp => { 2013 => BigDecimal(5.5,6)},
+    #    :yearly_target_cost => { 2013 => BigDecimal(25.25,6)},
+    #    :short_name => "Shorter name"
+    #)
+    project2 = build(:project, indicator_id: 3) # not a child of this indicator
     project1.save
     project2.save
     return indicator
