@@ -73,4 +73,7 @@ StrategyStroller::Application.configure do
   # except with our actual host name.
   config.action_mailer.default_url_options = { :host => 'strategy-stroller.herokuapp.com' }
   
+  # For heroku
+  config.assets.precompile += %w( custom.js )
+  
 end
