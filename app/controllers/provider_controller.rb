@@ -201,7 +201,22 @@ class ProviderController < ApplicationController
     end
   end
 
-
+  def activity_edit
+    @activity = Activity.find_by_id(params[:activity_id])
+    if (request.post? || request.put?)
+      @current_activity = Activity.find_by_name(params[:activity][:name])
+      if (@current_activity.update_attributes(params[:activity]))
+        flash[:notice] = "Activity successfully updated!"
+      else
+        flash[:error] = "ERROR: Activity not updated!"
+      end
+      if session[:return_to]
+        redirect_to session[:return_to]
+      else
+        redirect_to activities_path
+      end
+    end
+  end
 
   ### THE FOLLOWING ARE JUST HELPER METHODS ###
   private # Note at the top of this file

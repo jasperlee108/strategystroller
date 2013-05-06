@@ -48,6 +48,8 @@
   provider:
     activity_define:
       activity_form: "Activity Form"
+    activity_edit:
+      activity_edit: "Activity Edit"
     forms_composite:
       hi_provider: "Hi Provider, %{user_username}"
       unchecked: "Unchecked Forms"
