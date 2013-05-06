@@ -67,9 +67,9 @@
       form_name_3: "Form Name"
     forms_composite_update:
       hi_provider_1: "Hi Provider, %{user_username}"
-      update: "Update Indicators"
+      update_1: "Update Indicators"
       form_name_4: "Form Name"
-      saved_forms_1: "Saved Forms"
+      update_2: "Update Projects"
       form_name_5: "Form Name"
     project_update:
       project_form: "Project Form"
