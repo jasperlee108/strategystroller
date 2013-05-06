@@ -332,40 +332,9 @@ class ControllerUnitController < ApplicationController
     @current_indicator = Indicator.find_by_id(entry_id)
     @projects = (@current_indicator.projects).collect{|p| p.short_name}
     @projects.empty? ? @projects += ['None'] : nil
-    #freq is Array
-    #combos are 1, 1/7, 1/4/7/10, all, any
-    #TODO freq is all broken, doesn't propagate properly. See c_u/indicator_check.html.erb
-    freq = []
-    freqArr = @current_indicator.freq
-    freqArr.each do |month|
-      if (month != "")
-        freq << month.to_i
-      end
-    end
-    y = [1]
-    hy = [1,7]
-    q = [1,4,7,10]
-    m = [1,2,3,4,5,6,7,8,9,10,11,12]
-
-    if (freq == y)
-      real_freq = "Y"
-    elsif (freq == hy)
-      real_freq = "HY"
-    elsif (freq == q)
-      real_freq = "Q"
-    elsif (freq == m)
-      real_freq = "M"
-    else
-      real_freq = "S"
-      #@current_indicator.string_freq = freq
-    end 
-    #current_indicator.freq needs to become a string
-    @current_indicator.string_freq = real_freq
-    
-
     if (request.post?)
-      params[:indicator].delete(:string_freq)
-      params[:indicator][:freq] = freq
+      params[:indicator][:goal_ids].delete("")
+      params[:indicator][:freq].delete("")
       @current_form.update_attributes(:reviewed => true)
       @current_indicator.update_attributes(params[:indicator])
       flash[:notice] = "Indicator review completed!"
