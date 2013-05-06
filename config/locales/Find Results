@@ -1,0 +1,31 @@
+Searching 736 files for "project_target_duration_(months)"
+
+C:\Users\emily\Desktop\CS 169\strategystroller\app\views\controller_unit\all_project.html.erb:
+  124  		<div class="span6">
+  125  			<div class="span6">
+  126: 				<%= f.input :target_duration, :input_html => { :value => @project.target_duration, :readonly => true, :class => "span12" }, :label => (I18n.t :project_target_duration_months) %>
+  127  			</div>
+  128  			<div class="span6">
+
+C:\Users\emily\Desktop\CS 169\strategystroller\config\locales\en.yml:
+   15    justification_of_specific_goal: "Justification of Specific Goal"
+   16    current_year: "Current Year"
+   17:   project_target_duration_months: "Project Target Duration (months)"
+   18    current_status_by_milestone: "Current Status by Milestone"
+   19    project_description: "Project Description"
+
+C:\Users\emily\Desktop\CS 169\strategystroller\config\locales\piglatin.yml:
+   15    justification_of_specific_goal: "ustificationJay of ecificSpay oal Gay"
+   16    current_year: "urrentCay ear Yay"
+   17:   project_target_duration_months: "ojectPray argetTay urationDay onths) (may"
+   18    current_status_by_milestone: "urrentCay atusStay by ilestone May"
+   19    project_description: "ojectPray escription Day"
+
+C:\Users\emily\Desktop\CS 169\strategystroller\translated:
+    8    justification_of_specific_goal: "Justification of Specific Goal"
+    9    current_year: "Current Year"
+   10:   project_target_duration_months: "Project Target Duration (months)"
+   11    current_status_by_milestone: "Current Status by Milestone"
+   12    project_description: "Project Description"
+
+4 matches across 4 files
