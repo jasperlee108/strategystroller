@@ -170,6 +170,7 @@ class ControllerUnitController < ApplicationController
         @application = Application.new
         @years = Application::YEARS
         @languages = Application::LANGUAGES
+        @time_horizon = Application::TIME_HORIZON
          if (request.post?) 
             @application = Application.new(params[:application])
             if @application.save
