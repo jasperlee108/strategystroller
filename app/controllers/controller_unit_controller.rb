@@ -374,11 +374,21 @@ class ControllerUnitController < ApplicationController
     
 
     if (request.post?)
-      params[:indicator].delete(:string_freq)
-      params[:indicator][:freq] = freq
-      @current_form.update_attributes(:reviewed => true)
-      @current_indicator.update_attributes(params[:indicator])
-      flash[:notice] = "Indicator review completed!"
+      if params[:commit] == "Confirm Indicator"
+        params[:indicator].delete(:string_freq)
+        params[:indicator][:freq] = freq
+        @current_form.update_attributes(:reviewed => true)
+        @current_indicator.update_attributes(params[:indicator])
+        flash[:notice] = "Indicator review completed!"
+      elsif params[:commit] == "Revise"
+        @current_form.update_attributes(:checked => false, :submitted => false, :reviewed => false)
+        @user_obj = User.find_by_id(@current_form.user_id)
+        @form_url = encode_url(@current_form.id, @current_form.entry_id)
+        #save form_url
+        FormMailer.form_email(@user_obj,@form_url).deliver #Mail confirmation to each saved user
+        provider = @user_obj.username
+        flash[:notice] = "Indicator form has been resent to provider " + provider + "!"
+      end
       redirect_to cu_review_path
     end
   end
