@@ -12,12 +12,9 @@ describe Project do
 
   def gen_with_children
     project = generate()
-    activity1 = build(:activity, startDate: Date.new(2013,07,2), endDate: Date.new(2014,07,03), targetManp: 11, targetCost: 50.50, actualManp: 15, actualCost: 25.25) # If these dates change, the yearly_ tests will fail.
-    activity2 = build(:activity, project_id: 3) # Activity from a different project
-    activity3 = build(:activity, startDate: Date.new(2014,07,2), endDate: Date.new(2014,07,12), targetManp: 2, targetcost: 12.75, actualManp: 15, actualCost: 25.25)  # If these dates change, the yearly_ tests will fail.
-    activity1.save()
-    activity2.save()
-    activity3.save()
+    create(:activity, startDate: Date.new(2013,07,2), endDate: Date.new(2014,07,03), targetManp: 11, targetCost: 50.50, actualManp: 15, actualCost: 25.25) # If these dates change, the yearly_ tests will fail.
+    create(:activity, name: "Test Activity 2", project_id: 3) # Activity from a different project
+    create(:activity, name: "Test Activity 3", startDate: Date.new(2014,07,2), endDate: Date.new(2014,07,12), targetManp: 2, targetCost: 12.75, actualManp: 15, actualCost: 25.25)  # If these dates change, the yearly_ tests will fail.
     project.actual_cost = 0
     return project
   end

@@ -10,11 +10,10 @@ describe Goal do
   end
 
   def gen_with_children
-    goal = generate()
-    indicator1 = build(:indictor)
-    indicator2 = build(:indicator, goal_id: 3) # Not a child of this goal
-    indicator1.save()
-    indicator2.save()
+    goal = create(:goal)
+    indicator1 = create(:indicator)
+    indicator2 = create(:indicator, name: "Test Indicator 2") # Not a child of this goal
+    goal.indicators = [indicator1]
     return goal
   end
 
@@ -141,20 +140,12 @@ describe Goal do
 
   ## Prereq can be empty
   it "should be allowed to have empty Prereq" do
-    prereq = ""
+    prereq = []
     goal = generate()
     goal.prereq = prereq
     assert(goal.save, "It won't save on empty Prereq")
   end
   
-  ## Prereq max = 80
-  it "should not have Prereq longer than 80 characters" do
-    prereq = (0...81).map{ ( 65+rand(26) ).chr }.join
-    goal = generate()
-    goal.prereq = prereq
-    assert(!goal.save, "It saves on Prereq longer than 80 characters")
-  end
-
   ### SHORT NAME
 
   ## Short Name is not empty
@@ -175,15 +166,13 @@ describe Goal do
 
   ### Status Update/calculation
   it 'can find the correct number of children' do
-    goal = gen_with_children()
-    goal.save()
+    gen_with_children()
     goal_in_table = Goal.find(1)
     assert(goal_in_table.indicators.count == 1, "goal counted #{goal_in_table.indicators.count} children, not 1 as expected")
   end
 
   it 'can update its status using its children' do
-    goal = gen_with_children()
-    goal.save()
+    gen_with_children()
     goal_in_table = Goal.find(1)
     goal_in_table.update_status()
     assert(goal_in_table.status == 0.693, "goal status value was #{goal_in_table.status}, not 0.693 as expected")

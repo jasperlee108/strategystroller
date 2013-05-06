@@ -12,8 +12,8 @@ describe Dimension do
   def gen_with_children
     dimension = generate()
     goal1 = build(:goal, status: 0.23)
-    goal2 = build(:goal, status: 0.43, dimension_id: 3) #a different dimension's goal
-    goal3 = build(:goal, status: 0.69)
+    goal2 = build(:goal, name: "Test Goal 2", status: 0.43, dimension_id: 3) #a different dimension's goal
+    goal3 = build(:goal, name: "Test Goal 3", status: 0.69)
     goal1.save()
     goal2.save()
     goal3.save()

@@ -25,7 +25,7 @@ FactoryGirl.define do
     status  0.01
     dimension_id  1
     user_id  1
-    prereq  "A Different Goal's Name"
+    prereq  []
     short_name  "TGoal"
   end
 
@@ -48,7 +48,6 @@ FactoryGirl.define do
     status  0.755
     contributing_projects_status 0.693
     status_notes  "Notes on the indicator's status."
-    goal_id  1
     user_id  1
     short_name "TInd"
   end
@@ -78,7 +77,6 @@ FactoryGirl.define do
     status_cost  10.5
     status_global  0.505
     status_notes  "Notes on the project's status."
-    indicator_id  1
     head_id  1
     steer_id  1
     team  "James Bond, Andy Warhol"
