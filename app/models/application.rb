@@ -21,9 +21,4 @@ class Application < ActiveRecord::Base
   :presence => true
   # validate valid year?
   
-  # init_year
-  validates :init_year,
-  :presence => true
-  # validate valid year?
-  
 end

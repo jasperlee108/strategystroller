@@ -58,7 +58,7 @@ describe ApplicationHelper do
                 :target_duration => 1, :actual_duration => 1, :target_cost => 1, :actual_cost => 1,
                 :target_manp => 1, :actual_manp => 1, :status_prog => 1, :status_manp => 1,
                 :status_cost => 1, :status_global => 1, :startDate => Date.current, :endDate => Date.tomorrow,
-                :status_ms => {-1 => 0, 0 => 1, 1 => 1, 2 => 1, 3 => 1, 4 => 1}).save
+                :status_ms => {0 => 0, 1 => 1, 2 => 1, 3 => 1, 4 => 1}).save
     returnValue = find_label(PROJECT, ENTRY_ID)
     assert(returnValue == short_name, "Did not return short name for project")
     Project.delete_all
@@ -77,8 +77,8 @@ describe ApplicationHelper do
 
   # Find short name for wrong object
   it "should return short name for wrong object" do
-    returnValue = find_label(ERROR, ENTRY_ID)
-    assert(returnValue == "ERROR: Show what?", "Did not return short name for wrong object")
+    returnValue = find_label(5, ENTRY_ID)
+    assert((returnValue.include? "ERROR"), "Did not return short name for wrong object")
   end
 
   # Form type goal
@@ -107,8 +107,8 @@ describe ApplicationHelper do
 
   # Form type wrong from
   it "should return form type for wrong form" do
-    returnValue = find_form_type(ERROR)
-    assert(returnValue == "ERROR: Cannot find table!", "Did not return form type for wrong form")
+    returnValue = find_form_type(5)
+    assert((returnValue.include? "ERROR"), "Did not return form type for wrong form")
   end  
 
 end

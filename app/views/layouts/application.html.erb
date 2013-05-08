@@ -56,7 +56,7 @@
 							<%= link_to (t :create_users), create_users_path %>
 						</li>
 					
-						<% if current_page? (all_form_path) %>
+						<% if current_page? (all_form_path) or current_page? (goals_path) or current_page? (indicators_path) or current_page? (projects_path)%>
 							<li id ="navbar_framework" class="active">
 						<% else %>
 							<li id ="navbar_framework">

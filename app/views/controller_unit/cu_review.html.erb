@@ -1,22 +1,5 @@
-<div class="navbar">
-	<div class="navbar-inner">
-		<a class="brand" href="#"><%= t '.generate_new_1' %></a>
-
-		<div class="navbar-form pull-right">
-			<ul class="nav">
-				<div class="pull-right">
-					<select id ="cu_review_form_select">
-						<option value="<%= goals_path %>"><%= t '.goal_1' %></option>
-						<option value="<%= indicators_path %>"><%= t '.indicator_1' %></option>
-						<option value="<%= projects_path %>"><%= t '.project_1' %></option>
-					</select>
-					<a class="btn" onclick="cu_review_button()"> <%= t '.generate_1' %> </a>
-				</div>
-			</ul>
-		</div>
-	</div>
-</div>
 <%= render "setup_alerts" %>
+<br />
 <div class="well" style="margin-top:0px; padding:0px 10px 0px 10px;">
 	<h4><u><%= t '.forms_to' %></u></h4>
 	<table class="table table-hover table-bordered" style="background-color:white;">

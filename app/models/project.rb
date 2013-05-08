@@ -24,10 +24,6 @@ class Project < ActiveRecord::Base
   :length => { :maximum => 600 },
   :allow_blank => true
   
-  # Needs a Parent
-  validates :indicator_ids,
-  :presence => true
-
   # Needs an Owner
   validates :head_id,
   :presence => true

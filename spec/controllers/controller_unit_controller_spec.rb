@@ -79,7 +79,7 @@ describe ControllerUnitController do
 
       it "sends the user the expected error" do
         #post :set_goal, :params => { :goal => {}}
-        assert_equal("ERROR: Goal was not saved!" ,flash[:error])
+        assert_equal("ERROR: Goal was not saved! Please fill out all required fields." ,flash[:error])
       end
     end
 
@@ -162,7 +162,7 @@ describe ControllerUnitController do
       end
 
       it "alerts the user that it was successful" do
-        assert_equal("Setup successfully saved!" ,flash[:error])
+        assert_equal("Setup successfully saved!" ,flash[:notice])
       end
     end
 

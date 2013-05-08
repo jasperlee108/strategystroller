@@ -40,7 +40,7 @@
 			<%= f.input :startDate, :input_html => { :value => @activity.startDate, :class => "span4" }, :label => (I18n.t :starting_date) %>
 		</div>
 		<div class="span6">
-			<%= f.input :actualManp, :input_html => { :value => @activity.actualManp, :class => "span12" }, :label => (I18n.t :actual_employee_resources_(days)) %>
+			<%= f.input :actualManp, :input_html => { :value => @activity.actualManp, :class => "span12" }, :label => (I18n.t :actual_employee_resources_days) %>
 		</div>
 	</div>
 
@@ -49,7 +49,7 @@
 			<%= f.input :endDate, :input_html => { :value => @activity.endDate,:class => "span4" }, :label => (I18n.t :ending_date) %>
 		</div>
 		<div class="span6">
-			<%= f.input :actualCost, :input_html => { :value => @activity.actualCost, :class => "span12" }, :label => (I18n.t :actual_external_costs_(currency)) %>
+			<%= f.input :actualCost, :input_html => { :value => @activity.actualCost, :class => "span12" }, :label => (I18n.t :actual_external_costs_currency) %>
 		</div>
 	</div>
 
@@ -64,7 +64,7 @@
 
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :phase, :input_html => { :value => @activity.phase, :class => "span12" }, :label => (I18n.t :part_of_phase) %>
+			<%= f.input :phase, :as => :select, :collection => [["0-Ongoing", 0], ["1-Concept completed", 1], ["2-Prerequisites fulfilled", 2], ["3-Implementation running", 3], ["4-Project in effect", 4]], :label => (I18n.t :part_of_phase), :input_html => { :class=> "span12" } %>
           <!--TODO add in phase string functionality. This will work for now.-->
 		</div>
 		<div class="span6">

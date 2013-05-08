@@ -11,7 +11,7 @@
 			</ul>
 		</div>
 	</div>
-</div><!-- /.navbar 
+</div><!-- /.navbar
 <h2><%= t '.hi_controlling', :user_username => (@user.username) %>! </h2>
 <%= t '.here_is_all' %>
 <br />
@@ -19,71 +19,77 @@
 <br />-->
 
 <div class="well nocorner keybar">
-<span class="label label-info nocorner"><center><%= t :dimension %></center></span>
-<span class="label label-info nocorner"><center><%= t :goal %></center></span>
-<span class="label label-info nocorner"><center><%= t :indicator %></center></span>
-<span class="label label-info nocorner"><center><%= t :project %></center></span>
+	<span class="label label-info nocorner">
+		<center>
+			<%= t :dimension %>
+		</center></span>
+	<span class="label label-info nocorner">
+		<center>
+			<%= t :goal %>
+		</center></span>
+	<span class="label label-info nocorner">
+		<center>
+			<%= t :indicator %>
+		</center></span>
+	<span class="label label-info nocorner">
+		<center>
+			<%= t :project %>
+		</center></span>
 </div>
-
 
 <div class="tree">
 	<ul>
 		<% Dimension.all.each do |d| %>
 		<li class = "li_tree_dim">
 			<div class="tree_dim">
-                 <% if d.status >= 1 %>
-                <span class="label label-success treebadge nocorner">
-                <% elsif d.status >= 0.9 %>
-                <span class="label label-warning treebadge nocorner">
-                <% else %>
-                <span class="label label-important treebadge nocorner">
-                <% end %>
-				<%= link_to d.name, all_dimension_path(:dimension_id => d.id) %>
-                </span>
-            </div>
+				<% if d.status >= 1 %>
+				<span class="label label-success treebadge nocorner">
+				<% elsif d.status >= 0.9 %>
+				<span class="label label-warning treebadge nocorner">
+				<% else %>
+				<span class="label label-important treebadge nocorner">
+				<% end %>
+				<%= link_to d.name, all_dimension_path(:dimension_id => d.id) %> </span>
+			</div>
 			<ul>
-				<% Goal.where(:dimension_id => d.id).each do |g| %>
+				<% d.goals.each do |g| %>
 				<li class = "li_tree_goal">
-					<div>
-                         <% if g.status >= 1 %>
-                        <span class="label label-success treebadge nocorner">
-                        <% elsif g.status >= 0.9 %>
-                        <span class="label label-warning treebadge nocorner">
-                        <% else %>
-                        <span class="label label-important treebadge nocorner">
-                        <% end %>
-						<%= link_to g.name, all_goal_path(:goal_id => g.id) %>
-                        </span>
-                    </div>
+					<div class="tree_goal">
+						<% if g.status >= 1 %>
+						<span class="label label-success treebadge nocorner"> 
+						<% elsif g.status >= 0.9 %> 
+						<span class="label label-warning treebadge nocorner"> 
+						<% else %> 
+						<span class="label label-important treebadge nocorner"> 
+						<% end %>
+						<%= link_to g.name, all_goal_path(:goal_id => g.id) %> </span>
+					</div>
 					<ul>
-						<% Indicator.where(:all, :include => :goals, :conditions => ["goals.id =?", g])do |i| %>
+						<% g.indicators.each do |i| %>
 						<li class = "li_tree_indic">
-							<div>
-                                
-                                <% if i.status >= 1 %>
-                                <span class="label label-success treebadge nocorner">
-                                <% elsif i.status >= 0.9 %>
-                                <span class="label label-warning treebadge nocorner">
-                                <% else %>
-                                <span class="label label-important treebadge nocorner">
-                                <% end %>
-								<%= link_to i.name, all_indicator_path(:indicator_id => i.id) %>
-                                </span>
-                            </div>
+							<div class="tree_indic">
+								<% if i.status >= 1 %>
+								<span class="label label-success treebadge nocorner"> 
+								<% elsif i.status >= 0.9 %> 
+								<span class="label label-warning treebadge nocorner"> 
+								<% else %> 
+								<span class="label label-important treebadge nocorner"> 
+								<% end %>
+								<%= link_to i.name, all_indicator_path(:indicator_id => i.id) %> </span>
+							</div>
 							<ul>
-								<% Project.where(:indicator_id => i).each do |p| %>
+								<% i.projects.each do |p| %>
 								<li class = "li_tree_proj">
-									<div>
-                                         <% if p.status >= 1 %>
-                                        <span class="label label-success treebadge nocorner">
-                                        <% elsif p.status >= 0.9 %>
-                                        <span class="label label-warning treebadge nocorner">
-                                        <% else %>
-                                        <span class="label label-important treebadge nocorner">
-                                        <% end %>
-										<%= link_to p.name, all_project_path(:project_id => p.id) %>
-                                        </span>
-                                    </div>
+									<div class="tree_proj">
+										<% if p.status_global >= 1 %>
+										<span class="label label-success treebadge nocorner"> 
+										<% elsif p.status_global >= 0.9 %> 
+										<span class="label label-warning treebadge nocorner"> 
+										<% else %> 
+										<span class="label label-important treebadge nocorner"> 
+										<% end %>
+										<%= link_to p.name, all_project_path(:project_id => p.id) %> </span>
+									</div>
 								</li>
 								<% end %>
 							</ul>

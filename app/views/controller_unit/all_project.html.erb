@@ -30,7 +30,7 @@
 
 	<div class="row-fluid">
 		<div class="span6">
-			<%= f.input :indicator_id, :as => :select, :collection => Indicator.all, :selected => @project.indicator_id, :input_html => { :disabled => true, :class => "span12", :multiple => true }, :label => (I18n.t :associated_indicators) %>
+			<%= f.input :indicator_ids, :as => :select, :collection => Indicator.all, :selected => @project.indicator_ids, :input_html => { :disabled => true, :class => "span12", :multiple => true }, :label => (I18n.t :associated_indicators) %>
 		</div>
 		<div class="span6">
 			<%= f.input :head_id, :as => :select, :collection => User.where(:controlling_unit => false), :selected => @project.head_id, :input_html => { :disabled => true, :class => "span12" }, :label => (I18n.t :project_manager) %>
@@ -67,10 +67,10 @@
 		</div>
 		<div class="span6">
 			<div class="span6">
-			<%= f.input :actual_manp, :value => 40, :input_html => { :value => @project.actual_manp, :class => "span12", :disabled => true }, :label => (I18n.t :actual_employee_resources_(days)) %>
+			<%= f.input :actual_manp, :value => 40, :input_html => { :value => @project.actual_manp, :class => "span12", :disabled => true }, :label => (I18n.t :actual_employee_resources_days) %>
 			</div>
 			<div class="span6">
-			<%= f.input :actual_cost, :value => 30, :input_html => { :value => @project.actual_cost, :class => "span12", :disabled => true }, :label => (I18n.t :actual_external_costs_(currency)) %>
+			<%= f.input :actual_cost, :value => 30, :input_html => { :value => @project.actual_cost, :class => "span12", :disabled => true }, :label => (I18n.t :actual_external_costs_currency) %>
 			</div>
 		</div>
 	</div>
@@ -93,10 +93,10 @@
 		<div class="span6"></div>
 		<div class="span6">
 			<div class="span4">
-				<%= f.input :target_manp, :input_html => { :value => @project.target_manp, :readonly => true, :class => "span12" }, :label => (I18n.t :planned_employee_resources_(days)) %>
+				<%= f.input :target_manp, :input_html => { :value => @project.target_manp, :readonly => true, :class => "span12" }, :label => (I18n.t :planned_employee_resources_days) %>
 			</div>
 			<div class="span4">
-				<%= f.input :actual_manp, :input_html => { :value => @project.actual_manp, :readonly => true, :class => "span12" }, :label => (I18n.t :actual_employee_resources_(days)) %>
+				<%= f.input :actual_manp, :input_html => { :value => @project.actual_manp, :readonly => true, :class => "span12" }, :label => (I18n.t :actual_employee_resources_days) %>
 			</div>
 			<div class="span4">
 				<%= f.input :status_manp, :input_html => { :value => @project.status_manp, :readonly => true, :class => "span12" }, :label => (I18n.t :current_status_by_manpower_use) %>
@@ -108,10 +108,10 @@
 		<div class="span6"></div>
 		<div class="span6">
 			<div class="span4">
-				<%= f.input :target_cost, :input_html => { :value => @project.target_cost, :readonly => true, :class => "span12" }, :label => (I18n.t :planned_external_costs_(currency)) %>
+				<%= f.input :target_cost, :input_html => { :value => @project.target_cost, :readonly => true, :class => "span12" }, :label => (I18n.t :planned_external_costs_currency) %>
 			</div>
 			<div class="span4">
-				<%= f.input :actual_cost, :input_html => { :value => @project.actual_cost, :readonly => true, :class => "span12" }, :label => (I18n.t :actual_external_costs_(currency)) %>
+				<%= f.input :actual_cost, :input_html => { :value => @project.actual_cost, :readonly => true, :class => "span12" }, :label => (I18n.t :actual_external_costs_currency) %>
 			</div>
 			<div class="span4">
 				<%= f.input :status_cost, :input_html => { :value => @project.status_cost, :readonly => true, :class => "span12" }, :label => (I18n.t :current_status_by_cost) %>
@@ -123,7 +123,7 @@
 		<div class="span6"></div>
 		<div class="span6">
 			<div class="span6">
-				<%= f.input :target_duration, :input_html => { :value => @project.target_duration, :readonly => true, :class => "span12" }, :label => (I18n.t :project_target_duration_(months)) %>
+				<%= f.input :target_duration, :input_html => { :value => @project.target_duration, :readonly => true, :class => "span12" }, :label => (I18n.t :project_target_duration_months) %>
 			</div>
 			<div class="span6">
 				<%= f.input :status_ms, :input_html => { :value => @project.status_ms, :readonly => true, :class => "span12" }, :label => (I18n.t :current_status_by_milestone) %>

@@ -24,10 +24,6 @@ class Indicator < ActiveRecord::Base
   :presence => true,
   :length => { :maximum => 30 }
 
-  # Needs to have Parent
-  validates :goal_ids,
-  :presence => true
-
   # Needs to have Owner
   validates :user_id,
   :presence => true
@@ -56,7 +52,7 @@ class Indicator < ActiveRecord::Base
         # problems << ":freq cannot be empty"
       else
         value.each do |month|
-          month = month.to_i
+          month = month
           if month < 1 or month > 12
             problems <<
                 "Each month must be a value between 1 and 12, one was #{month}"

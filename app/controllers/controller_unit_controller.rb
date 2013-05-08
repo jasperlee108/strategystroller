@@ -55,6 +55,7 @@ class ControllerUnitController < ApplicationController
     @goal = Goal.new
     if (request.post?)
       @goal = Goal.new(params[:goal])
+      @goal.status = 0
       if @goal.save # goal saved
         form_id = save_form(GOAL, @goal.user_id, @goal.id)
         if (!form_id) # goal saved but form not saved, so delete goal #TODO will never fail, since goal is hard- coded and it is the only thing it can fail on. No uniqueness, etc.
@@ -71,7 +72,7 @@ class ControllerUnitController < ApplicationController
       else # goal not saved
         flash[:error] = "ERROR: Goal was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
-      redirect_to cu_review_path
+      redirect_to all_form_path
     end
   end
   
@@ -104,7 +105,7 @@ class ControllerUnitController < ApplicationController
       else # indicator not saved
         flash[:error] = "ERROR: Indicator was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
-      redirect_to cu_review_path
+      redirect_to all_form_path
     end
   end
   
@@ -145,7 +146,7 @@ class ControllerUnitController < ApplicationController
       else # project not saved
         flash[:error] = "ERROR: Project was not saved! Please fill out all required fields." #CHANGED 5/6/2013
       end
-      redirect_to cu_review_path
+      redirect_to all_form_path
     end
   end
 
@@ -304,7 +305,7 @@ class ControllerUnitController < ApplicationController
     @forms = Form.order(sort_column + " " + sort_direction)
   end
 
-    def goal_check
+  def goal_check
     @user = current_user
     @goal = Goal.new
     form_id = params[:form_id]
@@ -332,7 +333,7 @@ class ControllerUnitController < ApplicationController
     end
   end
   
-   def indicator_check
+  def indicator_check
     @user = current_user
     @indicator = Indicator.new
     form_id = params[:form_id]
@@ -342,15 +343,15 @@ class ControllerUnitController < ApplicationController
     @projects = (@current_indicator.projects).collect{|p| p.short_name}
     @projects.empty? ? @projects += ['None'] : nil
     if (request.post?)
-      params[:indicator][:freq].delete_if{|k,v| k==""}
-      params[:indicator][:freq].map! do |month|
-          month = month.to_i
-      end
+      #params[:indicator][:freq].delete_if{|k,v| k==""}
+      #params[:indicator][:freq].map! do |month|
+      #    month = month.to_i
+      #end
       if params[:commit] == "Confirm Indicator"
         params[:indicator][:goal_ids].delete("")
         params[:indicator][:freq].delete("")
         ## From priyaFix, same with the fix as the first 3 lines after request.post
-        # params[:indicator][:freq] = params[:indicator][:freq].map { |s| s.to_i }
+        params[:indicator][:freq] = params[:indicator][:freq].map { |s| s.to_i }
         ## So keeping the above line around just in case
         @current_form.update_attributes(:reviewed => true)
         @current_indicator.update_attributes(params[:indicator])

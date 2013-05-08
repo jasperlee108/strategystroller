@@ -10,9 +10,7 @@
   <%= f.email_field :email, :class => "input-block-level", :placeholder => (I18n.t :email_address)%>
 
   <%= f.text_field :business_code, :class => "input-block-level", :placeholder => (I18n.t :business_code) %>
-  <label class="checkbox" style="font-size: 14px;color: rgb(85, 85, 85);"> 
-  <%= f.check_box :controlling_unit %> <%= I18n.t :controlling_unit %>
-  </label>
+  
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div><%= I18n.t :currently_awaiting_confirmation_for%><%= resource.unconfirmed_email %></div>
   <% end %>

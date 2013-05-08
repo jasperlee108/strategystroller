@@ -10,10 +10,10 @@
 		</ul>
 	</div>
 </div>
+<%= render "setup_alerts" %>
 <div class="well">
 		<div class="row-fluid">
 			<div class="span4 offset5">
-				<%= render "setup_alerts" %>
 				<!-- Need to specify company position and general position (CU/prov) when entering a user-->
 				<%= semantic_form_for @application do |f| %>
 				<%= f.inputs do %>
