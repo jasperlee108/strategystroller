@@ -40,5 +40,19 @@ describe ControllerUnitHelper do
     path = find_path_cu(ERROR, ENTRY_ID, FORM_ID)
     assert(path == cu_review_path, "Wrong path taken!")
   end
-  
+
+  describe "#save_form" do
+    after :each do
+      Form.delete_all
+    end
+
+    it "saves a form with valid inputs" do
+      assert(save_form(ControllerUnitController::GOAL, 1, 1,) == Form.last.id, "failed to save form on valid inputs")
+    end
+
+    it "returns nil if passed an invalid table_id" do
+      assert(save_form(-1, 1, 1,).nil?, "did not return a nil value for an invalid input")
+    end
+  end
+
 end

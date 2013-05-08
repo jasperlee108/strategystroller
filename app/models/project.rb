@@ -212,7 +212,7 @@ class Project < ActiveRecord::Base
       value.each do |phase, progress|
         problems << "phase must be in Activity::PHASES, unlike #{phase}" unless Activity::PHASES.include? phase
         problems << "progress must be in Activity::PROGRESS, unlike #{phase}" unless Activity::PROGRESS.include? progress
-        problems << "Activitiy::PROJECT_MANAGEMENT must have a progress of 0" if problems == "" and phase == Activity::PROJECT_MANAGEMENT and progress.nonzero?
+        problems << "Activitiy::ONGOING must have a progress of 0" if problems == "" and phase == Activity::ONGOING and progress.nonzero?
       end
       problems << "There must be an entry for each phase" unless value.length == Activity::PHASES.length
     else
@@ -364,7 +364,7 @@ class Project < ActiveRecord::Base
   def update_status_ms
     phases_progress = { }
     self.activities.each do |act|
-      if act.phase != Activity::PROJECT_MANAGEMENT
+      if act.phase != Activity::ONGOING
         if phases_progress[act.phase].nil?
           phases_progress[act.phase] = act.actualProg
         elsif phases_progress[act.phase] != act.actualProg
