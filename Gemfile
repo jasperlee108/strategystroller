@@ -29,7 +29,7 @@ gem 'coffee-script-source', '~> 1.4.0'
 gem 'bootstrap-sass-rails'
 
 gem 'formtastic-bootstrap'
-gem 'tabulous'
+gem 'tabulous', '1.3.2'
 gem 'cocoon'
 
 ## Assume deploying to heroku, use Rspec
