@@ -78,7 +78,12 @@ position: relative;
   border-top: 0 none transparent;
   border-right: 0 none transparent;
 }
-.li_tree_dim ul > li:last-child {
+.li_tree_dim ul {
+  list-style-type: none;
+  border-left: 2px dotted #000;
+  margin-left: -.1em;
+}
+.li_tree_dim ul > li{
   border-left: 100px solid transparent;
 }
 .li_tree_goal div {
@@ -96,7 +101,7 @@ position: relative;
   border-top: 0 none transparent;
   border-right: 0 none transparent;
 }
-.li_tree_goal ul > li:last-child {
+.li_tree_goal ul > li {
   border-left: 190px solid transparent;
 }
 .li_tree_indic div {
@@ -114,7 +119,7 @@ position: relative;
   border-top: 0 none transparent;
   border-right: 0 none transparent;
 }
-.li_tree_indic ul > li:last-child {
+.li_tree_indic ul > li {
   border-left: 180px solid transparent;
 }
 .li_tree_proj div {
